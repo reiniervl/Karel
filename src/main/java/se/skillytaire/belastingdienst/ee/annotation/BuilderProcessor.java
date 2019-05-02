@@ -14,8 +14,8 @@ import javax.lang.model.element.TypeElement;
 public class BuilderProcessor extends AbstractProcessor {
 
    @Override
-   public boolean process(Set<? extends TypeElement> annotations,
-         RoundEnvironment roundEnv) {
+   public boolean process(final Set<? extends TypeElement> annotations,
+         final RoundEnvironment roundEnv) {
       return false;
    }
 

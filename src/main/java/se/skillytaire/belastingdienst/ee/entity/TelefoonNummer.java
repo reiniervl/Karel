@@ -38,8 +38,8 @@ public class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
    public int compareTo(final TelefoonNummer that) {
       int compareTo;
       if (this.getLandNummer().equals(that.getLandNummer())) {
-         compareTo = this.getNationaalNummer()
-               .compareTo(that.getNationaalNummer());
+         compareTo =
+               this.getNationaalNummer().compareTo(that.getNationaalNummer());
       } else {
          compareTo = this.getLandNummer().compareTo(that.getLandNummer());
       }

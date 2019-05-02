@@ -34,6 +34,6 @@ public abstract class Tocht {
 
    @Override
    public String toString() {
-      return String.format("bt=%s + et=%s", this.beginTijd, this.eindTijd );
+      return String.format("bt=%s + et=%s", this.beginTijd, this.eindTijd);
    }
 }

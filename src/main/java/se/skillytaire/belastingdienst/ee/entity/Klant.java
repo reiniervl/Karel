@@ -12,9 +12,8 @@ import se.skillytaire.belastingdienst.ee.common.KlantBuilder;
 /**
  * <p>
  * De {@code Klant} class is bedoeld als entity class voor de BootjesCase.
- * Gebruik van deze class buiten de JPA wordt afgeraden, omdat deze class
- * alleen een no-arg constructor heeft om te voldoen aan het JavaBean
- * contract.
+ * Gebruik van deze class buiten de JPA wordt afgeraden, omdat deze class alleen
+ * een no-arg constructor heeft om te voldoen aan het JavaBean contract.
  * </p>
  * <p>
  * Zie de class {@code se.skillytaire.belastingdienst.ee.entity.KlantTest} voor
@@ -26,8 +25,8 @@ import se.skillytaire.belastingdienst.ee.common.KlantBuilder;
  *
  */
 @Entity
-@Table(name="klanten")
-public class Klant extends AbstractEntity<Klant, Integer>  {
+@Table(name = "klanten")
+public class Klant extends AbstractEntity<Klant, Integer> {
    private static final long serialVersionUID = 1l;
 
    public static KlantBuilder getBuilder() {
@@ -35,41 +34,42 @@ public class Klant extends AbstractEntity<Klant, Integer>  {
          private Klant klant = new Klant();
 
          @Override
-         public KlantBuilder addEmail(String email) {
+         public KlantBuilder addEmail(final String email) {
             this.klant.setEmail(email);
             return this;
          }
 
          @Override
-         public KlantBuilder addUsername(String username) {
+         public KlantBuilder addUsername(final String username) {
             this.klant.setUsername(username);
             return this;
          }
 
          @Override
-         public KlantBuilder addPassword(String password) {
+         public KlantBuilder addPassword(final String password) {
             // TODO Auto-generated method stub
             return this;
          }
 
          @Override
          public Klant build() {
-            return klant;
+            return this.klant;
          }
 
       };
 
    }
-//   private static String emailPattern = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+   // private static String emailPattern =
+   // "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
    // FIXME: pattern is not comprehensive enough
    @NotNull
-   @Pattern(regexp="[\\d\\w\\.]*@[\\d\\w\\.]*\\.[\\w]{2,3}$")
+   @Pattern(regexp = "[\\d\\w\\.]*@[\\d\\w\\.]*\\.[\\w]{2,3}$")
    private String email;
 
    @NotNull
-   @Size(min=4, max=24)
-   @Column(unique = true, length=24)
+   @Size(min = 4, max = 24)
+   @Column(unique = true, length = 24)
    private String username;
 
    @NotNull
@@ -78,14 +78,16 @@ public class Klant extends AbstractEntity<Klant, Integer>  {
    /**
     * No-arg constructor conform JavaBeans
     */
-   public Klant() {}
+   public Klant() {
+   }
 
    /**
     * Copy constructor
     *
-    * @param klant  Klant Object to be copied
+    * @param klant
+    *           Klant Object to be copied
     */
-   public Klant(Klant klant) {
+   public Klant(final Klant klant) {
       super(klant);
       this.setEmail(new String(klant.getEmail()));
       this.setUsername(new String(klant.getUsername()));
@@ -93,52 +95,51 @@ public class Klant extends AbstractEntity<Klant, Integer>  {
    }
 
    public String getEmail() {
-      return email;
+      return this.email;
    }
 
-   public void setEmail(String email) {
+   public void setEmail(final String email) {
       this.email = email;
    }
 
    public String getUsername() {
-      return username;
+      return this.username;
    }
 
-   public void setUsername(String username) {
+   public void setUsername(final String username) {
       this.username = username;
    }
 
    public String getPassword() {
-      return password;
+      return this.password;
    }
 
-   public void setPassword(String password) {
+   public void setPassword(final String password) {
       this.password = password;
    }
 
    @Override
-   public int compareTo(Klant klant) {
+   public int compareTo(final Klant klant) {
       int compareTo = 0;
       // TODO: implementation
-      compareTo = this.getUsername().compareTo(klant.getUsername());  // Placeholder vergelijking
+      compareTo = this.getUsername().compareTo(klant.getUsername()); // Placeholder
+                                                                     // vergelijking
       return compareTo;
    }
 
    /**
     * De implementatie van de equals methode is niet compleet. De List van
-    * {@code ActiviteitsReservering} in de property {@code reserveringen}
-    * wordt niet vergeleken.
+    * {@code ActiviteitsReservering} in de property {@code reserveringen} wordt
+    * niet vergeleken.
     */
    @Override
-   public boolean equals(Object o) {
-      boolean equals =false;
-      if(o instanceof Klant) {
-         Klant that = (Klant)o;
-         if(
-               this.getEmail().equals(that.getEmail()) &&
-               this.getUsername().equals(that.getUsername()) &&
-               this.getPassword().equals(that.getPassword())
-               ) {
+   public boolean equals(final Object o) {
+      boolean equals = false;
+      if (o instanceof Klant) {
+         Klant that = (Klant) o;
+         if (this.getEmail().equals(that.getEmail())
+               && this.getUsername().equals(that.getUsername())
+               && this.getPassword().equals(that.getPassword())) {
             equals = true;
          }
       }
@@ -156,11 +157,9 @@ public class Klant extends AbstractEntity<Klant, Integer>  {
 
    @Override
    public String toString() {
-      StringBuilder sb = new StringBuilder()
-            .append("username: ")
-            .append(this.getUsername())
-            .append("\nemail: ")
-            .append(this.getEmail());
+      StringBuilder sb =
+            new StringBuilder().append("username: ").append(this.getUsername())
+                  .append("\nemail: ").append(this.getEmail());
       return sb.toString();
    }
 }

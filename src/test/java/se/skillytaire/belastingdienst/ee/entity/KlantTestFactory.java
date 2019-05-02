@@ -2,8 +2,7 @@ package se.skillytaire.belastingdienst.ee.entity;
 
 import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
 
-public class KlantTestFactory
-      implements ComparableTestObjectFactory<Klant> {
+public class KlantTestFactory implements ComparableTestObjectFactory<Klant> {
    @Override
    public Klant createThat() {
       Klant klant = new Klant();

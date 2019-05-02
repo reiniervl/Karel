@@ -1,11 +1,8 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import javax.persistence.EntityManager;
+/*import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.Persistence;*/
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +16,7 @@ import se.skillytaire.course.tools.jlc.JLCRunner;
 public class AdresTest {
    GPSCoordinaat gps = new GPSCoordinaat(12.513321, 55.677069);
 
-   @Test
+ /*  @Test
    public void testPersistence() {
 
       Adres adres1 = new Adres(new GPSCoordinaat(0, 0));
@@ -30,19 +27,21 @@ public class AdresTest {
       adres1.setState("Aaa");
       adres1.setPostalCode("1111 AA");
       adres1.setCountry("De A");
-//
-//      ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-//      Validator validator = factory.getValidator();
-//      Set<ConstraintViolation<Adres>> violations = validator.validate(adres1);
-//      violations.stream().forEach((v) -> System.err.println(v));
+      //
+      // ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+      // Validator validator = factory.getValidator();
+      // Set<ConstraintViolation<Adres>> violations =
+      // validator.validate(adres1);
+      // violations.stream().forEach((v) -> System.err.println(v));
 
-      EntityManagerFactory factory = Persistence.createEntityManagerFactory("stuga");
+      EntityManagerFactory factory =
+            Persistence.createEntityManagerFactory("stuga");
       EntityManager em = factory.createEntityManager();
-      assertFalse("Entity Manager is null", em == null);
-      assertFalse("Adres is null", em == null);
+      Assert.assertFalse("Entity Manager is null", em == null);
+      Assert.assertFalse("Adres is null", em == null);
       em.persist(adres1);
-      assertTrue(adres1.isPersistant());
-   }
+      Assert.assertTrue(adres1.isPersistant());
+   }*/
 
    @Test
    public void fullConstructorTest() {

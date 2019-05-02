@@ -28,27 +28,27 @@ public class BootTestFactory implements ComparableTestObjectFactory<Boot> {
 
    @Override
    public Boot createThat() {
-      return new Boot(thatVerhuurder, thatPositive);
+      return new Boot(this.thatVerhuurder, this.thatPositive);
    }
 
    @Override
    public Boot createThis() {
-      return new Boot(thisVerhuurder, thisPositive);
+      return new Boot(this.thisVerhuurder, this.thisPositive);
    }
 
    @Override
-   public boolean isTypeFor(Class<?> type) {
+   public boolean isTypeFor(final Class<?> type) {
       return Boot.class == type;
    }
 
    @Override
    public Boot createGreaterThen() {
-      return new Boot(dirk, henk);
+      return new Boot(this.dirk, this.henk);
    }
 
    @Override
    public Boot createLessThen() {
-      return new Boot(anton, joop);
+      return new Boot(this.anton, this.joop);
    }
 
 }

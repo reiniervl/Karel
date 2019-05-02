@@ -8,7 +8,7 @@ public class Gebruikersnaam extends AbstractTransferableObject<String> {
       this.addConstraint((v) -> Pattern.matches("^[a-zA-Z][\\w]{1,23}$", v));
    }
 
-   public Gebruikersnaam(String value) {
+   public Gebruikersnaam(final String value) {
       this.setValue(value);
    }
 }

@@ -22,22 +22,22 @@ public class Verhuurder extends AbstractEntity<Verhuurder, Integer> {
 
    private ArrayList<Boot> vloot = new ArrayList<>();
 
-   public boolean add(Boot e) {
-      return vloot.add(e);
+   public boolean add(final Boot e) {
+      return this.vloot.add(e);
    }
 
-   public boolean remove(Boot b) {
-      return vloot.remove(b);
+   public boolean remove(final Boot b) {
+      return this.vloot.remove(b);
    }
 
    private ArrayList<Tocht> tochtenbak = new ArrayList<>();
 
-   public boolean add(Tocht e) {
-      return tochtenbak.add(e);
+   public boolean add(final Tocht e) {
+      return this.tochtenbak.add(e);
    }
 
-   public boolean remove(Tocht t) {
-      return tochtenbak.remove(t);
+   public boolean remove(final Tocht t) {
+      return this.tochtenbak.remove(t);
    }
 
    /** do not use */
@@ -52,8 +52,8 @@ public class Verhuurder extends AbstractEntity<Verhuurder, Integer> {
       this.adres = that.getAdres();
       this.name = that.getName();
       this.telefoonNummer = that.getTelefoonNummer();
-      this.vloot = (ArrayList<Boot>)that.vloot.clone();
-      this.tochtenbak = (ArrayList<Tocht>)that.tochtenbak.clone();
+      this.vloot = (ArrayList<Boot>) that.vloot.clone();
+      this.tochtenbak = (ArrayList<Tocht>) that.tochtenbak.clone();
    }
 
    public Verhuurder(final String userName) {

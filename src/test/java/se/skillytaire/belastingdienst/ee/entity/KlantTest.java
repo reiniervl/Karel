@@ -1,12 +1,8 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.regex.Pattern;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,7 +20,7 @@ public class KlantTest {
       Klant klant = new Klant();
       klant.setUsername(username);
 
-      assertEquals(username, klant.getUsername());
+      Assert.assertEquals(username, klant.getUsername());
    }
 
    @Test
@@ -33,7 +29,7 @@ public class KlantTest {
       Klant klant = new Klant();
       klant.setPassword(password);
 
-      assertEquals(password, klant.getPassword());
+      Assert.assertEquals(password, klant.getPassword());
    }
 
    @Test
@@ -42,10 +38,10 @@ public class KlantTest {
       Klant klant = new Klant();
       klant.setEmail(email);
 
-      assertEquals(email, klant.getEmail());
+      Assert.assertEquals(email, klant.getEmail());
 
       String regexPattern = "[\\d\\w]*@[\\d\\w\\.]*\\.[\\w]{2,3}$";
-      assertTrue(Pattern.matches(regexPattern, email));
+      Assert.assertTrue(Pattern.matches(regexPattern, email));
    }
 
    @Test
@@ -56,13 +52,13 @@ public class KlantTest {
       klant.setEmail(email);
 
       String regexPattern = "[\\d\\w]*@[\\d\\w\\.]*\\.[\\w]{2,3}$";
-      assertTrue(Pattern.matches(regexPattern, klant.getEmail()));
+      Assert.assertTrue(Pattern.matches(regexPattern, klant.getEmail()));
    }
 
-//   @Test
-//   public void testReserveringen() {
-//
-//   }
+   // @Test
+   // public void testReserveringen() {
+   //
+   // }
 
    @Test
    public void testEqual() {
@@ -85,7 +81,7 @@ public class KlantTest {
       klant2.setPassword(password2);
       klant2.setEmail(email2);
 
-      assertEquals(klant1, klant2);
+      Assert.assertEquals(klant1, klant2);
    }
 
    @Test
@@ -109,7 +105,7 @@ public class KlantTest {
       klant2.setPassword(password2);
       klant2.setEmail(email2);
 
-      assertNotEquals(klant1, klant2);
+      Assert.assertNotEquals(klant1, klant2);
    }
 
    @Test
@@ -133,7 +129,7 @@ public class KlantTest {
       klant2.setPassword(password2);
       klant2.setEmail(email2);
 
-      assertFalse(klant1.equals(klant2));
+      Assert.assertFalse(klant1.equals(klant2));
    }
 
    @Test
@@ -157,7 +153,7 @@ public class KlantTest {
       klant2.setPassword(password2);
       klant2.setEmail(email2);
 
-      assertNotEquals(klant1, klant2);
+      Assert.assertNotEquals(klant1, klant2);
    }
 
    @Test
@@ -175,7 +171,7 @@ public class KlantTest {
 
       Object klant2 = new Object();
 
-      assertNotEquals(klant1, klant2);
+      Assert.assertNotEquals(klant1, klant2);
    }
 
    @Test
@@ -199,7 +195,7 @@ public class KlantTest {
       klant2.setPassword(password2);
       klant2.setEmail(email2);
 
-      assertFalse(klant1.getClass().getSuperclass().equals(klant2));
+      Assert.assertFalse(klant1.getClass().getSuperclass().equals(klant2));
    }
 
    @Test
@@ -215,7 +211,7 @@ public class KlantTest {
 
       Klant klant2 = null;
 
-      assertNotEquals(klant1, klant2);
+      Assert.assertNotEquals(klant1, klant2);
    }
 
    @Test
@@ -228,13 +224,11 @@ public class KlantTest {
       klant1.setUsername(username1);
       klant1.setPassword(password1);
       klant1.setEmail(email1);
-      StringBuilder sb = new StringBuilder()
-            .append("username: ")
-            .append(klant1.getUsername())
-            .append("\nemail: ")
+      StringBuilder sb = new StringBuilder().append("username: ")
+            .append(klant1.getUsername()).append("\nemail: ")
             .append(klant1.getEmail());
 
-      assertEquals(klant1.toString(), sb.toString());
+      Assert.assertEquals(klant1.toString(), sb.toString());
    }
 
    @Test
@@ -258,7 +252,7 @@ public class KlantTest {
       klant2.setPassword(password2);
       klant2.setEmail(email2);
 
-      assertTrue(klant1.hashCode() == klant2.hashCode());
+      Assert.assertTrue(klant1.hashCode() == klant2.hashCode());
    }
 
    @Test
@@ -282,6 +276,6 @@ public class KlantTest {
       klant2.setPassword(password2);
       klant2.setEmail(email2);
 
-      assertTrue(klant1.compareTo(klant2) == 0);
+      Assert.assertTrue(klant1.compareTo(klant2) == 0);
    }
 }

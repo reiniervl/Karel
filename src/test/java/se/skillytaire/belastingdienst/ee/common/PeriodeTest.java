@@ -1,12 +1,9 @@
 package se.skillytaire.belastingdienst.ee.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class PeriodeTest {
@@ -14,40 +11,39 @@ public class PeriodeTest {
    @Test
    public void testPeriode() {
       Periode periode = new Periode();
-      assertEquals(Periode.class, periode.getClass());
+      Assert.assertEquals(Periode.class, periode.getClass());
    }
 
    @Test
    public void testPeriodeZoneId() {
       Periode periode = new Periode();
 
-      assertEquals(ZoneId.systemDefault(), periode.getZoneId());
+      Assert.assertEquals(ZoneId.systemDefault(), periode.getZoneId());
    }
 
    @Test
    public void testStart() {
       Periode periode = new Periode();
 
-      assertFalse(periode.getStart() != null);
+      Assert.assertFalse(periode.getStart() != null);
 
       periode.start();
 
-      assertTrue(periode.getStart() != null);
+      Assert.assertTrue(periode.getStart() != null);
    }
 
-   @Test(expected=RuntimeException.class)
+   @Test(expected = RuntimeException.class)
    public void testStartNull() {
       Periode periode = new Periode();
       periode.start();
       periode.start();
    }
 
-
    @Test
    public void testNotStart() {
       Periode periode = new Periode();
 
-      assertFalse(periode.getStart() != null);
+      Assert.assertFalse(periode.getStart() != null);
    }
 
    @Test
@@ -56,10 +52,10 @@ public class PeriodeTest {
       periode.start();
       periode.beeindig();
 
-      assertTrue(periode.getEind() != null);
+      Assert.assertTrue(periode.getEind() != null);
    }
 
-   @Test(expected=RuntimeException.class)
+   @Test(expected = RuntimeException.class)
    public void testBeeindigNull() {
       Periode periode = new Periode();
       periode.start();
@@ -72,7 +68,7 @@ public class PeriodeTest {
       Periode periode = new Periode();
       periode.start();
 
-      assertTrue(periode.isGestart());
+      Assert.assertTrue(periode.isGestart());
    }
 
    @Test
@@ -81,7 +77,7 @@ public class PeriodeTest {
       periode.start();
       periode.beeindig();
 
-      assertTrue(periode.isBeeindigd());
+      Assert.assertTrue(periode.isBeeindigd());
    }
 
    @Test
@@ -90,10 +86,10 @@ public class PeriodeTest {
       periode.start();
       periode.beeindig();
 
-      assertTrue(periode.getDuur() != null);
+      Assert.assertTrue(periode.getDuur() != null);
    }
 
-   @Test(expected=RuntimeException.class)
+   @Test(expected = RuntimeException.class)
    public void testGetDuurPanicExclimationMark() {
       Periode periode = new Periode();
       periode.getDuur();
@@ -114,7 +110,7 @@ public class PeriodeTest {
       }
       periode1.beeindig();
 
-      assertTrue(periode1.compareTo(periode2) > 0);
+      Assert.assertTrue(periode1.compareTo(periode2) > 0);
    }
 
    @Test
@@ -131,8 +127,9 @@ public class PeriodeTest {
       }
       periode1.beeindig();
 
-      assertTrue(periode1.compareTo(periode2) < 0);
+      Assert.assertTrue(periode1.compareTo(periode2) < 0);
    }
+
    @Test
    public void testCompareTo2NotStarted() {
       Periode periode1 = new Periode();
@@ -146,13 +143,13 @@ public class PeriodeTest {
       }
       periode1.beeindig();
 
-      assertTrue(periode1.compareTo(periode2) > 0);
+      Assert.assertTrue(periode1.compareTo(periode2) > 0);
    }
 
    @Test
    public void testToString() {
       Periode periode = new Periode();
-      assertTrue(periode.toString() instanceof String);
+      Assert.assertTrue(periode.toString() instanceof String);
    }
 
    @Test
@@ -160,7 +157,7 @@ public class PeriodeTest {
       Periode periode = new Periode();
       periode.start();
 
-      assertTrue(periode.getStart() != null);
+      Assert.assertTrue(periode.getStart() != null);
    }
 
    @Test
@@ -170,7 +167,7 @@ public class PeriodeTest {
       LocalDateTime ldt = LocalDateTime.now();
       periode.setStart(ldt);
 
-      assertEquals(ldt, periode.getStart());
+      Assert.assertEquals(ldt, periode.getStart());
    }
 
    @Test
@@ -179,7 +176,7 @@ public class PeriodeTest {
       periode.start();
       periode.beeindig();
 
-      assertTrue(periode.getEind() != null);
+      Assert.assertTrue(periode.getEind() != null);
    }
 
    @Test
@@ -190,14 +187,14 @@ public class PeriodeTest {
       LocalDateTime ldt = LocalDateTime.now();
       periode.setEind(ldt);
 
-      assertEquals(ldt, periode.getEind());
+      Assert.assertEquals(ldt, periode.getEind());
    }
 
    @Test
    public void testGetZoneId() {
       Periode periode = new Periode();
 
-      assertEquals(ZoneId.systemDefault(), periode.getZoneId());
+      Assert.assertEquals(ZoneId.systemDefault(), periode.getZoneId());
    }
 
    @Test
@@ -205,7 +202,7 @@ public class PeriodeTest {
       ZoneId ny = ZoneId.of("America/New_York");
       Periode periode = new Periode(ny);
 
-      assertEquals(ny, periode.getZoneId());
+      Assert.assertEquals(ny, periode.getZoneId());
    }
 
    @Test
@@ -214,7 +211,7 @@ public class PeriodeTest {
       ZoneId ny = ZoneId.of("America/New_York");
       periode.setZoneId(ny);
 
-      assertEquals(ny, periode.getZoneId());
+      Assert.assertEquals(ny, periode.getZoneId());
    }
 
 }

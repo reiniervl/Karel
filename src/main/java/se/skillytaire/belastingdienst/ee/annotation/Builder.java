@@ -7,13 +7,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <p>Fields in the annotated class will need to be used for the Builder
- * Pattern</p>
+ * <p>
+ * Fields in the annotated class will need to be used for the Builder Pattern
+ * </p>
  *
  * @author Reinier van Leussen
  * @version 0.0.1
  */
-@Target({TYPE})
+@Target({ TYPE })
 @Retention(RetentionPolicy.CLASS)
 public @interface Builder {
 }

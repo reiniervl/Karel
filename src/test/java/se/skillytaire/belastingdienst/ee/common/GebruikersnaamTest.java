@@ -1,10 +1,6 @@
 package se.skillytaire.belastingdienst.ee.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 public class GebruikersnaamTest {
@@ -14,7 +10,7 @@ public class GebruikersnaamTest {
       final String naam = "naam";
       Gebruikersnaam gebruikersnaam = new Gebruikersnaam(naam);
 
-      assertEquals(naam, gebruikersnaam.getValue());
+      Assert.assertEquals(naam, gebruikersnaam.getValue());
    }
 
    @Test
@@ -22,7 +18,7 @@ public class GebruikersnaamTest {
       final String naam = null;
       Gebruikersnaam gebruikersnaam = new Gebruikersnaam(naam);
 
-      assertNull(gebruikersnaam.getValue());
+      Assert.assertNull(gebruikersnaam.getValue());
    }
 
    @Test
@@ -30,7 +26,7 @@ public class GebruikersnaamTest {
       final String naam = "naam";
       Gebruikersnaam gebruikersnaam = new Gebruikersnaam(naam);
 
-      assertNotNull(gebruikersnaam.getValue());
+      Assert.assertNotNull(gebruikersnaam.getValue());
    }
 
    @Test
@@ -38,36 +34,36 @@ public class GebruikersnaamTest {
       final String naam = "";
       Gebruikersnaam gebruikersnaam = new Gebruikersnaam(naam);
 
-      assertFalse(gebruikersnaam.validate());
-      assertFalse(gebruikersnaam.validate(naam));
+      Assert.assertFalse(gebruikersnaam.validate());
+      Assert.assertFalse(gebruikersnaam.validate(naam));
    }
 
    @Test
    public void testValidateTeKort() {
       Gebruikersnaam naam = new Gebruikersnaam("a");
 
-      assertFalse(naam.validate());
+      Assert.assertFalse(naam.validate());
    }
 
    @Test
    public void testValidateTeLang() {
       Gebruikersnaam naam = new Gebruikersnaam("abcdefghijklmnopqrstuvwxyz");
 
-      assertFalse(naam.validate());
+      Assert.assertFalse(naam.validate());
    }
 
    @Test
    public void testValidateBegintMetGetal() {
       Gebruikersnaam naam = new Gebruikersnaam("1naam");
 
-      assertFalse(naam.validate());
+      Assert.assertFalse(naam.validate());
    }
 
    @Test
    public void testValidateBevatSpatie() {
       Gebruikersnaam naam = new Gebruikersnaam("na am");
 
-      assertFalse(naam.validate());
+      Assert.assertFalse(naam.validate());
    }
 
 }

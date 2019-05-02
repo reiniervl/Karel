@@ -4,7 +4,7 @@ import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
 import se.skillytaire.service.weather.api.PositiveInteger;
 
 public class PositiveTestFactory
-   implements ComparableTestObjectFactory<PositiveInteger> {
+      implements ComparableTestObjectFactory<PositiveInteger> {
    @Override
    public PositiveInteger createThat() {
       return new PositiveInteger(2);
@@ -16,7 +16,7 @@ public class PositiveTestFactory
    }
 
    @Override
-   public boolean isTypeFor(Class<?> type) {
+   public boolean isTypeFor(final Class<?> type) {
       return PositiveInteger.class == type;
    }
 

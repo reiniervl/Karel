@@ -10,37 +10,40 @@ public abstract class AbstractTransferableObject<T> implements Validatable<T> {
    @Override
    public boolean validate() {
       boolean validated = false;
-      for(Constraint<T> c : constraints) {
-         if(!(validated = c.criteriumMet(this.value))) break;
+      for (Constraint<T> c : this.constraints) {
+         if (!(validated = c.criteriumMet(this.value))) {
+            break;
+         }
       }
       return validated;
    }
 
-
    @Override
-   public boolean validate(T t) {
+   public boolean validate(final T t) {
       boolean validated = false;
-      for(Constraint<T> c : constraints) {
-         if(!(validated = c.criteriumMet(t))) break;
+      for (Constraint<T> c : this.constraints) {
+         if (!(validated = c.criteriumMet(t))) {
+            break;
+         }
       }
       return validated;
    }
 
    @Override
-   public void addConstraint(Constraint<T> constraint) {
+   public void addConstraint(final Constraint<T> constraint) {
       this.constraints.add(constraint);
    }
 
    @Override
-   public void removeConstraint(Constraint<T> constraint) {
+   public void removeConstraint(final Constraint<T> constraint) {
       this.constraints.remove(constraint);
    }
 
    public T getValue() {
-      return value;
+      return this.value;
    }
 
-   public void setValue(T value) {
+   public void setValue(final T value) {
       this.value = value;
    }
 }

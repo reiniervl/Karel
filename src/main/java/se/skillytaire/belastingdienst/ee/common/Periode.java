@@ -19,27 +19,31 @@ public class Periode implements Comparable<Periode> {
     * No-arg constructor waardoor de ZoneId op de Steemstandaard wordt
     * ingesteld.
     */
-   public Periode() { }
+   public Periode() {
+   }
 
    /**
     *
-    * @param zoneId Locale ZoneId, mag niet null zijn.
+    * @param zoneId
+    *           Locale ZoneId, mag niet null zijn.
     */
-   public Periode(ZoneId zoneId) {
-      if(zoneId == null) throw new IllegalArgumentException("ZoneId mag niet null zijn");
+   public Periode(final ZoneId zoneId) {
+      if (zoneId == null) {
+         throw new IllegalArgumentException("ZoneId mag niet null zijn");
+      }
       this.setZoneId(zoneId);
    }
 
    public void start() {
-      if(!this.isGestart()) {
-         start = LocalDateTime.now(this.getZoneId());
+      if (!this.isGestart()) {
+         this.start = LocalDateTime.now(this.getZoneId());
       } else {
          throw new RuntimeException("Periode was al gestart");
       }
    }
 
    public void beeindig() {
-      if(!this.isBeeindigd()) {
+      if (!this.isBeeindigd()) {
          this.eind = LocalDateTime.now(this.getZoneId());
       } else {
          throw new RuntimeException("Periode was al beeindigd");
@@ -55,23 +59,24 @@ public class Periode implements Comparable<Periode> {
    }
 
    public Duration getDuur() {
-      if(this.isGestart() && this.isBeeindigd()) {
+      if (this.isGestart() && this.isBeeindigd()) {
          return Duration.between(this.getStart(), this.getEind());
       } else {
-         throw new RuntimeException("Het is niet mogelijk om een duur te berekenen als een periode nog niet is gestart of beeindigd");
+         throw new RuntimeException(
+               "Het is niet mogelijk om een duur te berekenen als een periode nog niet is gestart of beeindigd");
       }
    }
 
    @Override
-   public int compareTo(Periode periode) {
+   public int compareTo(final Periode periode) {
       int compare = 0;
-      if(this.isGestart() && !periode.isGestart()) {
+      if (this.isGestart() && !periode.isGestart()) {
          compare = 1;
-      } else if(!this.isGestart() && periode.isGestart()) {
+      } else if (!this.isGestart() && periode.isGestart()) {
          compare = -1;
-      } else if(this.isBeeindigd() && periode.isBeeindigd()) {
+      } else if (this.isBeeindigd() && periode.isBeeindigd()) {
          long verschil = this.getDuur().minus(periode.getDuur()).getSeconds();
-         if(verschil < 0L) {
+         if (verschil < 0L) {
             compare = -1;
          } else if (verschil > 0L) {
             compare = 1;
@@ -82,33 +87,35 @@ public class Periode implements Comparable<Periode> {
 
    @Override
    public String toString() {
-      String start_sz = this.getStart() != null ? this.getStart().toString() : "-- : --";
-      String eind_sz = this.getEind() != null ? this.getEind().toString() : "-- : --";
+      String start_sz =
+            this.getStart() != null ? this.getStart().toString() : "-- : --";
+      String eind_sz =
+            this.getEind() != null ? this.getEind().toString() : "-- : --";
       return String.format("Start: %s / Eind: %s", start_sz, eind_sz);
    }
 
    // Getters & Setters
    public LocalDateTime getStart() {
-      return start;
+      return this.start;
    }
 
-   public void setStart(LocalDateTime start) {
+   public void setStart(final LocalDateTime start) {
       this.start = start;
    }
 
    public LocalDateTime getEind() {
-      return eind;
+      return this.eind;
    }
 
-   public void setEind(LocalDateTime eind) {
+   public void setEind(final LocalDateTime eind) {
       this.eind = eind;
    }
 
    public ZoneId getZoneId() {
-      return zoneId;
+      return this.zoneId;
    }
 
-   public void setZoneId(ZoneId zoneId) {
+   public void setZoneId(final ZoneId zoneId) {
       this.zoneId = zoneId;
    }
 }

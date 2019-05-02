@@ -1,11 +1,6 @@
 package se.skillytaire.belastingdienst.ee.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 public class EmailAdresTest {
@@ -15,7 +10,7 @@ public class EmailAdresTest {
       final String naam = "naam";
       EmailAdres emailAdres = new EmailAdres(naam);
 
-      assertEquals(naam, emailAdres.getValue());
+      Assert.assertEquals(naam, emailAdres.getValue());
    }
 
    @Test
@@ -23,7 +18,7 @@ public class EmailAdresTest {
       final String naam = null;
       EmailAdres emailAdres = new EmailAdres(naam);
 
-      assertNull(emailAdres.getValue());
+      Assert.assertNull(emailAdres.getValue());
    }
 
    @Test
@@ -31,8 +26,8 @@ public class EmailAdresTest {
       final String naam = "test@createment.nl";
       EmailAdres emailAdres = new EmailAdres(naam);
 
-      assertTrue(emailAdres.validate());
-      assertTrue(emailAdres.validate(naam));
+      Assert.assertTrue(emailAdres.validate());
+      Assert.assertTrue(emailAdres.validate(naam));
    }
 
    @Test
@@ -40,7 +35,7 @@ public class EmailAdresTest {
       final String naam = "test@createment.nl";
       EmailAdres emailAdres = new EmailAdres(naam);
 
-      assertNotNull(emailAdres.getValue());
+      Assert.assertNotNull(emailAdres.getValue());
    }
 
    @Test
@@ -48,7 +43,7 @@ public class EmailAdresTest {
       final String naam = "";
       EmailAdres emailAdres = new EmailAdres(naam);
 
-      assertFalse(emailAdres.validate());
-      assertFalse(emailAdres.validate(naam));
+      Assert.assertFalse(emailAdres.validate());
+      Assert.assertFalse(emailAdres.validate(naam));
    }
 }

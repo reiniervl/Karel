@@ -12,8 +12,8 @@ public class GPSCoordinaat extends AbstractComparableObject<GPSCoordinaat>
    public static final double MAX_LONGITUDE = 180;
    public static final double MIN_LATITUDE = -85.05112878;
    public static final double MAX_LATITUDE = 85.05112878;
-   public static final GPSCoordinaat STUGA = new GPSCoordinaat(60.138421,
-         14.360336);
+   public static final GPSCoordinaat STUGA =
+         new GPSCoordinaat(60.138421, 14.360336);
    public static final GPSCoordinaat MAX_VALUE = new GPSCoordinaat(
          GPSCoordinaat.MAX_LONGITUDE, GPSCoordinaat.MAX_LATITUDE);
    public static final GPSCoordinaat MIN_VALUE = new GPSCoordinaat(
@@ -72,8 +72,8 @@ public class GPSCoordinaat extends AbstractComparableObject<GPSCoordinaat>
 
    @Override
    public int compareTo(final GPSCoordinaat that) {
-      int compareTo = Double.compare(this.getLongtitude(),
-            that.getLongtitude());
+      int compareTo =
+            Double.compare(this.getLongtitude(), that.getLongtitude());
       if (compareTo == 0) {
          compareTo = Double.compare(this.getLatitude(), that.getLatitude());
       }
