@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: se.skillytaire.belastingdienst.ee.entity.BootTest
--------------------------------------------------------------------------------
-Tests run: 181, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.459 s - in se.skillytaire.belastingdienst.ee.entity.BootTest

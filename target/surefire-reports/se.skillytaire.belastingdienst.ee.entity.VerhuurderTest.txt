@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: se.skillytaire.belastingdienst.ee.entity.VerhuurderTest
--------------------------------------------------------------------------------
-Tests run: 260, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.449 s - in se.skillytaire.belastingdienst.ee.entity.VerhuurderTest

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: se.skillytaire.belastingdienst.ee.entity.KlantTest
--------------------------------------------------------------------------------
-Tests run: 227, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.495 s - in se.skillytaire.belastingdienst.ee.entity.KlantTest

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: se.skillytaire.belastingdienst.ee.entity.GPSCoordinaatTest
--------------------------------------------------------------------------------
-Tests run: 78, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.123 s - in se.skillytaire.belastingdienst.ee.entity.GPSCoordinaatTest
