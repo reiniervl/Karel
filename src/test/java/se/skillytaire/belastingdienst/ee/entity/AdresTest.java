@@ -18,7 +18,7 @@ public class AdresTest {
 
    /*
     * @Test public void testPersistence() {
-    * 
+    *
     * Adres adres1 = new Adres(new GPSCoordinaat(0, 0));
     * adres1.setStreet("Een"); adres1.setHouseNumber(1);
     * adres1.setNumberSuffix("a"); adres1.setCity("Aa"); adres1.setState("Aaa");
@@ -28,7 +28,7 @@ public class AdresTest {
     * Set<ConstraintViolation<Adres>> violations = //
     * validator.validate(adres1); // violations.stream().forEach((v) ->
     * System.err.println(v));
-    * 
+    *
     * EntityManagerFactory factory =
     * Persistence.createEntityManagerFactory("stuga"); EntityManager em =
     * factory.createEntityManager();

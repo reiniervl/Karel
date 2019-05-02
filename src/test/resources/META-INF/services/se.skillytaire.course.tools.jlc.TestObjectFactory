@@ -5,3 +5,4 @@ se.skillytaire.belastingdienst.ee.entity.VerhuurderTestFactory
 se.skillytaire.belastingdienst.ee.entity.BootTestFactory
 se.skillytaire.belastingdienst.ee.entity.PositiveTestFactory
 se.skillytaire.belastingdienst.ee.entity.KlantTestFactory
+se.skillytaire.belastingdienst.ee.entity.ReserveringTestFactory
