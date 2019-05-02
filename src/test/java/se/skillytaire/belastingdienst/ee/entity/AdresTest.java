@@ -16,32 +16,26 @@ import se.skillytaire.course.tools.jlc.JLCRunner;
 public class AdresTest {
    GPSCoordinaat gps = new GPSCoordinaat(12.513321, 55.677069);
 
- /*  @Test
-   public void testPersistence() {
-
-      Adres adres1 = new Adres(new GPSCoordinaat(0, 0));
-      adres1.setStreet("Een");
-      adres1.setHouseNumber(1);
-      adres1.setNumberSuffix("a");
-      adres1.setCity("Aa");
-      adres1.setState("Aaa");
-      adres1.setPostalCode("1111 AA");
-      adres1.setCountry("De A");
-      //
-      // ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-      // Validator validator = factory.getValidator();
-      // Set<ConstraintViolation<Adres>> violations =
-      // validator.validate(adres1);
-      // violations.stream().forEach((v) -> System.err.println(v));
-
-      EntityManagerFactory factory =
-            Persistence.createEntityManagerFactory("stuga");
-      EntityManager em = factory.createEntityManager();
-      Assert.assertFalse("Entity Manager is null", em == null);
-      Assert.assertFalse("Adres is null", em == null);
-      em.persist(adres1);
-      Assert.assertTrue(adres1.isPersistant());
-   }*/
+   /*
+    * @Test public void testPersistence() {
+    * 
+    * Adres adres1 = new Adres(new GPSCoordinaat(0, 0));
+    * adres1.setStreet("Een"); adres1.setHouseNumber(1);
+    * adres1.setNumberSuffix("a"); adres1.setCity("Aa"); adres1.setState("Aaa");
+    * adres1.setPostalCode("1111 AA"); adres1.setCountry("De A"); // //
+    * ValidatorFactory factory = Validation.buildDefaultValidatorFactory(); //
+    * Validator validator = factory.getValidator(); //
+    * Set<ConstraintViolation<Adres>> violations = //
+    * validator.validate(adres1); // violations.stream().forEach((v) ->
+    * System.err.println(v));
+    * 
+    * EntityManagerFactory factory =
+    * Persistence.createEntityManagerFactory("stuga"); EntityManager em =
+    * factory.createEntityManager();
+    * Assert.assertFalse("Entity Manager is null", em == null);
+    * Assert.assertFalse("Adres is null", em == null); em.persist(adres1);
+    * Assert.assertTrue(adres1.isPersistant()); }
+    */
 
    @Test
    public void fullConstructorTest() {
