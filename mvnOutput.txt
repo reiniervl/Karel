@@ -1,0 +1,575 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< se.skillytaire.belastingdienst.ee:entity >--------------
+[INFO] Building entity 1.0-SNAPSHOT
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- liberty-maven-plugin:2.5:stop-server (stop-server-before-clean) @ entity ---
+[INFO] CWWKM2102I: Using artifact based assembly archive : io.openliberty:openliberty-runtime:null:RELEASE:zip.
+[INFO] CWWKM2102I: Using installDirectory : C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp.
+[INFO] CWWKM2102I: Using serverName : entityServer.
+[INFO] CWWKM2102I: Using serverDirectory : C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer.
+[INFO] CWWKM2152I: Stopping server entityServer.
+[INFO] CWWKM2001I: server.config.dir is C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer.
+[INFO] CWWKM2001I: server.output.dir is C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer.
+[INFO] CWWKM2001I: Invoke command is ["C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\bin\server.bat", stop, entityServer].
+[INFO] Stopping server entityServer.
+[INFO] Server entityServer is not running.
+[INFO] 
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ entity ---
+[INFO] Deleting C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (default) @ entity ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (validate) @ entity ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.3:prepare-agent (default-prepare-agent) @ entity ---
+[INFO] argLine set to "-javaagent:C:\\Users\\Reinier van Leussen\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.3\\org.jacoco.agent-0.8.3-runtime.jar=destfile=C:\\2019-03 Full Stack EE Developer Track\\workspace\\Java3\\se.skillytaire.belastingdienst.ee.entity\\target\\jacoco.exec"
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.1:process (default) @ entity ---
+[INFO] Setting property: classpath.resource.loader.class => 'org.codehaus.plexus.velocity.ContextClassLoaderResourceLoader'.
+[INFO] Setting property: velocimacro.messages.on => 'false'.
+[INFO] Setting property: resource.loader => 'classpath'.
+[INFO] Setting property: resource.manager.logwhenfound => 'false'.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:resources (default-resources) @ entity ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ entity ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 8 source files to C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\classes
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.8:run (default) @ entity ---
+[INFO] Executing tasks
+
+main:
+    [mkdir] Created dir: C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\test-classes
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:testResources (default-testResources) @ entity ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ entity ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 9 source files to C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:3.0.0-M3:test (default-test) @ entity ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running se.skillytaire.belastingdienst.ee.entity.AdresTest
+[INFO] Tests run: 321, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.186 s - in se.skillytaire.belastingdienst.ee.entity.AdresTest
+[INFO] Running se.skillytaire.belastingdienst.ee.entity.GPSCoordinaatTest
+[INFO] Tests run: 78, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.172 s - in se.skillytaire.belastingdienst.ee.entity.GPSCoordinaatTest
+[INFO] Running se.skillytaire.belastingdienst.ee.entity.TelefoonNummerTestCase
+[INFO] Tests run: 70, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.266 s - in se.skillytaire.belastingdienst.ee.entity.TelefoonNummerTestCase
+[INFO] Running se.skillytaire.belastingdienst.ee.entity.VerhuurderTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.884 s - in se.skillytaire.belastingdienst.ee.entity.VerhuurderTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 705, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- liberty-maven-plugin:2.5:install-server (install-server) @ entity ---
+[INFO] CWWKM2102I: Using artifact based assembly archive : io.openliberty:openliberty-kernel:null:18.0.0.2:zip.
+[INFO] CWWKM2102I: Using installDirectory : C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp.
+[INFO] CWWKM2102I: Using serverName : entityServer.
+[INFO] CWWKM2102I: Using serverDirectory : C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer.
+[INFO] CWWKM2185I: The liberty-maven-plugin configuration parameter "appsDirectory" value defaults to "dropins".
+[INFO] Installing assembly...
+[INFO] Expanding: C:\Users\Reinier van Leussen\.m2\repository\io\openliberty\openliberty-kernel\18.0.0.2\openliberty-kernel-18.0.0.2.zip into C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty
+[INFO] 
+[INFO] --- liberty-maven-plugin:2.5:create-server (install-server) @ entity ---
+[INFO] CWWKM2102I: Using artifact based assembly archive : io.openliberty:openliberty-kernel:null:18.0.0.2:zip.
+[INFO] CWWKM2102I: Using installDirectory : C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp.
+[INFO] CWWKM2102I: Using serverName : entityServer.
+[INFO] CWWKM2102I: Using serverDirectory : C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer.
+[INFO] CWWKM2185I: The liberty-maven-plugin configuration parameter "appsDirectory" value defaults to "dropins".
+[INFO] CWWKM2112I: Re-using previously installed assembly.
+[INFO] CWWKM2143I: Server entityServer does not exist. Now creating...
+[INFO] CWWKM2001I: server.config.dir is C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer.
+[INFO] CWWKM2001I: server.output.dir is C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer.
+[INFO] CWWKM2001I: Invoke command is ["C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\bin\server.bat", create, entityServer].
+[INFO] Server entityServer created.
+[INFO] CWWKM2129I: Server entityServer has been created at C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer.
+[INFO] Copying 1 file to C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer
+[INFO] CWWKM2144I: Update server configuration file server.xml from C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\src\main\liberty\config\server.xml.
+[INFO] CWWKM2144I: Update server configuration file bootstrap.properties from inlined configuration.
+[INFO] 
+[INFO] --- liberty-maven-plugin:2.5:install-feature (install-feature) @ entity ---
+[INFO] CWWKM2102I: Using artifact based assembly archive : io.openliberty:openliberty-runtime:null:RELEASE:zip.
+[INFO] CWWKM2102I: Using installDirectory : C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp.
+[INFO] CWWKM2102I: Using serverName : entityServer.
+[INFO] CWWKM2102I: Using serverDirectory : C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer.
+[INFO] Installing features: [servlet-4.0, cdi-1.2]
+[INFO] Product validation completed successfully.
+[INFO] The following features have been installed: servlet-4.0 cdi-1.2 
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.3:report (default-report) @ entity ---
+[INFO] Loading execution data file C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\jacoco.exec
+[INFO] Analyzed bundle 'entity' with 8 classes
+[INFO] 
+[INFO] --- maven-war-plugin:3.2.2:war (default-war) @ entity ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [entity] in [C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\se.skillytaire.belastingdienst.ee.entity]
+[INFO] Processing war project
+[INFO] Webapp assembled in [250 msecs]
+[INFO] Building war: C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\se.skillytaire.belastingdienst.ee.entity.war
+[INFO] 
+[INFO] --- liberty-maven-plugin:2.5:install-apps (install-apps) @ entity ---
+[INFO] CWWKM2102I: Using artifact based assembly archive : io.openliberty:openliberty-runtime:null:RELEASE:zip.
+[INFO] CWWKM2102I: Using installDirectory : C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp.
+[INFO] CWWKM2102I: Using serverName : entityServer.
+[INFO] CWWKM2102I: Using serverDirectory : C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer.
+[INFO] Copying 1 file to C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\liberty\wlp\usr\servers\entityServer
+[INFO] CWWKM2144I: Update server configuration file server.xml from C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\src\main\liberty\config\server.xml.
+[INFO] CWWKM2144I: Update server configuration file bootstrap.properties from inlined configuration.
+[INFO] CWWKM2185I: The liberty-maven-plugin configuration parameter "appsDirectory" value defaults to "apps".
+[INFO] 
+[INFO] --- maven-failsafe-plugin:3.0.0-M1:integration-test (default) @ entity ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running se.skillytaire.belastingdienst.ee.entity.AdresTest
+[INFO] Tests run: 321, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.213 s - in se.skillytaire.belastingdienst.ee.entity.AdresTest
+[INFO] Running se.skillytaire.belastingdienst.ee.entity.GPSCoordinaatTest
+[INFO] Tests run: 78, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.234 s - in se.skillytaire.belastingdienst.ee.entity.GPSCoordinaatTest
+[INFO] Running se.skillytaire.belastingdienst.ee.entity.TelefoonNummerTestCase
+[INFO] Tests run: 70, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.224 s - in se.skillytaire.belastingdienst.ee.entity.TelefoonNummerTestCase
+[INFO] Running se.skillytaire.belastingdienst.ee.entity.VerhuurderTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.006 s - in se.skillytaire.belastingdienst.ee.entity.VerhuurderTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 705, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- maven-failsafe-plugin:3.0.0-M1:verify (default) @ entity ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ entity ---
+[INFO] Installing C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\se.skillytaire.belastingdienst.ee.entity.war to C:\Users\Reinier van Leussen\.m2\repository\se\skillytaire\belastingdienst\ee\entity\1.0-SNAPSHOT\entity-1.0-SNAPSHOT.war
+[INFO] Installing C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\pom.xml to C:\Users\Reinier van Leussen\.m2\repository\se\skillytaire\belastingdienst\ee\entity\1.0-SNAPSHOT\entity-1.0-SNAPSHOT.pom
+[INFO] 
+[INFO] --- maven-site-plugin:3.7.1:site (default-site) @ entity ---
+[INFO] configuring report plugin org.apache.maven.plugins:maven-javadoc-plugin:3.1.0
+[INFO] preparing maven-javadoc-plugin:javadoc report requires 'generate-sources' forked phase execution
+[INFO] 
+[INFO] >>> maven-javadoc-plugin:3.1.0:javadoc > generate-sources @ entity >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (default) @ entity ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (validate) @ entity ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.3:prepare-agent (default-prepare-agent) @ entity ---
+[INFO] argLine set to "-javaagent:C:\\Users\\Reinier van Leussen\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.3\\org.jacoco.agent-0.8.3-runtime.jar=destfile=C:\\2019-03 Full Stack EE Developer Track\\workspace\\Java3\\se.skillytaire.belastingdienst.ee.entity\\target\\jacoco.exec"
+[INFO] 
+[INFO] <<< maven-javadoc-plugin:3.1.0:javadoc < generate-sources @ entity <<<
+[INFO] 
+[INFO] 'generate-sources' forked phase execution for maven-javadoc-plugin:javadoc report preparation done
+[INFO] preparing maven-javadoc-plugin:test-javadoc report requires 'generate-test-sources' forked phase execution
+[INFO] 
+[INFO] >>> maven-javadoc-plugin:3.1.0:test-javadoc > generate-test-sources @ entity >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (default) @ entity ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (validate) @ entity ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.3:prepare-agent (default-prepare-agent) @ entity ---
+[INFO] argLine set to "-javaagent:C:\\Users\\Reinier van Leussen\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.3\\org.jacoco.agent-0.8.3-runtime.jar=destfile=C:\\2019-03 Full Stack EE Developer Track\\workspace\\Java3\\se.skillytaire.belastingdienst.ee.entity\\target\\jacoco.exec"
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.1:process (default) @ entity ---
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:resources (default-resources) @ entity ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ entity ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< maven-javadoc-plugin:3.1.0:test-javadoc < generate-test-sources @ entity <<<
+[INFO] 
+[INFO] 'generate-test-sources' forked phase execution for maven-javadoc-plugin:test-javadoc report preparation done
+[INFO] 6 reports detected for maven-javadoc-plugin:3.1.0: aggregate-no-fork, javadoc, javadoc-no-fork, test-aggregate-no-fork, test-javadoc, test-javadoc-no-fork
+[INFO] configuring report plugin org.apache.maven.plugins:maven-jxr-plugin:3.0.0
+[INFO] preparing maven-jxr-plugin:jxr report requires 'generate-sources' forked phase execution
+[INFO] 
+[INFO] >>> maven-jxr-plugin:3.0.0:jxr > generate-sources @ entity >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (default) @ entity ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (validate) @ entity ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.3:prepare-agent (default-prepare-agent) @ entity ---
+[INFO] argLine set to "-javaagent:C:\\Users\\Reinier van Leussen\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.3\\org.jacoco.agent-0.8.3-runtime.jar=destfile=C:\\2019-03 Full Stack EE Developer Track\\workspace\\Java3\\se.skillytaire.belastingdienst.ee.entity\\target\\jacoco.exec"
+[INFO] 
+[INFO] <<< maven-jxr-plugin:3.0.0:jxr < generate-sources @ entity <<<
+[INFO] 
+[INFO] 'generate-sources' forked phase execution for maven-jxr-plugin:jxr report preparation done
+[INFO] preparing maven-jxr-plugin:test-jxr report requires 'generate-test-sources' forked phase execution
+[INFO] 
+[INFO] >>> maven-jxr-plugin:3.0.0:test-jxr > generate-test-sources @ entity >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (default) @ entity ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (validate) @ entity ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.3:prepare-agent (default-prepare-agent) @ entity ---
+[INFO] argLine set to "-javaagent:C:\\Users\\Reinier van Leussen\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.3\\org.jacoco.agent-0.8.3-runtime.jar=destfile=C:\\2019-03 Full Stack EE Developer Track\\workspace\\Java3\\se.skillytaire.belastingdienst.ee.entity\\target\\jacoco.exec"
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.1:process (default) @ entity ---
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:resources (default-resources) @ entity ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ entity ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< maven-jxr-plugin:3.0.0:test-jxr < generate-test-sources @ entity <<<
+[INFO] 
+[INFO] 'generate-test-sources' forked phase execution for maven-jxr-plugin:test-jxr report preparation done
+[INFO] 2 reports detected for maven-jxr-plugin:3.0.0: jxr, test-jxr
+[INFO] configuring report plugin org.apache.maven.plugins:maven-pmd-plugin:3.11.0
+[INFO] 2 reports detected for maven-pmd-plugin:3.11.0: cpd, pmd
+[INFO] configuring report plugin org.jacoco:jacoco-maven-plugin:0.8.3
+[INFO] 1 report configured for jacoco-maven-plugin:0.8.3: report
+[INFO] configuring report plugin org.codehaus.mojo:jdepend-maven-plugin:2.0
+[INFO] preparing jdepend-maven-plugin:generate report requires 'compile' forked phase execution
+[INFO] 
+[INFO] >>> jdepend-maven-plugin:2.0:generate > compile @ entity >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (default) @ entity ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (validate) @ entity ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.3:prepare-agent (default-prepare-agent) @ entity ---
+[INFO] argLine set to "-javaagent:C:\\Users\\Reinier van Leussen\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.3\\org.jacoco.agent-0.8.3-runtime.jar=destfile=C:\\2019-03 Full Stack EE Developer Track\\workspace\\Java3\\se.skillytaire.belastingdienst.ee.entity\\target\\jacoco.exec"
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.1:process (default) @ entity ---
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:resources (default-resources) @ entity ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ entity ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< jdepend-maven-plugin:2.0:generate < compile @ entity <<<
+[INFO] 
+[INFO] 'compile' forked phase execution for jdepend-maven-plugin:generate report preparation done
+[INFO] 2 reports detected for jdepend-maven-plugin:2.0: generate-no-fork, generate
+[INFO] configuring report plugin org.codehaus.mojo:taglist-maven-plugin:2.4
+[INFO] 1 report detected for taglist-maven-plugin:2.4: taglist
+[INFO] configuring report plugin org.apache.maven.plugins:maven-surefire-report-plugin:3.0.0-M3
+[INFO] preparing maven-surefire-report-plugin:report report requires '[surefire]test' forked phase execution
+[INFO] 
+[INFO] >>> maven-surefire-report-plugin:3.0.0-M3:report > [surefire]test @ entity >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.0.0-M2:enforce (default) @ entity ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.0.0:check (validate) @ entity ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.3:prepare-agent (default-prepare-agent) @ entity ---
+[INFO] argLine set to "-javaagent:C:\\Users\\Reinier van Leussen\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.3\\org.jacoco.agent-0.8.3-runtime.jar=destfile=C:\\2019-03 Full Stack EE Developer Track\\workspace\\Java3\\se.skillytaire.belastingdienst.ee.entity\\target\\jacoco.exec"
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.1:process (default) @ entity ---
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:resources (default-resources) @ entity ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ entity ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.8:run (default) @ entity ---
+[INFO] Executing tasks
+
+main:
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:testResources (default-testResources) @ entity ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ entity ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 9 source files to C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:3.0.0-M3:test (default-test) @ entity ---
+[INFO] Skipping execution of surefire because it has already been run for this configuration
+[INFO] 
+[INFO] <<< maven-surefire-report-plugin:3.0.0-M3:report < [surefire]test @ entity <<<
+[INFO] 
+[INFO] '[surefire]test' forked phase execution for maven-surefire-report-plugin:report report preparation done
+[INFO] 3 reports detected for maven-surefire-report-plugin:3.0.0-M3: failsafe-report-only, report, report-only
+[INFO] configuring report plugin org.codehaus.mojo:findbugs-maven-plugin:3.0.3
+[INFO] 1 report detected for findbugs-maven-plugin:3.0.3: findbugs
+[INFO] plugin org.codehaus.mojo:findbugs-maven-plugin will be executed more than one time
+[INFO] configuring report plugin org.codehaus.mojo:findbugs-maven-plugin:3.0.3
+[INFO] 1 report detected for findbugs-maven-plugin:3.0.3: findbugs
+[INFO] configuring report plugin org.apache.maven.plugins:maven-checkstyle-plugin:3.0.0
+[INFO] 1 report configured for maven-checkstyle-plugin:3.0.0: checkstyle
+[WARNING] Report plugin org.apache.maven.plugins:maven-project-info-reports-plugin has an empty version.
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[INFO] configuring report plugin org.apache.maven.plugins:maven-project-info-reports-plugin:3.0.0
+[INFO] 15 reports detected for maven-project-info-reports-plugin:3.0.0: ci-management, dependencies, dependency-info, dependency-management, distribution-management, index, issue-management, licenses, mailing-lists, modules, plugin-management, plugins, scm, summary, team
+[INFO] Fork Value is true
+     [java] apr 16, 2019 12:05:12 PM java.util.prefs.WindowsPreferences <init>
+     [java] WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0x80000002. Windows RegCreateKeyEx(...) returned error code 5.
+[INFO] Done FindBugs Analysis....
+[INFO] Fork Value is true
+     [java] apr 16, 2019 12:05:22 PM java.util.prefs.WindowsPreferences <init>
+     [java] WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0x80000002. Windows RegCreateKeyEx(...) returned error code 5.
+[INFO] Done FindBugs Analysis....
+[INFO] Rendering site with default locale English (en)
+[WARNING] Unable to find a URL to the parent project. The parent menu will NOT be added.
+[INFO] Relativizing decoration links with respect to localized project URL: http://stuga-gruvriset.se
+[INFO] Rendering content with org.apache.maven.skins:maven-default-skin:jar:1.2 skin.
+[INFO] Skipped "Javadoc" report (maven-javadoc-plugin:3.1.0:javadoc), file "apidocs/index.html" already exists.
+[INFO] Skipped "Javadoc" report (maven-javadoc-plugin:3.1.0:javadoc-no-fork), file "apidocs/index.html" already exists.
+[INFO] Skipped "Test Javadoc" report (maven-javadoc-plugin:3.1.0:test-javadoc), file "testapidocs/index.html" already exists.
+[INFO] Skipped "Test Javadoc" report (maven-javadoc-plugin:3.1.0:test-javadoc-no-fork), file "testapidocs/index.html" already exists.
+[INFO] Skipped "JDepend" report (jdepend-maven-plugin:2.0:generate), file "jdepend-report.html" already exists.
+[INFO] Skipped "Surefire Report" report (maven-surefire-report-plugin:3.0.0-M3:report-only), file "surefire-report.html" already exists.
+[INFO] Skipped "FindBugs" report (findbugs-maven-plugin:3.0.3:findbugs), file "findbugs.html" already exists.
+[INFO] Generating "Javadoc" report       --- maven-javadoc-plugin:3.1.0:aggregate-no-fork
+[INFO] Generating "Test Javadoc" report  --- maven-javadoc-plugin:3.1.0:test-aggregate-no-fork
+[INFO] Generating "Source Xref" report   --- maven-jxr-plugin:3.0.0:jxr
+[INFO] Generating "Test Source Xref" report --- maven-jxr-plugin:3.0.0:test-jxr
+[INFO] Generating "PMD" report           --- maven-pmd-plugin:3.11.0:pmd
+[INFO] Generating "JaCoCo" report        --- jacoco-maven-plugin:0.8.3:report
+[INFO] Loading execution data file C:\2019-03 Full Stack EE Developer Track\workspace\Java3\se.skillytaire.belastingdienst.ee.entity\target\jacoco.exec
+[INFO] Analyzed bundle 'entity' with 8 classes
+[INFO] Generating "JDepend" report       --- jdepend-maven-plugin:2.0:generate-no-fork
+[INFO] Generating "Tag List" report      --- taglist-maven-plugin:2.4:taglist
+[WARNING] Using legacy tag format.  This is not recommended.
+[INFO] Generating "Failsafe Report" report --- maven-surefire-report-plugin:3.0.0-M3:failsafe-report-only
+[INFO] Generating "Surefire Report" report --- maven-surefire-report-plugin:3.0.0-M3:report
+[INFO] Generating "FindBugs" report      --- findbugs-maven-plugin:3.0.3:findbugs
+[INFO] Generating "Checkstyle" report    --- maven-checkstyle-plugin:3.0.0:checkstyle
+[INFO] Starting audit...
+Audit done.
+[INFO] Generating "Dependencies" report  --- maven-project-info-reports-plugin:3.0.0:dependencies
+[WARNING] Unable to create Maven project from repository.
+org.apache.maven.project.ProjectBuildingException: Some problems were encountered while processing the POMs:
+[ERROR] Unknown packaging: bundle @ line 11, column 14
+
+    at org.apache.maven.project.DefaultProjectBuilder.build (DefaultProjectBuilder.java:194)
+    at org.apache.maven.project.DefaultProjectBuilder.build (DefaultProjectBuilder.java:329)
+    at org.apache.maven.report.projectinfo.dependencies.RepositoryUtils.getMavenProjectFromRepository (RepositoryUtils.java:125)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderArtifactRow (DependenciesRenderer.java:799)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderDependenciesForScope (DependenciesRenderer.java:749)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderDependenciesForAllScopes (DependenciesRenderer.java:418)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderSectionProjectDependencies (DependenciesRenderer.java:397)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderBody (DependenciesRenderer.java:216)
+    at org.apache.maven.reporting.AbstractMavenReportRenderer.render (AbstractMavenReportRenderer.java:80)
+    at org.apache.maven.report.projectinfo.DependenciesReport.executeReport (DependenciesReport.java:162)
+    at org.apache.maven.reporting.AbstractMavenReport.generate (AbstractMavenReport.java:251)
+    at org.apache.maven.plugins.site.render.ReportDocumentRenderer.renderDocument (ReportDocumentRenderer.java:230)
+    at org.apache.maven.doxia.siterenderer.DefaultSiteRenderer.render (DefaultSiteRenderer.java:349)
+    at org.apache.maven.plugins.site.render.SiteMojo.renderLocale (SiteMojo.java:198)
+    at org.apache.maven.plugins.site.render.SiteMojo.execute (SiteMojo.java:147)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:956)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:288)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:498)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:289)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:229)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:415)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:356)
+Caused by: org.apache.maven.model.building.ModelBuildingException: 1 problem was encountered while building the effective model for org.postgresql:postgresql:42.2.5
+[ERROR] Unknown packaging: bundle @ line 11, column 14
+
+    at org.apache.maven.model.building.DefaultModelProblemCollector.newModelBuildingException (DefaultModelProblemCollector.java:197)
+    at org.apache.maven.model.building.DefaultModelBuilder.build (DefaultModelBuilder.java:490)
+    at org.apache.maven.model.building.DefaultModelBuilder.build (DefaultModelBuilder.java:432)
+    at org.apache.maven.model.building.DefaultModelBuilder.build (DefaultModelBuilder.java:422)
+    at org.apache.maven.project.DefaultProjectBuilder.build (DefaultProjectBuilder.java:160)
+    at org.apache.maven.project.DefaultProjectBuilder.build (DefaultProjectBuilder.java:329)
+    at org.apache.maven.report.projectinfo.dependencies.RepositoryUtils.getMavenProjectFromRepository (RepositoryUtils.java:125)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderArtifactRow (DependenciesRenderer.java:799)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderDependenciesForScope (DependenciesRenderer.java:749)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderDependenciesForAllScopes (DependenciesRenderer.java:418)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderSectionProjectDependencies (DependenciesRenderer.java:397)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderBody (DependenciesRenderer.java:216)
+    at org.apache.maven.reporting.AbstractMavenReportRenderer.render (AbstractMavenReportRenderer.java:80)
+    at org.apache.maven.report.projectinfo.DependenciesReport.executeReport (DependenciesReport.java:162)
+    at org.apache.maven.reporting.AbstractMavenReport.generate (AbstractMavenReport.java:251)
+    at org.apache.maven.plugins.site.render.ReportDocumentRenderer.renderDocument (ReportDocumentRenderer.java:230)
+    at org.apache.maven.doxia.siterenderer.DefaultSiteRenderer.render (DefaultSiteRenderer.java:349)
+    at org.apache.maven.plugins.site.render.SiteMojo.renderLocale (SiteMojo.java:198)
+    at org.apache.maven.plugins.site.render.SiteMojo.execute (SiteMojo.java:147)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:956)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:288)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:498)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:289)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:229)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:415)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:356)
+[WARNING] Unable to create Maven project from repository for artifact org.postgresql:postgresql:jar:42.2.5
+org.apache.maven.project.ProjectBuildingException: Some problems were encountered while processing the POMs:
+[ERROR] Unknown packaging: bundle @ line 11, column 14
+
+    at org.apache.maven.project.DefaultProjectBuilder.build (DefaultProjectBuilder.java:194)
+    at org.apache.maven.project.DefaultProjectBuilder.build (DefaultProjectBuilder.java:329)
+    at org.apache.maven.report.projectinfo.dependencies.RepositoryUtils.getMavenProjectFromRepository (RepositoryUtils.java:125)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.printDescriptionsAndURLs (DependenciesRenderer.java:890)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.printDependencyListing (DependenciesRenderer.java:847)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.printDependencyListing (DependenciesRenderer.java:867)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderSectionDependencyTree (DependenciesRenderer.java:486)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderSectionProjectDependencyGraph (DependenciesRenderer.java:449)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderBody (DependenciesRenderer.java:222)
+    at org.apache.maven.reporting.AbstractMavenReportRenderer.render (AbstractMavenReportRenderer.java:80)
+    at org.apache.maven.report.projectinfo.DependenciesReport.executeReport (DependenciesReport.java:162)
+    at org.apache.maven.reporting.AbstractMavenReport.generate (AbstractMavenReport.java:251)
+    at org.apache.maven.plugins.site.render.ReportDocumentRenderer.renderDocument (ReportDocumentRenderer.java:230)
+    at org.apache.maven.doxia.siterenderer.DefaultSiteRenderer.render (DefaultSiteRenderer.java:349)
+    at org.apache.maven.plugins.site.render.SiteMojo.renderLocale (SiteMojo.java:198)
+    at org.apache.maven.plugins.site.render.SiteMojo.execute (SiteMojo.java:147)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:956)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:288)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:498)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:289)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:229)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:415)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:356)
+Caused by: org.apache.maven.model.building.ModelBuildingException: 1 problem was encountered while building the effective model for org.postgresql:postgresql:42.2.5
+[ERROR] Unknown packaging: bundle @ line 11, column 14
+
+    at org.apache.maven.model.building.DefaultModelProblemCollector.newModelBuildingException (DefaultModelProblemCollector.java:197)
+    at org.apache.maven.model.building.DefaultModelBuilder.build (DefaultModelBuilder.java:490)
+    at org.apache.maven.model.building.DefaultModelBuilder.build (DefaultModelBuilder.java:432)
+    at org.apache.maven.model.building.DefaultModelBuilder.build (DefaultModelBuilder.java:422)
+    at org.apache.maven.project.DefaultProjectBuilder.build (DefaultProjectBuilder.java:160)
+    at org.apache.maven.project.DefaultProjectBuilder.build (DefaultProjectBuilder.java:329)
+    at org.apache.maven.report.projectinfo.dependencies.RepositoryUtils.getMavenProjectFromRepository (RepositoryUtils.java:125)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.printDescriptionsAndURLs (DependenciesRenderer.java:890)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.printDependencyListing (DependenciesRenderer.java:847)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.printDependencyListing (DependenciesRenderer.java:867)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderSectionDependencyTree (DependenciesRenderer.java:486)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderSectionProjectDependencyGraph (DependenciesRenderer.java:449)
+    at org.apache.maven.report.projectinfo.dependencies.renderer.DependenciesRenderer.renderBody (DependenciesRenderer.java:222)
+    at org.apache.maven.reporting.AbstractMavenReportRenderer.render (AbstractMavenReportRenderer.java:80)
+    at org.apache.maven.report.projectinfo.DependenciesReport.executeReport (DependenciesReport.java:162)
+    at org.apache.maven.reporting.AbstractMavenReport.generate (AbstractMavenReport.java:251)
+    at org.apache.maven.plugins.site.render.ReportDocumentRenderer.renderDocument (ReportDocumentRenderer.java:230)
+    at org.apache.maven.doxia.siterenderer.DefaultSiteRenderer.render (DefaultSiteRenderer.java:349)
+    at org.apache.maven.plugins.site.render.SiteMojo.renderLocale (SiteMojo.java:198)
+    at org.apache.maven.plugins.site.render.SiteMojo.execute (SiteMojo.java:147)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:956)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:288)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:498)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:289)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:229)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:415)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:356)
+[INFO] Generating "Dependency Information" report --- maven-project-info-reports-plugin:3.0.0:dependency-info
+[INFO] Generating "Distribution Management" report --- maven-project-info-reports-plugin:3.0.0:distribution-management
+[INFO] Generating "About" report         --- maven-project-info-reports-plugin:3.0.0:index
+[INFO] Generating "Licenses" report      --- maven-project-info-reports-plugin:3.0.0:licenses
+[INFO] Generating "Plugin Management" report --- maven-project-info-reports-plugin:3.0.0:plugin-management
+[INFO] Generating "Plugins" report       --- maven-project-info-reports-plugin:3.0.0:plugins
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-project-info-reports-plugin/maven-metadata.xml
+Progress (1): 948 B                   Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-project-info-reports-plugin/maven-metadata.xml (948 B at 4.3 kB/s)
+[INFO] Generating "Source Code Management" report --- maven-project-info-reports-plugin:3.0.0:scm
+[INFO] Generating "Summary" report       --- maven-project-info-reports-plugin:3.0.0:summary
+[INFO] Generating "Team" report          --- maven-project-info-reports-plugin:3.0.0:team
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:06 min
+[INFO] Finished at: 2019-04-16T12:05:59+02:00
+[INFO] ------------------------------------------------------------------------

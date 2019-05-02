@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.createment.nl/weather-service-request"
+	xmlns:tns="http://www.createment.nl/weather-service-request"
+	elementFormDefault="qualified">
+	<element name="request" type="tns:gpsType"/>
+
+	<complexType name="gpsType">
+		<sequence maxOccurs="1" minOccurs="1">
+			<element name="longtitude" type="tns:longtitudeType" minOccurs="1" maxOccurs="1"/>
+			<element name="latitude" type="tns:latitudeType" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<simpleType name="longtitudeType">
+		<restriction base="double">
+			<minInclusive value="-180" />
+			<maxInclusive value="180" />
+		</restriction>
+	</simpleType>
+	<simpleType name="latitudeType">
+		<restriction base="double">
+			<minInclusive value="-85.05112878" />
+			<maxInclusive value="85.05112878" />
+		</restriction>
+	</simpleType>
+</schema>

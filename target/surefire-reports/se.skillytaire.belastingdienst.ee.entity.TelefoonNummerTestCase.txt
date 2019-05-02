@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: se.skillytaire.belastingdienst.ee.entity.TelefoonNummerTestCase
+-------------------------------------------------------------------------------
+Tests run: 70, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.163 s - in se.skillytaire.belastingdienst.ee.entity.TelefoonNummerTestCase

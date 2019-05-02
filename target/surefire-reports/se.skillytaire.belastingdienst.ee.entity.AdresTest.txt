@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: se.skillytaire.belastingdienst.ee.entity.AdresTest
+-------------------------------------------------------------------------------
+Tests run: 322, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 11.464 s <<< FAILURE! - in se.skillytaire.belastingdienst.ee.entity.AdresTest
+testPersistence(se.skillytaire.belastingdienst.ee.entity.AdresTest)  Time elapsed: 9.182 s  <<< ERROR!
+java.lang.NullPointerException
+	at se.skillytaire.belastingdienst.ee.entity.AdresTest.testPersistence(AdresTest.java:37)
+

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request xmlns="http://www.createment.nl/weather-service-request" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.createment.nl/weather-service-request weather-service-request.xsd ">
+  <longtitude>0.0</longtitude>
+  <latitude>85.0511287</latitude>
+</request>
