@@ -8,11 +8,12 @@ import java.lang.annotation.Target;
 
 /**
  * <p>
- * Fields in the annotated class will need to be used for the Builder Pattern
+ * Alle instance variabelen worden gebruikt om een builder class te maken. De
+ * class die wordt gegenereerd is de naam van de originele class + 'Builder'.
  * </p>
  *
  * @author Reinier van Leussen
- * @version 0.0.1
+ * @version 0.8.2
  */
 @Target({ TYPE })
 @Retention(RetentionPolicy.CLASS)
