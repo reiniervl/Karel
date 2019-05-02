@@ -26,7 +26,7 @@ import se.skillytaire.belastingdienst.ee.common.KlantBuilder;
  */
 @Entity
 @Table(name = "klanten")
-public class Klant extends AbstractEntity<Klant, Integer> {
+public class Klant extends AbstractEntity<Klant> {
    private static final long serialVersionUID = 1l;
 
    public static KlantBuilder getBuilder() {
@@ -47,7 +47,7 @@ public class Klant extends AbstractEntity<Klant, Integer> {
 
          @Override
          public KlantBuilder addPassword(final String password) {
-            // TODO Auto-generated method stub
+            this.klant.setPassword(password);
             return this;
          }
 

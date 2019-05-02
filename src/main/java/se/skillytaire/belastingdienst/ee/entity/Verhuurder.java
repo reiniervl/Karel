@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 @Entity
-public class Verhuurder extends AbstractEntity<Verhuurder, Integer> {
+public class Verhuurder extends AbstractEntity<Verhuurder> {
    private static final long serialVersionUID = 1L;
    @NotNull
    /// @Column(unique=true)

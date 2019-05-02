@@ -1,14 +1,11 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class AbstractEntity<E extends AbstractEntity<E, OID>,
-      OID extends Comparable<OID> & Serializable>
+public abstract class AbstractEntity<E extends AbstractEntity<E>>
       extends AbstractComparableObject<E> implements Cloneable {
    private static final long serialVersionUID = 1L;
    /*
@@ -16,7 +13,7 @@ public abstract class AbstractEntity<E extends AbstractEntity<E, OID>,
     */
    @Id
    @GeneratedValue
-   private OID oid;
+   private Integer oid;
 
    /**
     * Developers should not use the default constructor. Please use the same
@@ -36,7 +33,7 @@ public abstract class AbstractEntity<E extends AbstractEntity<E, OID>,
       this.oid = that.getOid();
    }
 
-   public OID getOid() {
+   public Integer getOid() {
       return this.oid;
    }
 

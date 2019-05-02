@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import se.skillytaire.service.weather.api.PositiveInteger;
 
-public class Boot extends AbstractEntity<Boot, Integer> {
+public class Boot extends AbstractEntity<Boot> {
    private static final long serialVersionUID = 1L;
    private int bootNummer;
    private Tocht deLaatsteTocht;

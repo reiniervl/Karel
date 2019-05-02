@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueAdresLocation",
       columnNames = { "longtitude", "latitude" }) })
-public class Adres extends AbstractEntity<Adres, Integer> {
+public class Adres extends AbstractEntity<Adres> {
    private static final long serialVersionUID = 1L;
    @Basic
    private String street;
