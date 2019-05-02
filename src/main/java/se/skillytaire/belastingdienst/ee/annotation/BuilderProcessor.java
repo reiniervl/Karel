@@ -45,6 +45,7 @@ public class BuilderProcessor extends AbstractProcessor {
 				writer.write(String.format("\n\tprivate %s build = new %s();\n", enclosing.getSimpleName(), enclosing.getSimpleName()));
 
 				for (Element field : fields) {
+					if(field.getAnnotation(BuilderField.class) == null) continue;
 					writer.write(String.format("\n\tpublic %s set%s(%s %s) {", className, field.getSimpleName().toString().substring(0, 1).toUpperCase() + field.getSimpleName().toString().substring(1), field.asType().toString(), field.getSimpleName()));
 					writer.write(String.format("\n\t\tbuild.set%s(%s);", field.getSimpleName().toString().substring(0, 1).toUpperCase() + field.getSimpleName().toString().substring(1), field.getSimpleName()));
 					writer.write("\n\t\treturn this;");
