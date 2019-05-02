@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Table(uniqueConstraints = {
       @UniqueConstraint(name = "UniqueReserverings", columnNames = {
             "ReserveringsNummer", "reserveringsDatum", "verloopDatum" }) })
-public class Reservering extends AbstractEntity<Reservering, Integer> {
+public class Reservering extends AbstractEntity<Reservering> {
    private static final long serialVersionUID = 1L;
    @Basic
    private Integer reserveringsNummer;
