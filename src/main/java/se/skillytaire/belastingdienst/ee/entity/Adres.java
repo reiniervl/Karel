@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 @Table(uniqueConstraints = {
       @UniqueConstraint(name = "UniqueAdresLocation", columnNames = {
             "longtitude", "latitude" }) })
-
 public class Adres extends AbstractEntity<Adres> {
    private static final long serialVersionUID = 1L;
    @Basic
