@@ -28,13 +28,16 @@ public class Adres extends AbstractEntity<Adres> {
    private String state;
    @Basic
    private String postalCode;
+
    @Basic
    private String country;
+
    @Embedded
    @NotNull
    @AttributeOverrides({
          @AttributeOverride(name = "longtitude", column = @Column(name = "longtitude")),
-         @AttributeOverride(name = "latitude", column = @Column(name = "latitude")) })
+         @AttributeOverride(name = "latitude", column = @Column(name = "latitude"))
+         })
    private GPSCoordinaat gpsCoordinaat;
 
    /**
