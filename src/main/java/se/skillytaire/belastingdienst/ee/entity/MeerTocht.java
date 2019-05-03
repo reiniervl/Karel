@@ -1,20 +1,15 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-public class MeerTocht extends Tocht {
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-   public MeerTocht() {
-      super();
-   }
+@Entity
+@DiscriminatorValue("m")
+public class MeerTocht extends Tocht<MeerTocht> {
 
-   @Override
-   public int compareTo(Tocht o) {
-      // TODO Auto-generated method stub
-      return 0;
-   }
+   /**
+    *
+    */
+   private static final long serialVersionUID = 1L;
 
-   @Override
-   public int hashCode() {
-      // TODO Auto-generated method stub
-      return 0;
-   }
 }

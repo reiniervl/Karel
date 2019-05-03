@@ -3,13 +3,16 @@ package se.skillytaire.belastingdienst.ee.entity;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
 import javax.validation.constraints.NotNull;
 
 @Entity
-
-public abstract class Tocht extends AbstractEntity<Tocht> {
+@Inheritance
+@DiscriminatorColumn(name = "type")
+public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
    private static final long serialVersionUID = 1L;
    @NotNull
    @Embedded
@@ -51,7 +54,7 @@ public abstract class Tocht extends AbstractEntity<Tocht> {
       this.actuelePeriode = new Periode();
    }
 
-   public Tocht(final Tocht tocht) {
+   public Tocht(final T tocht) {
       super(tocht);
       this.reserveringsPeriode = tocht.getReserveringsPeriode();
       this.actuelePeriode = tocht.getActuelePeriode();
@@ -59,8 +62,14 @@ public abstract class Tocht extends AbstractEntity<Tocht> {
    }
 
    @Override
-   public int compareTo(final Tocht that) {
-      return this.reserveringsPeriode.compareTo(that.reserveringsPeriode);
+   public int compareTo(T that) {
+      Tocht<T> deTocht = that;
+      return this.reserveringsPeriode.compareTo(deTocht.reserveringsPeriode);
+   }
+
+   @Override
+   public int hashCode() {
+      return reserveringsPeriode.hashCode();
    }
 
    @Override

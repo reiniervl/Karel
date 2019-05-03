@@ -6,3 +6,4 @@ se.skillytaire.belastingdienst.ee.entity.BootTestFactory
 se.skillytaire.belastingdienst.ee.entity.PositiveTestFactory
 se.skillytaire.belastingdienst.ee.entity.KlantTestFactory
 se.skillytaire.belastingdienst.ee.entity.ReserveringTestFactory
+se.skillytaire.belastingdienst.ee.entity.PeriodeTestFactory

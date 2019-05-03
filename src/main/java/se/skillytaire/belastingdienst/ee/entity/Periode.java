@@ -47,6 +47,10 @@ public class Periode extends AbstractComparableObject<Periode>
    }
 
    public Periode(final Periode periode) {
+      if (periode == null) {
+         throw new IllegalArgumentException(
+               "Periode mag niet gelijk zijn aan null");
+      }
       this.start = periode.getStart();
       this.eind = periode.getEind();
       Optional<Duration> optionalDuration = periode.getDuur();

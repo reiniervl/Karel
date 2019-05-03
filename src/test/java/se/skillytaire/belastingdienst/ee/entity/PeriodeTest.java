@@ -5,11 +5,13 @@ import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import se.skillytaire.belastingdienst.ee.entity.Periode;
+import se.skillytaire.course.tools.jlc.JLC;
+import se.skillytaire.course.tools.jlc.JLCRunner;
 
-//@RunWith(JLCRunner.class)
-//@JLC(value = Periode.class, asJUnit = true)
+@RunWith(JLCRunner.class)
+@JLC(value = Periode.class, asJUnit = true)
 public class PeriodeTest {
 
    @Test
@@ -87,18 +89,15 @@ public class PeriodeTest {
    }
 
    @Test
-   public void testCompareTo() {
+   public void testCompareTo() throws InterruptedException {
       Periode periode1 = new Periode();
       Periode periode2 = new Periode();
       periode1.start();
       periode2.start();
       periode2.beeindig();
 
-      try {
-         Thread.sleep(1000);
-      } catch (InterruptedException e) {
-         e.printStackTrace();
-      }
+      Thread.sleep(1000);
+
       periode1.beeindig();
 
       Assert.assertTrue(periode1.compareTo(periode2) > 0);
