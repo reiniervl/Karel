@@ -8,6 +8,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>se.skillytaire.belastingdienst.ee.entity.Adres</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.Klant</class>
+		<class>se.skillytaire.belastingdienst.ee.entity.Reservering</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <validation-mode>AUTO</validation-mode>
     <properties>
