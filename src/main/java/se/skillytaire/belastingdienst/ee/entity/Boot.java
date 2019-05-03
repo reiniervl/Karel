@@ -2,6 +2,7 @@ package se.skillytaire.belastingdienst.ee.entity;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
 
@@ -44,23 +45,11 @@ public class Boot extends AbstractEntity<Boot> {
       }
    }
 
-   public Duration beeindigTocht() {
-      this.deLaatsteTocht.beeindig();
-      return this.deLaatsteTocht.geefDuur();
-   }
-
-   public Tocht gaMeerTochtMaken() {
-      return this.gaTochtMaken(new MeerTocht());
-   }
-
-   public Tocht gaRivierTochtMaken() {
-      return this.gaTochtMaken(new RivierTocht());
-   }
-
-   private Tocht gaTochtMaken(final Tocht eenTocht) {
+   public void start(final Tocht eenTocht) {
+      // FIXME: design by contract
       this.deLaatsteTocht = eenTocht;
       this.tochtGeschiedenis.add(this.deLaatsteTocht);
-      return this.deLaatsteTocht;
+      eenTocht.start();
    }
 
    public int geefNummer() {
@@ -78,13 +67,17 @@ public class Boot extends AbstractEntity<Boot> {
    public boolean isInspectieNodig() {
       Duration total = Duration.ZERO;
       for (Tocht t : this.tochtGeschiedenis) {
-         total = total.plus(t.geefDuur());
+         Periode actuelePeriode = t.getActuelePeriode();
+         Optional<Duration> optionalDuration = actuelePeriode.getDuur();
+         if (optionalDuration.isPresent()) {
+            total = total.plus(optionalDuration.get());
+         }
       }
       return total.getSeconds() > Boot.INSPECTIEDUUR.getSeconds();
    }
 
    private boolean isVrij() {
-      return ((!this.hasLaatsteTocht()) || (this.deLaatsteTocht.isBeeindigd()));
+      return (!this.hasLaatsteTocht()) || (this.deLaatsteTocht.isBeeindigd());
    }
 
    public boolean hasLaatsteTocht() {

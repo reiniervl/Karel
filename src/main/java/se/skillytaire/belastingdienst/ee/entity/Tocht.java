@@ -1,39 +1,105 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
-public abstract class Tocht {
-   private LocalDateTime beginTijd;
-   private LocalDateTime eindTijd;
+@Entity
 
+public abstract class Tocht extends AbstractEntity<Tocht> {
+   private static final long serialVersionUID = 1L;
+   @NotNull
+   @Embedded
+   @AttributeOverrides({
+         @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "reserveringstart")),
+         @AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "reserveringeind")),
+         @AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "reserveringduur")) })
+   private Periode reserveringsPeriode;
+   @NotNull
+   @Embedded
+   @AttributeOverrides({
+         @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "actuelestart")),
+         @AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "actueleeind")),
+         @AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "actueleduur")) })
+   private Periode actuelePeriode;
+   @NotNull
+   private Double prijs;
+
+   /**
+    * Developers should not use the default constructor. Please use the same
+    * visibility modifier "protected" for overriding classes.
+    */
    public Tocht() {
-
-      this.zetBeginTijd(LocalDateTime.now());
    }
 
-   public void beeindig() {
-      this.zetEindTijd(LocalDateTime.now());
+   public Tocht(final Double prijs, Periode reserveringsPeriode) {
+      if (prijs == null) {
+         throw new IllegalArgumentException("De prijs is null");
+      }
+      if (reserveringsPeriode == null) {
+         throw new IllegalArgumentException("De reserveringsPeriode is null");
+      }
+      if (!reserveringsPeriode.isBeeindigd()) {
+         throw new IllegalArgumentException(
+               "De reserveringsPeriode is niet valide");
+      }
+      this.prijs = prijs;
+      this.reserveringsPeriode = reserveringsPeriode.clone();
+      this.actuelePeriode = new Periode();
    }
 
-   public Duration geefDuur() {
-      return Duration.between(this.beginTijd, this.eindTijd);
+   public Tocht(final Tocht tocht) {
+      super(tocht);
+      this.reserveringsPeriode = tocht.getReserveringsPeriode();
+      this.actuelePeriode = tocht.getActuelePeriode();
+      this.prijs = tocht.getPrijs();
    }
 
-   public boolean isBeeindigd() {
-      return (this.eindTijd != null);
-   }
-
-   private void zetBeginTijd(final LocalDateTime eenTijd) {
-      this.beginTijd = eenTijd;
-   }
-
-   private void zetEindTijd(final LocalDateTime eenTijd) {
-      this.eindTijd = eenTijd;
+   @Override
+   public int compareTo(final Tocht that) {
+      return this.reserveringsPeriode.compareTo(that.reserveringsPeriode);
    }
 
    @Override
    public String toString() {
-      return String.format("bt=%s + et=%s", this.beginTijd, this.eindTijd);
+      StringBuilder builder = new StringBuilder();
+      builder.append(", reserveringsPeriode=");
+      builder.append(this.reserveringsPeriode);
+      builder.append(", actuelePeriode=");
+      builder.append(this.actuelePeriode);
+      builder.append(", prijs=");
+      builder.append(this.prijs);
+      return builder.toString();
+   }
+
+   public Periode getReserveringsPeriode() {
+      return reserveringsPeriode.clone();
+   }
+
+   public Periode getActuelePeriode() {
+      return actuelePeriode.clone();
+   }
+
+   public double prijs() {
+      return this.prijs();
+   }
+
+   public Double getPrijs() {
+      return prijs;
+   }
+
+   public void setPrijs(Double prijs) {
+      this.prijs = prijs;
+   }
+
+   public boolean isBeeindigd() {
+      return this.actuelePeriode.isBeeindigd();
+   }
+
+   public void start() {
+      this.actuelePeriode.start();
    }
 }

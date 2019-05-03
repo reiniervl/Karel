@@ -11,8 +11,10 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueAdresLocation",
-      columnNames = { "longtitude", "latitude" }) })
+@Table(uniqueConstraints = {
+      @UniqueConstraint(name = "UniqueAdresLocation", columnNames = {
+            "longtitude", "latitude" }) })
+
 public class Adres extends AbstractEntity<Adres> {
    private static final long serialVersionUID = 1L;
    @Basic
@@ -32,10 +34,8 @@ public class Adres extends AbstractEntity<Adres> {
    @Embedded
    @NotNull
    @AttributeOverrides({
-         @AttributeOverride(name = "longtitude",
-               column = @Column(name = "longtitude")),
-         @AttributeOverride(name = "latitude",
-               column = @Column(name = "latitude")) })
+         @AttributeOverride(name = "longtitude", column = @Column(name = "longtitude")),
+         @AttributeOverride(name = "latitude", column = @Column(name = "latitude")) })
    private GPSCoordinaat gpsCoordinaat;
 
    /**

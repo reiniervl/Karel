@@ -3,6 +3,10 @@ package se.skillytaire.belastingdienst.ee.entity;
 import java.time.Duration;
 
 public class RivierTocht extends Tocht {
+   /**
+    *
+    */
+   private static final long serialVersionUID = 1L;
    private static final Duration CORRECTIEDUUR = Duration.ofMinutes(30);
 
    public RivierTocht() {
@@ -10,9 +14,21 @@ public class RivierTocht extends Tocht {
    }
 
    @Override
-   public Duration geefDuur() {
-      Duration duur = super.geefDuur();
-      return duur.minus(RivierTocht.CORRECTIEDUUR);
+   public int compareTo(Tocht o) {
+      // TODO Auto-generated method stub
+      return 0;
    }
+
+   @Override
+   public int hashCode() {
+      // TODO Auto-generated method stub
+      return 0;
+   }
+
+   // @Override
+   // public Duration geefDuur() {
+   // Duration duur = super.geefDuur();
+   // return duur.minus(RivierTocht.CORRECTIEDUUR);
+   // }
 
 }
