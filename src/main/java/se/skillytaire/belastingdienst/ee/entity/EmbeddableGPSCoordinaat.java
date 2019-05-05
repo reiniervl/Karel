@@ -6,17 +6,15 @@ import javax.persistence.Embeddable;
 
 import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
 import se.skillytaire.belastingdienst.ee.common.GPSCoordinaat;
-import se.skillytaire.didactic.annotation.fluent.Fluent;
 
-@Fluent
 @Embeddable
 public class EmbeddableGPSCoordinaat
       extends AbstractComparableObject<EmbeddableGPSCoordinaat>
       implements Serializable {
 
    private static final long serialVersionUID = 1L;
-   public static final String PROPERTY_LAT ="latitude";
-   public static final String PROPERTY_LONG ="longtitude";
+   public static final String PROPERTY_LAT = "latitude";
+   public static final String PROPERTY_LONG = "longtitude";
    private double longtitude;
 
    private double latitude;

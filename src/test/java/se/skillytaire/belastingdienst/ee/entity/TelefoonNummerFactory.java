@@ -1,9 +1,11 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.AbstractComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.TestFactory;
 
+@TestFactory
 public class TelefoonNummerFactory
-      implements ComparableTestObjectFactory<TelefoonNummer> {
+      extends AbstractComparableTestObjectFactory<TelefoonNummer> {
    @Override
    public TelefoonNummer createThat() {
       return new TelefoonNummer(31, 123456789);
@@ -22,10 +24,5 @@ public class TelefoonNummerFactory
    @Override
    public TelefoonNummer createLessThen() {
       return new TelefoonNummer(30, 111111111);
-   }
-
-   @Override
-   public boolean isTypeFor(final Class<?> type) {
-      return TelefoonNummer.class == type;
    }
 }

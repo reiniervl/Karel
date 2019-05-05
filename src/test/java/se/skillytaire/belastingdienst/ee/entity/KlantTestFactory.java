@@ -1,8 +1,11 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.AbstractComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.TestFactory;
 
-public class KlantTestFactory implements ComparableTestObjectFactory<Klant> {
+@TestFactory
+public class KlantTestFactory
+      extends AbstractComparableTestObjectFactory<Klant> {
    @Override
    public Klant createThat() {
       Klant klant = new Klant();
@@ -19,11 +22,6 @@ public class KlantTestFactory implements ComparableTestObjectFactory<Klant> {
       klant.setPassword("password");
       klant.setEmail("test@createment.nl");
       return klant;
-   }
-
-   @Override
-   public boolean isTypeFor(final Class<?> type) {
-      return Klant.class == type;
    }
 
    @Override

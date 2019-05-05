@@ -1,7 +1,9 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
 import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.TestFactory;
 
+@TestFactory
 public class VerhuurderTestFactory
       implements ComparableTestObjectFactory<Verhuurder> {
    @Override

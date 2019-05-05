@@ -1,10 +1,12 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.AbstractComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.TestFactory;
 import se.skillytaire.java.datatype.PositiveInteger;
 
+@TestFactory
 public class PositiveTestFactory
-      implements ComparableTestObjectFactory<PositiveInteger> {
+      extends AbstractComparableTestObjectFactory<PositiveInteger> {
    @Override
    public PositiveInteger createThat() {
       return new PositiveInteger(2);
@@ -13,11 +15,6 @@ public class PositiveTestFactory
    @Override
    public PositiveInteger createThis() {
       return new PositiveInteger(1);
-   }
-
-   @Override
-   public boolean isTypeFor(final Class<?> type) {
-      return PositiveInteger.class == type;
    }
 
    @Override

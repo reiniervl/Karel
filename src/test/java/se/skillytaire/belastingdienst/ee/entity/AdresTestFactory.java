@@ -1,12 +1,15 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.AbstractComparableTestObjectFactory;
 import se.skillytaire.course.tools.jlc.GreaterThen;
 import se.skillytaire.course.tools.jlc.LessThen;
+import se.skillytaire.course.tools.jlc.TestFactory;
 import se.skillytaire.course.tools.jlc.That;
 import se.skillytaire.course.tools.jlc.This;
 
-public class AdresTestFactory implements ComparableTestObjectFactory<Adres> {
+@TestFactory
+public class AdresTestFactory
+      extends AbstractComparableTestObjectFactory<Adres> {
    @This
    private EmbeddableGPSCoordinaat thisGPS;
    @That
@@ -24,11 +27,6 @@ public class AdresTestFactory implements ComparableTestObjectFactory<Adres> {
    @Override
    public Adres createThis() {
       return new Adres(this.thisGPS);
-   }
-
-   @Override
-   public boolean isTypeFor(final Class<?> type) {
-      return Adres.class == type;
    }
 
    @Override

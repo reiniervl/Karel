@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" >
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -34,7 +34,9 @@
 		<version.hamcrest>1.3</version.hamcrest>
 		<version.arquillian-junit-container>1.1.5.Final</version.arquillian-junit-container>
 		<version.arquillian-transaction-bom>1.0.1.Final</version.arquillian-transaction-bom>
-		<version.jlc>1.4.6-SNAPSHOT</version.jlc>
+		<version.jlc>1.4.6</version.jlc>
+		<version.didactic.generator>1.0.1</version.didactic.generator>
+
 		<version.liberty>19.0.0.4</version.liberty>
 		<!-- liberty server config -->
 
@@ -45,7 +47,7 @@
 		<warContext>${app.name}</warContext>
 
 		<package.file>${project.build.directory}${file.separator}${project.build.finalName}.zip</package.file>
-        <packaging.type>usr</packaging.type>
+		<packaging.type>usr</packaging.type>
 
 		<package.clart>se.skillytaire.service.clart</package.clart>
 
@@ -57,13 +59,29 @@
 	<dependencies>
 		<dependency>
 			<groupId>se.skillytaire.didactic</groupId>
+			<artifactId>annotation.fluent</artifactId>
+			<version>${version.didactic.generator}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>se.skillytaire.didactic</groupId>
 			<artifactId>generator</artifactId>
-			<version>1.0.1</version>	
-			<scope>provided</scope>	
-		</dependency>	
+			<version>${version.didactic.generator}</version>
+			<scope>provided</scope>
+			<!-- 
+			<exclusions>
+				<exclusion>
+					<groupId>javax.validation</groupId>
+					<artifactId>validation-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.persistence</groupId>
+					<artifactId>javax.persistence-api</artifactId>
+				</exclusion>
+			</exclusions>
+			 -->
+		</dependency>
 
-
-		
 		<!-- Klart Weather Service -->
 		<dependency>
 			<groupId>se.skillytaire.service.wheater</groupId>
@@ -160,18 +178,18 @@
 			<version>3.1.1</version>
 			<scope>test</scope>
 		</dependency>
-	    <dependency>
-	      <groupId>org.eclipse.persistence</groupId>
-	      <artifactId>eclipselink</artifactId>
-	      <version>2.5.0</version>
-	      <scope>test</scope>
-	    </dependency>
-	    <dependency>
-	      <groupId>org.hsqldb</groupId>
-	      <artifactId>hsqldb</artifactId>
-	      <version>2.4.1</version>
-	      <scope>test</scope>
-	    </dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>2.5.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.4.1</version>
+			<scope>test</scope>
+		</dependency>
 
 
 		<!-- JSR 349: Bean Validation 1.1 Let op, lage versies werken niet goed 
@@ -200,33 +218,33 @@
 			</exclusions>
 		</dependency>
 
-			<!-- Arquillian gerelateerde dependencies -->
+		<!-- Arquillian gerelateerde dependencies -->
 
-			<!-- Arquillian junit testen -->
-			<dependency>
-				<groupId>org.jboss.arquillian.junit</groupId>
-				<artifactId>arquillian-junit-container</artifactId>
-				<version>${version.arquillian-junit-container}</version>
-				<scope>test</scope>
-			</dependency>
+		<!-- Arquillian junit testen -->
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<version>${version.arquillian-junit-container}</version>
+			<scope>test</scope>
+		</dependency>
 
-			<!-- Arquilllian transaction extension -->
-			<dependency>
-				<groupId>org.jboss.arquillian.extension</groupId>
-				<artifactId>arquillian-transaction-bom</artifactId>
-				<version>${version.arquillian-transaction-bom}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
+		<!-- Arquilllian transaction extension -->
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-transaction-bom</artifactId>
+			<version>${version.arquillian-transaction-bom}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
 
-			<!-- Arquillian adapter voor Liberty -->
-			<dependency>
-			    <groupId>io.openliberty.arquillian</groupId>
-			    <artifactId>arquillian-liberty-managed</artifactId>
-			    <version>1.0.4</version>
-			    <scope>test</scope>
-			</dependency>
-			
+		<!-- Arquillian adapter voor Liberty -->
+		<dependency>
+			<groupId>io.openliberty.arquillian</groupId>
+			<artifactId>arquillian-liberty-managed</artifactId>
+			<version>1.0.4</version>
+			<scope>test</scope>
+		</dependency>
+
 
 
 	</dependencies>
@@ -418,9 +436,7 @@
 					<stripVersion>true</stripVersion>
 					<configFile>src/main/liberty/config/server.xml</configFile>
 					<looseApplication>true</looseApplication>
-					<!--  
-                    <installAppPackages>project</installAppPackages>
-                    -->
+					<!-- <installAppPackages>project</installAppPackages> -->
 					<packageFile>${package.file}</packageFile>
 					<include>${packaging.type}</include>
 					<bootstrapProperties>
@@ -429,11 +445,9 @@
 						<app.context.root>${warContext}</app.context.root>
 						<!-- -->
 						<appLocation>${app.location}</appLocation>
-						 
+
 					</bootstrapProperties>
-					<!-- 
-					<appArchive>${app.location}</appArchive>
-					 -->
+					<!-- <appArchive>${app.location}</appArchive> -->
 				</configuration>
 
 				<executions>
@@ -479,25 +493,25 @@
 							<outputDirectory>target/wlp-package</outputDirectory>
 						</configuration>
 					</execution>
-					
-  
-                        <execution>
-                            <id>test-start-server</id>
-                            <phase>pre-integration-test</phase>
-                            <goals>
-                                <goal>test-start-server</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>test-stop-server</id>
-                            <phase>post-integration-test</phase>
-                            <goals>
-                                <goal>test-stop-server</goal>
-                            </goals>
-                        </execution>
+
+
+					<execution>
+						<id>test-start-server</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>test-start-server</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>test-stop-server</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>test-stop-server</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -656,16 +670,28 @@ default.https.port=${testServerHttpsPort}
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
-					 
+					 <annotationProcessorPaths> <path> <groupId>se.skillytaire.course.tools.junit</groupId> 
+						<artifactId>jlc</artifactId> <version>${version.jlc}</version> </path> <path> 
+						<groupId>se.skillytaire.didactic</groupId> <artifactId>generator</artifactId> 
+						<version>${version.didactic.generator}</version> </path> </annotationProcessorPaths> 
 					<annotationProcessors>
-					    <annotationProcessor>se.skillytaire.didactic.generator.fluent.deluxe.DeluxeFluentProcessor</annotationProcessor>  
-						<annotationProcessor>se.skillytaire.didactic.generator.fluent.basic.BasicFluentProcessor</annotationProcessor>
+					<!-- 	 -->
 						<annotationProcessor>se.skillytaire.didactic.generator.dto.JPATOProcessor</annotationProcessor>
 						<annotationProcessor>se.skillytaire.didactic.generator.toa.TOAProcessor</annotationProcessor>
 					
-					</annotationProcessors>		
-					  		
+						<annotationProcessor>se.skillytaire.didactic.generator.fluent.deluxe.DeluxeFluentProcessor</annotationProcessor>
+						<annotationProcessor>se.skillytaire.didactic.generator.fluent.basic.BasicFluentProcessor</annotationProcessor>
+						
+						<!--  -->
+						<annotationProcessor>se.skillytaire.course.tools.jlc.processor.TestFactoryProcessor</annotationProcessor>
+						
+					</annotationProcessors>
+
 				</configuration>
+				<!-- <dependencies> <dependency> <groupId>se.skillytaire.course.tools.junit</groupId> 
+					<artifactId>jlc</artifactId> <version>${version.jlc}</version> </dependency> 
+					<dependency> <groupId>se.skillytaire.didactic</groupId> <artifactId>generator</artifactId> 
+					<version>${version.didactic.generator}</version> </dependency> </dependencies> -->
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -686,105 +712,87 @@ default.https.port=${testServerHttpsPort}
 								<property>
 									<name>se.skillytaire.didactic.generator.builder.basic.class.package</name>
 									<value>${package.service}</value>
-								</property>	
+								</property>
 								<property>
 									<name>se.skillytaire.didactic.generator.builder.basic.class.public</name>
 									<value>false</value>
-								</property>	
+								</property>
 								<property>
 									<name>se.skillytaire.didactic.generator.builder.basic.interface.generate</name>
 									<value>true</value>
 								</property>
-								
-								
+
+
 								<property>
 									<name>se.skillytaire.didactic.generator.builder.deluxe.interface.package</name>
 									<value>${package.service}</value>
-								</property>	
+								</property>
+								<property>
+									<name>se.skillytaire.didactic.generator.builder.deluxe.class.package</name>
+									<value>${package.service}</value>
+								</property>								
+								
 								<property>
 									<name>se.skillytaire.didactic.generator.builder.deluxe.class.public</name>
 									<value>false</value>
-								</property>																
+								</property>
 								<property>
 									<name>se.skillytaire.didactic.generator.builder.deluxe.class.message.prefix</name>
 									<value></value>
-								</property>	
-																								
-																
+								</property>
+
+
 								<property>
 									<name>se.skillytaire.didactic.generator.toa.interface.package</name>
 									<value>${package.service}</value>
-								</property>	
+								</property>
 								<property>
 									<name>se.skillytaire.didactic.generator.toa.class.package</name>
 									<value>${package.service}</value>
-								</property>																	
+								</property>
 
-								
-																						
+
+
 								<property>
 									<name>se.skillytaire.didactic.generator.toa.class.public</name>
 									<value>false</value>
-								</property>	
+								</property>
 								<property>
 									<name>se.skillytaire.didactic.generator.builder.basic.interface.enable.validation</name>
 									<value>true</value>
 								</property>
 
-						
-								
-								
-<!-- For Fluent 
-se.skillytaire.didactic.generator.builder.interface.name    
-se.skillytaire.didactic.generator.builder.interface.package 
-se.skillytaire.didactic.generator.builder.interface.generate
-se.skillytaire.didactic.generator.builder.interface.message
 
-se.skillytaire.didactic.generator.builder.interface.enable.validation
--->								
-								
-<!-- For the DTO's -->
+
+
+								<!-- For Fluent se.skillytaire.didactic.generator.builder.interface.name 
+									se.skillytaire.didactic.generator.builder.interface.package se.skillytaire.didactic.generator.builder.interface.generate 
+									se.skillytaire.didactic.generator.builder.interface.message se.skillytaire.didactic.generator.builder.interface.enable.validation -->
+
+								<!-- For the DTO's -->
 
 								<property>
 									<name>se.skillytaire.didactic.generator.dto.interface.package</name>
 									<value>se.skillytaire.belastingdienst.ee.common</value>
-								</property>	
+								</property>
 								<property>
 									<name>se.skillytaire.didactic.generator.dto.class.package</name>
 									<value>se.skillytaire.belastingdienst.ee.service</value>
-								</property>									
-								
-								<!-- 
-								<property>
-									<name>se.skillytaire.didactic.generator.dto.interface.name</name>
-									<value>DTO</value>
-								</property>									
-								<property>
-									<name>se.skillytaire.didactic.generator.dto.interface.generate</name>
-									<value>true</value>
-								</property>	
-								<property>
-									<name>se.skillytaire.didactic.generator.dto.interface.message</name>
-									<value>getId</value>
-								</property>		
-								<property>
-									<name>se.skillytaire.didactic.generator.dto.class.name.postfix</name>
-									<value>Result</value>
 								</property>
-								<property>
-									<name>se.skillytaire.didactic.generator.dto.class.name.prefix</name>
-									<value>DTO</value>
-								</property>																
-							
-															
-									 -->
-<!-- END DTO's -->									
+
+								<!-- <property> <name>se.skillytaire.didactic.generator.dto.interface.name</name> 
+									<value>DTO</value> </property> <property> <name>se.skillytaire.didactic.generator.dto.interface.generate</name> 
+									<value>true</value> </property> <property> <name>se.skillytaire.didactic.generator.dto.interface.message</name> 
+									<value>getId</value> </property> <property> <name>se.skillytaire.didactic.generator.dto.class.name.postfix</name> 
+									<value>Result</value> </property> <property> <name>se.skillytaire.didactic.generator.dto.class.name.prefix</name> 
+									<value>DTO</value> </property> -->
+								<!-- END DTO's -->
 							</properties>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>			
-			
+			</plugin>
+
 			<!-- alleen voor JAX-B https://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.2/plugin-info.html 
 				<plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jaxb2-maven-plugin</artifactId> 
 				<version>2.4</version> <executions> <execution> <id>xjc</id> <goals> <goal>xjc</goal> 
@@ -963,47 +971,15 @@ se.skillytaire.didactic.generator.builder.interface.enable.validation
 		</plugins>
 	</build>
 
-<!-- Jetty en Tomcat erin ivm Belastingdienst JOS spulletjes
-	<profiles>
-		<profile>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.jetty</groupId>
-						<artifactId>jetty-maven-plugin</artifactId>
-						<version>9.4.11.v20180605</version>
-						<configuration>
-							<httpConnector>
-								<port>8999</port>
-							</httpConnector>
-							<stopKey>quit</stopKey>
-							<stopPort>9000</stopPort>
-						</configuration>
-						<executions>
-							<execution>
-								<id>start-jetty</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>start</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>stop-jetty</id>
-								<phase>post-integration-test</phase>
-								<goals>
-									<goal>stop</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-				</plugins>
-
-			</build>
-		</profile>
-
-	</profiles>
--->
+	<!-- Jetty en Tomcat erin ivm Belastingdienst JOS spulletjes <profiles> 
+		<profile> <build> <plugins> <plugin> <groupId>org.eclipse.jetty</groupId> 
+		<artifactId>jetty-maven-plugin</artifactId> <version>9.4.11.v20180605</version> 
+		<configuration> <httpConnector> <port>8999</port> </httpConnector> <stopKey>quit</stopKey> 
+		<stopPort>9000</stopPort> </configuration> <executions> <execution> <id>start-jetty</id> 
+		<phase>pre-integration-test</phase> <goals> <goal>start</goal> </goals> </execution> 
+		<execution> <id>stop-jetty</id> <phase>post-integration-test</phase> <goals> 
+		<goal>stop</goal> </goals> </execution> </executions> </plugin> </plugins> 
+		</build> </profile> </profiles> -->
 	<reporting>
 		<plugins>
 			<plugin>

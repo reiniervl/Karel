@@ -1,9 +1,11 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.AbstractComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.TestFactory;
 
+@TestFactory
 public class ReserveringTestFactory
-      implements ComparableTestObjectFactory<Reservering> {
+      extends AbstractComparableTestObjectFactory<Reservering> {
    @Override
    public Reservering createThat() {
       Integer reserveringsNummer = new Integer(123456789);
@@ -14,11 +16,6 @@ public class ReserveringTestFactory
    public Reservering createThis() {
       Integer reserveringsNummer = new Integer(987654321);
       return new Reservering(reserveringsNummer);
-   }
-
-   @Override
-   public boolean isTypeFor(final Class<?> type) {
-      return Reservering.class == type;
    }
 
    @Override

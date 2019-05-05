@@ -1,11 +1,11 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skillytaire.didactic</groupId>
-	<artifactId>generator</artifactId>
+	<artifactId>annotation.fluent</artifactId>
 	<version>1.0.1</version>
 	<!-- -SNAPSHOT -->
 	<packaging>jar</packaging>
-	<name>Basic Didactic tools for code Generator</name>
+	<name>Fluent API</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -22,25 +22,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	<dependencies>
-		<dependency>
-			<groupId>com.github.javaparser</groupId>
-			<artifactId>javaparser-core</artifactId>
-			<version>3.13.9</version>
-		</dependency>
-		<dependency>
-		    <groupId>javax.persistence</groupId>
-		    <artifactId>javax.persistence-api</artifactId>
-		    <version>2.2</version>		
-		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.1.0.Final</version>
 
-		</dependency>
-	
-	</dependencies>
 	<build>
 		<finalName>${groupId}.${artifactId}-${version}</finalName>
 		<plugins>

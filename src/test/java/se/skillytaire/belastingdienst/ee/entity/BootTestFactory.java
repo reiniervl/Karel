@@ -1,13 +1,15 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.AbstractComparableTestObjectFactory;
 import se.skillytaire.course.tools.jlc.GreaterThen;
 import se.skillytaire.course.tools.jlc.LessThen;
+import se.skillytaire.course.tools.jlc.TestFactory;
 import se.skillytaire.course.tools.jlc.That;
 import se.skillytaire.course.tools.jlc.This;
 import se.skillytaire.java.datatype.PositiveInteger;
 
-public class BootTestFactory implements ComparableTestObjectFactory<Boot> {
+@TestFactory
+public class BootTestFactory extends AbstractComparableTestObjectFactory<Boot> {
    @This
    private Verhuurder thisVerhuurder;
    @That
@@ -34,11 +36,6 @@ public class BootTestFactory implements ComparableTestObjectFactory<Boot> {
    @Override
    public Boot createThis() {
       return new Boot(this.thisVerhuurder, this.thisPositive);
-   }
-
-   @Override
-   public boolean isTypeFor(final Class<?> type) {
-      return Boot.class == type;
    }
 
    @Override

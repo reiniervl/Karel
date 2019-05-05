@@ -2,10 +2,12 @@ package se.skillytaire.belastingdienst.ee.entity;
 
 import java.time.LocalDateTime;
 
-import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.AbstractComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.TestFactory;
 
+@TestFactory
 public class PeriodeTestFactory
-      implements ComparableTestObjectFactory<Periode> {
+      extends AbstractComparableTestObjectFactory<Periode> {
    private static final LocalDateTime NU = LocalDateTime.now();
 
    @Override
@@ -20,12 +22,6 @@ public class PeriodeTestFactory
       Periode periode = new Periode(PeriodeTestFactory.NU,
             PeriodeTestFactory.NU.plusHours(2));
       return periode;
-   }
-
-   @Override
-   public boolean isTypeFor(final Class<?> type) {
-      // TODO Auto-generated method stub
-      return Periode.class == type;
    }
 
    @Override

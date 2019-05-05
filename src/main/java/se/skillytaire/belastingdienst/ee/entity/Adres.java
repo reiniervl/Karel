@@ -6,16 +6,23 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import se.skillytaire.didactic.annotation.fluent.Fluent;
+import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
+
+@Fluent
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueAdresLocation",
       columnNames = { "longtitude", "latitude" }) })
-@NamedQuery(name= Adres.FIND_BY_GPS ,query="select a from Adres a where a.gpsCoordinaat.latitude=:latitude and a.gpsCoordinaat.longtitude=:longtitude")
-@NamedQuery(name= Adres.DELETE_BY_OID ,query="delete from Adres a where a.oid=:oid")
+@NamedQueries({ @NamedQuery(name = Adres.FIND_BY_GPS,
+      query = "select a from Adres a where a.gpsCoordinaat.latitude=:latitude and a.gpsCoordinaat.longtitude=:longtitude"),
+      @NamedQuery(name = Adres.DELETE_BY_OID,
+            query = "delete from Adres a where a.oid=:oid") })
 public class Adres extends AbstractEntity<Adres> {
    public static final String FIND_BY_GPS = "Adres_DeleteByGPS";
    public static final String DELETE_BY_OID = "Adres_DeleteByOid";
@@ -52,6 +59,7 @@ public class Adres extends AbstractEntity<Adres> {
    public Adres() {
    }
 
+   @FluentConstructorArgument(fieldName = "gpsCoordinaat")
    public Adres(final EmbeddableGPSCoordinaat gpsCoordinaat) {
       if (gpsCoordinaat == null) {
          throw new IllegalArgumentException("Het GPS Coordinaat is null");

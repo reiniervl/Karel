@@ -5,7 +5,6 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
 import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
-import se.skillytaire.didactic.annotation.fluent.Fluent;
 import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
 
 /**
@@ -13,7 +12,7 @@ import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
  * gecombineerd.
  *
  */
-@Fluent
+
 @Embeddable
 public class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
    private static final long serialVersionUID = 1L;
