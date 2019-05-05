@@ -15,7 +15,8 @@ public class EmbeddableGPSCoordinaat
       implements Serializable {
 
    private static final long serialVersionUID = 1L;
-
+   public static final String PROPERTY_LAT ="latitude";
+   public static final String PROPERTY_LONG ="longtitude";
    private double longtitude;
 
    private double latitude;

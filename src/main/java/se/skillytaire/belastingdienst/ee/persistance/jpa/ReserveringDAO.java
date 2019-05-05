@@ -1,4 +1,4 @@
-package se.skillytaire.belastingdienst.ee.data;
+package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
 
@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import se.skillytaire.belastingdienst.ee.entity.Reservering;
+import se.skillytaire.belastingdienst.ee.persistance.DAO;
 
 public class ReserveringDAO implements DAO<Reservering> {
 
@@ -46,7 +47,8 @@ public class ReserveringDAO implements DAO<Reservering> {
    }
 
    @Override
-   public void update(final Reservering that) {
+   public Reservering update(final Reservering that) {
+      Reservering result;
       EntityManagerFactory entityManagerFactory = Persistence
             .createEntityManagerFactory("stuga");
       EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -54,7 +56,7 @@ public class ReserveringDAO implements DAO<Reservering> {
       Reservering updateReservering = that;
       try {
          unmanagedTx.begin();
-         entityManager.merge(updateReservering);
+         result = entityManager.merge(updateReservering);
          unmanagedTx.commit();
       } catch (RuntimeException e) {
          if (unmanagedTx != null) {
@@ -62,11 +64,11 @@ public class ReserveringDAO implements DAO<Reservering> {
          }
          throw e;
       }
-
+      return result;
    }
 
    @Override
-   public void delete(final Reservering that) {
+   public boolean delete(final Reservering that) {
       EntityManagerFactory entityManagerFactory = Persistence
             .createEntityManagerFactory("stuga");
       EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -85,10 +87,11 @@ public class ReserveringDAO implements DAO<Reservering> {
          }
          throw e;
       }
+      return true;
    }
 
    @Override
-   public void deleteByOID(final Integer OID) {
+   public boolean deleteByOID(final Integer OID) {
       EntityManagerFactory entityManagerFactory = Persistence
             .createEntityManagerFactory("stuga");
       EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -109,7 +112,7 @@ public class ReserveringDAO implements DAO<Reservering> {
          }
          throw e;
       }
-
+      return true;
    }
 
 }

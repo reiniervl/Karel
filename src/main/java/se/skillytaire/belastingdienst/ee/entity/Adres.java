@@ -6,6 +6,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -13,7 +14,11 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueAdresLocation",
       columnNames = { "longtitude", "latitude" }) })
+@NamedQuery(name= Adres.FIND_BY_GPS ,query="select a from Adres a where a.gpsCoordinaat.latitude=:latitude and a.gpsCoordinaat.longtitude=:longtitude")
+@NamedQuery(name= Adres.DELETE_BY_OID ,query="delete from Adres a where a.oid=:oid")
 public class Adres extends AbstractEntity<Adres> {
+   public static final String FIND_BY_GPS = "Adres_DeleteByGPS";
+   public static final String DELETE_BY_OID = "Adres_DeleteByOid";
    private static final long serialVersionUID = 1L;
    @Basic
    private String street;
@@ -34,9 +39,9 @@ public class Adres extends AbstractEntity<Adres> {
    @Embedded
    @NotNull
    @AttributeOverrides({
-         @AttributeOverride(name = "longtitude",
+         @AttributeOverride(name = EmbeddableGPSCoordinaat.PROPERTY_LONG,
                column = @Column(name = "longtitude")),
-         @AttributeOverride(name = "latitude",
+         @AttributeOverride(name = EmbeddableGPSCoordinaat.PROPERTY_LAT,
                column = @Column(name = "latitude")) })
    private EmbeddableGPSCoordinaat gpsCoordinaat;
 
@@ -95,7 +100,7 @@ public class Adres extends AbstractEntity<Adres> {
       builder.append(this.country);
       builder.append(", gpsCoordinaat=");
       builder.append(this.gpsCoordinaat);
-      builder.append("]");
+      builder.append(super.toString());
       return builder.toString();
    }
 

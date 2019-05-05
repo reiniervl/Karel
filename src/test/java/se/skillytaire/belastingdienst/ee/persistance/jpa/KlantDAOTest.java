@@ -1,9 +1,10 @@
-package se.skillytaire.belastingdienst.ee.data;
+package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import se.skillytaire.belastingdienst.ee.entity.Klant;
+import se.skillytaire.belastingdienst.ee.persistance.jpa.KlantDAO;
 
 public class KlantDAOTest {
    @Test

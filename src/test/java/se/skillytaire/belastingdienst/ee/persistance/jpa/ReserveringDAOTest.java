@@ -1,4 +1,4 @@
-package se.skillytaire.belastingdienst.ee.data;
+package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import org.junit.Test;
 

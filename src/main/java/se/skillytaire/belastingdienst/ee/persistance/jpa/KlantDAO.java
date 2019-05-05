@@ -1,4 +1,4 @@
-package se.skillytaire.belastingdienst.ee.data;
+package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
 
@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import se.skillytaire.belastingdienst.ee.entity.Klant;
+import se.skillytaire.belastingdienst.ee.persistance.DAO;
 
 public class KlantDAO implements DAO<Klant> {
    private static KlantDAO dao = null;
@@ -49,19 +50,20 @@ public class KlantDAO implements DAO<Klant> {
    }
 
    @Override
-   public void update(final Klant klant) {
+   public Klant update(final Klant klant) {
       EntityManagerFactory factory = Persistence
             .createEntityManagerFactory("stuga");
       EntityManager em = factory.createEntityManager();
 
-      em.merge(klant);
+      Klant result = em.merge(klant);
 
       em.close();
       factory.close();
+      return result;
    }
 
    @Override
-   public void delete(final Klant klant) {
+   public boolean delete(final Klant klant) {
       EntityManagerFactory factory = Persistence
             .createEntityManagerFactory("stuga");
       EntityManager em = factory.createEntityManager();
@@ -70,10 +72,11 @@ public class KlantDAO implements DAO<Klant> {
 
       em.close();
       factory.close();
+      return true;
    }
 
    @Override
-   public void deleteByOID(final Integer OID) {
+   public boolean deleteByOID(final Integer OID) {
       Optional<Klant> gevondenKlant = this.findByOID(OID);
       if (gevondenKlant.isPresent()) {
          EntityManagerFactory factory = Persistence
@@ -85,6 +88,7 @@ public class KlantDAO implements DAO<Klant> {
          em.close();
          factory.close();
       }
+      return true;
    }
 
 }
