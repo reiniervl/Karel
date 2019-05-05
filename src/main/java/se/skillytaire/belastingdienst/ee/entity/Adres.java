@@ -11,9 +11,8 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(uniqueConstraints = {
-      @UniqueConstraint(name = "UniqueAdresLocation", columnNames = {
-            "longtitude", "latitude" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueAdresLocation",
+      columnNames = { "longtitude", "latitude" }) })
 public class Adres extends AbstractEntity<Adres> {
    private static final long serialVersionUID = 1L;
    @Basic
@@ -35,10 +34,11 @@ public class Adres extends AbstractEntity<Adres> {
    @Embedded
    @NotNull
    @AttributeOverrides({
-         @AttributeOverride(name = "longtitude", column = @Column(name = "longtitude")),
-         @AttributeOverride(name = "latitude", column = @Column(name = "latitude"))
-         })
-   private GPSCoordinaat gpsCoordinaat;
+         @AttributeOverride(name = "longtitude",
+               column = @Column(name = "longtitude")),
+         @AttributeOverride(name = "latitude",
+               column = @Column(name = "latitude")) })
+   private EmbeddableGPSCoordinaat gpsCoordinaat;
 
    /**
     * Developers should not use the default constructor. Please use the same
@@ -47,7 +47,7 @@ public class Adres extends AbstractEntity<Adres> {
    public Adres() {
    }
 
-   public Adres(final GPSCoordinaat gpsCoordinaat) {
+   public Adres(final EmbeddableGPSCoordinaat gpsCoordinaat) {
       if (gpsCoordinaat == null) {
          throw new IllegalArgumentException("Het GPS Coordinaat is null");
       }
@@ -155,7 +155,7 @@ public class Adres extends AbstractEntity<Adres> {
       this.country = country;
    }
 
-   public GPSCoordinaat getGpsCoordinaat() {
+   public EmbeddableGPSCoordinaat getGpsCoordinaat() {
       return this.gpsCoordinaat;
    }
 }

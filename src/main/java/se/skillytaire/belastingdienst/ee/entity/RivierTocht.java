@@ -14,7 +14,7 @@ public class RivierTocht extends Tocht {
    }
 
    @Override
-   public int compareTo(Tocht o) {
+   public int compareTo(final Tocht o) {
       // TODO Auto-generated method stub
       return 0;
    }

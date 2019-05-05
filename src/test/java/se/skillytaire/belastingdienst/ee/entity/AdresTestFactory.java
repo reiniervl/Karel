@@ -1,18 +1,29 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
 import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
+import se.skillytaire.course.tools.jlc.GreaterThen;
+import se.skillytaire.course.tools.jlc.LessThen;
+import se.skillytaire.course.tools.jlc.That;
+import se.skillytaire.course.tools.jlc.This;
 
 public class AdresTestFactory implements ComparableTestObjectFactory<Adres> {
+   @This
+   private EmbeddableGPSCoordinaat thisGPS;
+   @That
+   private EmbeddableGPSCoordinaat thatGPS;
+   @LessThen
+   private EmbeddableGPSCoordinaat lessThenGPS;
+   @GreaterThen
+   private EmbeddableGPSCoordinaat greaterThanGPS;
+
    @Override
    public Adres createThat() {
-      GPSCoordinaat gps = new GPSCoordinaat(60.1383991, 14.3603374);
-      return new Adres(gps);
+      return new Adres(this.thatGPS);
    }
 
    @Override
    public Adres createThis() {
-      GPSCoordinaat gps = new GPSCoordinaat(61.1383991, 14.3603374);
-      return new Adres(gps);
+      return new Adres(this.thisGPS);
    }
 
    @Override
@@ -22,13 +33,11 @@ public class AdresTestFactory implements ComparableTestObjectFactory<Adres> {
 
    @Override
    public Adres createGreaterThen() {
-      GPSCoordinaat gps = new GPSCoordinaat(70.1383991, 24.3603374);
-      return new Adres(gps);
+      return new Adres(this.greaterThanGPS);
    }
 
    @Override
    public Adres createLessThen() {
-      GPSCoordinaat gps = new GPSCoordinaat(50.1383991, 04.3603374);
-      return new Adres(gps);
+      return new Adres(this.lessThenGPS);
    }
 }

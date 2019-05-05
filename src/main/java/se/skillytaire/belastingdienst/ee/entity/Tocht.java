@@ -17,16 +17,22 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
    @NotNull
    @Embedded
    @AttributeOverrides({
-         @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "reserveringstart")),
-         @AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "reserveringeind")),
-         @AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "reserveringduur")) })
+         @AttributeOverride(name = Periode.PROPERTY_START,
+               column = @Column(name = "reserveringstart")),
+         @AttributeOverride(name = Periode.PROPERTY_EIND,
+               column = @Column(name = "reserveringeind")),
+         @AttributeOverride(name = Periode.PROPERTY_DUUR,
+               column = @Column(name = "reserveringduur")) })
    private Periode reserveringsPeriode;
    @NotNull
    @Embedded
    @AttributeOverrides({
-         @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "actuelestart")),
-         @AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "actueleeind")),
-         @AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "actueleduur")) })
+         @AttributeOverride(name = Periode.PROPERTY_START,
+               column = @Column(name = "actuelestart")),
+         @AttributeOverride(name = Periode.PROPERTY_EIND,
+               column = @Column(name = "actueleeind")),
+         @AttributeOverride(name = Periode.PROPERTY_DUUR,
+               column = @Column(name = "actueleduur")) })
    private Periode actuelePeriode;
    @NotNull
    private Double prijs;
@@ -38,7 +44,7 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
    public Tocht() {
    }
 
-   public Tocht(final Double prijs, Periode reserveringsPeriode) {
+   public Tocht(final Double prijs, final Periode reserveringsPeriode) {
       if (prijs == null) {
          throw new IllegalArgumentException("De prijs is null");
       }
@@ -62,14 +68,14 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
    }
 
    @Override
-   public int compareTo(T that) {
+   public int compareTo(final T that) {
       Tocht<T> deTocht = that;
       return this.reserveringsPeriode.compareTo(deTocht.reserveringsPeriode);
    }
 
    @Override
    public int hashCode() {
-      return reserveringsPeriode.hashCode();
+      return this.reserveringsPeriode.hashCode();
    }
 
    @Override
@@ -85,11 +91,11 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
    }
 
    public Periode getReserveringsPeriode() {
-      return reserveringsPeriode.clone();
+      return this.reserveringsPeriode.clone();
    }
 
    public Periode getActuelePeriode() {
-      return actuelePeriode.clone();
+      return this.actuelePeriode.clone();
    }
 
    public double prijs() {
@@ -97,10 +103,10 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
    }
 
    public Double getPrijs() {
-      return prijs;
+      return this.prijs;
    }
 
-   public void setPrijs(Double prijs) {
+   public void setPrijs(final Double prijs) {
       this.prijs = prijs;
    }
 

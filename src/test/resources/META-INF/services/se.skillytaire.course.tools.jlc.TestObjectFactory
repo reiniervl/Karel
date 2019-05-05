@@ -1,4 +1,4 @@
-se.skillytaire.belastingdienst.ee.entity.GPSCoordinaatTestFactory
+se.skillytaire.belastingdienst.ee.common.GPSCoordinaatTestFactory
 se.skillytaire.belastingdienst.ee.entity.TelefoonNummerFactory
 se.skillytaire.belastingdienst.ee.entity.AdresTestFactory
 se.skillytaire.belastingdienst.ee.entity.VerhuurderTestFactory
@@ -7,3 +7,4 @@ se.skillytaire.belastingdienst.ee.entity.PositiveTestFactory
 se.skillytaire.belastingdienst.ee.entity.KlantTestFactory
 se.skillytaire.belastingdienst.ee.entity.ReserveringTestFactory
 se.skillytaire.belastingdienst.ee.entity.PeriodeTestFactory
+se.skillytaire.belastingdienst.ee.entity.EmbeddableGPSCoordinaatTestFactory

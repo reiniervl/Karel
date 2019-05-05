@@ -4,6 +4,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
+
 @MappedSuperclass
 public abstract class AbstractEntity<E extends AbstractEntity<E>>
       extends AbstractComparableObject<E> implements Cloneable {

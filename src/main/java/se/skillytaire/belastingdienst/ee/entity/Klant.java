@@ -157,9 +157,9 @@ public class Klant extends AbstractEntity<Klant> {
 
    @Override
    public String toString() {
-      StringBuilder sb =
-            new StringBuilder().append("username: ").append(this.getUsername())
-                  .append("\nemail: ").append(this.getEmail());
+      StringBuilder sb = new StringBuilder().append("username: ")
+            .append(this.getUsername()).append("\nemail: ")
+            .append(this.getEmail());
       return sb.toString();
    }
 }

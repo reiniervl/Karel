@@ -1,7 +1,7 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
 import se.skillytaire.course.tools.jlc.ComparableTestObjectFactory;
-import se.skillytaire.service.weather.api.PositiveInteger;
+import se.skillytaire.java.datatype.PositiveInteger;
 
 public class PositiveTestFactory
       implements ComparableTestObjectFactory<PositiveInteger> {

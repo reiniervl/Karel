@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:response
+	xmlns:tns="http://www.createment.nl/weatherservice/response"
+	xmlns:sdt="http://www.createment.nl/weatherservice/shared"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.createment.nl/weatherservice/response ../xsd/response.xsd ">
+	<tns:gpsLocation>
+		<sdt:longitude>0</sdt:longitude>
+		<sdt:latitude>0</sdt:latitude>
+	</tns:gpsLocation>
+	<tns:dagvoorspelling datum="2019-04-19">
+		<tns:temperatuur min="-59" max="59" />
+		<tns:wind hoek="60" snelheid="180" />
+		<tns:neerslag kans="20" mm="20" />
+		<tns:pollen>0</tns:pollen>
+		<tns:luchtdruk>1</tns:luchtdruk>
+	</tns:dagvoorspelling>
+</tns:response>

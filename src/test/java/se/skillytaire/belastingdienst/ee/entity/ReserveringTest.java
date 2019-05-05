@@ -14,8 +14,8 @@ public class ReserveringTest {
 
    @Test
    public void fullConstructorTest() {
-      Reservering volledigeReservering =
-            new Reservering(this.reserveringsNummer);
+      Reservering volledigeReservering = new Reservering(
+            this.reserveringsNummer);
       int actual = volledigeReservering.getReserveringsNummer();
       Assert.assertEquals(this.reserveringsNummer, actual);
    }

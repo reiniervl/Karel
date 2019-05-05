@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skillytaire.service.wheater</groupId>
 	<artifactId>klart</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 	<name>Klart Wheather Service</name>
 	<description>Wheather Service implementation.</description>
@@ -52,7 +52,7 @@
 			<version>2.6</version>
 		</dependency>
 		<!-- einde Java 8 -->
-
+		
 	</dependencies>
 	<build>
 		<finalName>${groupId}.${artifactId}-${version}</finalName>
@@ -155,7 +155,7 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
-
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -180,7 +180,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>			
 		</plugins>
 	</build>
 

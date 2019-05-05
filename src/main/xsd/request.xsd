@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.createment.nl/weatherservice/request"
+	xmlns:tns="http://www.createment.nl/weatherservice/request"
+	xmlns:sdt="http://www.createment.nl/weatherservice/shared"
+	elementFormDefault="qualified">
+
+	<import namespace="http://www.createment.nl/weatherservice/shared"
+		schemaLocation="shared.xsd" />
+	<element name="request">
+		<complexType>
+			<sequence>
+				<element name="gpsLocation" type="sdt:gpsType" minOccurs="1"
+					maxOccurs="1"></element>
+				<element name="forecastCount" type="tns:forecastCountType"
+					minOccurs="0" maxOccurs="1"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<simpleType name="forecastCountType">
+		<restriction base="nonNegativeInteger">
+			<maxInclusive value="14" />
+		</restriction>
+	</simpleType>
+
+
+
+
+</schema>

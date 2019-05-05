@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
 
-import se.skillytaire.service.weather.api.PositiveInteger;
+import se.skillytaire.java.datatype.PositiveInteger;
 
 public class Boot extends AbstractEntity<Boot> {
    private static final long serialVersionUID = 1L;
@@ -37,8 +37,8 @@ public class Boot extends AbstractEntity<Boot> {
       super(that);
       this.bootNummer = that.geefNummer();
       this.eigenaar = that.getEigenaar();
-      this.tochtGeschiedenis =
-            (ArrayList<Tocht>) that.tochtGeschiedenis.clone();
+      this.tochtGeschiedenis = (ArrayList<Tocht>) that.tochtGeschiedenis
+            .clone();
       if (that.hasLaatsteTocht()) {
          // FIX-ME: Clone()
          this.deLaatsteTocht = that.deLaatsteTocht;

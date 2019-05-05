@@ -8,10 +8,10 @@ import java.lang.annotation.Target;
 
 /**
  * <p>
- * Instance variabelen worden gebruikt om een builder class te maken. De
- * class die wordt gegenereerd is de naam van de originele class + 'Builder'.
- * Alleen de variablen die geannoteerd zijn met: {@code BuilderField} worden
- * gebruikt om de builder class te genereren.
+ * Instance variabelen worden gebruikt om een builder class te maken. De class
+ * die wordt gegenereerd is de naam van de originele class + 'Builder'. Alleen
+ * de variablen die geannoteerd zijn met: {@code BuilderField} worden gebruikt
+ * om de builder class te genereren.
  * </p>
  *
  * @author Reinier van Leussen

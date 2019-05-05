@@ -1,789 +1,1172 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" >
 
-  <modelVersion>4.0.0</modelVersion>
-
-
-  <groupId>se.skillytaire.belastingdienst.ee</groupId>
-  <artifactId>entity</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>${project.artifactId}</name>
-  <description>Ondersteuning Java Persistency API tbv EE Belastingdienst waarbij de migratie naar Eclipse Link is gedaan en ontfiscussed zodat deze nu standalone is.</description>
-  <inceptionYear>2019</inceptionYear>
-  <packaging>war</packaging>
-  <url>http://stuga-gruvriset.se</url>
-  <parent>
-    <groupId>net.wasdev.maven.parent</groupId>
-    <artifactId>java7-parent</artifactId>
-    <version>1.4</version>
-  </parent>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.source>1.8</maven.compiler.source>
-
-    <fail.pmd>true</fail.pmd>
-    <fail.javadoc>false</fail.javadoc>
-    <fail.checkstyle>false</fail.checkstyle>
+	<modelVersion>4.0.0</modelVersion>
 
 
-    <version-slf4j>1.7.26</version-slf4j>
-    <version-junit>4.12</version-junit>
-    <version.hamcrest>1.3</version.hamcrest>
-    <version.jlc>1.4.5</version.jlc>
-    <!-- liberty server config -->
+	<groupId>se.skillytaire.belastingdienst.ee</groupId>
+	<artifactId>karel</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>${project.artifactId}</name>
+	<description>Ondersteuning Java Persistency API tbv EE Belastingdienst waarbij de migratie naar Eclipse Link is gedaan en ontfiscussed zodat deze nu standalone is.</description>
+	<inceptionYear>2019</inceptionYear>
+	<packaging>war</packaging>
+	<url>http://stuga-gruvriset.se</url>
+	<parent>
+		<groupId>net.wasdev.maven.parent</groupId>
+		<artifactId>java7-parent</artifactId>
+		<version>1.4</version>
+	</parent>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
 
-    <app.name>karel</app.name>
-    <testServerHttpPort>9080</testServerHttpPort>
-    <testServerHttpsPort>9443</testServerHttpsPort>
-    <warContext>${app.name}</warContext>
-    <package.file>${project.build.directory}/${app.name}.zip</package.file>
-    <packaging.type>usr</packaging.type>
-
-  </properties>
-
-  <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/eclipselink -->
-    <dependency>
-      <groupId>org.eclipse.persistence</groupId>
-      <artifactId>eclipselink</artifactId>
-      <version>2.5.0</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.hsqldb/hsqldb -->
-    <dependency>
-      <groupId>org.hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
-      <version>2.4.1</version>
-      <scope>test</scope>
-    </dependency>
+		<fail.pmd>true</fail.pmd>
+		<fail.javadoc>false</fail.javadoc>
+		<fail.checkstyle>false</fail.checkstyle>
 
 
-    <!-- Klart Weather Service -->
-    <dependency>
-      <groupId>se.skillytaire.service.wheater</groupId>
-      <artifactId>klart</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>se.skillytaire.service.wheater</groupId>
-      <artifactId>api</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <!-- JPA specification 2.1 -->
-    <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
-      <version>7.0</version>
-      <scope>provided</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>42.2.5</version>
-      <scope>provided</scope>
-    </dependency>
+		<version-slf4j>1.7.26</version-slf4j>
+		<version-junit>4.12</version-junit>
+		<version.hamcrest>1.3</version.hamcrest>
+		<version.arquillian-junit-container>1.1.5.Final</version.arquillian-junit-container>
+		<version.arquillian-transaction-bom>1.0.1.Final</version.arquillian-transaction-bom>
+		<version.jlc>1.4.6-SNAPSHOT</version.jlc>
+		<version.liberty>19.0.0.4</version.liberty>
+		<!-- liberty server config -->
 
-    <!-- <dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
-      <version>42.1.3</version> <scope>runtime</scope> </dependency> -->
-    <!-- <dependency> <groupId>net.wasdev.maven.tools.targets</groupId> <artifactId>liberty-target</artifactId> 
-      <version>java7-parent</version> <type>pom</type> <scope>provided</scope> 
-      </dependency> -->
-    <!-- Logging dependencies -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <version>${version-slf4j}</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>${version-slf4j}</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${version-slf4j}</version>
-      <scope>runtime</scope>
-    </dependency>
-    <!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-jcl</artifactId> 
-      <version>${version-slf4j}</version> <scope>runtime</scope> </dependency> -->
-    <!-- test dependencies -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${version-junit}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-core</artifactId>
-      <version>${version.hamcrest}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>se.skillytaire.course.tools.junit</groupId>
-      <artifactId>jlc</artifactId>
-      <version>${version.jlc}</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>javax.validation</groupId>
-          <artifactId>validation-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>javax.persistence</groupId>
-          <artifactId>javax.persistence-api</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+		<app.name>${project.artifactId}}</app.name>
+		<app.location>${project.build.directory}${file.separator}${project.build.finalName}.${project.packaging}</app.location>
+		<testServerHttpPort>9080</testServerHttpPort>
+		<testServerHttpsPort>9443</testServerHttpsPort>
+		<warContext>${app.name}</warContext>
 
-    <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>4.5.8</version>
-      <scope>test</scope>
-    </dependency>
+		<package.file>${project.build.directory}${file.separator}${project.build.finalName}.zip</package.file>
+        <packaging.type>usr</packaging.type>
+
+		<package.clart>se.skillytaire.service.clart</package.clart>
+
+		<package.root>se.skillytaire.belastingdienst.ee</package.root>
+		<package.entity>${package.root}.entity</package.entity>
+		<package.service>${package.root}.service</package.service>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>se.skillytaire.didactic</groupId>
+			<artifactId>generator</artifactId>
+			<version>1.0.1</version>	
+			<scope>provided</scope>	
+		</dependency>	
 
 
+		
+		<!-- Klart Weather Service -->
+		<dependency>
+			<groupId>se.skillytaire.service.wheater</groupId>
+			<artifactId>klart</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>se.skillytaire.service.wheater</groupId>
+			<artifactId>api</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<!-- JPA specification 2.1 -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- jsr-303 api -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.5</version>
+			<scope>provided</scope>
+		</dependency>
 
-    <!-- JSR 349: Bean Validation 1.1 Let op, lage versies werken niet goed 
-      bij hashcodes... deze zijn org.apache.bval hibernate validator alleen de 
-      google variant werkt -->
+		<!-- <dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
+			<version>42.1.3</version> <scope>runtime</scope> </dependency> -->
+		<!-- <dependency> <groupId>net.wasdev.maven.tools.targets</groupId> <artifactId>liberty-target</artifactId> 
+			<version>java7-parent</version> <type>pom</type> <scope>provided</scope> 
+			</dependency> -->
+		<!-- Logging dependencies -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${version-slf4j}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${version-slf4j}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${version-slf4j}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- test dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${version-junit}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>${version.hamcrest}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>se.skillytaire.course.tools.junit</groupId>
+			<artifactId>jlc</artifactId>
+			<version>${version.jlc}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.validation</groupId>
+					<artifactId>validation-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.persistence</groupId>
+					<artifactId>javax.persistence-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-    <!-- https://mvnrepository.com/artifact/com.googlecode.gwt-validation/gwt-validation -->
-    <dependency>
-      <groupId>com.googlecode.gwt-validation</groupId>
-      <artifactId>gwt-validation</artifactId>
-      <version>2.1</version>
-      <exclusions>
-        <exclusion>
-          <groupId>com.google.guava</groupId>
-          <artifactId>guava</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.freemarker</groupId>
-          <artifactId>freemarker</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-simple</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
-  </dependencies>
-
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient 
+			<dependency> <groupId>org.apache.httpcomponents</groupId> <artifactId>httpclient</artifactId> 
+			<version>4.5.8</version> <scope>test</scope> </dependency> -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-client</artifactId>
+			<version>3.1.1</version>
+			<scope>test</scope>
+		</dependency>
+	    <dependency>
+	      <groupId>org.eclipse.persistence</groupId>
+	      <artifactId>eclipselink</artifactId>
+	      <version>2.5.0</version>
+	      <scope>test</scope>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.hsqldb</groupId>
+	      <artifactId>hsqldb</artifactId>
+	      <version>2.4.1</version>
+	      <scope>test</scope>
+	    </dependency>
 
 
+		<!-- JSR 349: Bean Validation 1.1 Let op, lage versies werken niet goed 
+			bij hashcodes... deze zijn org.apache.bval hibernate validator alleen de 
+			google variant werkt -->
 
-  <build>
-    <finalName>${project.groupId}.${project.artifactId}</finalName>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.gwt-validation/gwt-validation -->
+		<dependency>
+			<groupId>com.googlecode.gwt-validation</groupId>
+			<artifactId>gwt-validation</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.freemarker</groupId>
+					<artifactId>freemarker</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+			<!-- Arquillian gerelateerde dependencies -->
+
+			<!-- Arquillian junit testen -->
+			<dependency>
+				<groupId>org.jboss.arquillian.junit</groupId>
+				<artifactId>arquillian-junit-container</artifactId>
+				<version>${version.arquillian-junit-container}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Arquilllian transaction extension -->
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-transaction-bom</artifactId>
+				<version>${version.arquillian-transaction-bom}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- Arquillian adapter voor Liberty -->
+			<dependency>
+			    <groupId>io.openliberty.arquillian</groupId>
+			    <artifactId>arquillian-liberty-managed</artifactId>
+			    <version>1.0.4</version>
+			</dependency>
+			
 
 
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.felix</groupId>
-          <artifactId>maven-bundle-plugin</artifactId>
-          <version>4.2.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>jdepend-maven-plugin</artifactId>
-          <version>2.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.8</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-help-plugin</artifactId>
-          <version>2.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-report-plugin</artifactId>
-          <version>3.0.0-M3</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M3</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>build-helper-maven-plugin</artifactId>
-          <version>1.12</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.5.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-ejb-plugin</artifactId>
-          <version>2.5.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>2.6</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-ear-plugin</artifactId>
-          <version>2.10.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.jvnet.jaxb2.maven2</groupId>
-          <artifactId>maven-jaxb2-plugin</artifactId>
-          <version>0.13.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.cxf</groupId>
-          <artifactId>cxf-codegen-plugin</artifactId>
-          <version>3.1.6</version>
-        </plugin>
-        <plugin>
-          <groupId>com.github.eirslett</groupId>
-          <artifactId>frontend-maven-plugin</artifactId>
-          <version>1.6</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <version>2.19.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-scm-plugin</artifactId>
-          <version>1.9.4</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-archetype-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.6</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>3.0.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>2.10</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>2.5.3</version>
-        </plugin>
-        <plugin>
-          <groupId>org.sonarsource.scanner.maven</groupId>
-          <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.4.0.905</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.apache.maven.wagon</groupId>
-              <artifactId>wagon-http</artifactId>
-              <version>2.9</version>
-            </dependency>
-            <dependency>
-              <groupId>org.apache.maven.wagon</groupId>
-              <artifactId>wagon-ssh</artifactId>
-              <version>2.9</version>
-            </dependency>
-            <dependency>
-              <groupId>org.apache.maven.wagon</groupId>
-              <artifactId>wagon-webdav-jackrabbit</artifactId>
-              <version>2.9</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-        <plugin>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.10.4</version>
-        </plugin>
-        <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.3</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.0.0-M2</version>
-        </plugin>
-        <plugin>
-
-          <artifactId>maven-pmd-plugin</artifactId>
-          <version>3.11.0</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
+	</dependencies>
 
 
 
 
-    <plugins>
-      <plugin>
-        <!-- installs the Liberty server in the target directory -->
-        <groupId>net.wasdev.wlp.maven.plugins</groupId>
-        <artifactId>liberty-maven-plugin</artifactId>
-        <version>2.5</version>
-        <configuration>
-          <assemblyArtifact>
-            <groupId>io.openliberty</groupId>
-            <artifactId>openliberty-runtime</artifactId>
-            <version>RELEASE</version>
-            <type>zip</type>
-          </assemblyArtifact>
-          <serverName>${project.artifactId}Server</serverName>
-          <stripVersion>true</stripVersion>
-          <configFile>src/main/liberty/config/server.xml</configFile>
-          <packageFile>${package.file}</packageFile>
-          <include>${packaging.type}</include>
-          <bootstrapProperties>
-            <default.http.port>${testServerHttpPort}</default.http.port>
-            <default.https.port>${testServerHttpsPort}</default.https.port>
-            <app.context.root>${warContext}</app.context.root>
-            <appLocation>${project.build.finalName}.war</appLocation>
-          </bootstrapProperties>
-        </configuration>
-
-        <executions>
-          <execution>
-            <id>stop-server-before-clean</id>
-            <phase>pre-clean</phase>
-            <goals>
-              <goal>stop-server</goal>
-            </goals>
-          </execution>
-
-          <execution>
-            <id>install-server</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>install-server</goal>
-              <goal>create-server</goal>
-            </goals>
-            <configuration>
-              <assemblyArtifact>
-                <groupId>io.openliberty</groupId>
-                <artifactId>openliberty-kernel</artifactId>
-                <version>18.0.0.2</version>
-                <type>zip</type>
-              </assemblyArtifact>
-            </configuration>
-          </execution>
-          <execution>
-            <id>install-apps</id>
-            <phase>package</phase>
-            <goals>
-              <goal>install-apps</goal>
-            </goals>
-          </execution>
-
-          <execution>
-            <id>install-feature</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>install-feature</goal>
-            </goals>
-            <configuration>
-              <features>
-                <acceptLicense>true</acceptLicense>
-              </features>
-            </configuration>
-          </execution>
-          <execution>
-            <id>package-server</id>
-            <configuration>
-              <outputDirectory>target/wlp-package</outputDirectory>
-            </configuration>
-          </execution>
+	<build>
+		<finalName>${project.groupId}.${project.artifactId}</finalName>
 
 
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-bundle-plugin</artifactId>
+					<version>4.2.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>jdepend-maven-plugin</artifactId>
+					<version>2.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.8</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-help-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-report-plugin</artifactId>
+					<version>3.0.0-M3</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.0.0-M3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>1.12</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>2.5.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>2.10.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.jvnet.jaxb2.maven2</groupId>
+					<artifactId>maven-jaxb2-plugin</artifactId>
+					<version>0.13.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.cxf</groupId>
+					<artifactId>cxf-codegen-plugin</artifactId>
+					<version>3.1.6</version>
+				</plugin>
+				<plugin>
+					<groupId>com.github.eirslett</groupId>
+					<artifactId>frontend-maven-plugin</artifactId>
+					<version>1.6</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>2.19.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-scm-plugin</artifactId>
+					<version>1.9.4</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-archetype-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>3.0.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.10</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.4.0.905</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-http</artifactId>
+							<version>2.9</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-ssh</artifactId>
+							<version>2.9</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-webdav-jackrabbit</artifactId>
+							<version>2.9</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.10.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.8.3</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>3.0.0-M2</version>
+				</plugin>
+				<plugin>
 
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.0.0-M1</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-            <configuration>
-              <includes>
-                <include>**/se/**</include>
-              </includes>
-              <systemPropertyVariables>
-                <liberty.test.port>
-                  ${testServerHttpPort}
-                </liberty.test.port>
-                <war.name>${warContext}</war.name>
-              </systemPropertyVariables>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>3.11.0</version>
+				</plugin>
 
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
-        <executions>
-          <execution>
-            <!-- in order to use JUNIT for the Belasting Way, we need to 
-              have the properties from maven in JUnit -->
-            <phase>generate-test-resources</phase>
-            <configuration>
-              <target>
-                <delete failOnError="false">
-                  <fileset
-                    dir="${project.build.testOutputDirectory}"
-                    includes="test.properties" />
-                </delete>
-                <mkdir dir="${project.build.testOutputDirectory}" />
-                <echo
-                  file="${project.build.testOutputDirectory}/test.properties">
+			</plugins>
+		</pluginManagement>
+
+
+
+
+		<plugins>
+			<plugin>
+				<!-- installs the Liberty server in the target directory -->
+				<groupId>net.wasdev.wlp.maven.plugins</groupId>
+				<artifactId>liberty-maven-plugin</artifactId>
+				<version>2.6.4</version>
+				<configuration>
+					<assemblyArtifact>
+						<groupId>io.openliberty</groupId>
+						<artifactId>openliberty-runtime</artifactId>
+						<version>${version.liberty}</version>
+						<type>zip</type>
+					</assemblyArtifact>
+					<serverName>${project.artifactId}Server</serverName>
+					<stripVersion>true</stripVersion>
+					<configFile>src/main/liberty/config/server.xml</configFile>
+					<looseApplication>true</looseApplication>
+					<!--  
+                    <installAppPackages>project</installAppPackages>
+                    -->
+					<packageFile>${package.file}</packageFile>
+					<include>${packaging.type}</include>
+					<bootstrapProperties>
+						<default.http.port>${testServerHttpPort}</default.http.port>
+						<default.https.port>${testServerHttpsPort}</default.https.port>
+						<app.context.root>${warContext}</app.context.root>
+						<!-- -->
+						<appLocation>${app.location}</appLocation>
+						 
+					</bootstrapProperties>
+					<!-- 
+					<appArchive>${app.location}</appArchive>
+					 -->
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>stop-server-before-clean</id>
+						<phase>pre-clean</phase>
+						<goals>
+							<goal>stop-server</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>install-server</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>install-server</goal>
+							<goal>create-server</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>install-apps</id>
+						<phase>package</phase>
+						<goals>
+							<goal>install-apps</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>install-feature</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>install-feature</goal>
+						</goals>
+						<configuration>
+							<features>
+								<acceptLicense>true</acceptLicense>
+							</features>
+						</configuration>
+					</execution>
+					<execution>
+						<id>package-server</id>
+						<configuration>
+							<outputDirectory>target/wlp-package</outputDirectory>
+						</configuration>
+					</execution>
+					
+  
+                        <execution>
+                            <id>test-start-server</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>test-start-server</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>test-stop-server</id>
+                            <phase>post-integration-test</phase>
+                            <goals>
+                                <goal>test-stop-server</goal>
+                            </goals>
+                        </execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>endors</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.slf4j</groupId>
+									<artifactId>jcl-over-slf4j</artifactId>
+									<version>${version-slf4j}</version>
+									<outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.slf4j</groupId>
+									<artifactId>slf4j-api</artifactId>
+									<version>${version-slf4j}</version>
+									<outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.slf4j</groupId>
+									<artifactId>slf4j-log4j12</artifactId>
+									<version>${version-slf4j}</version>
+									<outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>3.0.0-M1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>**/*IT</include>
+							</includes>
+							<systemPropertyVariables>
+								<liberty.test.port>
+									${testServerHttpPort}
+								</liberty.test.port>
+								<war.name>${warContext}</war.name>
+							</systemPropertyVariables>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<!-- in order to use JUNIT for the Belasting Way, we need to have the 
+							properties from maven in JUnit -->
+						<id>help</id>
+						<phase>pre-clean</phase>
+						<configuration>
+							<target>
+
+								<echo>
+<![CDATA[Maven Goals
+mvn liberty:run-server  runs the liberty server.
+mvn liberty:stop-server stops the liberty server
+
+
+
+Util URL
+Root         http://127.0.0.1:${testServerHttpPort}/${warContext}
+Health Check http://127.0.0.1:${testServerHttpPort}/health
+
+Properties:
+
+app.name=${app.name}
+app.context.root  =${warContext}
+app.location      =${app.location}
+app.url.http      =http://127.0.0.1:${testServerHttpPort}/${warContext}
+app.url.https     =http://127.0.0.1:${testServerHttpsPort}/${warContext}
+default.http.port =${testServerHttpPort}
+default.https.port=${testServerHttpsPort}
+
+finalName         =${project.build.finalName}
+packaging type    =${project.packaging}
+package.file      =${package.file}
+packaging.type    =${packaging.type}
+
+]]>
+								</echo>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<!-- in order to use JUNIT for the Belasting Way, we need to have the 
+							properties from maven in JUnit -->
+						<phase>generate-test-resources</phase>
+						<configuration>
+							<target>
+								<delete failOnError="false">
+									<fileset dir="${project.build.testOutputDirectory}"
+										includes="test.properties" />
+								</delete>
+								<mkdir dir="${project.build.testOutputDirectory}" />
+								<echo file="${project.build.testOutputDirectory}/test.properties">
 <![CDATA[#In order to override place a file ${user.name}.test.properties in
 #directory '${basedir}/src/test/resources'					
 app.name=${app.name}
 app.context.root=${warContext}
-app.location=${project.build.finalName}.war
+app.location=${app.location}
+app.root.package=${project.groupId}
 app.url.http=http://127.0.0.1:${testServerHttpPort}/${warContext}
-app.url.http=http://127.0.0.1:${testServerHttpsPort}/${warContext}
+app.url.https=http://127.0.0.1:${testServerHttpsPort}/${warContext}
 default.http.port=${testServerHttpPort}
-default.https.port=${testServerHttpsPort}]]>
-                </echo>
-              </target>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.2</version>
-        <configuration>
-          <packagingExcludes>pom.xml</packagingExcludes>
-        </configuration>
-      </plugin>
+default.https.port=${testServerHttpsPort}
+]]>
+								</echo>
+							</target>
+							<!-- liberty:run-server runs the Liberty server stop-server -->
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<packagingExcludes>pom.xml</packagingExcludes>
+				</configuration>
+			</plugin>
 
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
-        <configuration>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.3</version>
-        <configuration>
-          <additionalparam>-Xdoclint:none</additionalparam>
-        </configuration>
-      </plugin>
-      <!-- Helaas niet meer gesupport door Java :-( <plugin> <groupId>org.codehaus.mojo</groupId> 
-        <artifactId>cobertura-maven-plugin</artifactId> <configuration> <check> <branchRate>75</branchRate> 
-        <lineRate>85</lineRate> <totalBranchRate>85</totalBranchRate> <totalLineRate>85</totalLineRate> 
-        <packageLineRate>85</packageLineRate> <packageBranchRate>75</packageBranchRate> 
-        </check> </configuration> </plugin> -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <includes>
-            <include>**/Test*.java</include>
-            <include>**/*Test.java</include>
-            <include>**/*TestCase.java</include>
-            <include>**/*TestSuite.java</include>
-            <include>**/AllTests.java</include>
-          </includes>
-        </configuration>
-      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					 
+					<annotationProcessors>
+					    <annotationProcessor>se.skillytaire.didactic.generator.fluent.deluxe.DeluxeFluentProcessor</annotationProcessor>  
+						<annotationProcessor>se.skillytaire.didactic.generator.fluent.basic.BasicFluentProcessor</annotationProcessor>
+						<annotationProcessor>se.skillytaire.didactic.generator.dto.JPATOProcessor</annotationProcessor>
+						<annotationProcessor>se.skillytaire.didactic.generator.toa.TOAProcessor</annotationProcessor>
+					
+					</annotationProcessors>		
+					  		
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>set-system-properties</goal>
+						</goals>
+						<configuration>
+							<properties>
+								<property>
+									<name>se.skillytaire.didactic.generator.builder.basic.interface.package</name>
+									<value>${package.service}</value>
+								</property>
+								<property>
+									<name>se.skillytaire.didactic.generator.builder.basic.class.package</name>
+									<value>${package.service}</value>
+								</property>	
+								<property>
+									<name>se.skillytaire.didactic.generator.builder.basic.class.public</name>
+									<value>false</value>
+								</property>	
+								<property>
+									<name>se.skillytaire.didactic.generator.builder.basic.interface.generate</name>
+									<value>true</value>
+								</property>
+								
+								
+								<property>
+									<name>se.skillytaire.didactic.generator.builder.deluxe.interface.package</name>
+									<value>${package.service}</value>
+								</property>	
+								<property>
+									<name>se.skillytaire.didactic.generator.builder.deluxe.class.public</name>
+									<value>false</value>
+								</property>																
+								<property>
+									<name>se.skillytaire.didactic.generator.builder.deluxe.class.message.prefix</name>
+									<value></value>
+								</property>	
+																								
+																
+								<property>
+									<name>se.skillytaire.didactic.generator.toa.interface.package</name>
+									<value>${package.service}</value>
+								</property>	
+								<property>
+									<name>se.skillytaire.didactic.generator.toa.class.package</name>
+									<value>${package.service}</value>
+								</property>																	
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <configuration>
-          <includeTests>true</includeTests>
-          <minimumTokens>10</minimumTokens>
-          <linkXref>true</linkXref>
-          <targetJdk>1.8</targetJdk>
-          <failOnViolation>${fail.pmd}</failOnViolation>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
+								
+																						
+								<property>
+									<name>se.skillytaire.didactic.generator.toa.class.public</name>
+									<value>false</value>
+								</property>	
+								<property>
+									<name>se.skillytaire.didactic.generator.builder.basic.interface.enable.validation</name>
+									<value>true</value>
+								</property>
 
-        <executions>
-          <execution>
-            <id>default-prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>default-report</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-          <!-- <execution> <id>default-check</id> <goals> <goal>check</goal> 
-            </goals> </execution> -->
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.3</version>
-        <configuration>
-          <xmlOutput>true</xmlOutput>
-          <!-- Optional directory to put findbugs xdoc xml report -->
-          <xmlOutputDirectory>target/site</xmlOutputDirectory>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.10</version>
-        <configuration>
-          <projectNameTemplate>${project.build.finalName}</projectNameTemplate>
-          <downloadSources>true</downloadSources>
-          <downloadJavadocs>true</downloadJavadocs>
-        </configuration>
+						
+								
+								
+<!-- For Fluent 
+se.skillytaire.didactic.generator.builder.interface.name    
+se.skillytaire.didactic.generator.builder.interface.package 
+se.skillytaire.didactic.generator.builder.interface.generate
+se.skillytaire.didactic.generator.builder.interface.message
 
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <id>validate</id>
-            <phase>validate</phase>
-            <configuration>
-              <configLocation>${basedir}/ee-checkstyle.xml</configLocation>
-              <encoding>UTF-8</encoding>
-              <consoleOutput>true</consoleOutput>
-              <failsOnError>true</failsOnError>
-              <linkXRef>true</linkXRef>
-            </configuration>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+se.skillytaire.didactic.generator.builder.interface.enable.validation
+-->								
+								
+<!-- For the DTO's -->
 
+								<property>
+									<name>se.skillytaire.didactic.generator.dto.interface.package</name>
+									<value>se.skillytaire.belastingdienst.ee.common</value>
+								</property>	
+								<property>
+									<name>se.skillytaire.didactic.generator.dto.class.package</name>
+									<value>se.skillytaire.belastingdienst.ee.service</value>
+								</property>									
+								
+								<!-- 
+								<property>
+									<name>se.skillytaire.didactic.generator.dto.interface.name</name>
+									<value>DTO</value>
+								</property>									
+								<property>
+									<name>se.skillytaire.didactic.generator.dto.interface.generate</name>
+									<value>true</value>
+								</property>	
+								<property>
+									<name>se.skillytaire.didactic.generator.dto.interface.message</name>
+									<value>getId</value>
+								</property>		
+								<property>
+									<name>se.skillytaire.didactic.generator.dto.class.name.postfix</name>
+									<value>Result</value>
+								</property>
+								<property>
+									<name>se.skillytaire.didactic.generator.dto.class.name.prefix</name>
+									<value>DTO</value>
+								</property>																
+							
+															
+									 -->
+<!-- END DTO's -->									
+							</properties>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>			
+			
+			<!-- alleen voor JAX-B https://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.2/plugin-info.html 
+				<plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jaxb2-maven-plugin</artifactId> 
+				<version>2.4</version> <executions> <execution> <id>xjc</id> <goals> <goal>xjc</goal> 
+				</goals> </execution> </executions> <configuration> <target>2.1</target> 
+				<packageName>${package.clart}</packageName> <sources> <source>src/main/xsd</source> 
+				</sources> <xsdPathWithinArtifact>META-INF/service/xsd</xsdPathWithinArtifact> 
+				</configuration> </plugin> -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<version>2.5</version>
 
 
+				<dependencies>
+					<dependency>
+						<!-- builder pattern, prefix met with -->
+						<groupId>org.jvnet.jaxb2_commons</groupId>
+						<artifactId>jaxb2-fluent-api</artifactId>
+						<version>3.0</version>
+					</dependency>
+					<dependency>
+						<groupId>com.sun.xml.ws</groupId>
+						<artifactId>jaxws-tools</artifactId>
+						<version>2.3.0</version>
+					</dependency>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.0.0</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-plugin-plugin</artifactId>
-        <version>3.6.0</version>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>versions-maven-plugin</artifactId>
-        <version>2.7</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>dependency-updates-report</report>
-              <report>plugin-updates-report</report>
-              <report>property-updates-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.1.0</version>
-        <configuration>
-          <!-- stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile -->
-          <!-- XHTML Doclet -->
-          <!-- helpfile>${basedir}/src/main/javadoc/help-doc.html</helpfile -->
-          <failOnError>${fail.javadoc}</failOnError>
-          <show>public</show>
+				</dependencies>
 
-          <!-- ${basedir}/src/main/javadoc/overview.html -->
-          <overview>${basedir}/overview.html</overview>
-          <!-- These are the only dependencies we may use -->
-          <links>
-            <link>http://docs.oracle.com/javase/8/docs/api/</link>
-            <link>https://junit.org/junit4/javadoc/latest/</link>
-          </links>
-          <!-- detectLinks>true</detectLinks see bug http://jira.codehaus.org/browse/MJAVADOC-273 -->
-          <encoding>${project.build.sourceEncoding}</encoding>
-          <use>false</use>
-          <quiet>true</quiet>
-          <!--<maxmemory>512</maxmemory> -->
-          <!--<minmemory>256m</minmemory> -->
-          <doctitle><![CDATA[<h1>${project.name}</h1>]]></doctitle>
-          <bottom>
+				<configuration>
+					<!-- The name of your generated source package -->
+					<packageName>${package.clart}</packageName>
+					<xjcArgs>
+						<xjcArg>-Xfluent-api</xjcArg>
+					</xjcArgs>
+					<verbose>true</verbose>
+					<keep>true</keep>
+					<wsdlFiles>
+						<wsdlFile>${basedir}/src/main/xsd/weatherservice.wsdl</wsdlFile>
+					</wsdlFiles>
+					<wsdlDirectory>src/main/xsd/</wsdlDirectory>
+					<sourceDestDir>${basedir}/target/generated/clart</sourceDestDir>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generate-wsdl</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>wsimport</goal>
+						</goals>
+					</execution>
+				</executions>
+
+
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.9</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/target/generated/clart</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<configuration>
+					<additionalparam>-Xdoclint:none</additionalparam>
+				</configuration>
+			</plugin>
+			<!-- Helaas niet meer gesupport door Java :-( <plugin> <groupId>org.codehaus.mojo</groupId> 
+				<artifactId>cobertura-maven-plugin</artifactId> <configuration> <check> <branchRate>75</branchRate> 
+				<lineRate>85</lineRate> <totalBranchRate>85</totalBranchRate> <totalLineRate>85</totalLineRate> 
+				<packageLineRate>85</packageLineRate> <packageBranchRate>75</packageBranchRate> 
+				</check> </configuration> </plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/Test*.java</include>
+						<include>**/*Test.java</include>
+						<include>**/*TestCase.java</include>
+						<include>**/*TestSuite.java</include>
+						<include>**/AllTests.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<includeTests>true</includeTests>
+					<minimumTokens>10</minimumTokens>
+					<linkXref>true</linkXref>
+					<targetJdk>1.8</targetJdk>
+					<failOnViolation>${fail.pmd}</failOnViolation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<!-- <execution> <id>default-check</id> <goals> <goal>check</goal> </goals> 
+						</execution> -->
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.3</version>
+				<configuration>
+					<xmlOutput>true</xmlOutput>
+					<!-- Optional directory to put findbugs xdoc xml report -->
+					<xmlOutputDirectory>target/site</xmlOutputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<projectNameTemplate>${project.build.finalName}</projectNameTemplate>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<configuration>
+							<configLocation>${basedir}/ee-checkstyle.xml</configLocation>
+							<encoding>UTF-8</encoding>
+							<consoleOutput>true</consoleOutput>
+							<failsOnError>true</failsOnError>
+							<linkXRef>true</linkXRef>
+						</configuration>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+<!-- Jetty en Tomcat erin ivm Belastingdienst JOS spulletjes
+	<profiles>
+		<profile>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.jetty</groupId>
+						<artifactId>jetty-maven-plugin</artifactId>
+						<version>9.4.11.v20180605</version>
+						<configuration>
+							<httpConnector>
+								<port>8999</port>
+							</httpConnector>
+							<stopKey>quit</stopKey>
+							<stopPort>9000</stopPort>
+						</configuration>
+						<executions>
+							<execution>
+								<id>start-jetty</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>start</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>stop-jetty</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+
+			</build>
+		</profile>
+
+	</profiles>
+-->
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>3.0.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.6.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.7</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>dependency-updates-report</report>
+							<report>plugin-updates-report</report>
+							<report>property-updates-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<!-- stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile -->
+					<!-- XHTML Doclet -->
+					<!-- helpfile>${basedir}/src/main/javadoc/help-doc.html</helpfile -->
+					<failOnError>${fail.javadoc}</failOnError>
+					<show>public</show>
+
+					<!-- ${basedir}/src/main/javadoc/overview.html -->
+					<overview>${basedir}/overview.html</overview>
+					<!-- These are the only dependencies we may use -->
+					<links>
+						<link>http://docs.oracle.com/javase/8/docs/api/</link>
+						<link>https://junit.org/junit4/javadoc/latest/</link>
+					</links>
+					<!-- detectLinks>true</detectLinks see bug http://jira.codehaus.org/browse/MJAVADOC-273 -->
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<use>false</use>
+					<quiet>true</quiet>
+					<!--<maxmemory>512</maxmemory> -->
+					<!--<minmemory>256m</minmemory> -->
+					<doctitle><![CDATA[<h1>${project.name}</h1>]]></doctitle>
+					<bottom>
                         <![CDATA[Copyright &#169; {inceptionYear}-{currentYear} Wadium. All Rights Reserved.]]></bottom>
 
-          <linksource>true</linksource>
-          <source>${version.java.source}</source>
-        </configuration>
-        <!-- for helpdoc <dependencies> <dependency> <groupId>groupId</groupId> 
-          <artifactId>artifactId</artifactId> <version>version</version> </dependency> 
-          </dependencies> -->
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jxr-plugin</artifactId>
-        <version>3.0.0</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <configuration>
-          <linkXref>true</linkXref>
-        </configuration>
-      </plugin>
+					<linksource>true</linksource>
+					<source>${version.java.source}</source>
+				</configuration>
+				<!-- for helpdoc <dependencies> <dependency> <groupId>groupId</groupId> 
+					<artifactId>artifactId</artifactId> <version>version</version> </dependency> 
+					</dependencies> -->
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>3.0.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<linkXref>true</linkXref>
+				</configuration>
+			</plugin>
 
-      <!-- May he rest in peace... <plugin> <groupId>org.codehaus.mojo</groupId> 
-        <artifactId>cobertura-maven-plugin</artifactId> <version>2.7</version> </plugin> -->
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>jdepend-maven-plugin</artifactId>
-      </plugin>
-      <!-- ff uit <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jxr-maven-plugin</artifactId> 
-        </plugin> -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>taglist-maven-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <tagListOptions>
-            <tagClasses>
-              <tagClass>
-                <displayName>Todo Work</displayName>
-                <tags>
-                  <tag>
-                    <matchString>todo</matchString>
-                    <matchType>ignoreCase</matchType>
-                  </tag>
-                  <tag>
-                    <matchString>FIXME</matchString>
-                    <matchType>exact</matchType>
-                  </tag>
-                </tags>
-              </tagClass>
-            </tagClasses>
-          </tagListOptions>
-          <tags>
-            <tag>System.out.print</tag>
-            <tag>@deprecated</tag>
-            <tag>printStackTrace()</tag>
-            <!-- Legacy Tags <tag>TODO</tag> <tag>todo</tag> <tag>ToDo</tag> 
-              <tag>REDO</tag> <tag>redo</tag> <tag>ReDo</tag> <tag>FIXME</tag> <tag>fixme</tag> 
-              <tag>FixMe</tag> -->
-          </tags>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>3.0.0-M3</version>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.3</version>
-      </plugin>
-
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.3</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.0.0</version>
-        <configuration>
-          <configLocation>${basedir}/ee-checkstyle.xml</configLocation>
-          <encoding>UTF-8</encoding>
-          <consoleOutput>true</consoleOutput>
-          <failsOnError>true</failsOnError>
-          <linkXRef>true</linkXRef>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>checkstyle</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
+			<!-- May he rest in peace... <plugin> <groupId>org.codehaus.mojo</groupId> 
+				<artifactId>cobertura-maven-plugin</artifactId> <version>2.7</version> </plugin> -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jdepend-maven-plugin</artifactId>
+			</plugin>
+			<!-- ff uit <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jxr-maven-plugin</artifactId> 
+				</plugin> -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>taglist-maven-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<tagListOptions>
+						<tagClasses>
+							<tagClass>
+								<displayName>Todo Work</displayName>
+								<tags>
+									<tag>
+										<matchString>todo</matchString>
+										<matchType>ignoreCase</matchType>
+									</tag>
+									<tag>
+										<matchString>FIXME</matchString>
+										<matchType>exact</matchType>
+									</tag>
+								</tags>
+							</tagClass>
+						</tagClasses>
+					</tagListOptions>
+					<tags>
+						<tag>System.out.print</tag>
+						<tag>@deprecated</tag>
+						<tag>printStackTrace()</tag>
+						<!-- Legacy Tags <tag>TODO</tag> <tag>todo</tag> <tag>ToDo</tag> <tag>REDO</tag> 
+							<tag>redo</tag> <tag>ReDo</tag> <tag>FIXME</tag> <tag>fixme</tag> <tag>FixMe</tag> -->
+					</tags>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.0.0-M3</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.3</version>
+			</plugin>
 
 
-      <!-- Helaas niet meer gesupport door Java :-( <plugin> <groupId>org.codehaus.mojo</groupId> 
-        <artifactId>javancss-maven-plugin</artifactId> <version>2.1</version> </plugin> -->
-    </plugins>
-  </reporting>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.3</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<configLocation>${basedir}/ee-checkstyle.xml</configLocation>
+					<encoding>UTF-8</encoding>
+					<consoleOutput>true</consoleOutput>
+					<failsOnError>true</failsOnError>
+					<linkXRef>true</linkXRef>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+
+			<!-- Helaas niet meer gesupport door Java :-( <plugin> <groupId>org.codehaus.mojo</groupId> 
+				<artifactId>javancss-maven-plugin</artifactId> <version>2.1</version> </plugin> -->
+		</plugins>
+	</reporting>
 </project>

@@ -5,7 +5,7 @@ import se.skillytaire.course.tools.jlc.GreaterThen;
 import se.skillytaire.course.tools.jlc.LessThen;
 import se.skillytaire.course.tools.jlc.That;
 import se.skillytaire.course.tools.jlc.This;
-import se.skillytaire.service.weather.api.PositiveInteger;
+import se.skillytaire.java.datatype.PositiveInteger;
 
 public class BootTestFactory implements ComparableTestObjectFactory<Boot> {
    @This

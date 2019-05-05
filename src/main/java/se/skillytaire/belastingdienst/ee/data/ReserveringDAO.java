@@ -12,9 +12,9 @@ import se.skillytaire.belastingdienst.ee.entity.Reservering;
 public class ReserveringDAO implements DAO<Reservering> {
 
    @Override
-   public void add(Reservering that) {
-      EntityManagerFactory entityManagerFactory =
-            Persistence.createEntityManagerFactory("stuga");
+   public void add(final Reservering that) {
+      EntityManagerFactory entityManagerFactory = Persistence
+            .createEntityManagerFactory("stuga");
       EntityManager entityManager = entityManagerFactory.createEntityManager();
       EntityTransaction unmanagedTx = entityManager.getTransaction();
       try {
@@ -32,23 +32,23 @@ public class ReserveringDAO implements DAO<Reservering> {
    }
 
    @Override
-   public Optional<Reservering> findByOID(Integer OID) {
-      EntityManagerFactory entityManagerFactory =
-            Persistence.createEntityManagerFactory("stuga");
+   public Optional<Reservering> findByOID(final Integer OID) {
+      EntityManagerFactory entityManagerFactory = Persistence
+            .createEntityManagerFactory("stuga");
       EntityManager entityManager = entityManagerFactory.createEntityManager();
-      Reservering gevondenReservering =
-            entityManager.find(Reservering.class, OID);
-      Optional<Reservering> optioneleReservering =
-            Optional.ofNullable(gevondenReservering);
+      Reservering gevondenReservering = entityManager.find(Reservering.class,
+            OID);
+      Optional<Reservering> optioneleReservering = Optional
+            .ofNullable(gevondenReservering);
       entityManager.close();
       entityManagerFactory.close();
       return optioneleReservering;
    }
 
    @Override
-   public void update(Reservering that) {
-      EntityManagerFactory entityManagerFactory =
-            Persistence.createEntityManagerFactory("stuga");
+   public void update(final Reservering that) {
+      EntityManagerFactory entityManagerFactory = Persistence
+            .createEntityManagerFactory("stuga");
       EntityManager entityManager = entityManagerFactory.createEntityManager();
       EntityTransaction unmanagedTx = entityManager.getTransaction();
       Reservering updateReservering = that;
@@ -66,9 +66,9 @@ public class ReserveringDAO implements DAO<Reservering> {
    }
 
    @Override
-   public void delete(Reservering that) {
-      EntityManagerFactory entityManagerFactory =
-            Persistence.createEntityManagerFactory("stuga");
+   public void delete(final Reservering that) {
+      EntityManagerFactory entityManagerFactory = Persistence
+            .createEntityManagerFactory("stuga");
       EntityManager entityManager = entityManagerFactory.createEntityManager();
       EntityTransaction unmanagedTx = entityManager.getTransaction();
       Reservering deleteReservering = that;
@@ -88,9 +88,9 @@ public class ReserveringDAO implements DAO<Reservering> {
    }
 
    @Override
-   public void deleteByOID(Integer OID) {
-      EntityManagerFactory entityManagerFactory =
-            Persistence.createEntityManagerFactory("stuga");
+   public void deleteByOID(final Integer OID) {
+      EntityManagerFactory entityManagerFactory = Persistence
+            .createEntityManagerFactory("stuga");
       EntityManager entityManager = entityManagerFactory.createEntityManager();
       EntityTransaction unmanagedTx = entityManager.getTransaction();
       Reservering deleteReserveringByOID;

@@ -23,7 +23,7 @@ public class PeriodeTestFactory
    }
 
    @Override
-   public boolean isTypeFor(Class<?> type) {
+   public boolean isTypeFor(final Class<?> type) {
       // TODO Auto-generated method stub
       return Periode.class == type;
    }
@@ -37,8 +37,8 @@ public class PeriodeTestFactory
 
    @Override
    public Periode createLessThen() {
-      Periode periode =
-            new Periode(PeriodeTestFactory.NU, PeriodeTestFactory.NU);
+      Periode periode = new Periode(PeriodeTestFactory.NU,
+            PeriodeTestFactory.NU);
       return periode;
    }
 

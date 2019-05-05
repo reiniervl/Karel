@@ -4,11 +4,16 @@ import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
+import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
+import se.skillytaire.didactic.annotation.fluent.Fluent;
+import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
+
 /**
  * Een telefoonnummer is een internationaal nummer met nationaal nummer
  * gecombineerd.
  *
  */
+@Fluent
 @Embeddable
 public class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
    private static final long serialVersionUID = 1L;
@@ -22,6 +27,8 @@ public class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
    public TelefoonNummer() {
    }
 
+   @FluentConstructorArgument(fieldName = "landNummer")
+   @FluentConstructorArgument(fieldName = "nationaalNummer")
    public TelefoonNummer(final int landNummer, final int nationaalNummer) {
       super();
       this.landNummer = landNummer;
@@ -38,8 +45,8 @@ public class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
    public int compareTo(final TelefoonNummer that) {
       int compareTo;
       if (this.getLandNummer().equals(that.getLandNummer())) {
-         compareTo =
-               this.getNationaalNummer().compareTo(that.getNationaalNummer());
+         compareTo = this.getNationaalNummer()
+               .compareTo(that.getNationaalNummer());
       } else {
          compareTo = this.getLandNummer().compareTo(that.getLandNummer());
       }

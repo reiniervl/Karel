@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.persistence.Embeddable;
 
+import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
+
 /**
  * Non-entity class voor {@code Activiteit} class
  *
@@ -26,7 +28,7 @@ public class Periode extends AbstractComparableObject<Periode>
    private LocalDateTime start;
    private LocalDateTime eind;
 
-   public Periode(LocalDateTime start, LocalDateTime eind) {
+   public Periode(final LocalDateTime start, final LocalDateTime eind) {
       if (start == null) {
          throw new IllegalArgumentException("start mag niet null zijn");
       }
@@ -93,7 +95,7 @@ public class Periode extends AbstractComparableObject<Periode>
    }
 
    public Optional<Duration> getDuur() {
-      return Optional.ofNullable(duur);
+      return Optional.ofNullable(this.duur);
    }
 
    @Override
@@ -104,8 +106,8 @@ public class Periode extends AbstractComparableObject<Periode>
       } else if (!this.isGestart() && periode.isGestart()) {
          compare = -1;
       } else if (this.isBeeindigd() && periode.isBeeindigd()) {
-         long verschil =
-               this.getDuur().get().minus(periode.getDuur().get()).getSeconds();
+         long verschil = this.getDuur().get().minus(periode.getDuur().get())
+               .getSeconds();
          if (verschil < 0L) {
             compare = -1;
          } else if (verschil > 0L) {
@@ -119,9 +121,9 @@ public class Periode extends AbstractComparableObject<Periode>
    public String toString() {
       StringBuilder builder = new StringBuilder();
       builder.append("Periode [duur=");
-      builder.append(duur);
+      builder.append(this.duur);
       builder.append(", start=");
-      builder.append(start);
+      builder.append(this.start);
       builder.append("]");
       return builder.toString();
    }
@@ -135,11 +137,11 @@ public class Periode extends AbstractComparableObject<Periode>
    }
 
    private void berekenDuur() {
-      duur = Duration.between(this.getStart(), this.getEind());
+      this.duur = Duration.between(this.getStart(), this.getEind());
    }
 
    @Override
    public int hashCode() {
-      return HASH_PRIME;
+      return AbstractComparableObject.HASH_PRIME;
    }
 }

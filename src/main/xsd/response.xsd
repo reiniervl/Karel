@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.createment.nl/weatherservice/response" 
+	xmlns:tns="http://www.createment.nl/weatherservice/response" 
+	xmlns:sdt="http://www.createment.nl/weatherservice/shared"
+	elementFormDefault="qualified">
+
+	<import namespace="http://www.createment.nl/weatherservice/shared"
+		schemaLocation="shared.xsd" />
+
+	<element name="response">
+		<complexType>
+			<sequence>
+				<element name="gpsLocation" type="sdt:gpsType" minOccurs="1"
+					maxOccurs="1"></element>
+				<element name="dagvoorspelling"
+					type="tns:dagvoorspellingsType" minOccurs="1" maxOccurs="15" />
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="dagvoorspellingsType">
+		<sequence>
+			<element name="temperatuur">
+				<complexType>
+					<attribute name="min" type="tns:buitenTemperatuurType"
+						use="required" />
+					<attribute name="max" type="tns:buitenTemperatuurType"
+						use="required" />
+				</complexType>
+			</element>
+			<element name="wind">
+				<complexType>
+					<attribute name="hoek" type="tns:windhoekType"
+						use="required" />
+					<attribute name="snelheid" type="tns:windsnelheidType"
+						use="required" />
+				</complexType>
+			</element>
+			<element name="neerslag">
+				<complexType>
+					<attribute name="mm" type="tns:hoeveelheidNeerslagType"
+						use="required" />
+					<attribute name="kans" type="tns:percentageType"
+						use="required" />
+				</complexType>
+			</element>
+			<element name="pollen" type="tns:percentageType" />
+			<element name="luchtdruk" type="tns:luchtDrukType" />
+		</sequence>
+		<attribute name="datum" type="date" use="required" />
+	</complexType>
+
+	<simpleType name="buitenTemperatuurType">
+		<restriction base="double">
+			<minInclusive value="-60" />
+			<maxInclusive value="60" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="windhoekType">
+		<restriction base="nonNegativeInteger">
+			<maxInclusive value="359" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="windsnelheidType">
+		<restriction base="nonNegativeInteger">
+		</restriction>
+	</simpleType>
+
+	<simpleType name="hoeveelheidNeerslagType">
+		<restriction base="nonNegativeInteger">
+		</restriction>
+	</simpleType>
+
+	<simpleType name="percentageType">
+		<restriction base="nonNegativeInteger">
+			<maxInclusive value="100" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="luchtDrukType">
+		<restriction base="positiveInteger">
+			<maxInclusive value="1200" />
+		</restriction>
+	</simpleType>
+
+	<!-- http://www.safsen.se/sv/vinter zonsopgang zonsondergang gps locatie: 
+		doen we morgen -->
+</schema>

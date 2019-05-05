@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request xmlns="http://www.createment.nl/weatherservice/request"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sdt="http://www.createment.nl/weatherservice/shared"
+	xsi:schemaLocation="http://www.createment.nl/weatherservice/request  ../xsd/request.xsd ">
+
+	<gpsLocation>
+		<sdt:longitude>0.0</sdt:longitude>
+		<sdt:latitude>85.0511287</sdt:latitude>
+	</gpsLocation>
+</request>
