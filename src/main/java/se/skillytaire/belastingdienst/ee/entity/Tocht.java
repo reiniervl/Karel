@@ -17,22 +17,16 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
    @NotNull
    @Embedded
    @AttributeOverrides({
-         @AttributeOverride(name = Periode.PROPERTY_START,
-               column = @Column(name = "reserveringstart")),
-         @AttributeOverride(name = Periode.PROPERTY_EIND,
-               column = @Column(name = "reserveringeind")),
-         @AttributeOverride(name = Periode.PROPERTY_DUUR,
-               column = @Column(name = "reserveringduur")) })
+         @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "reserveringstart")),
+         @AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "reserveringeind")),
+         @AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "reserveringduur")) })
    private Periode reserveringsPeriode;
    @NotNull
    @Embedded
    @AttributeOverrides({
-         @AttributeOverride(name = Periode.PROPERTY_START,
-               column = @Column(name = "actuelestart")),
-         @AttributeOverride(name = Periode.PROPERTY_EIND,
-               column = @Column(name = "actueleeind")),
-         @AttributeOverride(name = Periode.PROPERTY_DUUR,
-               column = @Column(name = "actueleduur")) })
+         @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "actuelestart")),
+         @AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "actueleeind")),
+         @AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "actueleduur")) })
    private Periode actuelePeriode;
    @NotNull
    private Double prijs;
@@ -91,15 +85,14 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
    }
 
    public Periode getReserveringsPeriode() {
-      return this.reserveringsPeriode.clone();
+      return this.reserveringsPeriode != null ? this.reserveringsPeriode.clone()
+            : null;
+
    }
 
    public Periode getActuelePeriode() {
-      return this.actuelePeriode.clone();
-   }
-
-   public double prijs() {
-      return this.prijs();
+      return this.actuelePeriode != null ? this.actuelePeriode.clone()
+            : null;
    }
 
    public Double getPrijs() {

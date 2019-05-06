@@ -8,3 +8,4 @@ se.skillytaire.belastingdienst.ee.entity.KlantTestFactory
 se.skillytaire.belastingdienst.ee.entity.ReserveringTestFactory
 se.skillytaire.belastingdienst.ee.entity.PeriodeTestFactory
 se.skillytaire.belastingdienst.ee.entity.EmbeddableGPSCoordinaatTestFactory
+se.skillytaire.belastingdienst.ee.entity.MeerTochtTestFactory
