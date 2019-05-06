@@ -7,8 +7,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import se.skillytaire.belastingdienst.ee.common.KlantBuilder;
-
 /**
  * <p>
  * De {@code Klant} class is bedoeld als entity class voor de BootjesCase.
@@ -29,40 +27,6 @@ import se.skillytaire.belastingdienst.ee.common.KlantBuilder;
 public class Klant extends AbstractEntity<Klant> {
    private static final long serialVersionUID = 1l;
 
-   public static KlantBuilder getBuilder() {
-      return new KlantBuilder() {
-         private Klant klant = new Klant();
-
-         @Override
-         public KlantBuilder addEmail(final String email) {
-            this.klant.setEmail(email);
-            return this;
-         }
-
-         @Override
-         public KlantBuilder addUsername(final String username) {
-            this.klant.setUsername(username);
-            return this;
-         }
-
-         @Override
-         public KlantBuilder addPassword(final String password) {
-            this.klant.setPassword(password);
-            return this;
-         }
-
-         @Override
-         public Klant build() {
-            return this.klant;
-         }
-
-      };
-
-   }
-   // private static String emailPattern =
-   // "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
-
-   // FIXME: pattern is not comprehensive enough
    @NotNull
    @Pattern(regexp = "[\\d\\w\\.]*@[\\d\\w\\.]*\\.[\\w]{2,3}$")
    private String email;
@@ -121,9 +85,7 @@ public class Klant extends AbstractEntity<Klant> {
    @Override
    public int compareTo(final Klant klant) {
       int compareTo = 0;
-      // TODO: implementation
-      compareTo = this.getUsername().compareTo(klant.getUsername()); // Placeholder
-                                                                     // vergelijking
+			compareTo = this.getUsername().compareTo(klant.getUsername());
       return compareTo;
    }
 
