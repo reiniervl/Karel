@@ -59,8 +59,8 @@ public class AdresJpaDao implements AdresDao {
 
    @Override
    public Optional<Adres> find(final GPSCoordinaat coordinate) {
-      TypedQuery<Adres> namedQuery = this.em.createNamedQuery(Adres.FIND_BY_GPS,
-            Adres.class);
+      TypedQuery<Adres> namedQuery =
+            this.em.createNamedQuery(Adres.FIND_BY_GPS, Adres.class);
       namedQuery.setParameter(EmbeddableGPSCoordinaat.PROPERTY_LAT,
             coordinate.getLatitude());
       namedQuery.setParameter(EmbeddableGPSCoordinaat.PROPERTY_LONG,
