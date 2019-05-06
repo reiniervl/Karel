@@ -6,7 +6,10 @@ import javax.persistence.Embeddable;
 
 import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
 import se.skillytaire.belastingdienst.ee.common.GPSCoordinaat;
-
+import se.skillytaire.didactic.annotation.fluent.Fluent;
+import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
+import se.skillytaire.didactic.annotation.fluent.FluentConstructorArguments;
+@Fluent
 @Embeddable
 public class EmbeddableGPSCoordinaat
       extends AbstractComparableObject<EmbeddableGPSCoordinaat>
@@ -15,8 +18,10 @@ public class EmbeddableGPSCoordinaat
    private static final long serialVersionUID = 1L;
    public static final String PROPERTY_LAT = "latitude";
    public static final String PROPERTY_LONG = "longtitude";
+   
+   @Fluent( required=true)
    private double longtitude;
-
+   @Fluent( required=true)
    private double latitude;
 
    public EmbeddableGPSCoordinaat(final GPSCoordinaat gps) {
@@ -26,6 +31,15 @@ public class EmbeddableGPSCoordinaat
       this.longtitude = gps.getLongtitude();
       this.latitude = gps.getLongtitude();
    }
+  
+   @FluentConstructorArgument(fieldName="longtitude")
+   @FluentConstructorArgument(fieldName="latitude")
+  
+   public EmbeddableGPSCoordinaat(double longtitude, double latitude) {
+      this.longtitude = longtitude;
+      this.latitude = latitude;
+   }
+   
 
    public EmbeddableGPSCoordinaat() {
    }
