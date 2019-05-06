@@ -48,13 +48,17 @@ public class AdresJpaDaoTest {
 
    @After
    public void destroyJPA() {
-      this.entityManager.close();
-      this.factory.close();
-      while (this.factory.isOpen() && !Thread.interrupted()) {
-         try {
-            Thread.sleep(100);
-         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+      if (this.entityManager != null) {
+         this.entityManager.close();
+      }
+      if (this.factory != null) {
+         this.factory.close();
+         while (this.factory.isOpen() && !Thread.interrupted()) {
+            try {
+               Thread.sleep(100);
+            } catch (InterruptedException e) {
+               Thread.currentThread().interrupt();
+            }
          }
       }
    }
@@ -98,8 +102,8 @@ public class AdresJpaDaoTest {
    public void testFindByExistingOid() {
       Assert.assertFalse(this.thisAdres.isPersistant());
       this.addWithTX(this.thisAdres);
-      Optional<Adres> result = this.beanUnderTest
-            .findByOID(this.thisAdres.getOid());
+      Optional<Adres> result =
+            this.beanUnderTest.findByOID(this.thisAdres.getOid());
       Assert.assertTrue(result.isPresent());
       Assert.assertEquals(this.thisAdres, result.get());
    }
@@ -109,8 +113,8 @@ public class AdresJpaDaoTest {
       Assert.assertFalse(this.thisAdres.isPersistant());
       this.addWithTX(this.thisAdres);
       EmbeddableGPSCoordinaat aGPS = this.thisAdres.getGpsCoordinaat();
-      GPSCoordinaat coordinate = new GPSCoordinaat(aGPS.getLongtitude(),
-            aGPS.getLatitude());
+      GPSCoordinaat coordinate =
+            new GPSCoordinaat(aGPS.getLongtitude(), aGPS.getLatitude());
 
       Optional<Adres> result = this.beanUnderTest.find(coordinate);
       Assert.assertTrue(result.isPresent());
@@ -146,8 +150,8 @@ public class AdresJpaDaoTest {
       boolean succes = this.beanUnderTest.delete(this.thisAdres);
       Assert.assertTrue(succes);
       // oid is still there check jpa
-      Optional<Adres> result = this.beanUnderTest
-            .findByOID(this.thisAdres.getOid());
+      Optional<Adres> result =
+            this.beanUnderTest.findByOID(this.thisAdres.getOid());
       Assert.assertFalse(result.isPresent());
       unmanagedTx.commit();
    }
@@ -160,8 +164,8 @@ public class AdresJpaDaoTest {
       Adres clone = this.thisAdres.clone();
       clone.setCity("Zwolle");
       this.beanUnderTest.update(clone);
-      Optional<Adres> result = this.beanUnderTest
-            .findByOID(this.thisAdres.getOid());
+      Optional<Adres> result =
+            this.beanUnderTest.findByOID(this.thisAdres.getOid());
       Assert.assertTrue(result.isPresent());
       Assert.assertEquals("Zwolle", result.get().getCity());
       unmanagedTx.commit();

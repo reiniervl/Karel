@@ -4,21 +4,31 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(uniqueConstraints = {
-      @UniqueConstraint(name = "UniqueReserverings", columnNames = {
+      @UniqueConstraint(name = "UniqueReservering", columnNames = {
             "ReserveringsNummer", "reserveringsDatum", "verloopDatum" }) })
+@NamedQueries({ @NamedQuery(name = Reservering.FIND_BY_RESNUMMER,
+query = "select a from Reservering a where a.reserveringsNummer=:reserveringsNummer"),
+@NamedQuery(name = Reservering.DELETE_BY_OID,
+      query = "delete from Reservering a where a.oid=:oid") })
 public class Reservering extends AbstractEntity<Reservering> {
    private static final long serialVersionUID = 1L;
+   public static final String FIND_BY_RESNUMMER = "Reservering_FindByResnummer";
+   public static final String DELETE_BY_OID = "Reservering_DeleteByOid";
+   @NotNull
    @Basic
    private Integer reserveringsNummer;
    @NotNull
    @Basic
    private LocalDateTime reserveringsDatum;
+   @NotNull
    @Basic
    private LocalDateTime verloopDatum;
 
