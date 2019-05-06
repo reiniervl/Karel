@@ -29,3 +29,4 @@ mvnOutput.txt
 .project
 .vscode/
 /1.txt
+.git/*
