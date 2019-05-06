@@ -10,15 +10,13 @@ import se.skillytaire.belastingdienst.ee.entity.Klant;
 import se.skillytaire.belastingdienst.ee.persistance.DAO;
 
 public class KlantDAO implements DAO<Klant> {
-   private static KlantDAO dao = null;
+   private final static KlantDAO dao = new KlantDAO();
 
    private KlantDAO() {
    }
 
    public static KlantDAO getDAO() {
-      if (KlantDAO.dao == null) {
-         KlantDAO.dao = new KlantDAO();
-      }
+
       return KlantDAO.dao;
    }
 
