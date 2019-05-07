@@ -26,9 +26,8 @@ import javax.validation.constraints.Size;
  *
  */
 @Entity
-@Table(name = "klanten")
 @NamedQueries({
-      @NamedQuery(name = Klant.FIND_BY_USERNAME, query = "SELECT k FROM klanten WHERE k.username=:username") })
+      @NamedQuery(name = Klant.FIND_BY_USERNAME, query = "SELECT k FROM Klant k WHERE k.username=:username") })
 public class Klant extends AbstractEntity<Klant> {
    private static final long serialVersionUID = 1l;
    public static final String FIND_BY_USERNAME = "Klant_findByUsername";
@@ -67,10 +66,9 @@ public class Klant extends AbstractEntity<Klant> {
     */
    public Klant(final Klant klant) {
       super(klant);
-      // TODO code cleanup
-      this.setEmail(new String(klant.getEmail()));
-      this.username = (new String(klant.getUsername()));
-      this.setPassword(new String(klant.getPassword()));
+      this.username = klant.getUsername();
+      this.setEmail(klant.getEmail());
+      this.setPassword(klant.getPassword());
    }
 
    public String getEmail() {

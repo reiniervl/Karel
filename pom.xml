@@ -670,6 +670,7 @@ default.https.port=${testServerHttpsPort}
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
+					<fork>true</fork>
 					 <annotationProcessorPaths> <path> <groupId>se.skillytaire.course.tools.junit</groupId> 
 						<artifactId>jlc</artifactId> <version>${version.jlc}</version> </path> <path> 
 						<groupId>se.skillytaire.didactic</groupId> <artifactId>generator</artifactId> 
