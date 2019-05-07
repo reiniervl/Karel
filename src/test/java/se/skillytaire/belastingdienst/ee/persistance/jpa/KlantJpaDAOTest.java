@@ -1,5 +1,7 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -14,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import se.skillytaire.belastingdienst.ee.entity.Klant;
-import se.skillytaire.belastingdienst.ee.persistance.DAO;
+import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
 
@@ -23,11 +25,11 @@ public class KlantJpaDAOTest {
 	private EntityManager entityManager;
 
 	@This
-	private Klant thisKlant;
+	private Klant thisKlant = new Klant("user1");
 	@This
-	private Klant thisKlant2;
+	private Klant thisKlant2 = new Klant("user2");;
 
-	private DAO<Klant> beanUnderTest;
+	private KlantDAO beanUnderTest;
 
 	@Before
 	public void before() {
@@ -45,8 +47,9 @@ public class KlantJpaDAOTest {
 
 	@After
 	public void destroyJPA() {
-		 this.entityManager.close();
-		 this.factory.close();
+		if(this.entityManager != null) this.entityManager.close();
+		if(this.entityManager != null) {
+			 this.factory.close();
 		 while (this.factory.isOpen() && !Thread.interrupted()) {
 				try {
 					 Thread.sleep(100);
@@ -54,9 +57,11 @@ public class KlantJpaDAOTest {
 					 Thread.currentThread().interrupt();
 				}
 		 }
+		}
 	}
    @Test
    public void testDaoAdd() {
+		 assertNotNull("EntityManage cannot be null", this.entityManager);
       this.beanUnderTest.add(thisKlant);
       Assert.assertTrue("Klant is opgeslagen", thisKlant.isPersistant());
 
