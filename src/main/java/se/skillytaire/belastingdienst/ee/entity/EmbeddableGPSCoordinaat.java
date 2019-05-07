@@ -8,7 +8,6 @@ import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
 import se.skillytaire.belastingdienst.ee.common.GPSCoordinaat;
 import se.skillytaire.didactic.annotation.fluent.Fluent;
 import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
-import se.skillytaire.didactic.annotation.fluent.FluentConstructorArguments;
 @Fluent
 @Embeddable
 public class EmbeddableGPSCoordinaat
