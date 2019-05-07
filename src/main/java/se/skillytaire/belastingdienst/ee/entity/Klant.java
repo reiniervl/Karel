@@ -2,6 +2,8 @@ package se.skillytaire.belastingdienst.ee.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -24,8 +26,12 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "klanten")
+@NamedQueries({
+	@NamedQuery(name=Klant.FIND_BY_USERNAME, query="SELECT k FROM klanten WHERE k.username=:username")
+})
 public class Klant extends AbstractEntity<Klant> {
-   private static final long serialVersionUID = 1l;
+	 private static final long serialVersionUID = 1l;
+	 public static final String FIND_BY_USERNAME = "Klant_findByUsername";
 
    @NotNull
    @Pattern(regexp = "[\\d\\w\\.]*@[\\d\\w\\.]*\\.[\\w]{2,3}$")
