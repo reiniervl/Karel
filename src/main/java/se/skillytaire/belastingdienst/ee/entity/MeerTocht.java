@@ -17,7 +17,7 @@ public class MeerTocht extends Tocht<MeerTocht> {
       // TODO Auto-generated constructor stub
    }
 
-   public MeerTocht(Double prijs, Periode reserveringsPeriode) {
+   public MeerTocht(double prijs, Periode reserveringsPeriode) {
       super(prijs, reserveringsPeriode);
       // TODO Auto-generated constructor stub
    }
