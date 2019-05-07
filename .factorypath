@@ -7,4 +7,5 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/se/skillytaire/didactic/generator/1.0.1/generator-1.0.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/github/javaparser/javaparser-core/3.13.9/javaparser-core-3.13.9.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/se/skillytaire/didactic/annotation.fluent/1.0.1/annotation.fluent-1.0.1.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/rvlstudio/Builder/0.9.8/Builder-0.9.8.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>

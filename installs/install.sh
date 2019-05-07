@@ -16,3 +16,5 @@ mvn install:install-file -Dfile=se.skillytaire.service.wheater.api-1.0.1-javadoc
 mvn install:install-file -Dfile=se.skillytaire.service.wheater.klart-1.0.1.jar -DpomFile=wheater.klart-pom.xml
 mvn install:install-file -Dfile=se.skillytaire.service.wheater.klart-1.0.1-sources.jar -DgroupId=se.skillytaire.service.wheater -DartifactId=klart -Dversion=1.0.0 -Dpackaging=jar -Dclassifier=sources
 mvn install:install-file -Dfile=se.skillytaire.service.wheater.klart-1.0.1-javadoc.jar -DgroupId=se.skillytaire.service.wheater -DartifactId=klart -Dversion=1.0.0 -Dpackaging=jar -Dclassifier=javadoc
+
+mvn install:install-file -Dfile=Builder-0.9.8.jar -DpomFile=Builder-0.9.8.pom.xml

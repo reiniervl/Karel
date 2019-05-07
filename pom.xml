@@ -1,10 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-
 	<groupId>se.skillytaire.belastingdienst.ee</groupId>
 	<artifactId>karel</artifactId>
 	<version>1.0-SNAPSHOT</version>
@@ -23,12 +19,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
-
 		<fail.pmd>true</fail.pmd>
 		<fail.javadoc>false</fail.javadoc>
 		<fail.checkstyle>false</fail.checkstyle>
-
-
 		<version-slf4j>1.7.26</version-slf4j>
 		<version-junit>4.12</version-junit>
 		<version.hamcrest>1.3</version.hamcrest>
@@ -36,27 +29,27 @@
 		<version.arquillian-transaction-bom>1.0.1.Final</version.arquillian-transaction-bom>
 		<version.jlc>1.4.6</version.jlc>
 		<version.didactic.generator>1.0.1</version.didactic.generator>
-
 		<version.liberty>19.0.0.4</version.liberty>
 		<!-- liberty server config -->
-
 		<app.name>${project.artifactId}}</app.name>
 		<app.location>${project.build.directory}${file.separator}${project.build.finalName}.${project.packaging}</app.location>
 		<testServerHttpPort>9080</testServerHttpPort>
 		<testServerHttpsPort>9443</testServerHttpsPort>
 		<warContext>${app.name}</warContext>
-
 		<package.file>${project.build.directory}${file.separator}${project.build.finalName}.zip</package.file>
 		<packaging.type>usr</packaging.type>
-
 		<package.clart>se.skillytaire.service.clart</package.clart>
-
 		<package.root>se.skillytaire.belastingdienst.ee</package.root>
 		<package.entity>${package.root}.entity</package.entity>
 		<package.service>${package.root}.service</package.service>
 	</properties>
-
 	<dependencies>
+		<dependency>
+			<groupId>com.rvlstudio</groupId>
+			<artifactId>Builder</artifactId>
+			<version>0.9.8</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>se.skillytaire.didactic</groupId>
 			<artifactId>annotation.fluent</artifactId>
@@ -81,7 +74,6 @@
 			</exclusions>
 			 -->
 		</dependency>
-
 		<!-- Klart Weather Service -->
 		<dependency>
 			<groupId>se.skillytaire.service.wheater</groupId>
@@ -114,7 +106,6 @@
 			<version>42.2.5</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<!-- <dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
 			<version>42.1.3</version> <scope>runtime</scope> </dependency> -->
 		<!-- <dependency> <groupId>net.wasdev.maven.tools.targets</groupId> <artifactId>liberty-target</artifactId> 
@@ -168,7 +159,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient 
 			<dependency> <groupId>org.apache.httpcomponents</groupId> <artifactId>httpclient</artifactId> 
 			<version>4.5.8</version> <scope>test</scope> </dependency> -->
@@ -190,12 +180,9 @@
 			<version>2.4.1</version>
 			<scope>test</scope>
 		</dependency>
-
-
 		<!-- JSR 349: Bean Validation 1.1 Let op, lage versies werken niet goed 
 			bij hashcodes... deze zijn org.apache.bval hibernate validator alleen de 
 			google variant werkt -->
-
 		<!-- https://mvnrepository.com/artifact/com.googlecode.gwt-validation/gwt-validation -->
 		<dependency>
 			<groupId>com.googlecode.gwt-validation</groupId>
@@ -217,9 +204,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<!-- Arquillian gerelateerde dependencies -->
-
 		<!-- Arquillian junit testen -->
 		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>
@@ -227,7 +212,6 @@
 			<version>${version.arquillian-junit-container}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- Arquilllian transaction extension -->
 		<dependency>
 			<groupId>org.jboss.arquillian.extension</groupId>
@@ -236,7 +220,6 @@
 			<type>pom</type>
 			<scope>import</scope>
 		</dependency>
-
 		<!-- Arquillian adapter voor Liberty -->
 		<dependency>
 			<groupId>io.openliberty.arquillian</groupId>
@@ -244,18 +227,9 @@
 			<version>1.0.4</version>
 			<scope>test</scope>
 		</dependency>
-
-
-
 	</dependencies>
-
-
-
-
 	<build>
 		<finalName>${project.groupId}.${project.artifactId}</finalName>
-
-
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -408,17 +382,11 @@
 					<version>3.0.0-M2</version>
 				</plugin>
 				<plugin>
-
 					<artifactId>maven-pmd-plugin</artifactId>
 					<version>3.11.0</version>
 				</plugin>
-
 			</plugins>
 		</pluginManagement>
-
-
-
-
 		<plugins>
 			<plugin>
 				<!-- installs the Liberty server in the target directory -->
@@ -445,11 +413,9 @@
 						<app.context.root>${warContext}</app.context.root>
 						<!-- -->
 						<appLocation>${app.location}</appLocation>
-
 					</bootstrapProperties>
 					<!-- <appArchive>${app.location}</appArchive> -->
 				</configuration>
-
 				<executions>
 					<execution>
 						<id>stop-server-before-clean</id>
@@ -458,7 +424,6 @@
 							<goal>stop-server</goal>
 						</goals>
 					</execution>
-
 					<execution>
 						<id>install-server</id>
 						<phase>prepare-package</phase>
@@ -474,7 +439,6 @@
 							<goal>install-apps</goal>
 						</goals>
 					</execution>
-
 					<execution>
 						<id>install-feature</id>
 						<phase>prepare-package</phase>
@@ -493,8 +457,6 @@
 							<outputDirectory>target/wlp-package</outputDirectory>
 						</configuration>
 					</execution>
-
-
 					<execution>
 						<id>test-start-server</id>
 						<phase>pre-integration-test</phase>
@@ -511,7 +473,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -548,7 +509,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -573,7 +533,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.8</version>
@@ -585,9 +544,8 @@
 						<phase>pre-clean</phase>
 						<configuration>
 							<target>
-
 								<echo>
-<![CDATA[Maven Goals
+									<![CDATA[Maven Goals
 mvn liberty:run-server  runs the liberty server.
 mvn liberty:stop-server stops the liberty server
 
@@ -627,12 +585,11 @@ packaging.type    =${packaging.type}
 						<configuration>
 							<target>
 								<delete failOnError="false">
-									<fileset dir="${project.build.testOutputDirectory}"
-										includes="test.properties" />
+									<fileset dir="${project.build.testOutputDirectory}" includes="test.properties" />
 								</delete>
 								<mkdir dir="${project.build.testOutputDirectory}" />
 								<echo file="${project.build.testOutputDirectory}/test.properties">
-<![CDATA[#In order to override place a file ${user.name}.test.properties in
+									<![CDATA[#In order to override place a file ${user.name}.test.properties in
 #directory '${basedir}/src/test/resources'					
 app.name=${app.name}
 app.context.root=${warContext}
@@ -661,8 +618,6 @@ default.https.port=${testServerHttpsPort}
 					<packagingExcludes>pom.xml</packagingExcludes>
 				</configuration>
 			</plugin>
-
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -671,23 +626,34 @@ default.https.port=${testServerHttpsPort}
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 					<fork>true</fork>
-					 <annotationProcessorPaths> <path> <groupId>se.skillytaire.course.tools.junit</groupId> 
-						<artifactId>jlc</artifactId> <version>${version.jlc}</version> </path> <path> 
-						<groupId>se.skillytaire.didactic</groupId> <artifactId>generator</artifactId> 
-						<version>${version.didactic.generator}</version> </path> </annotationProcessorPaths> 
+					<annotationProcessorPaths>
+						<path>
+							<groupId>se.skillytaire.course.tools.junit</groupId>
+							<artifactId>jlc</artifactId>
+							<version>${version.jlc}</version>
+						</path>
+						<path>
+							<groupId>se.skillytaire.didactic</groupId>
+							<artifactId>generator</artifactId>
+							<version>${version.didactic.generator}</version>
+						</path>
+						<path>
+							<groupId>com.rvlstudio</groupId>
+							<artifactId>Builder</artifactId>
+							<version>0.9.8</version>
+						</path>
+					</annotationProcessorPaths>
 					<annotationProcessors>
-					<!-- 	 -->
+						<!-- 	 -->
 						<annotationProcessor>se.skillytaire.didactic.generator.dto.JPATOProcessor</annotationProcessor>
 						<annotationProcessor>se.skillytaire.didactic.generator.toa.TOAProcessor</annotationProcessor>
-					
 						<annotationProcessor>se.skillytaire.didactic.generator.fluent.deluxe.DeluxeFluentProcessor</annotationProcessor>
 						<annotationProcessor>se.skillytaire.didactic.generator.fluent.basic.BasicFluentProcessor</annotationProcessor>
-						
 						<!--  -->
 						<annotationProcessor>se.skillytaire.course.tools.jlc.processor.TestFactoryProcessor</annotationProcessor>
-						
+						<!-- Builder Processor -->
+						<annotationProcessor>com.rvlstudio.annotation.BuilderProcessor</annotationProcessor>
 					</annotationProcessors>
-
 				</configuration>
 				<!-- <dependencies> <dependency> <groupId>se.skillytaire.course.tools.junit</groupId> 
 					<artifactId>jlc</artifactId> <version>${version.jlc}</version> </dependency> 
@@ -722,8 +688,6 @@ default.https.port=${testServerHttpsPort}
 									<name>se.skillytaire.didactic.generator.builder.basic.interface.generate</name>
 									<value>true</value>
 								</property>
-
-
 								<property>
 									<name>se.skillytaire.didactic.generator.builder.deluxe.interface.package</name>
 									<value>${package.service}</value>
@@ -731,8 +695,7 @@ default.https.port=${testServerHttpsPort}
 								<property>
 									<name>se.skillytaire.didactic.generator.builder.deluxe.class.package</name>
 									<value>${package.service}</value>
-								</property>								
-								
+								</property>
 								<property>
 									<name>se.skillytaire.didactic.generator.builder.deluxe.class.public</name>
 									<value>false</value>
@@ -741,8 +704,6 @@ default.https.port=${testServerHttpsPort}
 									<name>se.skillytaire.didactic.generator.builder.deluxe.class.message.prefix</name>
 									<value></value>
 								</property>
-
-
 								<property>
 									<name>se.skillytaire.didactic.generator.toa.interface.package</name>
 									<value>${package.service}</value>
@@ -751,9 +712,6 @@ default.https.port=${testServerHttpsPort}
 									<name>se.skillytaire.didactic.generator.toa.class.package</name>
 									<value>${package.service}</value>
 								</property>
-
-
-
 								<property>
 									<name>se.skillytaire.didactic.generator.toa.class.public</name>
 									<value>false</value>
@@ -762,16 +720,10 @@ default.https.port=${testServerHttpsPort}
 									<name>se.skillytaire.didactic.generator.builder.basic.interface.enable.validation</name>
 									<value>true</value>
 								</property>
-
-
-
-
 								<!-- For Fluent se.skillytaire.didactic.generator.builder.interface.name 
 									se.skillytaire.didactic.generator.builder.interface.package se.skillytaire.didactic.generator.builder.interface.generate 
 									se.skillytaire.didactic.generator.builder.interface.message se.skillytaire.didactic.generator.builder.interface.enable.validation -->
-
 								<!-- For the DTO's -->
-
 								<property>
 									<name>se.skillytaire.didactic.generator.dto.interface.package</name>
 									<value>se.skillytaire.belastingdienst.ee.common</value>
@@ -780,7 +732,6 @@ default.https.port=${testServerHttpsPort}
 									<name>se.skillytaire.didactic.generator.dto.class.package</name>
 									<value>se.skillytaire.belastingdienst.ee.service</value>
 								</property>
-
 								<!-- <property> <name>se.skillytaire.didactic.generator.dto.interface.name</name> 
 									<value>DTO</value> </property> <property> <name>se.skillytaire.didactic.generator.dto.interface.generate</name> 
 									<value>true</value> </property> <property> <name>se.skillytaire.didactic.generator.dto.interface.message</name> 
@@ -793,7 +744,6 @@ default.https.port=${testServerHttpsPort}
 					</execution>
 				</executions>
 			</plugin>
-
 			<!-- alleen voor JAX-B https://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.2/plugin-info.html 
 				<plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jaxb2-maven-plugin</artifactId> 
 				<version>2.4</version> <executions> <execution> <id>xjc</id> <goals> <goal>xjc</goal> 
@@ -805,8 +755,6 @@ default.https.port=${testServerHttpsPort}
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxws-maven-plugin</artifactId>
 				<version>2.5</version>
-
-
 				<dependencies>
 					<dependency>
 						<!-- builder pattern, prefix met with -->
@@ -819,9 +767,7 @@ default.https.port=${testServerHttpsPort}
 						<artifactId>jaxws-tools</artifactId>
 						<version>2.3.0</version>
 					</dependency>
-
 				</dependencies>
-
 				<configuration>
 					<!-- The name of your generated source package -->
 					<packageName>${package.clart}</packageName>
@@ -845,8 +791,6 @@ default.https.port=${testServerHttpsPort}
 						</goals>
 					</execution>
 				</executions>
-
-
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -893,7 +837,6 @@ default.https.port=${testServerHttpsPort}
 					</includes>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
@@ -908,7 +851,6 @@ default.https.port=${testServerHttpsPort}
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-
 				<executions>
 					<execution>
 						<id>default-prepare-agent</id>
@@ -946,7 +888,6 @@ default.https.port=${testServerHttpsPort}
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
-
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -971,7 +912,6 @@ default.https.port=${testServerHttpsPort}
 			</plugin>
 		</plugins>
 	</build>
-
 	<!-- Jetty en Tomcat erin ivm Belastingdienst JOS spulletjes <profiles> 
 		<profile> <build> <plugins> <plugin> <groupId>org.eclipse.jetty</groupId> 
 		<artifactId>jetty-maven-plugin</artifactId> <version>9.4.11.v20180605</version> 
@@ -1017,7 +957,6 @@ default.https.port=${testServerHttpsPort}
 					<!-- helpfile>${basedir}/src/main/javadoc/help-doc.html</helpfile -->
 					<failOnError>${fail.javadoc}</failOnError>
 					<show>public</show>
-
 					<!-- ${basedir}/src/main/javadoc/overview.html -->
 					<overview>${basedir}/overview.html</overview>
 					<!-- These are the only dependencies we may use -->
@@ -1031,10 +970,12 @@ default.https.port=${testServerHttpsPort}
 					<quiet>true</quiet>
 					<!--<maxmemory>512</maxmemory> -->
 					<!--<minmemory>256m</minmemory> -->
-					<doctitle><![CDATA[<h1>${project.name}</h1>]]></doctitle>
+					<doctitle>
+						<![CDATA[<h1>${project.name}</h1>]]>
+					</doctitle>
 					<bottom>
-                        <![CDATA[Copyright &#169; {inceptionYear}-{currentYear} Wadium. All Rights Reserved.]]></bottom>
-
+						<![CDATA[Copyright &#169; {inceptionYear}-{currentYear} Wadium. All Rights Reserved.]]>
+					</bottom>
 					<linksource>true</linksource>
 					<source>${version.java.source}</source>
 				</configuration>
@@ -1054,7 +995,6 @@ default.https.port=${testServerHttpsPort}
 					<linkXref>true</linkXref>
 				</configuration>
 			</plugin>
-
 			<!-- May he rest in peace... <plugin> <groupId>org.codehaus.mojo</groupId> 
 				<artifactId>cobertura-maven-plugin</artifactId> <version>2.7</version> </plugin> -->
 			<plugin>
@@ -1115,8 +1055,6 @@ default.https.port=${testServerHttpsPort}
 				<artifactId>findbugs-maven-plugin</artifactId>
 				<version>3.0.3</version>
 			</plugin>
-
-
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
@@ -1141,8 +1079,6 @@ default.https.port=${testServerHttpsPort}
 					</reportSet>
 				</reportSets>
 			</plugin>
-
-
 			<!-- Helaas niet meer gesupport door Java :-( <plugin> <groupId>org.codehaus.mojo</groupId> 
 				<artifactId>javancss-maven-plugin</artifactId> <version>2.1</version> </plugin> -->
 		</plugins>
