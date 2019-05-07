@@ -3,10 +3,12 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import se.skillytaire.belastingdienst.ee.entity.Klant;
-import se.skillytaire.belastingdienst.ee.persistance.DAO;
+import javax.persistence.TypedQuery;
 
-public class KlantJpaDAO implements DAO<Klant> {
+import se.skillytaire.belastingdienst.ee.entity.Klant;
+import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;
+
+public class KlantJpaDAO implements KlantDAO {
 	 private final static KlantJpaDAO dao = new KlantJpaDAO();
 	 private EntityManager em;
 
@@ -29,7 +31,9 @@ public class KlantJpaDAO implements DAO<Klant> {
    @Override
    public Optional<Klant> findByOID(final Integer OID) {
 			return Optional.ofNullable(this.em.find(Klant.class, OID));
-   }
+	 }
+	 
+
 
    @Override
    public Klant update(final Klant klant) {
@@ -53,4 +57,12 @@ public class KlantJpaDAO implements DAO<Klant> {
       return deleted;
    }
 
+	@Override
+	public Optional<Klant> find(String username) {
+    TypedQuery<Klant> namedQuery = this.em.createNamedQuery(Klant.FIND_BY_USERNAME,
+		Klant.class);
+    namedQuery.setParameter("username", username);
+    Optional<Klant> result = namedQuery.getResultList().stream().findFirst();
+    return result;
+	}
 }

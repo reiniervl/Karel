@@ -28,11 +28,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "klanten")
 @NamedQueries({
-	@NamedQuery(name=Klant.FIND_BY_USERNAME, query="SELECT k FROM klanten WHERE k.username=:username")
-})
+      @NamedQuery(name = Klant.FIND_BY_USERNAME, query = "SELECT k FROM klanten WHERE k.username=:username") })
 public class Klant extends AbstractEntity<Klant> {
-	 private static final long serialVersionUID = 1l;
-	 public static final String FIND_BY_USERNAME = "Klant_findByUsername";
+   private static final long serialVersionUID = 1l;
+   public static final String FIND_BY_USERNAME = "Klant_findByUsername";
 
    @NotNull
    @Pattern(regexp = "[\\d\\w\\.]*@[\\d\\w\\.]*\\.[\\w]{2,3}$")
