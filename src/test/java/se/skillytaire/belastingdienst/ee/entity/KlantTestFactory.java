@@ -8,8 +8,7 @@ public class KlantTestFactory
       extends AbstractComparableTestObjectFactory<Klant> {
    @Override
    public Klant createThat() {
-      Klant klant = new Klant();
-      klant.setUsername("bert");
+      Klant klant = new Klant("bert");
       klant.setPassword("password");
       klant.setEmail("test@createment.nl");
       return klant;
@@ -17,8 +16,7 @@ public class KlantTestFactory
 
    @Override
    public Klant createThis() {
-      Klant klant = new Klant();
-      klant.setUsername("ernie");
+      Klant klant = new Klant("ernie");
       klant.setPassword("password");
       klant.setEmail("test@createment.nl");
       return klant;
@@ -26,8 +24,7 @@ public class KlantTestFactory
 
    @Override
    public Klant createGreaterThen() {
-      Klant klant = new Klant();
-      klant.setUsername("zzz");
+      Klant klant = new Klant("zzz");
       klant.setPassword("password");
       klant.setEmail("test@createment.nl");
       return klant;
@@ -35,8 +32,7 @@ public class KlantTestFactory
 
    @Override
    public Klant createLessThen() {
-      Klant klant = new Klant();
-      klant.setUsername("aaa");
+      Klant klant = new Klant("aaa");
       klant.setPassword("password");
       klant.setEmail("test@createment.nl");
       return klant;

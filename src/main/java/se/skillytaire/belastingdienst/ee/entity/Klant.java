@@ -2,11 +2,14 @@ package se.skillytaire.belastingdienst.ee.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+//TODO functionele constructor voor username maken om nieuwe klant te initialiseren
 /**
  * <p>
  * De {@code Klant} class is bedoeld als entity class voor de BootjesCase.
@@ -24,8 +27,12 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "klanten")
+@NamedQueries({
+	@NamedQuery(name=Klant.FIND_BY_USERNAME, query="SELECT k FROM klanten WHERE k.username=:username")
+})
 public class Klant extends AbstractEntity<Klant> {
-   private static final long serialVersionUID = 1l;
+	 private static final long serialVersionUID = 1l;
+	 public static final String FIND_BY_USERNAME = "Klant_findByUsername";
 
    @NotNull
    @Pattern(regexp = "[\\d\\w\\.]*@[\\d\\w\\.]*\\.[\\w]{2,3}$")
@@ -45,6 +52,14 @@ public class Klant extends AbstractEntity<Klant> {
    public Klant() {
    }
 
+   public Klant(String username) {
+      super();
+      if (username == null) {
+         throw new IllegalArgumentException("username mag niet null zijn");
+      }
+      this.username = username;
+   }
+
    /**
     * Copy constructor
     *
@@ -53,8 +68,9 @@ public class Klant extends AbstractEntity<Klant> {
     */
    public Klant(final Klant klant) {
       super(klant);
+      // TODO code cleanup
       this.setEmail(new String(klant.getEmail()));
-      this.setUsername(new String(klant.getUsername()));
+      this.username = (new String(klant.getUsername()));
       this.setPassword(new String(klant.getPassword()));
    }
 
@@ -70,10 +86,6 @@ public class Klant extends AbstractEntity<Klant> {
       return this.username;
    }
 
-   public void setUsername(final String username) {
-      this.username = username;
-   }
-
    public String getPassword() {
       return this.password;
    }
@@ -84,9 +96,7 @@ public class Klant extends AbstractEntity<Klant> {
 
    @Override
    public int compareTo(final Klant klant) {
-      int compareTo = 0;
-			compareTo = this.getUsername().compareTo(klant.getUsername());
-      return compareTo;
+      return this.getUsername().compareTo(klant.getUsername());
    }
 
    /**
@@ -96,20 +106,12 @@ public class Klant extends AbstractEntity<Klant> {
     */
    @Override
    public boolean equals(final Object o) {
-      boolean equals = false;
-      if (o instanceof Klant) {
-         Klant that = (Klant) o;
-         if (this.getEmail().equals(that.getEmail())
-               && this.getUsername().equals(that.getUsername())
-               && this.getPassword().equals(that.getPassword())) {
-            equals = true;
-         }
-      }
-      return equals;
+      return super.equals(o) && this.getEmail().equals(((Klant) o).getEmail())
+            && this.getPassword().equals(((Klant) o).getPassword());
    }
 
    /**
-    * De property {@code username} is uniek. Hierdoor kan de hascode
+    * De property {@code username} is uniek. Hierdoor kan de hashcode
     * doorverwezen worden.
     */
    @Override
@@ -119,9 +121,9 @@ public class Klant extends AbstractEntity<Klant> {
 
    @Override
    public String toString() {
-      StringBuilder sb = new StringBuilder().append("username: ")
-            .append(this.getUsername()).append("\nemail: ")
-            .append(this.getEmail());
+      StringBuilder sb =
+            new StringBuilder().append("username: ").append(this.getUsername())
+                  .append("\nemail: ").append(this.getEmail());
       return sb.toString();
    }
 }

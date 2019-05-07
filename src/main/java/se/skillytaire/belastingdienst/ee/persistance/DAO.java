@@ -11,7 +11,13 @@ public interface DAO<T extends AbstractEntity<T>> {
 
    T update(T t);
 
-   boolean delete(T t);
+   public default boolean delete(T t) {
+      boolean isDeleted = false;
+      if (t.isPersistant()) {
+         isDeleted = deleteByOID(t.getOid());
+      }
+      return isDeleted;
+   }
 
    boolean deleteByOID(Integer OID);
 }

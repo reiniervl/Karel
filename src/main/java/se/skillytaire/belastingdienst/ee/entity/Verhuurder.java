@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+//TODO mapping van vloot en adres en telefoonnummer toevoegen.
 @Entity
 public class Verhuurder extends AbstractEntity<Verhuurder> {
    private static final long serialVersionUID = 1L;
