@@ -22,7 +22,6 @@ public class MeerTochtDAO implements DAO<MeerTocht> {
    @Override
    public void add(MeerTocht t) {
       this.em.persist(t);
-
    }
 
    @Override

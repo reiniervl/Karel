@@ -1,5 +1,7 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
+import static org.junit.Assert.assertFalse;
+
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -26,7 +28,8 @@ public class MeerTochtDaoTest {
    @This
    private Periode thisPeriode;
    @This
-   private MeerTocht thisMeerTocht;
+	 private MeerTocht thisMeerTocht;
+	 @This
    private MeerTocht thisMeerTocht2;
    private MeerTochtDAO beanUnderTest;
 
@@ -90,11 +93,11 @@ public class MeerTochtDaoTest {
 
   //  @Test(expected = RollbackException.class)
   //  public void testAddedTwiceMeerTocht() {
-  //     this.thisMeerTocht.setPrijs(12);
+	// 		this.thisMeerTocht.setPrijs(12);
   //     this.addWithTX(this.thisMeerTocht);
-  //     Assert.assertTrue(this.thisMeerTocht.isPersistant());
-  //     Assert.assertFalse(this.thisMeerTocht.isIdentical(this.thisMeerTocht2));
-  //     this.addWithTX(this.thisMeerTocht2);
+  //     // Assert.assertTrue(this.thisMeerTocht.isPersistant());
+	// 		// Assert.assertFalse(this.thisMeerTocht.isIdentical(this.thisMeerTocht2));
+  //     this.addWithTX(this.thisMeerTocht);
   //  }
 
    @Test
