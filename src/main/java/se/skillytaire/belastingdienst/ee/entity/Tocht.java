@@ -29,7 +29,7 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
          @AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "actueleduur")) })
    private Periode actuelePeriode;
    @NotNull
-   private Double prijs;
+   private double prijs;
 
    /**
     * Developers should not use the default constructor. Please use the same
@@ -38,10 +38,8 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
    public Tocht() {
    }
 
-   public Tocht(final Double prijs, final Periode reserveringsPeriode) {
-      if (prijs == null) {
-         throw new IllegalArgumentException("De prijs is null");
-      }
+   public Tocht(final double prijs, final Periode reserveringsPeriode) {
+
       if (reserveringsPeriode == null) {
          throw new IllegalArgumentException("De reserveringsPeriode is null");
       }
@@ -91,15 +89,14 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
    }
 
    public Periode getActuelePeriode() {
-      return this.actuelePeriode != null ? this.actuelePeriode.clone()
-            : null;
+      return this.actuelePeriode != null ? this.actuelePeriode.clone() : null;
    }
 
-   public Double getPrijs() {
+   public double getPrijs() {
       return this.prijs;
    }
 
-   public void setPrijs(final Double prijs) {
+   public void setPrijs(final double prijs) {
       this.prijs = prijs;
    }
 

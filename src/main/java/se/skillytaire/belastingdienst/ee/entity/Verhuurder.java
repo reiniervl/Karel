@@ -2,7 +2,9 @@ package se.skillytaire.belastingdienst.ee.entity;
 
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
@@ -21,6 +23,7 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
    private TelefoonNummer telefoonNummer;
    // Locaties?????
 
+   @OneToMany(cascade = CascadeType.ALL)
    private ArrayList<Boot> vloot = new ArrayList<>();
 
    public boolean add(final Boot e) {

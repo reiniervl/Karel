@@ -1,34 +1,40 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import java.time.Duration;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-public class RivierTocht extends Tocht {
-   /**
-    *
-    */
+@Entity
+@DiscriminatorValue("r")
+public class RivierTocht extends Tocht<RivierTocht> {
    private static final long serialVersionUID = 1L;
-   private static final Duration CORRECTIEDUUR = Duration.ofMinutes(30);
 
    public RivierTocht() {
-      super();
+   }
+
+   public RivierTocht(double prijs, Periode reserveringsPeriode) {
+      super(prijs, reserveringsPeriode);
+   }
+
+   public RivierTocht(RivierTocht tocht) {
+      super(tocht);
    }
 
    @Override
-   public int compareTo(final Tocht o) {
-      // TODO Auto-generated method stub
-      return 0;
+   public String toString() {
+      StringBuilder builder = new StringBuilder();
+      builder.append("RivierTocht []");
+      return builder.toString();
+   }
+
+   @Override
+   public int compareTo(final RivierTocht that) {
+      return this.getReserveringsPeriode()
+            .compareTo(that.getReserveringsPeriode());
    }
 
    @Override
    public int hashCode() {
-      // TODO Auto-generated method stub
-      return 0;
+      return this.getReserveringsPeriode().hashCode();
    }
-
-   // @Override
-   // public Duration geefDuur() {
-   // Duration duur = super.geefDuur();
-   // return duur.minus(RivierTocht.CORRECTIEDUUR);
-   // }
 
 }

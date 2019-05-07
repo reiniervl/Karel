@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import se.skillytaire.java.datatype.PositiveInteger;
@@ -13,6 +15,7 @@ public class Boot extends AbstractEntity<Boot> {
    private int bootNummer;
    private Tocht deLaatsteTocht;
    @NotNull
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "vloot")
    private Verhuurder eigenaar;
    private ArrayList<Tocht> tochtGeschiedenis;
    private static final Duration INSPECTIEDUUR = Duration.ofSeconds(10);
@@ -37,8 +40,8 @@ public class Boot extends AbstractEntity<Boot> {
       super(that);
       this.bootNummer = that.geefNummer();
       this.eigenaar = that.getEigenaar();
-      this.tochtGeschiedenis = (ArrayList<Tocht>) that.tochtGeschiedenis
-            .clone();
+      this.tochtGeschiedenis =
+            (ArrayList<Tocht>) that.tochtGeschiedenis.clone();
       if (that.hasLaatsteTocht()) {
          // FIX-ME: Clone()
          this.deLaatsteTocht = that.deLaatsteTocht;
