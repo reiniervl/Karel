@@ -30,3 +30,4 @@ mvnOutput.txt
 .vscode/
 /1.txt
 .git/*
+/bin/
