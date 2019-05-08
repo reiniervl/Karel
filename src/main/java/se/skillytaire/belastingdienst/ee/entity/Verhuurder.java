@@ -3,10 +3,14 @@ package se.skillytaire.belastingdienst.ee.entity;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+
+import se.skillytaire.didactic.annotation.fluent.Fluent;
 
 //TODO mapping van vloot en adres en telefoonnummer toevoegen.
 @Entity
@@ -20,7 +24,8 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
    @Null
    private Adres adres;
    @Null
-   private TelefoonNummer telefoonNummer;
+   @Embedded
+   private EmbeddedTelefoonNummer telefoonNummer;
    // Locaties?????
 
    @OneToMany(cascade = CascadeType.ALL)
@@ -97,11 +102,11 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
       this.adres = adres;
    }
 
-   public TelefoonNummer getTelefoonNummer() {
+   public EmbeddedTelefoonNummer getTelefoonNummer() {
       return this.telefoonNummer;
    }
 
-   public void setTelefoonNummer(final TelefoonNummer telefoonNummer) {
+   public void setTelefoonNummer(final EmbeddedTelefoonNummer telefoonNummer) {
       this.telefoonNummer = telefoonNummer;
    }
 
