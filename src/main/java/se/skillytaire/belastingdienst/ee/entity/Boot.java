@@ -13,11 +13,11 @@ import se.skillytaire.java.datatype.PositiveInteger;
 public class Boot extends AbstractEntity<Boot> {
    private static final long serialVersionUID = 1L;
    private int bootNummer;
-   private Tocht deLaatsteTocht;
+   private Tocht<?> deLaatsteTocht;
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vloot")
    private Verhuurder eigenaar;
-   private ArrayList<Tocht> tochtGeschiedenis;
+   private ArrayList<Tocht<?>> tochtGeschiedenis;
    private static final Duration INSPECTIEDUUR = Duration.ofSeconds(10);
 
    public Boot() {
@@ -32,7 +32,7 @@ public class Boot extends AbstractEntity<Boot> {
       }
       this.eigenaar = eenEigenaar;
       this.bootNummer = nummer.intValue();
-      this.tochtGeschiedenis = new ArrayList<Tocht>();
+      this.tochtGeschiedenis = new ArrayList<Tocht<?>>();
    }
 
    @SuppressWarnings("unchecked")
@@ -41,14 +41,14 @@ public class Boot extends AbstractEntity<Boot> {
       this.bootNummer = that.geefNummer();
       this.eigenaar = that.getEigenaar();
       this.tochtGeschiedenis =
-            (ArrayList<Tocht>) that.tochtGeschiedenis.clone();
+            (ArrayList<Tocht<?>>) that.tochtGeschiedenis.clone();
       if (that.hasLaatsteTocht()) {
          // FIX-ME: Clone()
          this.deLaatsteTocht = that.deLaatsteTocht;
       }
    }
 
-   public void start(final Tocht eenTocht) {
+   public void start(final Tocht<?> eenTocht) {
       // FIXME: design by contract
       this.deLaatsteTocht = eenTocht;
       this.tochtGeschiedenis.add(this.deLaatsteTocht);
@@ -69,7 +69,7 @@ public class Boot extends AbstractEntity<Boot> {
 
    public boolean isInspectieNodig() {
       Duration total = Duration.ZERO;
-      for (Tocht t : this.tochtGeschiedenis) {
+      for (Tocht<?> t : this.tochtGeschiedenis) {
          Periode actuelePeriode = t.getActuelePeriode();
          Optional<Duration> optionalDuration = actuelePeriode.getDuur();
          if (optionalDuration.isPresent()) {
