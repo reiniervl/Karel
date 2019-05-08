@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skillytaire.didactic</groupId>
 	<artifactId>generator</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<!-- -SNAPSHOT -->
 	<packaging>jar</packaging>
 	<name>Basic Didactic tools for code Generator</name>
@@ -29,9 +29,9 @@
 			<version>3.13.9</version>
 		</dependency>
 		<dependency>
-		    <groupId>javax.persistence</groupId>
-		    <artifactId>javax.persistence-api</artifactId>
-		    <version>2.2</version>		
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -41,8 +41,8 @@
 		</dependency>
 		<dependency>
 			<groupId>se.skillytaire.didactic</groupId>
-	<artifactId>annotation.fluent</artifactId>
-	<version>1.0.1</version>
+			<artifactId>annotation.fluent</artifactId>
+			<version>1.0.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -57,21 +57,21 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
-           <executions>
-                <execution>
-                    <id>default-compile</id>
-                    <configuration>
-                        <compilerArgument>-proc:none</compilerArgument>
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>compile-project</id>
-                    <phase>compile</phase>
-                    <goals>
-                        <goal>compile</goal>
-                    </goals>
-                </execution>
-            </executions>				
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<configuration>
+							<compilerArgument>-proc:none</compilerArgument>
+						</configuration>
+					</execution>
+					<execution>
+						<id>compile-project</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -83,7 +83,7 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 
-			</plugin>			
+			</plugin>
 		</plugins>
 	</build>
 </project>

@@ -28,7 +28,7 @@
 		<version.arquillian-junit-container>1.1.5.Final</version.arquillian-junit-container>
 		<version.arquillian-transaction-bom>1.0.1.Final</version.arquillian-transaction-bom>
 		<version.jlc>1.4.6</version.jlc>
-		<version.didactic.generator>1.0.1</version.didactic.generator>
+		<version.didactic.generator>1.0.2-SNAPSHOT</version.didactic.generator>
 		<version.liberty>19.0.0.4</version.liberty>
 		<!-- liberty server config -->
 		<app.name>${project.artifactId}}</app.name>
@@ -644,11 +644,12 @@ default.https.port=${testServerHttpsPort}
 						</path>
 					</annotationProcessorPaths>
 					<annotationProcessors>
-						<!-- 	 -->
+						<!-- 	
 						<annotationProcessor>se.skillytaire.didactic.generator.dto.JPATOProcessor</annotationProcessor>
 						<annotationProcessor>se.skillytaire.didactic.generator.toa.TOAProcessor</annotationProcessor>
 						<annotationProcessor>se.skillytaire.didactic.generator.fluent.deluxe.DeluxeFluentProcessor</annotationProcessor>
 						<annotationProcessor>se.skillytaire.didactic.generator.fluent.basic.BasicFluentProcessor</annotationProcessor>
+						 -->
 						<!--  -->
 						<annotationProcessor>se.skillytaire.course.tools.jlc.processor.TestFactoryProcessor</annotationProcessor>
 						<!-- Builder Processor -->
