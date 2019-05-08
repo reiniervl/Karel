@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import se.skillytaire.belastingdienst.ee.common.GPSCoordinaat;
 import se.skillytaire.didactic.annotation.fluent.Fluent;
 import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
 
@@ -42,6 +43,7 @@ public class Adres extends AbstractEntity<Adres> {
 
    @Basic
    private String country;
+
 
    @Embedded
    @NotNull

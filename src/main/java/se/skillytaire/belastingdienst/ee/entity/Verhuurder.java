@@ -8,6 +8,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+import se.skillytaire.didactic.annotation.fluent.Fluent;
+
 //TODO mapping van vloot en adres en telefoonnummer toevoegen.
 @Entity
 public class Verhuurder extends AbstractEntity<Verhuurder> {
