@@ -1,7 +1,7 @@
 mvn install:install-file -Dfile=jlc-1.4.6.jar -DpomFile=jlc-1.4.6.pom.xml
 
-mvn install:install-file -Dfile=se.skillytaire.didactic.generator-1.0.1.jar -DpomFile=se.skillytaire.didactic.generator-1.0.1.pom.xml
-mvn install:install-file -Dfile=se.skillytaire.didactic.annotation.fluent-1.0.1.jar -DpomFile=se.skillytaire.didactic.annotation.fluent-1.0.1.pom.xml
+mvn install:install-file -Dfile=se.skillytaire.didactic.generator-1.0.2.jar -DpomFile=se.skillytaire.didactic.generator-1.0.2.pom.xml
+mvn install:install-file -Dfile=se.skillytaire.didactic.annotation.fluent-1.0.2.jar -DpomFile=se.skillytaire.didactic.annotation.fluent-1.0.2.pom.xml
 
 mvn install:install-file -Dfile=se.skillytaire.java.datatype-1.0.0.jar -DpomFile=datatype-pom.xml
 mvn install:install-file -Dfile=se.skillytaire.java.datatype-1.0.0-sources.jar -DgroupId=se.skillytaire.java -DartifactId=datatype -Dversion=1.0.0 -Dpackaging=jar -Dclassifier=sources
