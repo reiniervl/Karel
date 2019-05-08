@@ -14,4 +14,6 @@ call mvn install:install-file -Dfile=se.skillytaire.service.wheater.klart-1.0.1.
 call mvn install:install-file -Dfile=se.skillytaire.service.wheater.klart-1.0.1-sources.jar -DgroupId=se.skillytaire.service.wheater -DartifactId=klart -Dversion=1.0.0 -Dpackaging=jar -Dclassifier=sources
 call mvn install:install-file -Dfile=se.skillytaire.service.wheater.klart-1.0.1-javadoc.jar -DgroupId=se.skillytaire.service.wheater -DartifactId=klart -Dversion=1.0.0 -Dpackaging=jar -Dclassifier=javadoc
 
-call mvn install:install-file -Dfile=Builder-0.9.8.jar -DpomFile=Builder-0.9.8.pom.xml 
+call mvn install:install-file -Dfile=Builder-0.9.8.jar -DpomFile=Builder-0.9.8.pom.xml
+call mvn install:install-file -Dfile=Builder-0.9.8-sources.jar -DgroupId=com.rvlstudio -DartifactId=Builder -Dversion=0.9.8 -Dpackaging=jar -Dclassifier=sources
+call mvn install:install-file -Dfile=Builder-0.9.8-javadoc.jar -DgroupId=com.rvlstudio -DartifactId=Builder -Dversion=0.9.8 -Dpackaging=jar -Dclassifier=javadoc
