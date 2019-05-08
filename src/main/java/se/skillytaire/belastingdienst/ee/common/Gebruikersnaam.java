@@ -1,14 +1,34 @@
 package se.skillytaire.belastingdienst.ee.common;
 
-import java.util.regex.Pattern;
+public class Gebruikersnaam extends AbstractComparableObject<Gebruikersnaam>  {
 
-public class Gebruikersnaam extends AbstractTransferableObject<String> {
-   {
-      this.addConstraint((v) -> v != null);
-      this.addConstraint((v) -> Pattern.matches("^[a-zA-Z][\\w]{1,23}$", v));
+   private static final long serialVersionUID = 1L;
+
+   private final String value;
+
+   public Gebruikersnaam(final String aValue) {
+      if(aValue == null) {
+         throw new IllegalArgumentException("aValue is void");
+      }
+      this.value = aValue;
    }
 
-   public Gebruikersnaam(final String value) {
-      this.setValue(value);
+   public String getValue() {
+      return value;
+   }
+
+   @Override
+   public int compareTo(Gebruikersnaam that) {
+      return getValue().compareTo(that.getValue());
+   }
+
+   @Override
+   public int hashCode() {
+      return getValue().hashCode();
+   }
+
+   @Override
+   public String toString() {
+      return getValue();
    }
 }

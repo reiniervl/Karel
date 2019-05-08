@@ -1,5 +1,5 @@
 package se.skillytaire.belastingdienst.ee.common;
-
+@Deprecated
 public interface Validatable<T> {
    boolean validate();
 

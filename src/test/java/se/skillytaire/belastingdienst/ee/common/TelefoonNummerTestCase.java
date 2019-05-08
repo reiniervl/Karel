@@ -1,14 +1,16 @@
-package se.skillytaire.belastingdienst.ee.entity;
+package se.skillytaire.belastingdienst.ee.common;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import se.skillytaire.course.tools.jlc.ImmutableObject;
 import se.skillytaire.course.tools.jlc.JLC;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 
 @RunWith(JLCRunner.class)
 @JLC(value = TelefoonNummer.class)
+@ImmutableObject
 public class TelefoonNummerTestCase {
    /*
     * It is reflexive: for any non-null reference value x, x.equals(x) should

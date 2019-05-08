@@ -3,11 +3,13 @@ package se.skillytaire.belastingdienst.ee.common;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import se.skillytaire.course.tools.jlc.ImmutableObject;
 import se.skillytaire.course.tools.jlc.JLC;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 
 @RunWith(JLCRunner.class)
 @JLC(value = GPSCoordinaat.class, asJUnit = true)
+@ImmutableObject
 public class GPSCoordinaatTest {
    @Test(expected = IllegalArgumentException.class)
    public void testDBC_001() {

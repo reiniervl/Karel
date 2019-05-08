@@ -5,6 +5,8 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
 import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
+import se.skillytaire.belastingdienst.ee.common.TelefoonNummer;
+import se.skillytaire.didactic.annotation.fluent.Fluent;
 import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
 
 /**
@@ -12,9 +14,9 @@ import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
  * gecombineerd.
  *
  */
-
+@Fluent(voType=TelefoonNummer.class)
 @Embeddable
-public class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
+public class EmbeddedTelefoonNummer extends AbstractComparableObject<EmbeddedTelefoonNummer> {
    private static final long serialVersionUID = 1L;
    @Basic
    @NotNull
@@ -23,15 +25,16 @@ public class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
    @NotNull
    private Integer nationaalNummer;
 
-   public TelefoonNummer() {
+   public EmbeddedTelefoonNummer() {
    }
 
-   @FluentConstructorArgument(fieldName = "landNummer")
-   @FluentConstructorArgument(fieldName = "nationaalNummer")
-   public TelefoonNummer(final int landNummer, final int nationaalNummer) {
-      super();
-      this.landNummer = landNummer;
-      this.nationaalNummer = nationaalNummer;
+
+   public EmbeddedTelefoonNummer(TelefoonNummer tel) {
+      if(tel == null) {
+         throw new IllegalArgumentException("Tel is void");
+      }
+      this.landNummer = tel.getLandNummer();
+      this.nationaalNummer = tel.getNationaalNummer();
    }
 
    @Override
@@ -41,7 +44,7 @@ public class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
    }
 
    @Override
-   public int compareTo(final TelefoonNummer that) {
+   public int compareTo(final EmbeddedTelefoonNummer that) {
       int compareTo;
       if (this.getLandNummer().equals(that.getLandNummer())) {
          compareTo = this.getNationaalNummer()

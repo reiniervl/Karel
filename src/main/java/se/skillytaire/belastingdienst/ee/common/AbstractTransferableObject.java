@@ -3,6 +3,7 @@ package se.skillytaire.belastingdienst.ee.common;
 import java.util.HashSet;
 import java.util.Set;
 
+@Deprecated
 public abstract class AbstractTransferableObject<T> implements Validatable<T> {
    private Set<Constraint<T>> constraints = new HashSet<>();
    private T value;
