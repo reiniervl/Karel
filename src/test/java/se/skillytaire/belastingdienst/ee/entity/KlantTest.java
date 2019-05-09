@@ -62,120 +62,111 @@ public class KlantTest {
    //
    // }
 
-   // @Test
-   // public void testEqual() {
-   // final String username1 = new String("test username");
-   // final String username2 = new String("test username");
-   //
-   // final String password1 = new String("password");
-   // final String password2 = new String("password");
-   //
-   // final String email1 = new String("test@createment.nl");
-   // final String email2 = new String("test@createment.nl");
-   //
-   // Klant klant1 = new Klant();
-   // klant1.setUsername(username1);
-   // klant1.setPassword(password1);
-   // klant1.setEmail(email1);
-   //
-   // Klant klant2 = new Klant();
-   // klant2.setUsername(username2);
-   // klant2.setPassword(password2);
-   // klant2.setEmail(email2);
-   //
-   // Assert.assertEquals(klant1, klant2);
-   // }
+   @Test
+   public void testEqual() {
+   final String username1 = new String("test username");
+   final String username2 = new String("test username");
+   
+   final String password1 = new String("password");
+   final String password2 = new String("password");
+   
+   final String email1 = new String("test@createment.nl");
+   final String email2 = new String("test@createment.nl");
+   
+   Klant klant1 = new Klant(username1);
+   klant1.setPassword(password1);
+   klant1.setEmail(email1);
+   
+   Klant klant2 = new Klant(username2);
+   klant2.setPassword(password2);
+   klant2.setEmail(email2);
+   
+   Assert.assertEquals(klant1, klant2);
+   }
 
-   // @Test
-   // public void testUsernameEqual() {
-   // final String username1 = new String("test username");
-   // final String username2 = new String("test username DIFFERENT");
-   //
-   // final String password1 = new String("password");
-   // final String password2 = new String("password");
-   //
-   // final String email1 = new String("test@createment.nl");
-   // final String email2 = new String("test@createment.nl");
-   //
-   // Klant klant1 = new Klant();
-   // klant1.setUsername(username1);
-   // klant1.setPassword(password1);
-   // klant1.setEmail(email1);
-   //
-   // Klant klant2 = new Klant();
-   // klant2.setUsername(username2);
-   // klant2.setPassword(password2);
-   // klant2.setEmail(email2);
-   //
-   // Assert.assertNotEquals(klant1, klant2);
-   // }
-   //
-   // @Test
-   // public void testPasswordEqual() {
-   // final String username1 = new String("test username");
-   // final String username2 = new String("test username");
-   //
-   // final String password1 = new String("password");
-   // final String password2 = new String("DIFFERENT");
-   //
-   // final String email1 = new String("test@createment.nl");
-   // final String email2 = new String("test@createment.nl");
-   //
-   // Klant klant1 = new Klant();
-   // klant1.setUsername(username1);
-   // klant1.setPassword(password1);
-   // klant1.setEmail(email1);
-   //
-   // Klant klant2 = new Klant();
-   // klant2.setUsername(username2);
-   // klant2.setPassword(password2);
-   // klant2.setEmail(email2);
-   //
-   // Assert.assertFalse(klant1.equals(klant2));
-   // }
-   //
-   // @Test
-   // public void testEmailEqual() {
-   // final String username1 = new String("test username");
-   // final String username2 = new String("test username");
-   //
-   // final String password1 = new String("password");
-   // final String password2 = new String("password");
-   //
-   // final String email1 = new String("test@createment.nl");
-   // final String email2 = new String("test@DIFFERENT.nl");
-   //
-   // Klant klant1 = new Klant();
-   // klant1.setUsername(username1);
-   // klant1.setPassword(password1);
-   // klant1.setEmail(email1);
-   //
-   // Klant klant2 = new Klant();
-   // klant2.setUsername(username2);
-   // klant2.setPassword(password2);
-   // klant2.setEmail(email2);
-   //
-   // Assert.assertNotEquals(klant1, klant2);
-   // }
-   //
-   // @Test
-   // public void testInstanceEqual() {
-   // final String username1 = new String("test username");
-   //
-   // final String password1 = new String("password");
-   //
-   // final String email1 = new String("test@createment.nl");
-   //
-   // Klant klant1 = new Klant();
-   // klant1.setUsername(username1);
-   // klant1.setPassword(password1);
-   // klant1.setEmail(email1);
-   //
-   // Object klant2 = new Object();
-   //
-   // Assert.assertNotEquals(klant1, klant2);
-   // }
-   //
+   @Test
+   public void testUsernameEqual() {
+   final String username1 = new String("test username");
+   final String username2 = new String("test username DIFFERENT");
+   
+   final String password1 = new String("password");
+   final String password2 = new String("password");
+   
+   final String email1 = new String("test@createment.nl");
+   final String email2 = new String("test@createment.nl");
+   
+   Klant klant1 = new Klant(username1);
+   klant1.setPassword(password1);
+   klant1.setEmail(email1);
+   
+   Klant klant2 = new Klant(username2);
+   klant2.setPassword(password2);
+   klant2.setEmail(email2);
+   
+   Assert.assertNotEquals(klant1, klant2);
+   }
+   
+   @Test
+   public void testPasswordEqual() {
+   final String username1 = new String("test username");
+   final String username2 = new String("test username");
+   
+   final String password1 = new String("password");
+   final String password2 = new String("DIFFERENT");
+   
+   final String email1 = new String("test@createment.nl");
+   final String email2 = new String("test@createment.nl");
+   
+   Klant klant1 = new Klant(username1);
+   klant1.setPassword(password1);
+   klant1.setEmail(email1);
+   
+   Klant klant2 = new Klant(username2);
+   klant2.setPassword(password2);
+   klant2.setEmail(email2);
+   
+   Assert.assertFalse(klant1.equals(klant2));
+   }
+   
+   @Test
+   public void testEmailEqual() {
+   final String username1 = new String("test username");
+   final String username2 = new String("test username");
+   
+   final String password1 = new String("password");
+   final String password2 = new String("password");
+   
+   final String email1 = new String("test@createment.nl");
+   final String email2 = new String("test@DIFFERENT.nl");
+   
+   Klant klant1 = new Klant(username1);
+   klant1.setPassword(password1);
+   klant1.setEmail(email1);
+   
+   Klant klant2 = new Klant(username2);
+   klant2.setPassword(password2);
+   klant2.setEmail(email2);
+   
+   Assert.assertNotEquals(klant1, klant2);
+   }
+   
+   @Test
+   public void testInstanceEqual() {
+   final String username1 = new String("test username");
+   
+   final String password1 = new String("password");
+   
+   final String email1 = new String("test@createment.nl");
+   
+   Klant klant1 = new Klant(username1);
+   klant1.setPassword(password1);
+   klant1.setEmail(email1);
+   
+   Object klant2 = new Object();
+   
+   Assert.assertNotEquals(klant1, klant2);
+   }
+   
    // @Test
    // public void testSuperEqual() {
    // final String username1 = new String("test username");
