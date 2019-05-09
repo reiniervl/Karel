@@ -900,6 +900,7 @@ files are moved
 				<configuration>
 					<excludes>
 						<exlcude>**/*Builder.*</exlcude>
+						<exclude>**/service/clart/**/*</exclude>
 					</excludes>
 				</configuration>
 				<executions>
