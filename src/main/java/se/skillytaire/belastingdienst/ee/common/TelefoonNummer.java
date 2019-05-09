@@ -1,6 +1,6 @@
 package se.skillytaire.belastingdienst.ee.common;
 
-<<<<<<< HEAD
+
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
@@ -8,8 +8,7 @@ import javax.validation.constraints.NotNull;
 import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
 import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
  
-=======
->>>>>>> 284c3f7c3406e6e5496f47f55ce95a8f134cbff5
+
 /**
  * Een telefoonnummer is een internationaal nummer met nationaal nummer
  * gecombineerd.
