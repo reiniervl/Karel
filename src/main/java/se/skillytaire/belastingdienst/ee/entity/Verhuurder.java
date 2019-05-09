@@ -3,26 +3,30 @@ package se.skillytaire.belastingdienst.ee.entity;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+import com.rvlstudio.annotation.Builder;
+import com.rvlstudio.annotation.BuilderField;
+
 import se.skillytaire.didactic.annotation.fluent.Fluent;
-import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
 
 //TODO mapping van vloot en adres en telefoonnummer toevoegen.
-//@Fluent
+@Builder
 @Entity
 public class Verhuurder extends AbstractEntity<Verhuurder> {
-   private static final long serialVersionUID = 1L;
+	 private static final long serialVersionUID = 1L;
+	 @BuilderField
    @NotNull
    /// @Column(unique=true)
-   private String userName;
+	 private String userName;
+	 @BuilderField
    @Null
-   private String name;
+	 private String name;
+	 @BuilderField
    @Null
    private Adres adres;
    @Null
@@ -66,7 +70,7 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
       this.vloot = (ArrayList<Boot>) that.vloot.clone();
       this.tochtenbak = (ArrayList<Tocht>) that.tochtenbak.clone();
    }
-   @FluentConstructorArgument(fieldName="userName")
+
    public Verhuurder(final String userName) {
       if (userName == null) {
          throw new IllegalArgumentException("userName is void");

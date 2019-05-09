@@ -60,7 +60,7 @@ public class Adres extends AbstractEntity<Adres> {
    public Adres() {
    }
 
-   @FluentConstructorArgument(fieldName="gpsCoordinaat")
+   @FluentConstructorArgument(fieldName = "gpsCoordinaat")
    public Adres(final EmbeddableGPSCoordinaat gpsCoordinaat) {
       if (gpsCoordinaat == null) {
          throw new IllegalArgumentException("Het GPS Coordinaat is null");
