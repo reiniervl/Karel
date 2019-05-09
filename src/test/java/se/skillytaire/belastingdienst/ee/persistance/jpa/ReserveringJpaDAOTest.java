@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -78,7 +79,7 @@ public class ReserveringJpaDAOTest {
       }
    }
 
-   @Test
+   @Test(expected = RollbackException.class)
    public void testAddedTwiceReservering() {
       this.thisReservering.setReserveringsDatum(testTijd);
       this.addWithTX(this.thisReservering);
