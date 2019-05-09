@@ -13,6 +13,7 @@
 		<class>se.skillytaire.belastingdienst.ee.entity.MeerTocht</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.RivierTocht</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.Tocht</class>
+		<class>se.skillytaire.belastingdienst.ee.entity.Boot</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<validation-mode>AUTO</validation-mode>
 		<properties>

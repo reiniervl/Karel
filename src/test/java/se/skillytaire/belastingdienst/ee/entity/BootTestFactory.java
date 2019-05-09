@@ -10,42 +10,42 @@ import se.skillytaire.java.datatype.PositiveInteger;
 
 @TestFactory
 public class BootTestFactory extends AbstractComparableTestObjectFactory<Boot> {
-   @This
-   private Verhuurder thisVerhuurder;
+	@This
+	private Verhuurder thisVerhuurder;
    @That
    private Verhuurder thatVerhuurder;
    @LessThen
-   private Verhuurder anton;
+   private Verhuurder lessThenVerhuurder;
    @GreaterThen
-   private Verhuurder dirk;
+   private Verhuurder greaterThenVerhuurder;
 
    @This
-   private PositiveInteger thisPositive;
+   private PositiveInteger thisNummer;
    @That
-   private PositiveInteger thatPositive;
+   private PositiveInteger thatNummer;
    @LessThen
-   private PositiveInteger joop;
+   private PositiveInteger lessThenNummer;
    @GreaterThen
-   private PositiveInteger henk;
+   private PositiveInteger greaterThenNummer;
 
    @Override
    public Boot createThat() {
-      return new Boot(this.thatVerhuurder, this.thatPositive);
+      return new Boot(this.thatVerhuurder, this.thatNummer);
    }
 
    @Override
    public Boot createThis() {
-      return new Boot(this.thisVerhuurder, this.thisPositive);
+      return new Boot(this.thisVerhuurder, this.thisNummer);
    }
 
    @Override
    public Boot createGreaterThen() {
-      return new Boot(this.dirk, this.henk);
+      return new Boot(this.greaterThenVerhuurder, this.greaterThenNummer);
    }
 
    @Override
    public Boot createLessThen() {
-      return new Boot(this.anton, this.joop);
+      return new Boot(this.lessThenVerhuurder, this.lessThenNummer);
    }
 
 }

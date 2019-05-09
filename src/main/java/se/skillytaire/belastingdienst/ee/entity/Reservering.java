@@ -92,10 +92,6 @@ public class Reservering extends AbstractEntity<Reservering> {
       return this.reserveringsNummer;
    }
 
-   // public void setReserveringsNummer(final Integer reserveringsNummer) {
-   // this.reserveringsNummer = reserveringsNummer;
-   // }
-
    public LocalDateTime getReserveringsDatum() {
       return this.reserveringsDatum;
    }
