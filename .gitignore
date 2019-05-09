@@ -37,3 +37,4 @@ mvnOutput.txt
 # local jar
 #
 installs/install.sh
+.factorypath
