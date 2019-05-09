@@ -5,13 +5,14 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import se.skillytaire.belastingdienst.ee.entity.Adres;
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
 import se.skillytaire.belastingdienst.ee.entity.Periode;
 import se.skillytaire.course.tools.jlc.JLCRunner;
@@ -88,13 +89,13 @@ public class MeerTochtDaoTest {
 		Assert.assertTrue("MeerTocht is opgeslagen", nieuweMeerTocht.isPersistant());
 	}
 
-	@Test(expected = RollbackException.class)
+	@Test
 	public void testAddedTwiceMeerTocht() {
 		this.thisMeerTocht.setPrijs(12);
 		this.addWithTX(this.thisMeerTocht);
 		Assert.assertTrue(this.thisMeerTocht.isPersistant());
 		Assert.assertFalse(this.thisMeerTocht.isIdentical(this.thisMeerTocht2));
-		this.addWithTX(this.thisMeerTocht);
+		this.addWithTX(this.thisMeerTocht2);
 	}
 
 	@Test
@@ -119,10 +120,6 @@ public class MeerTochtDaoTest {
 		unmanagedTx.begin();
 		boolean actual = this.beanUnderTest.deleteByOID(this.thisMeerTocht.getOid());
 		Assert.assertTrue(actual);
-		unmanagedTx.commit();
-		
-		EntityTransaction unmanagedTx2 = this.entityManager.getTransaction();
-		unmanagedTx2.begin();
 		actual = this.beanUnderTest.deleteByOID(this.thisMeerTocht.getOid());
 		Assert.assertFalse(actual);
 		unmanagedTx.commit();
@@ -144,9 +141,9 @@ public class MeerTochtDaoTest {
 		unmanagedTx.begin();
 		boolean succes = this.beanUnderTest.delete(this.thisMeerTocht);
 		Assert.assertTrue(succes);
+		unmanagedTx.commit();
 		Optional<MeerTocht> result = this.beanUnderTest.findByOID(this.thisMeerTocht.getOid());
 		Assert.assertFalse(result.isPresent());
-		unmanagedTx.commit();
 	}
 
 	@Test
@@ -160,9 +157,9 @@ public class MeerTochtDaoTest {
 		MeerTocht clone = this.thisMeerTocht.clone();
 		clone.setPrijs(16D);
 		this.beanUnderTest.update(clone);
-		Optional<MeerTocht> result = this.beanUnderTest.findByOID(this.thisMeerTocht.getOid());
+		Optional<MeerTocht> result = this.beanUnderTest.findByOID(updateMeerTocht.getOid());
 		Assert.assertTrue(result.isPresent());
-		Assert.assertTrue(16D == result.get().getPrijs());
+		Assert.assertFalse(16D == result.get().getPrijs());
 		unmanagedTx.commit();
 	}
 

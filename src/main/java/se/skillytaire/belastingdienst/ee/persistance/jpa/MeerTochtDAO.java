@@ -3,17 +3,16 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
-import se.skillytaire.belastingdienst.ee.entity.Periode;
 import se.skillytaire.belastingdienst.ee.persistance.DAO;
 
 public class MeerTochtDAO implements DAO<MeerTocht> {
    private final static MeerTochtDAO dao = new MeerTochtDAO();
    private EntityManager em;
-   Optional<MeerTocht> find(double prijs, Periode reserveringsPeriode) {
-	return null;
-}
+ //  Optional<MeerTocht> find(double prijs, Periode reserveringsPeriode);
+
    
    private MeerTochtDAO() {
    }
@@ -40,18 +39,11 @@ public class MeerTochtDAO implements DAO<MeerTocht> {
    }
 
    @Override
-   public boolean delete(MeerTocht t) {
-      em.remove(t);
-      return true;
-   }
-
-   @Override
    public boolean deleteByOID(Integer OID) {
-      Optional<MeerTocht> tochtinsysteem = this.findByOID(OID);
-      if (tochtinsysteem.isPresent()) {
-         em.remove(tochtinsysteem.get());
-      }
-      return true;
+	      Query namedQuery = this.em.createNamedQuery(MeerTocht.DELETE_BY_OID);
+	      namedQuery.setParameter("oid", OID);
+	      int result = namedQuery.executeUpdate();
+	      return result != 0;
    }
 
    public static MeerTochtDAO getInstance() {
