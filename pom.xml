@@ -632,11 +632,11 @@ default.https.port=${testServerHttpsPort}
 							<artifactId>jlc</artifactId>
 							<version>${version.jlc}</version>
 						</path>
-						<path>
+						<!-- <path>
 							<groupId>se.skillytaire.didactic</groupId>
 							<artifactId>generator</artifactId>
 							<version>${version.didactic.generator}</version>
-						</path>
+						</path> -->
 						<path>
 							<groupId>com.rvlstudio</groupId>
 							<artifactId>Builder</artifactId>
