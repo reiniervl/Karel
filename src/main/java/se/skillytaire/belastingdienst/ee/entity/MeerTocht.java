@@ -30,14 +30,4 @@ public class MeerTocht extends Tocht<MeerTocht> {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static Object getBuilder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void add(MeerTocht thisMeerTocht) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
