@@ -32,3 +32,8 @@ mvnOutput.txt
 .git/*
 /bin/
 /.apt_generated/
+
+#
+# local jar
+#
+installs/install.sh
