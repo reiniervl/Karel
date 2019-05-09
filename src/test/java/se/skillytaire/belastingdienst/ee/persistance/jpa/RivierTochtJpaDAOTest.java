@@ -152,12 +152,11 @@ public class RivierTochtJpaDAOTest {
 	public void testUpdateNonExsisting() {
 		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
 		unmanagedTx.begin();
-		RivierTocht persistant = this.thisRivierTocht2;
 		this.beanUnderTest.update(this.thisRivierTocht2);
-		// RivierTocht persistant = this.beanUnderTest.update(this.thisRivierTocht2);
-		Assert.assertFalse(this.thisRivierTocht2.isPersistant());
-		Assert.assertFalse(persistant.isPersistant());
-		Assert.assertEquals(this.thisRivierTocht2, persistant);
+		RivierTocht persistant = this.beanUnderTest.update(this.thisRivierTocht2);
 		unmanagedTx.commit();
+		Assert.assertFalse(this.thisRivierTocht2.isPersistant());
+		Assert.assertTrue(persistant.isPersistant());
+		Assert.assertEquals(this.thisRivierTocht2, persistant);
 	}
 }
