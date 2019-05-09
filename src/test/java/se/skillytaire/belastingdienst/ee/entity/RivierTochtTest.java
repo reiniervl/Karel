@@ -24,7 +24,7 @@ public class RivierTochtTest {
       RivierTocht volledigeReservering = new RivierTocht(prijs1, periode1);
       double actual = volledigeReservering.getPrijs();
       Periode actualPeriode = volledigeReservering.getReserveringsPeriode();
-      Assert.assertTrue(prijs1 == actual);
+      Assert.assertEquals(prijs1, actual, 0);
       Assert.assertEquals(periode1, actualPeriode);
    }
 

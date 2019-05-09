@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
 import se.skillytaire.belastingdienst.ee.common.TelefoonNummer;
 import se.skillytaire.didactic.annotation.fluent.Fluent;
-import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
 
 /**
  * Een telefoonnummer is een internationaal nummer met nationaal nummer

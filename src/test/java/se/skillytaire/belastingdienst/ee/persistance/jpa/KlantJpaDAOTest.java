@@ -112,6 +112,16 @@ public class KlantJpaDAOTest {
    }
 
    @Test
+   public void testFindByUsername() {
+      Assert.assertFalse(this.thisKlant.isPersistant());
+      this.addWithTX(this.thisKlant);
+      Optional<Klant> result = this.beanUnderTest
+            .find(this.thisKlant.getUsername());
+      Assert.assertTrue(result.isPresent());
+      Assert.assertEquals(this.thisKlant, result.get());
+   }
+
+   @Test
    public void testDeleteByOid() {
       this.addWithTX(this.thisKlant);
       EntityTransaction unmanagedTx = this.entityManager.getTransaction();
