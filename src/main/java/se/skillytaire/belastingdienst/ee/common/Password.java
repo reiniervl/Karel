@@ -1,6 +1,6 @@
 package se.skillytaire.belastingdienst.ee.common;
 
-public class Password extends AbstractComparableObject<String> {
+public class Password extends AbstractComparableObject<Password> {
 	private static final long serialVersionUID = 1L;
 	// {
 	// 	this.addConstraint((v) -> v != null);
@@ -9,11 +9,10 @@ public class Password extends AbstractComparableObject<String> {
 	// }
 	private final String value;
 
-	public boolean verify(Password password) {
-		return password != null && this.getValue().equals(password.getValue());
-	}
-
 	public Password(final String value) {
+		if(value == null) {
+			 throw new IllegalArgumentException("value is void");
+		}
 		this.value = value;
  }
 
@@ -28,11 +27,11 @@ public class Password extends AbstractComparableObject<String> {
 
  @Override
  public String toString() {
-		return getValue();
+		return this.getValue();
  }
 
 	@Override
-	public int compareTo(String arg) {
-		return this.value.compareTo(arg);
+	public int compareTo(Password arg) {
+		return this.value.compareTo(arg.getValue());
 	}
 }
