@@ -12,7 +12,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import se.skillytaire.belastingdienst.ee.common.GPSCoordinaat;
 import se.skillytaire.didactic.annotation.fluent.Fluent;
 import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
 
@@ -61,7 +60,7 @@ public class Adres extends AbstractEntity<Adres> {
    public Adres() {
    }
 
-   @FluentConstructorArgument(fieldName = "gpsCoordinaat")
+   @FluentConstructorArgument(fieldName="gpsCoordinaat")
    public Adres(final EmbeddableGPSCoordinaat gpsCoordinaat) {
       if (gpsCoordinaat == null) {
          throw new IllegalArgumentException("Het GPS Coordinaat is null");

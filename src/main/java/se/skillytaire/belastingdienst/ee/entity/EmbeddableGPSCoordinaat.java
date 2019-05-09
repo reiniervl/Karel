@@ -24,7 +24,7 @@ public class EmbeddableGPSCoordinaat
    private double longtitude;
    @Fluent( required=true)
    private double latitude;
-
+   
    public EmbeddableGPSCoordinaat(final GPSCoordinaat gps) {
       if (gps == null) {
          throw new IllegalArgumentException("gps is void");

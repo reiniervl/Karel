@@ -11,8 +11,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 import se.skillytaire.didactic.annotation.fluent.Fluent;
+import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
 
 //TODO mapping van vloot en adres en telefoonnummer toevoegen.
+//@Fluent
 @Entity
 public class Verhuurder extends AbstractEntity<Verhuurder> {
    private static final long serialVersionUID = 1L;
@@ -64,7 +66,7 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
       this.vloot = (ArrayList<Boot>) that.vloot.clone();
       this.tochtenbak = (ArrayList<Tocht>) that.tochtenbak.clone();
    }
-
+   @FluentConstructorArgument(fieldName="userName")
    public Verhuurder(final String userName) {
       if (userName == null) {
          throw new IllegalArgumentException("userName is void");

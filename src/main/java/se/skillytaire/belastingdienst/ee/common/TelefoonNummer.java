@@ -14,14 +14,12 @@ import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
  */
 
 
-public class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
+public final class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
    private static final long serialVersionUID = 1L;
 
    private Integer landNummer;
    private Integer nationaalNummer;
 
-   public TelefoonNummer() {
-   }
 
    public TelefoonNummer(final int landNummer, final int nationaalNummer) {
       super();

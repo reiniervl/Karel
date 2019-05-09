@@ -31,3 +31,4 @@ mvnOutput.txt
 /1.txt
 .git/*
 /bin/
+/.apt_generated/
