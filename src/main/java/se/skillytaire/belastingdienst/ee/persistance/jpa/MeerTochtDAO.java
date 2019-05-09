@@ -5,12 +5,16 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
+import se.skillytaire.belastingdienst.ee.entity.Periode;
 import se.skillytaire.belastingdienst.ee.persistance.DAO;
 
 public class MeerTochtDAO implements DAO<MeerTocht> {
    private final static MeerTochtDAO dao = new MeerTochtDAO();
    private EntityManager em;
-
+   Optional<MeerTocht> find(double prijs, Periode reserveringsPeriode) {
+	return null;
+}
+   
    private MeerTochtDAO() {
    }
 
