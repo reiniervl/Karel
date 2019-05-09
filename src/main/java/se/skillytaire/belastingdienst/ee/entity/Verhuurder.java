@@ -1,7 +1,7 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
 import java.util.ArrayList;
-
+ 
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
