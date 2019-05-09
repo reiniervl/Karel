@@ -29,8 +29,8 @@
 		<version.arquillian-junit-container>1.1.5.Final</version.arquillian-junit-container>
 		<version.arquillian-transaction-bom>1.0.1.Final</version.arquillian-transaction-bom>
 	
-		<version.didactic.generator>1.0.2-SNAPSHOT</version.didactic.generator>
-		<version.didactic.jlc>1.4.7-SNAPSHOT</version.didactic.jlc>
+		<version.didactic.generator>1.0.2</version.didactic.generator>
+		<version.didactic.jlc>1.4.7</version.didactic.jlc>
 
 		<version.liberty>19.0.0.4</version.liberty>
 		<!-- liberty server config -->
