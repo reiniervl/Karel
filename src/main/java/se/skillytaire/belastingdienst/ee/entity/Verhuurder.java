@@ -12,8 +12,6 @@ import javax.validation.constraints.Null;
 import com.rvlstudio.annotation.Builder;
 import com.rvlstudio.annotation.BuilderField;
 
-import se.skillytaire.didactic.annotation.fluent.Fluent;
-
 //TODO mapping van vloot en adres en telefoonnummer toevoegen.
 @Builder
 @Entity
@@ -45,13 +43,13 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
       return this.vloot.remove(b);
    }
 
-   private ArrayList<Tocht> tochtenbak = new ArrayList<>();
+   private ArrayList<Tocht<?>> tochtenbak = new ArrayList<>();
 
-   public boolean add(final Tocht e) {
+   public boolean add(final Tocht<?> e) {
       return this.tochtenbak.add(e);
    }
 
-   public boolean remove(final Tocht t) {
+   public boolean remove(final Tocht<?> t) {
       return this.tochtenbak.remove(t);
    }
 
@@ -68,7 +66,7 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
       this.name = that.getName();
       this.telefoonNummer = that.getTelefoonNummer();
       this.vloot = (ArrayList<Boot>) that.vloot.clone();
-      this.tochtenbak = (ArrayList<Tocht>) that.tochtenbak.clone();
+      this.tochtenbak = (ArrayList<Tocht<?>>) that.tochtenbak.clone();
    }
 
    public Verhuurder(final String userName) {
