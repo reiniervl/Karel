@@ -1,5 +1,14 @@
 package se.skillytaire.belastingdienst.ee.common;
 
+
+import javax.persistence.Basic;
+import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
+
+import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
+import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
+ 
+
 /**
  * Een telefoonnummer is een internationaal nummer met nationaal nummer
  * gecombineerd.
@@ -7,14 +16,12 @@ package se.skillytaire.belastingdienst.ee.common;
  */
 
 
-public class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
+public final class TelefoonNummer extends AbstractComparableObject<TelefoonNummer> {
    private static final long serialVersionUID = 1L;
 
    private Integer landNummer;
    private Integer nationaalNummer;
 
-   public TelefoonNummer() {
-   }
 
    public TelefoonNummer(final int landNummer, final int nationaalNummer) {
       super();

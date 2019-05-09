@@ -1,5 +1,5 @@
 package se.skillytaire.belastingdienst.ee.entity;
-
+ 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Basic;

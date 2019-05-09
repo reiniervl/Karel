@@ -1,4 +1,5 @@
-mvn install:install-file -Dfile=jlc-1.4.6.jar -DpomFile=jlc-1.4.6.pom.xml
+mvn install:install-file -Dfile=jlc-1.4.7.jar -DpomFile=jlc-1.4.7.pom.xml
+mvn install:install-file -Dfile=se.skillytaire.course.tools.junit.jlc.processor-1.4.7.jar -DpomFile=se.skillytaire.course.tools.junit.jlc.processor-1.4.7.pom.xml
 
 mvn install:install-file -Dfile=se.skillytaire.didactic.generator-1.0.2.jar -DpomFile=se.skillytaire.didactic.generator-1.0.2.pom.xml
 mvn install:install-file -Dfile=se.skillytaire.didactic.annotation.fluent-1.0.2.jar -DpomFile=se.skillytaire.didactic.annotation.fluent-1.0.2.pom.xml

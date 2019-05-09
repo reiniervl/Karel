@@ -1,11 +1,11 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>se.skillytaire.didactic</groupId>
-	<artifactId>annotation.fluent</artifactId>
-	<version>1.0.2</version>
+	<groupId>se.skillytaire.course.tools.junit</groupId>
+	<artifactId>jlc.processor</artifactId>
+	<version>1.4.7</version>
 	<!-- -SNAPSHOT -->
 	<packaging>jar</packaging>
-	<name>Fluent API</name>
+	<name>Basic Didactic tools for code Generator</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -22,7 +22,14 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	<dependencies>
+		<dependency>
+			<groupId>se.skillytaire.course.tools.junit</groupId>
+			<artifactId>jlc</artifactId>
+			<version>1.4.7</version>
+		</dependency>
 
+	</dependencies>
 	<build>
 		<finalName>${groupId}.${artifactId}-${version}</finalName>
 		<plugins>
@@ -35,21 +42,21 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
-           <executions>
-                <execution>
-                    <id>default-compile</id>
-                    <configuration>
-                        <compilerArgument>-proc:none</compilerArgument>
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>compile-project</id>
-                    <phase>compile</phase>
-                    <goals>
-                        <goal>compile</goal>
-                    </goals>
-                </execution>
-            </executions>				
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<configuration>
+							<compilerArgument>-proc:none</compilerArgument>
+						</configuration>
+					</execution>
+					<execution>
+						<id>compile-project</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -61,7 +68,7 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 
-			</plugin>			
+			</plugin>
 		</plugins>
 	</build>
 </project>
