@@ -1,9 +1,9 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -17,106 +17,95 @@ import com.rvlstudio.annotation.BuilderField;
 @Builder
 @Entity
 public class Verhuurder extends AbstractEntity<Verhuurder> {
-	private static final long serialVersionUID = 1L;
-	@BuilderField
-	@NotNull
-	@Column(unique=true)
-	private String userName;
-	@BuilderField
-	@Null
-	private String name;
-	@BuilderField
-	@Null
-	@OneToOne(cascade = CascadeType.ALL)
-	private Adres adres;
-	@Null
-	@Embedded
-	private EmbeddedTelefoonNummer telefoonNummer;
+	 private static final long serialVersionUID = 1L;
+	 @BuilderField
+   @NotNull
+   /// @Column(unique=true)
+	 private String userName;
+	 @BuilderField
+   @Null
+	 private String name;
+	 @BuilderField
+	 @Null
+	 @OneToOne(cascade = CascadeType.ALL)
+   private Adres adres;
+   @Null
+   @Embedded
+   private EmbeddedTelefoonNummer telefoonNummer;
+   // Locaties?????
 
+   @OneToMany(cascade = CascadeType.ALL)
+   private List<Boot> vloot = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private ArrayList<Boot> vloot = new ArrayList<>();
+   public boolean add(final Boot e) {
+      return this.vloot.add(e);
+   }
 
-	public boolean add(final Boot e) {
-		return this.vloot.add(e);
-	}
+   public boolean remove(final Boot b) {
+      return this.vloot.remove(b);
+   }
 
-	public boolean remove(final Boot b) {
-		return this.vloot.remove(b);
-	}
+   /** do not use */
+   public Verhuurder() {
+      super();
+   }
 
-	private ArrayList<Tocht<?>> tochtenbak = new ArrayList<>();
+   @SuppressWarnings("unchecked")
+   public Verhuurder(final Verhuurder that) {
+      super(that);
+      this.userName = that.getUserName();
+      this.adres = that.getAdres();
+      this.name = that.getName();
+      this.telefoonNummer = that.getTelefoonNummer();
+      this.vloot = (ArrayList<Boot>) ((ArrayList<Boot>)that.vloot).clone();
+   }
 
-	public boolean add(final Tocht<?> e) {
-		return this.tochtenbak.add(e);
-	}
+   public Verhuurder(final String userName) {
+      if (userName == null) {
+         throw new IllegalArgumentException("userName is void");
+      }
+      this.userName = userName;
+   }
 
-	public boolean remove(final Tocht<?> t) {
-		return this.tochtenbak.remove(t);
-	}
+   @Override
+   public int compareTo(final Verhuurder that) {
+      return this.getUserName().compareTo(that.getUserName());
+   }
 
-	/** do not use */
-	public Verhuurder() {
-		super();
-	}
+   @Override
+   public int hashCode() {
+      return this.getUserName().hashCode();
+   }
 
-	@SuppressWarnings("unchecked")
-	public Verhuurder(final Verhuurder that) {
-		super(that);
-		this.userName = that.getUserName();
-		this.adres = that.getAdres();
-		this.name = that.getName();
-		this.telefoonNummer = that.getTelefoonNummer();
-		this.vloot = (ArrayList<Boot>) that.vloot.clone();
-		this.tochtenbak = (ArrayList<Tocht<?>>) that.tochtenbak.clone();
-	}
+   public String getName() {
+      return this.name;
+   }
 
-	public Verhuurder(final String userName) {
-		if (userName == null) {
-			throw new IllegalArgumentException("userName is void");
-		}
-		this.userName = userName;
-	}
+   public void setName(final String name) {
+      this.name = name;
+   }
 
-	@Override
-	public int compareTo(final Verhuurder that) {
-		return this.getUserName().compareTo(that.getUserName());
-	}
+   public Adres getAdres() {
+      return this.adres;
+   }
 
-	@Override
-	public int hashCode() {
-		return this.getUserName().hashCode();
-	}
+   public boolean hasAdres() {
+      return this.adres != null;
+   }
 
-	public String getName() {
-		return this.name;
-	}
+   public void setAdres(final Adres adres) {
+      this.adres = adres;
+   }
 
-	public void setName(final String name) {
-		this.name = name;
-	}
+   public EmbeddedTelefoonNummer getTelefoonNummer() {
+      return this.telefoonNummer;
+   }
 
-	public Adres getAdres() {
-		return this.adres;
-	}
+   public void setTelefoonNummer(final EmbeddedTelefoonNummer telefoonNummer) {
+      this.telefoonNummer = telefoonNummer;
+   }
 
-	public boolean hasAdres() {
-		return this.adres != null;
-	}
-
-	public void setAdres(final Adres adres) {
-		this.adres = adres;
-	}
-
-	public EmbeddedTelefoonNummer getTelefoonNummer() {
-		return this.telefoonNummer;
-	}
-
-	public void setTelefoonNummer(final EmbeddedTelefoonNummer telefoonNummer) {
-		this.telefoonNummer = telefoonNummer;
-	}
-
-	public String getUserName() {
-		return this.userName;
-	}
+   public String getUserName() {
+      return this.userName;
+   }
 }
