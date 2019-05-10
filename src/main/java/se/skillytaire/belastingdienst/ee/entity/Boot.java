@@ -10,20 +10,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.rvlstudio.annotation.Builder;
+import com.rvlstudio.annotation.BuilderField;
+
 import se.skillytaire.java.datatype.PositiveInteger;
 
 @Entity
+@Builder
 @NamedQuery(name = Boot.DELETE_BY_OID, query = "delete from Boot a where a.oid=:oid")
 public class Boot extends AbstractEntity<Boot> {
 	private static final long serialVersionUID = 1L;
 	public static final String DELETE_BY_OID = "Boot_DeleteByOid";
 	@NotNull
 	@Column(unique = true)
+	@BuilderField
 	private int nummer;
-  @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-  private List<Tocht<?>> tochten = new ArrayList<>();
-//   @OneToMany(cascade = CascadeType.ALL, mappedBy = "vloot")
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	private List<Tocht<?>> tochten = new ArrayList<>();
 	@NotNull
+	@BuilderField
 	private Verhuurder eigenaar;
 //   private ArrayList<Tocht<?>> tochtGeschiedenis;
 //   private static final Duration INSPECTIEDUUR = Duration.ofSeconds(10);

@@ -16,96 +16,114 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-//TODO klant en tocht verwerken: add /remove
+import com.rvlstudio.annotation.Builder;
+import com.rvlstudio.annotation.BuilderField;
+
+@Builder
 @Entity
-@Table(uniqueConstraints = {
-      @UniqueConstraint(name = "UniqueReservering", columnNames = {
-            "ReserveringsNummer", "reserveringsDatum", "verloopDatum" }) })
-@NamedQueries({ @NamedQuery(name = Reservering.FIND_BY_RESNUMMER,
-      query = "select a from Reservering a where a.reserveringsNummer=:reserveringsNummer"),
-      @NamedQuery(name = Reservering.DELETE_BY_OID,
-            query = "delete from Reservering a where a.oid=:oid") })
+@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueReservering", columnNames = { "ReserveringsNummer",
+		"reserveringsDatum", "verloopDatum" }) })
+@NamedQueries({
+		@NamedQuery(name = Reservering.FIND_BY_RESNUMMER, query = "select a from Reservering a where a.reserveringsNummer=:reserveringsNummer"),
+		@NamedQuery(name = Reservering.DELETE_BY_OID, query = "delete from Reservering a where a.oid=:oid") })
 public class Reservering extends AbstractEntity<Reservering> {
-   private static final long serialVersionUID = 1L;
-   public static final String FIND_BY_RESNUMMER = "Reservering_FindByResnummer";
-   public static final String DELETE_BY_OID = "Reservering_DeleteByOid";
-   @NotNull
-   @Basic
-   @Column(unique = true)
-   private Integer reserveringsNummer;
-   @NotNull
-   @Basic
-   private LocalDateTime reserveringsDatum;
-   @NotNull
-   @Basic
-   private LocalDateTime verloopDatum;
-   @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-   private List<Tocht<?>> mijnTochten = new ArrayList<Tocht<?>>();
-   @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-   private Klant mijnKlant;
+	private static final long serialVersionUID = 1L;
+	public static final String FIND_BY_RESNUMMER = "Reservering_FindByResnummer";
+	public static final String DELETE_BY_OID = "Reservering_DeleteByOid";
+	@NotNull
+	@BuilderField
+	@Basic
+	@Column(unique = true)
+	private Integer reserveringsNummer;
+	@NotNull
+	@BuilderField
+	@Basic
+	private LocalDateTime reserveringsDatum;
+	@NotNull
+	@BuilderField
+	@Basic
+	private LocalDateTime verloopDatum;
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	private List<Tocht<?>> mijnTochten = new ArrayList<Tocht<?>>();
+	@NotNull
+	@BuilderField
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	private Klant klant;
 
-   /**
-    * Developers should not use the default constructor. Please use the same
-    * visibility modifier "protected" for overriding classes.
-    */
-   public Reservering() {
-   }
+	/**
+	 * Developers should not use the default constructor. Please use the same
+	 * visibility modifier "protected" for overriding classes.
+	 */
+	public Reservering() {
+	}
 
-   public Reservering(final Integer reserveringsNummer) {
-      if (reserveringsNummer == null) {
-         throw new IllegalArgumentException("Het reserveringsNummer is Null");
-      }
-      this.reserveringsNummer = reserveringsNummer;
-   }
+	public Reservering(final Integer reserveringsNummer, final Klant klant) {
+		if (reserveringsNummer == null) {
+			throw new IllegalArgumentException("Het reserveringsNummer is Null");
+		}
+		if (klant == null) {
+			throw new IllegalArgumentException("Klant is Null");
+		}
+		this.reserveringsNummer = reserveringsNummer;
+		this.klant = klant;
+	}
 
-   public Reservering(final Reservering reservering) {
-      super(reservering);
-      this.reserveringsNummer = reservering.getReserveringsNummer();
-      this.reserveringsDatum = reservering.getReserveringsDatum();
-      this.verloopDatum = reservering.getVerloopDatum();
-   }
+	public Reservering(final Reservering reservering) {
+		super(reservering);
+		this.reserveringsNummer = reservering.getReserveringsNummer();
+		this.reserveringsDatum = reservering.getReserveringsDatum();
+		this.verloopDatum = reservering.getVerloopDatum();
+		this.klant = reservering.getKlant();
+	}
 
-   @Override
-   public String toString() {
-      StringBuilder builder = new StringBuilder();
-      builder.append("Reservering [Reserveringsnummer= ");
-      builder.append(this.reserveringsNummer);
-      builder.append("Reserverings datum= ");
-      builder.append(this.reserveringsDatum);
-      builder.append("Verloop datum= ");
-      builder.append(this.verloopDatum);
-      builder.append("]");
-      return builder.toString();
-   }
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Klant [Mijn Klant= ").append(this.klant).append("Reservering Reserveringsnummer= ")
+				.append(this.reserveringsNummer).append("Reserverings datum= ").append(this.reserveringsDatum)
+				.append("Verloop datum= ").append(this.verloopDatum).append("]");
+		return builder.toString();
+	}
 
-   @Override
-   public int compareTo(final Reservering that) {
-      return this.getReserveringsNummer()
-            .compareTo(that.getReserveringsNummer());
-   }
+	@Override
+	public int compareTo(final Reservering that) {
+		return this.getReserveringsNummer().compareTo(that.getReserveringsNummer());
+	}
 
-   @Override
-   public int hashCode() {
-      return this.reserveringsNummer.hashCode();
-   }
+	@Override
+	public int hashCode() {
+		return this.reserveringsNummer.hashCode();
+	}
 
-   public Integer getReserveringsNummer() {
-      return this.reserveringsNummer;
-   }
+	public Klant getKlant() {
+		return this.klant;
+	}
 
-   public LocalDateTime getReserveringsDatum() {
-      return this.reserveringsDatum;
-   }
+	public Integer getReserveringsNummer() {
+		return this.reserveringsNummer;
+	}
 
-   public void setReserveringsDatum(final LocalDateTime reserveringsDatum) {
-      this.reserveringsDatum = reserveringsDatum;
-   }
+	public LocalDateTime getReserveringsDatum() {
+		return this.reserveringsDatum;
+	}
 
-   public LocalDateTime getVerloopDatum() {
-      return this.verloopDatum;
-   }
+	public void setReserveringsDatum(final LocalDateTime reserveringsDatum) {
+		this.reserveringsDatum = reserveringsDatum;
+	}
 
-   public void setVerloopDatum(final LocalDateTime verloopDatum) {
-      this.verloopDatum = verloopDatum;
-   }
+	public LocalDateTime getVerloopDatum() {
+		return this.verloopDatum;
+	}
+
+	public void setVerloopDatum(final LocalDateTime verloopDatum) {
+		this.verloopDatum = verloopDatum;
+	}
+
+	public boolean add(final Tocht<?> e) {
+		return this.mijnTochten.add(e);
+	}
+
+	public boolean remove(final Tocht<?> e) {
+		return this.mijnTochten.remove(e);
+	}
 }

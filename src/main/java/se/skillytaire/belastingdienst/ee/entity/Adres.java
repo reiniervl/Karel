@@ -12,10 +12,13 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import com.rvlstudio.annotation.Builder;
+
 import se.skillytaire.didactic.annotation.fluent.Fluent;
 import se.skillytaire.didactic.annotation.fluent.FluentConstructorArgument;
 
 @Fluent
+@Builder(all=true)
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueAdresLocation",
       columnNames = { "longtitude", "latitude" }) })
