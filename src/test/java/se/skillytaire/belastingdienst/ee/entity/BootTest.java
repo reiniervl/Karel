@@ -13,6 +13,10 @@ import se.skillytaire.java.datatype.PositiveInteger;
 @RunWith(JLCRunner.class)
 @JLC(value = Boot.class, asJUnit = true)
 public class BootTest {
+	@This
+	private RivierTocht thisRivierTocht;
+	@This
+	private MeerTocht thisMeerTocht;
 
 	@This
 	private Verhuurder thisVerhuurder;
@@ -78,4 +82,19 @@ public class BootTest {
 		Assert.assertFalse(boot.hasNummer(458));
 	}
 
+	@Test
+	public void testAddBoot() {
+		Boot boot = new Boot(this.thisVerhuurder, this.thisNummer);
+		boot.addTocht(this.thisMeerTocht);
+		boot.addTocht(this.thisRivierTocht);
+	}
+
+	@Test
+	public void testRemoveBoot() {
+		Boot boot = new Boot(this.thisVerhuurder, this.thisNummer);
+		boot.addTocht(this.thisMeerTocht);
+		boot.addTocht(this.thisRivierTocht);
+		boot.removeTocht(this.thisMeerTocht);
+		boot.removeTocht(this.thisRivierTocht);
+	}
 }

@@ -4,5 +4,5 @@ import javax.ejb.Remote;
 
 @Remote
 public interface UsernameCheckRemote {
-	boolean isUniek(String username);
+	boolean isBeschikbaar(String username);
 }
