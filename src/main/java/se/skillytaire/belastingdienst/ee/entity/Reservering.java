@@ -16,6 +16,10 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import com.rvlstudio.annotation.Builder;
+import com.rvlstudio.annotation.BuilderField;
+
+@Builder
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueReservering", columnNames = { "ReserveringsNummer",
 		"reserveringsDatum", "verloopDatum" }) })
@@ -27,20 +31,24 @@ public class Reservering extends AbstractEntity<Reservering> {
 	public static final String FIND_BY_RESNUMMER = "Reservering_FindByResnummer";
 	public static final String DELETE_BY_OID = "Reservering_DeleteByOid";
 	@NotNull
+	@BuilderField
 	@Basic
 	@Column(unique = true)
 	private Integer reserveringsNummer;
 	@NotNull
+	@BuilderField
 	@Basic
 	private LocalDateTime reserveringsDatum;
 	@NotNull
+	@BuilderField
 	@Basic
 	private LocalDateTime verloopDatum;
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Tocht<?>> mijnTochten = new ArrayList<Tocht<?>>();
 	@NotNull
+	@BuilderField
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	private Klant mijnKlant;
+	private Klant klant;
 
 	/**
 	 * Developers should not use the default constructor. Please use the same
@@ -49,15 +57,15 @@ public class Reservering extends AbstractEntity<Reservering> {
 	public Reservering() {
 	}
 
-	public Reservering(final Integer reserveringsNummer, final Klant mijnKlant) {
+	public Reservering(final Integer reserveringsNummer, final Klant klant) {
 		if (reserveringsNummer == null) {
 			throw new IllegalArgumentException("Het reserveringsNummer is Null");
 		}
-		if (mijnKlant == null) {
+		if (klant == null) {
 			throw new IllegalArgumentException("Klant is Null");
 		}
 		this.reserveringsNummer = reserveringsNummer;
-		this.mijnKlant = mijnKlant;
+		this.klant = klant;
 	}
 
 	public Reservering(final Reservering reservering) {
@@ -65,13 +73,13 @@ public class Reservering extends AbstractEntity<Reservering> {
 		this.reserveringsNummer = reservering.getReserveringsNummer();
 		this.reserveringsDatum = reservering.getReserveringsDatum();
 		this.verloopDatum = reservering.getVerloopDatum();
-		this.mijnKlant = reservering.getKlant();
+		this.klant = reservering.getKlant();
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Klant [Mijn Klant= ").append(this.mijnKlant).append("Reservering Reserveringsnummer= ")
+		builder.append("Klant [Mijn Klant= ").append(this.klant).append("Reservering Reserveringsnummer= ")
 				.append(this.reserveringsNummer).append("Reserverings datum= ").append(this.reserveringsDatum)
 				.append("Verloop datum= ").append(this.verloopDatum).append("]");
 		return builder.toString();
@@ -88,7 +96,7 @@ public class Reservering extends AbstractEntity<Reservering> {
 	}
 
 	public Klant getKlant() {
-		return this.mijnKlant;
+		return this.klant;
 	}
 
 	public Integer getReserveringsNummer() {
