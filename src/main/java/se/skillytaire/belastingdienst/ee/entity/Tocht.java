@@ -2,6 +2,7 @@ package se.skillytaire.belastingdienst.ee.entity;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embedded;
@@ -30,7 +31,7 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	@NotNull
 	private double prijs;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@NotNull
 	private Boot boot;
 
@@ -69,7 +70,11 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	@Override
 	public int compareTo(final T that) {
 		Tocht<T> deTocht = that;
-		return this.reserveringsPeriode.compareTo(deTocht.reserveringsPeriode) + this.boot.compareTo(that.getBoot());
+		int compareTo = this.boot.compareTo(that.getBoot());
+		if (compareTo == 0) {
+			compareTo = this.reserveringsPeriode.compareTo(deTocht.reserveringsPeriode);
+		}
+		return compareTo;
 	}
 
 	@Override

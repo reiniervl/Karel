@@ -2,9 +2,6 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.*;
 
 import org.junit.After;
@@ -96,7 +93,7 @@ public class MeerTochtDaoTest {
 		Assert.assertTrue("MeerTocht is opgeslagen", nieuweMeerTocht.isPersistant());
 	}
 
-	@Test
+	@Test(expected = RollbackException.class)
 	public void testAddedTwiceMeerTocht() {
 		this.thisMeerTocht.setPrijs(12);
 		this.addWithTX(this.thisMeerTocht);
@@ -161,12 +158,11 @@ public class MeerTochtDaoTest {
 		MeerTochtDAO dao = MeerTochtDAO.getDAO();
 		dao.add(updateMeerTocht);
 		Assert.assertTrue("MeerTocht is opgeslagen", updateMeerTocht.isPersistant());
-		MeerTocht clone = this.thisMeerTocht.clone();
-		clone.setPrijs(16D);
-		this.beanUnderTest.update(clone);
+		updateMeerTocht.setPrijs(16D);
+		this.beanUnderTest.update(updateMeerTocht);
 		Optional<MeerTocht> result = this.beanUnderTest.findByOID(updateMeerTocht.getOid());
 		Assert.assertTrue(result.isPresent());
-		Assert.assertFalse(16D == result.get().getPrijs());
+		Assert.assertTrue(16D == result.get().getPrijs());
 		unmanagedTx.commit();
 	}
 

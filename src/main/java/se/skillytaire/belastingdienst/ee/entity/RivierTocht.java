@@ -34,9 +34,4 @@ public class RivierTocht extends Tocht<RivierTocht> {
 		builder.append(super.getPrijs());
 		return builder.toString();
 	}
-
-	@Override
-	public int compareTo(final RivierTocht that) {
-		return this.getReserveringsPeriode().compareTo(that.getReserveringsPeriode());
-	}
 }
