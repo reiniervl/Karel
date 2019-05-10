@@ -80,6 +80,14 @@ public class Boot extends AbstractEntity<Boot> {
 		return this.getNummer();
 	}
 
+	public void addTocht(Tocht<?> tocht) {
+		this.tochten.add(tocht);
+	}
+
+	public void removeTocht(Tocht<?> tocht) {
+		this.tochten.remove(tocht);
+	}
+
 	public int getNummer() {
 		return this.nummer;
 	}
@@ -93,7 +101,6 @@ public class Boot extends AbstractEntity<Boot> {
 	}
 
 // public void start(final Tocht<?> eenTocht) {
-//    // FIXME: design by contract
 //    this.deLaatsteTocht = eenTocht;
 ////    this.tochtGeschiedenis.add(this.deLaatsteTocht);
 //    eenTocht.start();
