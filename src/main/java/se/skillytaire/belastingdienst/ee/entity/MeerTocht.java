@@ -9,25 +9,18 @@ import javax.persistence.NamedQuery;
 @NamedQuery(name = MeerTocht.DELETE_BY_OID, query = "delete from MeerTocht a where a.oid=:oid")
 public class MeerTocht extends Tocht<MeerTocht> {
 	public static final String DELETE_BY_OID = "MeerTocht_DeleteByOid";
-
-	/**
-	*
-	*/
 	private static final long serialVersionUID = 1L;
 
 	public MeerTocht() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public MeerTocht(double prijs, Periode reserveringsPeriode) {
-		super(prijs, reserveringsPeriode);
-		// TODO Auto-generated constructor stub
+	public MeerTocht(Boot boot, double prijs, Periode reserveringsPeriode) {
+		super(boot, prijs, reserveringsPeriode);
 	}
 
 	public MeerTocht(MeerTocht tocht) {
 		super(tocht);
-		// TODO Auto-generated constructor stub
 	}
 
 }

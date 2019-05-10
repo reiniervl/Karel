@@ -6,13 +6,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 import com.rvlstudio.annotation.Builder;
 import com.rvlstudio.annotation.BuilderField;
 
-//TODO mapping van vloot en adres en telefoonnummer toevoegen.
 @Builder
 @Entity
 public class Verhuurder extends AbstractEntity<Verhuurder> {
@@ -25,7 +25,8 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
    @Null
 	 private String name;
 	 @BuilderField
-   @Null
+	 @Null
+	 @OneToOne(cascade = CascadeType.ALL)
    private Adres adres;
    @Null
    @Embedded

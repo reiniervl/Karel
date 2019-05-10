@@ -67,14 +67,6 @@ public class AdresTest {
       Adres adres1 = new Adres(AdresTest.FIXED);
       Assert.assertFalse(adres1.equals(null));
    }
-   // FIXME deze test klopt niet
-   // @Test
-   // public void equalsOngelijkTest() {
-   // Adres adres1 = new Adres(FIXED);
-   // EmbeddableGPSCoordinaat hetzelfde = FIXED;
-   // Adres adres2 = new Adres(hetzelfde);
-   // Assert.assertFalse(adres1.equals(adres2));
-   // }
 
    @Test
    public void testHash() {

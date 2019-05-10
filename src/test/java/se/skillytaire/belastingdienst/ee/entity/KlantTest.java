@@ -10,20 +10,10 @@ import se.skillytaire.course.tools.jlc.JLC;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.TestPropertyFile;
 
-//TODO setUsername is missing
 @RunWith(JLCRunner.class)
 @JLC(value = Klant.class, asJUnit = true)
 @TestPropertyFile
 public class KlantTest {
-
-   // @Test
-   // public void testUnsername() {
-   // final String username = "test username";
-   // Klant klant = new Klant();
-   // klant.setUsername(username);
-   //
-   // Assert.assertEquals(username, klant.getUsername());
-   // }
 
    @Test
    public void testPassword() {
@@ -56,11 +46,6 @@ public class KlantTest {
       String regexPattern = "[\\d\\w]*@[\\d\\w\\.]*\\.[\\w]{2,3}$";
       Assert.assertTrue(Pattern.matches(regexPattern, klant.getEmail()));
    }
-
-   // @Test
-   // public void testReserveringen() {
-   //
-   // }
 
    @Test
    public void testEqual() {

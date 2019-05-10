@@ -7,104 +7,116 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "type")
 public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
-   private static final long serialVersionUID = 1L;
-   @NotNull
-   @Embedded
-   @AttributeOverrides({
-         @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "reserveringstart")),
-         @AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "reserveringeind")),
-         @AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "reserveringduur")) })
-   private Periode reserveringsPeriode;
-   @NotNull
-   @Embedded
-   @AttributeOverrides({
-         @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "actuelestart")),
-         @AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "actueleeind")),
-         @AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "actueleduur")) })
-   private Periode actuelePeriode;
-   @NotNull
-   private double prijs;
+	private static final long serialVersionUID = 1L;
+	@NotNull
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "reserveringstart")),
+			@AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "reserveringeind")),
+			@AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "reserveringduur")) })
+	private Periode reserveringsPeriode;
+	@NotNull
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "actuelestart")),
+			@AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "actueleeind")),
+			@AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "actueleduur")) })
+	private Periode actuelePeriode;
+	@NotNull
+	private double prijs;
 
-   /**
-    * Developers should not use the default constructor. Please use the same
-    * visibility modifier "protected" for overriding classes.
-    */
-   public Tocht() {
-   }
+	@OneToOne
+	@NotNull
+	private Boot boot;
 
-   public Tocht(final double prijs, final Periode reserveringsPeriode) {
+	/**
+	 * Developers should not use the default constructor. Please use the same
+	 * visibility modifier "protected" for overriding classes.
+	 */
+	public Tocht() {
+	}
 
-      if (reserveringsPeriode == null) {
-         throw new IllegalArgumentException("De reserveringsPeriode is null");
-      }
-      if (!reserveringsPeriode.isBeeindigd()) {
-         throw new IllegalArgumentException(
-               "De reserveringsPeriode is niet valide");
-      }
-      this.prijs = prijs;
-      this.reserveringsPeriode = reserveringsPeriode.clone();
-      this.actuelePeriode = new Periode();
-   }
+	public Tocht(final Boot boot, final double prijs, final Periode reserveringsPeriode) {
+		if (boot == null) {
+			throw new IllegalArgumentException("De boot is null");
+		}
 
-   public Tocht(final T tocht) {
-      super(tocht);
-      this.reserveringsPeriode = tocht.getReserveringsPeriode();
-      this.actuelePeriode = tocht.getActuelePeriode();
-      this.prijs = tocht.getPrijs();
-   }
+		if (reserveringsPeriode == null) {
+			throw new IllegalArgumentException("De reserveringsPeriode is null");
+		}
+		if (!reserveringsPeriode.isBeeindigd()) {
+			throw new IllegalArgumentException("De reserveringsPeriode is niet valide");
+		}
+		this.boot = boot;
+		this.prijs = prijs;
+		this.reserveringsPeriode = reserveringsPeriode.clone();
+		this.actuelePeriode = new Periode();
+	}
 
-   @Override
-   public int compareTo(final T that) {
-      Tocht<T> deTocht = that;
-      return this.reserveringsPeriode.compareTo(deTocht.reserveringsPeriode);
-   }
+	public Tocht(final T tocht) {
+		super(tocht);
+		this.boot = tocht.getBoot();
+		this.reserveringsPeriode = tocht.getReserveringsPeriode();
+		this.actuelePeriode = tocht.getActuelePeriode();
+		this.prijs = tocht.getPrijs();
+	}
 
-   @Override
-   public int hashCode() {
-      return this.reserveringsPeriode.hashCode();
-   }
+	@Override
+	public int compareTo(final T that) {
+		Tocht<T> deTocht = that;
+		return this.reserveringsPeriode.compareTo(deTocht.reserveringsPeriode) + this.boot.compareTo(that.getBoot());
+	}
 
-   @Override
-   public String toString() {
-      StringBuilder builder = new StringBuilder();
-      builder.append(", reserveringsPeriode=");
-      builder.append(this.reserveringsPeriode);
-      builder.append(", actuelePeriode=");
-      builder.append(this.actuelePeriode);
-      builder.append(", prijs=");
-      builder.append(this.prijs);
-      return builder.toString();
-   }
+	@Override
+	public int hashCode() {
+		return this.reserveringsPeriode.hashCode();
+	}
 
-   public Periode getReserveringsPeriode() {
-      return this.reserveringsPeriode != null ? this.reserveringsPeriode.clone()
-            : null;
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(", reserveringsPeriode=")
+			.append(", actuelePeriode=")
+			.append(this.actuelePeriode)
+			.append(this.reserveringsPeriode)
+			.append(", prijs=")
+			.append(this.prijs)
+			.append(", boot=")
+			.append(this.boot);
+		return builder.toString();
+	}
 
-   }
+	public Periode getReserveringsPeriode() {
+		return this.reserveringsPeriode != null ? this.reserveringsPeriode.clone() : null;
 
-   public Periode getActuelePeriode() {
-      return this.actuelePeriode != null ? this.actuelePeriode.clone() : null;
-   }
+	}
 
-   public double getPrijs() {
-      return this.prijs;
-   }
+	public Periode getActuelePeriode() {
+		return this.actuelePeriode != null ? this.actuelePeriode.clone() : null;
+	}
 
-   public void setPrijs(final double prijs) {
-      this.prijs = prijs;
-   }
+	public double getPrijs() {
+		return this.prijs;
+	}
 
-   public boolean isBeeindigd() {
-      return this.actuelePeriode.isBeeindigd();
-   }
+	public void setPrijs(final double prijs) {
+		this.prijs = prijs;
+	}
 
-   public void start() {
-      this.actuelePeriode.start();
-   }
+	public boolean isBeeindigd() {
+		return this.actuelePeriode.isBeeindigd();
+	}
+
+	public void start() {
+		this.actuelePeriode.start();
+	}
+
+	public Boot getBoot() {
+		return this.boot;
+	}
 }

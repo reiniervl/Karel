@@ -17,25 +17,38 @@ public class RivierTochtTestFactory
    @GreaterThen
    private Periode greaterThenPeriode;
    @LessThen
-   private Periode lessThenPeriode;
+	 private Periode lessThenPeriode;
+	 
+	 
+
+	 @This
+	 Boot thisBoot;
+	 @That
+	 Boot thatBoot;
+
+	 @GreaterThen
+	 Boot grooteBoot;
+
+	 @LessThen
+	 Boot subBoot;
 
    @Override
    public RivierTocht createThis() {
-      return new RivierTocht(100D, this.thisPeriode);
+      return new RivierTocht(thisBoot, 100D, this.thisPeriode);
    }
 
    @Override
    public RivierTocht createThat() {
-      return new RivierTocht(10D, this.thatPeriode);
+      return new RivierTocht(thatBoot, 10D, this.thatPeriode);
    }
 
    @Override
    public RivierTocht createGreaterThen() {
-      return new RivierTocht(999D, this.greaterThenPeriode);
+      return new RivierTocht(grooteBoot, 999D, this.greaterThenPeriode);
    }
 
    @Override
    public RivierTocht createLessThen() {
-      return new RivierTocht(1D, this.lessThenPeriode);
+      return new RivierTocht(subBoot, 1D, this.lessThenPeriode);
    }
 }

@@ -9,9 +9,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.rvlstudio.annotation.Builder;
-import com.rvlstudio.annotation.BuilderField;
 
-//TODO functionele constructor voor username maken om nieuwe klant te initialiseren
 /**
  * <p>
  * De {@code Klant} class is bedoeld als entity class voor de BootjesCase.

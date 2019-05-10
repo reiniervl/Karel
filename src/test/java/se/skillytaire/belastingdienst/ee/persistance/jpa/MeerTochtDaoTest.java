@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import se.skillytaire.belastingdienst.ee.entity.Adres;
+import se.skillytaire.belastingdienst.ee.entity.Boot;
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
 import se.skillytaire.belastingdienst.ee.entity.Periode;
 import se.skillytaire.course.tools.jlc.JLCRunner;
@@ -31,6 +31,9 @@ public class MeerTochtDaoTest {
 	@This
 	private MeerTocht thisMeerTocht2;
 	private MeerTochtDAO beanUnderTest;
+
+	@This
+	Boot dezeBoot;
 
 	@Before
 	public void before() {
@@ -85,7 +88,7 @@ public class MeerTochtDaoTest {
 
 	@Test
 	public void testDaoAdd() {
-		MeerTocht nieuweMeerTocht = new MeerTocht(10D, thisPeriode);
+		MeerTocht nieuweMeerTocht = new MeerTocht(dezeBoot, 10D, thisPeriode);
 		MeerTochtDAO dao = MeerTochtDAO.getDAO();
 		Assert.assertFalse(dao == null);
 		Assert.assertFalse(nieuweMeerTocht == null);
@@ -154,7 +157,7 @@ public class MeerTochtDaoTest {
 	public void testMeerTochtUpdate() {
 		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
 		unmanagedTx.begin();
-		MeerTocht updateMeerTocht = new MeerTocht(12D, thisPeriode);
+		MeerTocht updateMeerTocht = new MeerTocht(dezeBoot, 10D, thisPeriode);
 		MeerTochtDAO dao = MeerTochtDAO.getDAO();
 		dao.add(updateMeerTocht);
 		Assert.assertTrue("MeerTocht is opgeslagen", updateMeerTocht.isPersistant());

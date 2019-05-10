@@ -14,8 +14,8 @@ public class RivierTocht extends Tocht<RivierTocht> {
 	public RivierTocht() {
 	}
 
-	public RivierTocht(double prijs, Periode reserveringsPeriode) {
-		super(prijs, reserveringsPeriode);
+	public RivierTocht(Boot boot, double prijs, Periode reserveringsPeriode) {
+		super(boot, prijs, reserveringsPeriode);
 	}
 
 	public RivierTocht(RivierTocht tocht) {
@@ -38,10 +38,5 @@ public class RivierTocht extends Tocht<RivierTocht> {
 	@Override
 	public int compareTo(final RivierTocht that) {
 		return this.getReserveringsPeriode().compareTo(that.getReserveringsPeriode());
-	}
-
-	@Override
-	public int hashCode() {
-		return this.getReserveringsPeriode().hashCode();
 	}
 }
