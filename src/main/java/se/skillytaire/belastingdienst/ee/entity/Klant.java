@@ -27,7 +27,7 @@ import com.rvlstudio.annotation.BuilderField;
  * @version 0.3.2
  *
  */
-@Builder
+@Builder(all=true)
 @Entity
 @NamedQueries({
       @NamedQuery(name = Klant.FIND_BY_USERNAME, query = "SELECT k FROM Klant k WHERE k.username=:username") })
@@ -35,18 +35,15 @@ public class Klant extends AbstractEntity<Klant> {
    private static final long serialVersionUID = 1l;
    public static final String FIND_BY_USERNAME = "Klant_findByUsername";
 
-	 @BuilderField
    @NotNull
    @Pattern(regexp = "[\\d\\w\\.]*@[\\d\\w\\.]*\\.[\\w]{2,3}$")
    private String email;
 
-	 @BuilderField
    @NotNull
    @Size(min = 4, max = 24)
    @Column(unique = true, length = 24)
    private String username;
 
-	 @BuilderField
    @NotNull
    private String password;
 

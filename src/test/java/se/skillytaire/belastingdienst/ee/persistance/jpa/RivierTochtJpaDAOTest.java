@@ -45,15 +45,19 @@ public class RivierTochtJpaDAOTest {
 
 	@After
 	public void destroyJPA() {
-		this.entityManager.close();
-		this.factory.close();
-		while (this.factory.isOpen() && !Thread.interrupted()) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-			}
-		}
+		 if (this.entityManager != null) {
+				this.entityManager.close();
+		 }
+		 if (this.factory != null) {
+				this.factory.close();
+				while (this.factory.isOpen() && !Thread.interrupted()) {
+					 try {
+							Thread.sleep(100);
+					 } catch (InterruptedException e) {
+							Thread.currentThread().interrupt();
+					 }
+				}
+		 }
 	}
 
 	@Test

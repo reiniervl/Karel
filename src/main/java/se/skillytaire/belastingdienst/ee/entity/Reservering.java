@@ -3,6 +3,7 @@ package se.skillytaire.belastingdienst.ee.entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-//TODO klant en tocht verwerken
+//TODO klant en tocht verwerken: add /remove
 @Entity
 @Table(uniqueConstraints = {
       @UniqueConstraint(name = "UniqueReservering", columnNames = {
@@ -39,10 +40,9 @@ public class Reservering extends AbstractEntity<Reservering> {
    @NotNull
    @Basic
    private LocalDateTime verloopDatum;
-   @OneToMany(cascade = CascadeType.ALL, targetEntity = MeerTocht.class)
-   private Collection<Tocht<MeerTocht>> mijnMeerTochten =
-         new ArrayList<Tocht<MeerTocht>>();
-   @ManyToOne(cascade = CascadeType.ALL)
+   @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+   private List<Tocht<?>> mijnTochten = new ArrayList<Tocht<?>>();
+   @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
    private Klant mijnKlant;
 
    /**

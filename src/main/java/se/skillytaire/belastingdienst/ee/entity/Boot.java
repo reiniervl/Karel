@@ -1,22 +1,28 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import se.skillytaire.java.datatype.PositiveInteger;
 
-@NamedQuery(name = Boot.DELETE_BY_OID, query = "delete from Boot a where a.oid=:oid")
 @Entity
+@NamedQuery(name = Boot.DELETE_BY_OID, query = "delete from Boot a where a.oid=:oid")
 public class Boot extends AbstractEntity<Boot> {
 	private static final long serialVersionUID = 1L;
 	public static final String DELETE_BY_OID = "Boot_DeleteByOid";
 	@NotNull
 	@Column(unique = true)
-	private int bootNummer;
-//   @OneToMany(cascade = CascadeType.ALL)
-//   private ArrayList<Tocht<?>> tochten;
+	private int nummer;
+  @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+  private List<Tocht<?>> tochten = new ArrayList<>();
 //   @OneToMany(cascade = CascadeType.ALL, mappedBy = "vloot")
 	@NotNull
 	private Verhuurder eigenaar;
@@ -34,13 +40,13 @@ public class Boot extends AbstractEntity<Boot> {
 			throw new IllegalArgumentException("nummer mag niet 'null' zijn!");
 		}
 		this.eigenaar = eenEigenaar;
-		this.bootNummer = nummer.intValue();
+		this.nummer = nummer.intValue();
 //      this.tochtGeschiedenis = new ArrayList<Tocht<?>>();
 	}
 
 	public Boot(final Boot boot) {
 		super(boot);
-		this.bootNummer = boot.getNummer();
+		this.nummer = boot.getNummer();
 		this.eigenaar = boot.getEigenaar();
 //      this.tochtGeschiedenis =
 //            (ArrayList<Tocht<?>>) that.tochtGeschiedenis.clone();
@@ -53,7 +59,7 @@ public class Boot extends AbstractEntity<Boot> {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Boot [bootNummer=");
-		builder.append(this.bootNummer);
+		builder.append(this.nummer);
 		builder.append("]");
 		builder.append("Verhuurder [eigenaar=");
 		builder.append(this.eigenaar);
@@ -76,11 +82,11 @@ public class Boot extends AbstractEntity<Boot> {
 	}
 
 	public int getNummer() {
-		return this.bootNummer;
+		return this.nummer;
 	}
 
 	public boolean hasNummer(final int nummer) {
-		return (this.bootNummer == nummer);
+		return (this.nummer == nummer);
 	}
 
 	public Verhuurder getEigenaar() {
