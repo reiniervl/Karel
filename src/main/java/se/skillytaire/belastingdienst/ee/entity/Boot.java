@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.rvlstudio.annotation.Builder;
@@ -25,10 +26,13 @@ public class Boot extends AbstractEntity<Boot> {
 	@Column(unique = true)
 	@BuilderField
 	private int nummer;
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+
+	// UNDONE: CascadeType.PERSIST, CascadeType.MERGE
+	@OneToMany(cascade = { CascadeType.ALL})
 	private List<Tocht<?>> tochten = new ArrayList<>();
 	@NotNull
 	@BuilderField
+	@OneToOne(cascade = { CascadeType.ALL})
 	private Verhuurder eigenaar;
 //   private ArrayList<Tocht<?>> tochtGeschiedenis;
 //   private static final Duration INSPECTIEDUUR = Duration.ofSeconds(10);

@@ -31,7 +31,8 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	@NotNull
 	private double prijs;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	// UNDONE: CascadeType.PERSIST
+	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@NotNull
 	private Boot boot;
 
