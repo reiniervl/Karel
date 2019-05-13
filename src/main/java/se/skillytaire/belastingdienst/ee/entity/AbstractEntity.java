@@ -3,6 +3,7 @@ package se.skillytaire.belastingdienst.ee.entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 import se.skillytaire.belastingdienst.ee.common.AbstractComparableObject;
 
@@ -16,6 +17,9 @@ public abstract class AbstractEntity<E extends AbstractEntity<E>>
    @Id
    @GeneratedValue
    private Integer oid;
+
+   @Version
+   private Integer version;
 
    /**
     * Developers should not use the default constructor. Please use the same

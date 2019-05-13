@@ -1,5 +1,7 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
+import java.beans.ConstructorProperties;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -51,12 +53,21 @@ public class Klant extends AbstractEntity<Klant> {
    public Klant() {
    }
 
-   public Klant(String username) {
+   @ConstructorProperties({"username", "password", "email"})
+   public Klant(String username, String password, String email) {
       super();
       if (username == null) {
          throw new IllegalArgumentException("username mag niet null zijn");
       }
+      if (password == null) {
+         throw new IllegalArgumentException("password mag niet null zijn");
+      }
+      if (email == null) {
+         throw new IllegalArgumentException("email mag niet null zijn");
+      }
       this.username = username;
+      this.password = password;
+      this.email = email;
    }
 
    /**
@@ -119,9 +130,8 @@ public class Klant extends AbstractEntity<Klant> {
 
    @Override
    public String toString() {
-      StringBuilder sb =
-            new StringBuilder().append("username: ").append(this.getUsername())
-                  .append("\nemail: ").append(this.getEmail());
+      StringBuilder sb = new StringBuilder().append(", username: ").append(this.getUsername()).append(", email: ")
+            .append(this.getEmail()).append(super.toString());
       return sb.toString();
    }
 }
