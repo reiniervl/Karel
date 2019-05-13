@@ -18,6 +18,9 @@ public class VerhuurderTest {
    @This
    private Adres adres;
 
+   @This
+   private Boot boot;
+
    // @Property(key="app.url.http")
    // private static String grapje;
    @Test
@@ -26,5 +29,15 @@ public class VerhuurderTest {
       Adres actual = this.verhuurder.getAdres();
       Assert.assertEquals(this.adres, actual);
       // System.out.println(grapje);
+   }
+
+   @Test
+   public void testAddBoot() {
+      this.verhuurder.add(boot);
+   }
+
+   @Test
+   public void testRemoveBoot() {
+      this.verhuurder.remove(boot);
    }
 }
