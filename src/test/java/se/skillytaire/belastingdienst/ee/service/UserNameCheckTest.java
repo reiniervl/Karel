@@ -71,7 +71,7 @@ public class UserNameCheckTest {
 	
 	@Test
 	public void isNietBeschikbaarTest() {
-		Klant klant = KlantBuilder.klant()
+		Klant klant = KlantBuilder.builder()
 				.withPassword("123")
 				.withUsername("Karel")
 				.withEmail("sexyboy@gmail.com")

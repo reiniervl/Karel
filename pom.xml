@@ -34,7 +34,7 @@
 
 		<version.liberty>19.0.0.4</version.liberty>
 		<!-- liberty server config -->
-		<app.name>${project.artifactId}}</app.name>
+		<app.name>${project.artifactId}</app.name>
 		<app.location>${project.build.directory}${file.separator}${project.build.finalName}.${project.packaging}</app.location>
 		<testServerHttpPort>9080</testServerHttpPort>
 		<testServerHttpsPort>9443</testServerHttpsPort>
