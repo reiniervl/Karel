@@ -683,7 +683,7 @@ files are moved
 							<version>0.9.8</version>
 						</path>
 					</annotationProcessorPaths>
-					<annotationProcessors>
+						<annotationProcessors>
 							<!-- 
 						<annotationProcessor>se.skillytaire.didactic.generator.dto.JPATOProcessor</annotationProcessor>
 						<annotationProcessor>se.skillytaire.didactic.generator.fluent.deluxe.DeluxeFluentProcessor</annotationProcessor>

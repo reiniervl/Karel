@@ -30,6 +30,7 @@ public class RegistreerNieuwAccountEJB implements RegistreerNieuwAccount {
 		Optional<Klant> klant = klantDAO.findByOID(klantOid);
 		if(klant.isPresent()) {
 			Account account = AccountBuilder.builder().withKlant(klant.get()).build();
+			// Account account = new Account(klant.get());
 			try {
 				accountDAO.add(account);
 				result = new NieuwAccountResultTO(ResultTO.NO_ERROR);
