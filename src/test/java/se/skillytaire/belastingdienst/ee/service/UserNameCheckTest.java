@@ -49,32 +49,29 @@ public class UserNameCheckTest {
 			}
 		}
 	}
-	
-	   private void addWithTX(final Klant klant) {
-		      EntityTransaction unmanagedTx = this.entityManager.getTransaction();
-		      try {
-		         unmanagedTx.begin();
-		         KlantJpaDAO.getInstance().add(klant);
-		         unmanagedTx.commit();
-		      } catch (RuntimeException e) {
-		         if (unmanagedTx.isActive()) {
-		            unmanagedTx.rollback();
-		         }
-		         throw e;
-		      }
-		   }
+
+	private void addWithTX(final Klant klant) {
+		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+		try {
+			unmanagedTx.begin();
+			KlantJpaDAO.getInstance().add(klant);
+			unmanagedTx.commit();
+		} catch (RuntimeException e) {
+			if (unmanagedTx.isActive()) {
+				unmanagedTx.rollback();
+			}
+			throw e;
+		}
+	}
 
 	@Test
 	public void isBeschikbaarTest() {
 		Assert.assertTrue(beanUnderTest.isBeschikbaar("Karel"));
 	}
-	
+
 	@Test
 	public void isNietBeschikbaarTest() {
-		Klant klant = KlantBuilder.builder()
-				.withPassword("123")
-				.withUsername("Karel")
-				.withEmail("sexyboy@gmail.com")
+		Klant klant = KlantBuilder.builder().withPassword("123").withUsername("Karel").withEmail("sexyboy@gmail.com")
 				.build();
 		KlantJpaDAO.getInstance().add(klant);
 		this.addWithTX(klant);

@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -29,6 +31,8 @@ import com.rvlstudio.annotation.Builder;
  */
 @Builder(all=true)
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(name = "uniqueKlant",
+      columnNames = { "username", "email" }) })
 @NamedQueries({
       @NamedQuery(name = Klant.FIND_BY_USERNAME, query = "SELECT k FROM Klant k WHERE k.username=:username") })
 public class Klant extends AbstractEntity<Klant> {
@@ -36,12 +40,13 @@ public class Klant extends AbstractEntity<Klant> {
    public static final String FIND_BY_USERNAME = "Klant_findByUsername";
 
    @NotNull
-   @Pattern(regexp = "[\\d\\w\\.]*@[\\d\\w\\.]*\\.[\\w]{2,3}$")
+	 @Pattern(regexp = "[\\w\\.]*@[\\w\\.]*\\.[\\w]{2,3}$")
+	 @Column(name = "email", unique = true)
    private String email;
 
    @NotNull
    @Size(min = 4, max = 24)
-   @Column(unique = true, length = 24)
+   @Column(unique = true, length = 24, name = "username")
    private String username;
 
    @NotNull

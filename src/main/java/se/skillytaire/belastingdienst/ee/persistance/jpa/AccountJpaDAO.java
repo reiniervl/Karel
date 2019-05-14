@@ -1,5 +1,6 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -63,6 +64,13 @@ public class AccountJpaDAO implements AccountDAO {
 	 Account.class);
 	 namedQuery.setParameter("username", username);
 	 Optional<Account> result = namedQuery.getResultList().stream().findFirst();
+	 return result;
+ }
+
+ public List<Account> findAll() {
+	 TypedQuery<Account> namedQuery = this.em.createNamedQuery("SELECT_ALL",
+	 Account.class);
+	 List<Account> result = namedQuery.getResultList();
 	 return result;
  }
 }

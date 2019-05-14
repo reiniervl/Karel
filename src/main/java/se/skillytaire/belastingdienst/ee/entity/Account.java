@@ -3,15 +3,21 @@ package se.skillytaire.belastingdienst.ee.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import com.rvlstudio.annotation.Builder;
+import com.rvlstudio.annotation.BuilderField;
+
 import java.util.ArrayList;
 
+@Builder
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "FIND_BY_USERNAME", query = "SELECT a FROM Account a WHERE a.klant.username=:username")
@@ -20,11 +26,12 @@ public class Account extends AbstractEntity<Account> {
 	private static final long serialVersionUID = 1L;
 	public static final String FIND_BY_USERNAME = "FIND_BY_USERNAME";
 
+	@BuilderField
 	@NotNull
+	@JoinColumn(name = "Klant_OID", unique = true)
 	@OneToOne(cascade = CascadeType.ALL)
 	private Klant klant;
 
-	@NotNull
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Reservering> reserveringen = new ArrayList<Reservering>();
 	
