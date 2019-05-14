@@ -15,6 +15,7 @@
 		<class>se.skillytaire.belastingdienst.ee.entity.Tocht</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.Boot</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.Verhuurder</class>
+		<class>se.skillytaire.belastingdienst.ee.entity.Account</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<validation-mode>AUTO</validation-mode>
 		<properties>
