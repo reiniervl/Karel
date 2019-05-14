@@ -3,15 +3,12 @@ package se.skillytaire.belastingdienst.ee.entity;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

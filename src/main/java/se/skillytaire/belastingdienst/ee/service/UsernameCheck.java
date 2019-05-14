@@ -1,7 +1,6 @@
 package se.skillytaire.belastingdienst.ee.service;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;

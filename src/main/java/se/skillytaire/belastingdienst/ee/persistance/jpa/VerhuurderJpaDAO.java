@@ -3,7 +3,6 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.DAO;
