@@ -15,23 +15,22 @@
 		<class>se.skillytaire.belastingdienst.ee.entity.Tocht</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.Boot</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.Verhuurder</class>
-		<class>se.skillytaire.belastingdienst.ee.entity.Account</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<validation-mode>AUTO</validation-mode>
 		<properties>
 			<property name="javax.persistence.validation.factory"
 				value="com.em.validation.client.spi.ValidationProviderImpl" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:hsqldb:mem:unit-testing-jpql" />
+				value="jdbc:postgresql://localhost/" />
 			<property name="javax.persistence.jdbc.driver"
-				value="org.hsqldb.jdbcDriver" />
-			<property name="javax.persistence.jdbc.user" value="sa" />
+				value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password" value="" />
 			<!-- <property name="hibernate.show_sql" value="true" /> <property name="hibernate.format_sql" 
 				value="true" /> <property name="hibernate.hbm2ddl.auto" value="update" /> -->
 			<property name="eclipselink.ddl-generation"
 				value="drop-and-create-tables" />
-			<property name="eclipselink.logging.level" value="INFO" />
+			<property name="eclipselink.logging.level" value="WARNING" />
 		</properties>
 	</persistence-unit>
 
