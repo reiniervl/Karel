@@ -46,6 +46,18 @@
 		<package.entity>${package.root}.entity</package.entity>
 		<package.service>${package.root}.service</package.service>
 	</properties>
+	<dependencyManagement>
+		<dependencies>
+		<!-- Arquilllian transaction extension -->
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-transaction-bom</artifactId>
+			<version>${version.arquillian-transaction-bom}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>com.rvlstudio</groupId>
@@ -220,14 +232,6 @@
 			<version>${version.arquillian-junit-container}</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- Arquilllian transaction extension -->
-		<dependency>
-			<groupId>org.jboss.arquillian.extension</groupId>
-			<artifactId>arquillian-transaction-bom</artifactId>
-			<version>${version.arquillian-transaction-bom}</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
 		<!-- Arquillian adapter voor Liberty -->
 		<dependency>
 			<groupId>io.openliberty.arquillian</groupId>
@@ -400,6 +404,30 @@
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>3.0.0</version>
 				</plugin>
+    <plugin>
+     <groupId>org.eclipse.m2e</groupId>
+     <artifactId>lifecycle-mapping</artifactId>
+     <version>1.0.0</version>
+     <configuration>
+       <lifecycleMappingMetadata>
+         <pluginExecutions>
+           <pluginExecution>
+             <pluginExecutionFilter>
+               <groupId>some-group-id</groupId>
+               <artifactId>some-artifact-id</artifactId>
+               <versionRange>[1.0.0,)</versionRange>
+               <goals>
+                 <goal>some-goal</goal>
+               </goals>
+             </pluginExecutionFilter>
+             <action>
+               <ignore/>
+             </action>
+           </pluginExecution>
+         </pluginExecutions>
+       </lifecycleMappingMetadata>
+     </configuration>
+    </plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
