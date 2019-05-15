@@ -31,7 +31,7 @@
 				value="true" /> <property name="hibernate.hbm2ddl.auto" value="update" /> -->
 			<property name="eclipselink.ddl-generation"
 				value="drop-and-create-tables" />
-			<property name="eclipselink.logging.level" value="INFO" />
+			<property name="eclipselink.logging.level" value="FINEST" />
 		</properties>
 	</persistence-unit>
 

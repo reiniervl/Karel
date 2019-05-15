@@ -1,5 +1,7 @@
 package se.skillytaire.belastingdienst.ee.service.ejb;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Singleton;
 import javax.transaction.Transactional;
@@ -31,6 +33,7 @@ public class RegistreerNieuweKlantEJB implements RegistreerNieuweKlant {
 		} catch(RuntimeException e) {
 			// FIXME: rollback transaction
 			result = new NieuweKlantResultTO();
+			throw e;
 		}
 		return result;
 	}

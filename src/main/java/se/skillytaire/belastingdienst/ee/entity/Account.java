@@ -31,7 +31,7 @@ public class Account extends AbstractEntity<Account> {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Klant klant;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
 	private List<Reservering> reserveringen = new ArrayList<Reservering>();
 	
 	/**
