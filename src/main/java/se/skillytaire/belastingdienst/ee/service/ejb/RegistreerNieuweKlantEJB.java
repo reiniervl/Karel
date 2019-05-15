@@ -14,7 +14,7 @@ import se.skillytaire.belastingdienst.ee.service.RegistreerNieuweKlant;
 @Stateless
 public class RegistreerNieuweKlantEJB implements RegistreerNieuweKlant {
 	@Singleton
-	private KlantDAO dao;
+	KlantDAO dao;
 
 	@Transactional
 	@Override
@@ -26,7 +26,7 @@ public class RegistreerNieuweKlantEJB implements RegistreerNieuweKlant {
 			.withEmail(klantTO.getEmail())
 			.build();
 		try {
-		dao.add(klant);
+			dao.add(klant);
 			result = new NieuweKlantResultTO(klant.getOid());
 		} catch(RuntimeException e) {
 			// FIXME: rollback transaction

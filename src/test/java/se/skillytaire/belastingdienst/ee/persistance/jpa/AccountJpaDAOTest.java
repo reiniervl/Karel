@@ -93,7 +93,8 @@ public class AccountJpaDAOTest {
 
    @Test(expected = RollbackException.class)
    public void testAddedTwiceAccount() {
-      this.thisAccount.getKlant().setEmail("testing@test.com");
+			Klant klant = this.thisAccount.getKlant();
+			klant.setEmail("testing@test.com");
       this.addWithTX(this.thisAccount);
       Assert.assertTrue(this.thisAccount.isPersistant());
       Assert.assertFalse(this.thisAccount.isIdentical(this.thisAccount2));
