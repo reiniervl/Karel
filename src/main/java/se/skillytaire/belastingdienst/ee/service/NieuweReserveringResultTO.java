@@ -9,6 +9,6 @@ public class NieuweReserveringResultTO extends ResultTO<Integer> {
 	}
 
 	public NieuweReserveringResultTO() {
-		super(ResultTO.Nieuwe_Klant_Exists);
+		super(ResultTO.NIEUWE_KLANT_EXISTS);
 	}
 }
