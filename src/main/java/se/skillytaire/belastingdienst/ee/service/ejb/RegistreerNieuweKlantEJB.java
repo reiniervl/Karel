@@ -3,6 +3,8 @@ package se.skillytaire.belastingdienst.ee.service.ejb;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Singleton;
 import javax.transaction.Transactional;
 
@@ -14,11 +16,12 @@ import se.skillytaire.belastingdienst.ee.service.NieuweKlantTO;
 import se.skillytaire.belastingdienst.ee.service.RegistreerNieuweKlant;
 
 @Stateless
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class RegistreerNieuweKlantEJB implements RegistreerNieuweKlant {
 	@Singleton
 	KlantDAO dao;
 
-	@Transactional
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	@Override
 	public NieuweKlantResultTO doIt(NieuweKlantTO klantTO) {
 		NieuweKlantResultTO result;

@@ -5,6 +5,8 @@ import java.util.Optional;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Singleton;
 import javax.transaction.Transactional;
 
@@ -18,6 +20,7 @@ import se.skillytaire.belastingdienst.ee.service.RegistreerNieuwAccount;
 import se.skillytaire.belastingdienst.ee.service.ResultTO;
 
 @Stateless
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class RegistreerNieuwAccountEJB implements RegistreerNieuwAccount {
 	@Singleton
 	AccountDAO accountDAO;
@@ -25,7 +28,8 @@ public class RegistreerNieuwAccountEJB implements RegistreerNieuwAccount {
 	@Singleton
 	KlantDAO klantDAO;
 
-	@Transactional
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public NieuwAccountResultTO registreer(Integer klantOid) {
 		NieuwAccountResultTO result;
 
