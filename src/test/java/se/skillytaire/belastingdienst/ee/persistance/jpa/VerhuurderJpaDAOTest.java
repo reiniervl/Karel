@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.DAO;
+import se.skillytaire.belastingdienst.ee.persistance.VerhuurderDAO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
 
@@ -26,9 +27,9 @@ public class VerhuurderJpaDAOTest {
    @This
    private Verhuurder thisVerhuurder;
    @This
-   private Verhuurder thisVerhuurder2;
+	 private Verhuurder thisVerhuurder2;
 
-   private DAO<Verhuurder> beanUnderTest;
+   private VerhuurderDAO beanUnderTest;
 
    @Before
    public void before() {
@@ -111,7 +112,16 @@ public class VerhuurderJpaDAOTest {
             .findByOID(this.thisVerhuurder.getOid());
       Assert.assertTrue(result.isPresent());
       Assert.assertEquals(this.thisVerhuurder, result.get());
-   }
+	 }
+	 
+	 @Test
+	 public void testFindByUsername() {
+		Assert.assertFalse(this.thisVerhuurder.isPersistant());
+		this.addWithTX(this.thisVerhuurder);
+		Assert.assertTrue(this.thisVerhuurder.isPersistant());
+		Optional<Verhuurder> result = this.beanUnderTest.find(this.thisVerhuurder.getUserName());
+		Assert.assertTrue(result.isPresent());
+	 }
 
    @Test
    public void testDeleteByOid() {

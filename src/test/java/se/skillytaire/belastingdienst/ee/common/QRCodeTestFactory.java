@@ -1,6 +1,5 @@
 package se.skillytaire.belastingdienst.ee.common;
 
-import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.course.tools.jlc.AbstractComparableTestObjectFactory;
 import se.skillytaire.course.tools.jlc.TestFactory;
 

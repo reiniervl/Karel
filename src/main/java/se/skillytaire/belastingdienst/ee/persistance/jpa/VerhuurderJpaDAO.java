@@ -3,11 +3,12 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
-import se.skillytaire.belastingdienst.ee.persistance.DAO;
+import se.skillytaire.belastingdienst.ee.persistance.VerhuurderDAO;
 
-public class VerhuurderJpaDAO implements DAO<Verhuurder> {
+public class VerhuurderJpaDAO implements VerhuurderDAO {
 	private static final VerhuurderJpaDAO instance = new VerhuurderJpaDAO();
 	private EntityManager em;
 
@@ -55,4 +56,12 @@ public class VerhuurderJpaDAO implements DAO<Verhuurder> {
 		 return deleted;
 	}
 
+	@Override
+	public Optional<Verhuurder> find(String username) {
+		TypedQuery<Verhuurder> query = this.em.createNamedQuery(
+			Verhuurder.FIND_VERHUURDER_BY_USERNAME, Verhuurder.class);
+		query.setParameter("username", username);
+		Optional<Verhuurder> result = query.getResultList().stream().findFirst();
+		return result;
+	}
 }

@@ -1,5 +1,7 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.Duration;
 import java.util.Optional;
 
@@ -134,6 +136,22 @@ public class PeriodeTest {
       periode1.beeindig();
 
       Assert.assertTrue(periode1.compareTo(periode2) > 0);
+   }
+
+   @Test
+   public void testCompareToBothEnded() {
+      Periode periode1 = new Periode();
+      Periode periode2 = new Periode();
+      periode1.start();
+      periode2.start();
+			periode1.beeindig();
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			periode2.beeindig();
+			assertEquals(-1, periode1.compareTo(periode2));
    }
 
    @Test

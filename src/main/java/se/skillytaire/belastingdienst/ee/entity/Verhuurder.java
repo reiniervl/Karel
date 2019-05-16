@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -17,8 +19,12 @@ import com.rvlstudio.annotation.BuilderField;
 
 @Builder
 @Entity
+@NamedQueries({
+	@NamedQuery(name = Verhuurder.FIND_VERHUURDER_BY_USERNAME, query = "SELECT v FROM Verhuurder v WHERE v.userName=:username")
+})
 public class Verhuurder extends AbstractEntity<Verhuurder> {
 	 private static final long serialVersionUID = 1L;
+	 public static final String FIND_VERHUURDER_BY_USERNAME = "FIND_VERHUURDER_BY_USERNAME";
 	 @BuilderField
    @NotNull
    @Column(unique=true)
