@@ -6,7 +6,6 @@ import javax.persistence.Persistence;
 
 import org.junit.Before;
 
-import se.skillytaire.belastingdienst.ee.persistance.jpa.KlantJpaDAO;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.MeerTochtJpaDAO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 
@@ -26,5 +25,6 @@ public class StartMeertochtTest {
 		this.factory = Persistence.createEntityManagerFactory("stuga");
 		this.entityManager = this.factory.createEntityManager();
 		MeerTochtJpaDAO.getInstance().setEntityManager(this.entityManager);
+		beanUnderTest = new StartMeertocht();
 	}
 }

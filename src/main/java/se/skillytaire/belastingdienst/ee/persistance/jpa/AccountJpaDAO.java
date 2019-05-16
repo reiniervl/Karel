@@ -66,11 +66,4 @@ public class AccountJpaDAO implements AccountDAO {
 	 Optional<Account> result = namedQuery.getResultList().stream().findFirst();
 	 return result;
  }
-
- public List<Account> findAll() {
-	 TypedQuery<Account> namedQuery = this.em.createNamedQuery("SELECT_ALL",
-	 Account.class);
-	 List<Account> result = namedQuery.getResultList();
-	 return result;
- }
 }

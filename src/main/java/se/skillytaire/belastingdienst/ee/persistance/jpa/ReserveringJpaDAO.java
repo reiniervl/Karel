@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.Reservering;
 import se.skillytaire.belastingdienst.ee.persistance.ReserveringDAO;
