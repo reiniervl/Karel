@@ -486,7 +486,7 @@
                             <goal>enforce</goal>
                         </goals>
                         <configuration>
-                            <rules>
+                            <rules> 
                                 <requireJavaVersion>
                                     <version>[1.8,)</version>
                                 </requireJavaVersion>
