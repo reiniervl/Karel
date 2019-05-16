@@ -9,7 +9,7 @@ public class NieuweKlantTOTest {
 	@Test
 	public void testEmptyKlantTO() {
 		NieuweKlantResultTO result = new NieuweKlantResultTO();
-		assertEquals(NieuweKlantResultTO.Nieuwe_Klant_Exists, result.getCode());
+		assertEquals(NieuweKlantResultTO.NIEUWE_KLANT_EXISTS, result.getCode());
 	}
 	@Test
 	public void testNieuweKlantTO() {

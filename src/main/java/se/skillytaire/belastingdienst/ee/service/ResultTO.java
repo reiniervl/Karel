@@ -6,8 +6,10 @@ import java.util.Optional;
 public abstract class ResultTO<R> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final int NO_ERROR = 0;
-	public static final int Nieuwe_Klant_Exists = 100;
+	public static final int NIEUWE_KLANT_EXISTS = 100;
 	public static final int ACCOUNT_NIET_AANGEMAAKT = 200;
+	public static final int TOCHT_NIET_GESTART = 300;
+
 
 	private final int code;
 	private final R result;

@@ -14,7 +14,6 @@ import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
 import se.skillytaire.belastingdienst.ee.entity.Periode;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
-import se.skillytaire.belastingdienst.ee.persistance.jpa.MeerTochtDAO;
 
 public class MeerTochtDaoTest {
 
@@ -27,7 +26,7 @@ public class MeerTochtDaoTest {
 	private MeerTocht thisMeerTocht;
 	@This
 	private MeerTocht thisMeerTocht2;
-	private MeerTochtDAO beanUnderTest;
+	private MeerTochtJpaDAO beanUnderTest;
 
 	@This
 	Boot dezeBoot;
@@ -41,8 +40,8 @@ public class MeerTochtDaoTest {
 	public void initJPA() {
 		this.factory = Persistence.createEntityManagerFactory("stuga");
 		this.entityManager = this.factory.createEntityManager();
-		MeerTochtDAO.getInstance().setEntityManager(this.entityManager);
-		this.beanUnderTest = MeerTochtDAO.getInstance();
+		MeerTochtJpaDAO.getInstance().setEntityManager(this.entityManager);
+		this.beanUnderTest = MeerTochtJpaDAO.getInstance();
 	}
 
 	@After
@@ -86,7 +85,7 @@ public class MeerTochtDaoTest {
 	@Test
 	public void testDaoAdd() {
 		MeerTocht nieuweMeerTocht = new MeerTocht(dezeBoot, 10D, thisPeriode);
-		MeerTochtDAO dao = MeerTochtDAO.getDAO();
+		MeerTochtJpaDAO dao = MeerTochtJpaDAO.getDAO();
 		Assert.assertFalse(dao == null);
 		Assert.assertFalse(nieuweMeerTocht == null);
 		dao.add(nieuweMeerTocht);
@@ -155,7 +154,7 @@ public class MeerTochtDaoTest {
 		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
 		unmanagedTx.begin();
 		MeerTocht updateMeerTocht = new MeerTocht(dezeBoot, 10D, thisPeriode);
-		MeerTochtDAO dao = MeerTochtDAO.getDAO();
+		MeerTochtJpaDAO dao = MeerTochtJpaDAO.getDAO();
 		dao.add(updateMeerTocht);
 		Assert.assertTrue("MeerTocht is opgeslagen", updateMeerTocht.isPersistant());
 		updateMeerTocht.setPrijs(16D);

@@ -5,19 +5,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.After;
-import org.junit.Assert;
 
-import se.skillytaire.belastingdienst.ee.entity.Boot;
-import se.skillytaire.belastingdienst.ee.entity.Klant;
-import se.skillytaire.belastingdienst.ee.entity.KlantBuilder;
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
-import se.skillytaire.belastingdienst.ee.entity.Periode;
-import se.skillytaire.belastingdienst.ee.persistance.jpa.KlantJpaDAO;
-import se.skillytaire.belastingdienst.ee.persistance.jpa.MeerTochtDAO;
+import se.skillytaire.belastingdienst.ee.persistance.jpa.MeerTochtJpaDAO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 
 public class MeerTochtCheckTest {
@@ -34,8 +29,8 @@ public class MeerTochtCheckTest {
 	public void initJPA() {
 		this.factory = Persistence.createEntityManagerFactory("stuga");
 		this.entityManager = this.factory.createEntityManager();
-		MeerTochtDAO.getInstance().setEntityManager(this.entityManager);
-		beanUnderTest = new MeerTochtCheck(MeerTochtDAO.getInstance());
+		MeerTochtJpaDAO.getInstance().setEntityManager(this.entityManager);
+		beanUnderTest = new MeerTochtCheck(MeerTochtJpaDAO.getInstance());
 	}
 
 	@After
@@ -59,7 +54,7 @@ public class MeerTochtCheckTest {
 		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
 		try {
 			unmanagedTx.begin();
-			MeerTochtDAO.getInstance().add(MeerTocht);
+			MeerTochtJpaDAO.getInstance().add(MeerTocht);
 			unmanagedTx.commit();
 		} catch (RuntimeException e) {
 			if (unmanagedTx.isActive()) {

@@ -8,6 +8,6 @@ public class NieuweKlantResultTO extends ResultTO<Integer> {
 	}
 
 	public NieuweKlantResultTO() {
-		super(ResultTO.Nieuwe_Klant_Exists);
+		super(ResultTO.NIEUWE_KLANT_EXISTS);
 	}
 }

@@ -7,6 +7,8 @@ import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;
 
 @Stateless
 public class UsernameCheck implements UsernameCheckRemote {
+	@Singleton
+	private KlantDAO dao;
 	
 	public UsernameCheck(KlantDAO dao) {
 		super();
@@ -17,8 +19,6 @@ public class UsernameCheck implements UsernameCheckRemote {
 		super();
 	}
 
-	@Singleton
-	private KlantDAO dao;
 	@Override
 	public boolean isBeschikbaar(String username) {
 		return !dao.find(username).isPresent();
