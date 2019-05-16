@@ -9,7 +9,8 @@ import javax.persistence.NamedQuery;
 @NamedQuery(name = RivierTocht.DELETE_BY_OID, query = "delete from RivierTocht a where a.oid=:oid")
 public class RivierTocht extends Tocht<RivierTocht> {
 	private static final long serialVersionUID = 1L;
-	public static final String DELETE_BY_OID = "RivierTocht_DeleteByOid";
+
+	public static final String DELETE_BY_OID = "RIVIERTOCHT_DELETEBYOID";
 
 	public RivierTocht() {
 	}

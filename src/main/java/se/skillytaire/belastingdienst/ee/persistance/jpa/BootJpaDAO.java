@@ -4,11 +4,14 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
+import se.skillytaire.belastingdienst.ee.common.QRCode;
 import se.skillytaire.belastingdienst.ee.entity.Boot;
+import se.skillytaire.belastingdienst.ee.persistance.BootDAO;
 import se.skillytaire.belastingdienst.ee.persistance.DAO;
 
-public class BootJpaDAO implements DAO<Boot> {
+public class BootJpaDAO implements BootDAO {
 	private static final BootJpaDAO instance = new BootJpaDAO();
 	private EntityManager em;
 
@@ -51,6 +54,14 @@ public class BootJpaDAO implements DAO<Boot> {
 		namedQuery.setParameter("oid", OID);
 		int result = namedQuery.executeUpdate();
 		return result != 0;
+	}
+
+	@Override
+	public Optional<Boot> find(QRCode qrcode) {
+		TypedQuery<Boot> query = this.em.createNamedQuery(Boot.SELECT_BY_QRCODE, Boot.class);
+		query.setParameter("bootNummer", qrcode.getBootNummer());
+		query.setParameter("verhuurder", qrcode.getUsername());
+		return query.getResultList().stream().findFirst();
 	}
 
 }

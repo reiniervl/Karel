@@ -6,9 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
-import se.skillytaire.belastingdienst.ee.persistance.DAO;
+import se.skillytaire.belastingdienst.ee.persistance.RivierTochtDAO;
 
-public class RivierTochtJpaDAO implements DAO<RivierTocht> {
+public class RivierTochtJpaDAO implements RivierTochtDAO {
    private static final RivierTochtJpaDAO instance = new RivierTochtJpaDAO();
    private EntityManager em;
 

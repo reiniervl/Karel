@@ -1,6 +1,5 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;

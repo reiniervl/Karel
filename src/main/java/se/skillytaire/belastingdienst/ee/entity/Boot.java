@@ -22,10 +22,17 @@ import se.skillytaire.java.datatype.PositiveInteger;
 
 @Entity
 @Builder
-@NamedQueries({ @NamedQuery(name = Boot.DELETE_BY_OID, query = "delete from Boot a where a.oid=:oid"),
-	@NamedQuery(name = Boot.SELECT_BY_QRCODE, query = "select a from Boot a where a.oid=:oid") })
-@Table(uniqueConstraints = { @UniqueConstraint(name = "Uniqueverhuurdericmnummer",
-	columnNames = { "verhuurder_oid", "nummer" }) })
+@NamedQueries({ 
+	@NamedQuery(name = Boot.DELETE_BY_OID, query = "delete from Boot a where a.oid=:oid"),
+	@NamedQuery(name = Boot.SELECT_BY_QRCODE, query = "select a from Boot a where a.nummer=:bootNummer AND a.eigenaar.userName=:verhuurder")
+})
+@Table(
+	uniqueConstraints = { 
+		@UniqueConstraint(
+			name = "Uniqueverhuurdericmnummer",
+			columnNames = { "verhuurder_oid", "nummer" }
+		)
+})
 public class Boot extends AbstractEntity<Boot> {
 	private static final long serialVersionUID = 1L;
 	public static final String DELETE_BY_OID = "Boot_DeleteByOid";

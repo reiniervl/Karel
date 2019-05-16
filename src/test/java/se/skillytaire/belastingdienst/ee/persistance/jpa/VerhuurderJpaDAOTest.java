@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
-import se.skillytaire.belastingdienst.ee.persistance.DAO;
 import se.skillytaire.belastingdienst.ee.persistance.VerhuurderDAO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
