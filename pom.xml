@@ -8,7 +8,8 @@
 	<description>Ondersteuning Java Persistency API tbv EE Belastingdienst waarbij de migratie naar Eclipse Link is gedaan en ontfiscussed zodat deze nu standalone is.</description>
 	<inceptionYear>2019</inceptionYear>
 	<packaging>war</packaging>
-	<url>http://stuga-gruvriset.se</url>
+	<url>http://stormpunt-itrack.com/website/</url>
+
 	<parent>
 		<groupId>net.wasdev.maven.parent</groupId>
 		<artifactId>java7-parent</artifactId>
@@ -46,6 +47,46 @@
 		<package.entity>${package.root}.entity</package.entity>
 		<package.service>${package.root}.service</package.service>
 	</properties>
+    <scm>
+        <connection>scm:git:git@github.com:reiniervl/Karel</connection>
+        <developerConnection>scm:git:git@github.com:reiniervl/Karel</developerConnection>
+        <url>git@github.com:reiniervl/Karel.git</url>
+	    <tag></tag>
+	</scm>	
+	<organization>
+	    <name>Stormpunt-itrack</name>
+	    <url>http://stormpunt-itrack.com/</url>
+	</organization>
+    <developers>
+        <developer>
+            <id>reinier</id>
+            <name>Reinier van Leussen</name>
+            <email>rvanleussen@outlook.com</email>
+        </developer>
+        <developer>
+            <id>dennis</id>
+            <name>Dennis Kappert</name>
+            <email>denniskappert@outlook.com</email>
+        </developer>    
+        <developer>
+            <id>selcuk</id>
+            <name>Selcuk Kult</name>
+            <email>skurt90@gmail.com</email>
+        </developer>             
+    </developers>	
+    
+
+    <licenses>
+        <license>
+            <!-- Some of the classes I've borrowed are LGPL, so I'm honouring their
+                license. -->
+            <name>The GNU Lesser General Public License, Version 2.0</name>
+            <url>http://www.gnu.org/licenses/lgpl-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>    
+    
+    
 	<dependencyManagement>
 		<dependencies>
 		<!-- Arquilllian transaction extension -->
@@ -431,6 +472,25 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>[1.8,)</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>		
 			<plugin>
 				<!-- installs the Liberty server in the target directory -->
 				<groupId>net.wasdev.wlp.maven.plugins</groupId>
@@ -516,6 +576,35 @@
 					</execution>
 				</executions>
 			</plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <version>1.20</version>
+            <configuration>
+                <verbose>false</verbose>
+                <addSvnKeyWords>true</addSvnKeyWords>
+            </configuration>
+            <!-- activeren pas in het weekeinde
+            <executions>
+                <execution>
+                    <id>first</id>
+                    <goals>
+                        <goal>update-file-header</goal>
+                    </goals>
+                    <phase>process-sources</phase>
+                    <configuration>
+                        <licenseName>gpl_v2</licenseName>
+                        <organizationName>Stormpunt-itrack</organizationName>
+                        <inceptionYear>2019</inceptionYear>
+                        <roots>
+                            <root>src/main/java</root>
+                            <root>src/test</root>
+                        </roots>
+                    </configuration>
+                </execution>
+            </executions>
+             -->
+        </plugin>			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
