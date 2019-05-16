@@ -2,13 +2,10 @@ package se.skillytaire.belastingdienst.ee.service.ejb;
 
 import java.util.Optional;
 
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Singleton;
-import javax.transaction.Transactional;
 
 import se.skillytaire.belastingdienst.ee.entity.Account;
 import se.skillytaire.belastingdienst.ee.entity.AccountBuilder;

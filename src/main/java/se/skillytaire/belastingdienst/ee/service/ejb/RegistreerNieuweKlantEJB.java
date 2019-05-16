@@ -1,12 +1,9 @@
 package se.skillytaire.belastingdienst.ee.service.ejb;
 
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Singleton;
-import javax.transaction.Transactional;
 
 import se.skillytaire.belastingdienst.ee.entity.Klant;
 import se.skillytaire.belastingdienst.ee.entity.KlantBuilder;

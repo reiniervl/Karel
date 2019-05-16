@@ -1,11 +1,9 @@
-package se.skillytaire.belastingdienst.ee.rest;
+package se.skillytaire.belastingdienst.ee.service.rest;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
-import javax.inject.Inject;
-import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -13,8 +11,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.StreamingOutput;
-
-import se.skillytaire.belastingdienst.ee.helper.UserNameExistsService;
 
 @Path("usernamecheck")
 public class UsernameCheck {
