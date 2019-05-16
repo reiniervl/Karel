@@ -9,7 +9,6 @@ import javax.persistence.TypedQuery;
 import se.skillytaire.belastingdienst.ee.common.QRCode;
 import se.skillytaire.belastingdienst.ee.entity.Boot;
 import se.skillytaire.belastingdienst.ee.persistance.BootDAO;
-import se.skillytaire.belastingdienst.ee.persistance.DAO;
 
 public class BootJpaDAO implements BootDAO {
 	private static final BootJpaDAO instance = new BootJpaDAO();

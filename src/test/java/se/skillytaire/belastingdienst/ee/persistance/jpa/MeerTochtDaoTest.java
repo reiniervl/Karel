@@ -1,5 +1,8 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Optional;
 
 import javax.persistence.*;
@@ -23,9 +26,12 @@ public class MeerTochtDaoTest {
 	@This
 	private Periode thisPeriode;
 	@This
+	private Boot thisBoot;
+	@This
 	private MeerTocht thisMeerTocht;
 	@This
 	private MeerTocht thisMeerTocht2;
+
 	private MeerTochtJpaDAO beanUnderTest;
 
 	@This
@@ -176,4 +182,26 @@ public class MeerTochtDaoTest {
 		unmanagedTx.commit();
 	}
 
+	@Test
+	public void testFindByBoot() {
+		BootJpaDAO bootDAO = BootJpaDAO.getInstance();
+		bootDAO.setEntityManager(this.entityManager);
+		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+		try {
+			unmanagedTx.begin();
+			bootDAO.add(thisMeerTocht.getBoot());
+			unmanagedTx.commit();
+		} catch (RuntimeException e) {
+			if (unmanagedTx.isActive()) {
+				unmanagedTx.rollback();
+			}
+			throw e;
+		}
+		assertTrue(thisMeerTocht.getBoot().isPersistant());
+		addWithTX(this.thisMeerTocht);
+		assertTrue(this.thisMeerTocht.isPersistant());
+		Optional<MeerTocht> result = beanUnderTest.findByBoot(thisMeerTocht.getBoot());
+		assertTrue("Tocht gevonden", result.isPresent());
+		assertEquals(thisMeerTocht, result.get());
+	}
 }
