@@ -14,17 +14,17 @@ import org.junit.Test;
 
 import se.skillytaire.belastingdienst.ee.common.QRCode;
 import se.skillytaire.belastingdienst.ee.entity.Account;
-import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
+import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.BootJpaDAO;
-import se.skillytaire.belastingdienst.ee.persistance.jpa.MeerTochtJpaDAO;
+import se.skillytaire.belastingdienst.ee.persistance.jpa.RivierTochtJpaDAO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
 
-public class StartMeerTochtTest {
+public class StartRivierTochtTest {
 	@This private Account account;
-	@This private MeerTocht meerTocht;
+	@This private RivierTocht rivierTocht;
 
-	StartMeertocht startMeerTocht;
+	StartRiviertocht startRivierTocht;
 
 	EntityManagerFactory factory;
 	EntityManager em;
@@ -38,11 +38,11 @@ public class StartMeerTochtTest {
 	public void setupJPA() {
 		factory = Persistence.createEntityManagerFactory("stuga");
 		em = factory.createEntityManager();
-		startMeerTocht = new StartMeertocht();
+		startRivierTocht = new StartRiviertocht();
 		BootJpaDAO.getInstance().setEntityManager(em);
-		MeerTochtJpaDAO.getInstance().setEntityManager(em);
-		startMeerTocht.bootDAO = BootJpaDAO.getInstance();
-		startMeerTocht.meerTochtDAO = MeerTochtJpaDAO.getInstance();
+		RivierTochtJpaDAO.getInstance().setEntityManager(em);
+		startRivierTocht.bootDAO = BootJpaDAO.getInstance();
+		startRivierTocht.rivierTochtDAO = RivierTochtJpaDAO.getInstance();
 	}
 
 	@After
@@ -62,11 +62,11 @@ public class StartMeerTochtTest {
 		}
 	}
 
-		private void addWithTX(final MeerTocht meerTocht) {
+		private void addWithTX(final RivierTocht rivierTocht) {
 		EntityTransaction unmanagedTx = this.em.getTransaction();
 		try {
 			unmanagedTx.begin();
-			startMeerTocht.meerTochtDAO.add(meerTocht);
+			startRivierTocht.rivierTochtDAO.add(rivierTocht);
 			unmanagedTx.commit();
 		} catch (RuntimeException e) {
 			if (unmanagedTx.isActive()) {
@@ -77,12 +77,12 @@ public class StartMeerTochtTest {
 	}
 
 	@Test
-	public void TestStartMeerTocht() {
-		assertTrue("meerTocht != null", meerTocht != null);
-		addWithTX(meerTocht);
-		QRCode code = new QRCode(meerTocht.getBoot().getEigenaar().getUserName(), meerTocht.getBoot().getNummer());
-		assertFalse("Tocht nog niet gestart", meerTocht.getActuelePeriode().isGestart());
-		StartMeerTochtResultTO result = startMeerTocht.start(code);
+	public void TestStartRivierTocht() {
+		assertTrue("rivierTocht != null", rivierTocht != null);
+		addWithTX(rivierTocht);
+		QRCode code = new QRCode(rivierTocht.getBoot().getEigenaar().getUserName(), rivierTocht.getBoot().getNummer());
+		assertFalse("Tocht nog niet gestart", rivierTocht.getActuelePeriode().isGestart());
+		StartRivierTochtResultTO result = startRivierTocht.start(code);
 		assertTrue("result is successful", result.isSuccessful());
 	}
 }

@@ -1,13 +1,13 @@
 package se.skillytaire.belastingdienst.ee.service;
 
-public abstract class StartTochtResultTO extends ResultTO<Integer> {
+public class StartMeerTochtResultTO extends ResultTO<Integer> {
 	private static final long serialVersionUID = 1L;
 
-	public StartTochtResultTO(Integer tochtOID) {
+	public StartMeerTochtResultTO(Integer tochtOID) {
 		super(tochtOID);
 	}
 
-	public StartTochtResultTO() {
+	public StartMeerTochtResultTO() {
 		super(ResultTO.TOCHT_NIET_GESTART);
 	}
 }

@@ -22,8 +22,8 @@ public class StartMeertocht implements StartMeertochtRemote {
 
 	public StartMeertocht() {}
 
-	public StartTochtResultTO start(QRCode code) {
-		StartTochtResultTO result = new StartTochtResultTO();
+	public StartMeerTochtResultTO start(QRCode code) {
+		StartMeerTochtResultTO result = new StartMeerTochtResultTO();
 		Optional<Boot> bootRes = bootDAO.find(code);
 		if(bootRes.isPresent()) {
 			Optional<MeerTocht> tochtRes = meerTochtDAO.findByBoot(bootRes.get());
@@ -31,7 +31,7 @@ public class StartMeertocht implements StartMeertochtRemote {
 				MeerTocht tocht = tochtRes.get();
 				tocht.start();
 				tocht = meerTochtDAO.update(tocht);
-				result = new StartTochtResultTO(tocht.getOid());
+				result = new StartMeerTochtResultTO(tocht.getOid());
 			}
 		}
 		return result;

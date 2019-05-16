@@ -1,5 +1,8 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -163,5 +166,28 @@ public class RivierTochtJpaDAOTest {
 		Assert.assertFalse(this.thisRivierTocht2.isPersistant());
 		Assert.assertTrue(persistant.isPersistant());
 		Assert.assertEquals(this.thisRivierTocht2, persistant);
+	}
+
+	@Test
+	public void testFindByBoot() {
+		BootJpaDAO bootDAO = BootJpaDAO.getInstance();
+		bootDAO.setEntityManager(this.entityManager);
+		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+		try {
+			unmanagedTx.begin();
+			bootDAO.add(thisRivierTocht.getBoot());
+			unmanagedTx.commit();
+		} catch (RuntimeException e) {
+			if (unmanagedTx.isActive()) {
+				unmanagedTx.rollback();
+			}
+			throw e;
+		}
+		assertTrue(thisRivierTocht.getBoot().isPersistant());
+		addWithTX(this.thisRivierTocht);
+		assertTrue(this.thisRivierTocht.isPersistant());
+		Optional<RivierTocht> result = beanUnderTest.findByBoot(thisRivierTocht.getBoot());
+		assertTrue("Tocht gevonden", result.isPresent());
+		assertEquals(thisRivierTocht, result.get());
 	}
 }
