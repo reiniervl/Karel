@@ -6,9 +6,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import com.rvlstudio.annotation.Builder;
@@ -18,12 +22,16 @@ import se.skillytaire.java.datatype.PositiveInteger;
 
 @Entity
 @Builder
-@NamedQuery(name = Boot.DELETE_BY_OID, query = "delete from Boot a where a.oid=:oid")
+@NamedQueries({ @NamedQuery(name = Boot.DELETE_BY_OID, query = "delete from Boot a where a.oid=:oid"),
+	@NamedQuery(name = Boot.SELECT_BY_QRCODE, query = "select a from Boot a where a.oid=:oid") })
+@Table(uniqueConstraints = { @UniqueConstraint(name = "Uniqueverhuurdericmnummer",
+	columnNames = { "verhuurder_oid", "nummer" }) })
 public class Boot extends AbstractEntity<Boot> {
 	private static final long serialVersionUID = 1L;
 	public static final String DELETE_BY_OID = "Boot_DeleteByOid";
+	public static final String SELECT_BY_QRCODE = "Boot_SelectByQrcode";
 	@NotNull
-	@Column(unique = true)
+	@Column (name = "nummer")
 	@BuilderField
 	private int nummer;
 
@@ -33,6 +41,7 @@ public class Boot extends AbstractEntity<Boot> {
 	@NotNull
 	@BuilderField
 	@OneToOne(cascade = { CascadeType.ALL})
+	@JoinColumn (name = "verhuurder_oid")
 	private Verhuurder eigenaar;
 //   private ArrayList<Tocht<?>> tochtGeschiedenis;
 //   private static final Duration INSPECTIEDUUR = Duration.ofSeconds(10);

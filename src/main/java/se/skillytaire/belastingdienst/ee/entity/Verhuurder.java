@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -20,7 +21,7 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
 	 private static final long serialVersionUID = 1L;
 	 @BuilderField
    @NotNull
-   /// @Column(unique=true)
+   @Column(unique=true)
 	 private String userName;
 	 @BuilderField
    @Null
