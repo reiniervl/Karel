@@ -583,7 +583,7 @@
             <configuration>
                 <verbose>false</verbose>
                 <addSvnKeyWords>true</addSvnKeyWords>
-            </configuration>
+            </configuration> 
             <!-- activeren pas in het weekeinde
             <executions>
                 <execution>
