@@ -18,11 +18,6 @@ public class MeerTochtJpaDAO implements MeerTochtDAO {
 	private MeerTochtJpaDAO() {
 	}
 
-	public static MeerTochtJpaDAO getDAO() {
-
-		return MeerTochtJpaDAO.dao;
-	}
-
 	@Override
 	public void add(MeerTocht t) {
 		this.em.persist(t);

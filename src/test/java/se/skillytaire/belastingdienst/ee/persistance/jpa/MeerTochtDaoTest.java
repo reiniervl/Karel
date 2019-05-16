@@ -91,7 +91,7 @@ public class MeerTochtDaoTest {
 	@Test
 	public void testDaoAdd() {
 		MeerTocht nieuweMeerTocht = new MeerTocht(dezeBoot, 10D, thisPeriode);
-		MeerTochtJpaDAO dao = MeerTochtJpaDAO.getDAO();
+		MeerTochtJpaDAO dao = MeerTochtJpaDAO.getInstance();
 		Assert.assertFalse(dao == null);
 		Assert.assertFalse(nieuweMeerTocht == null);
 		dao.add(nieuweMeerTocht);
@@ -160,7 +160,7 @@ public class MeerTochtDaoTest {
 		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
 		unmanagedTx.begin();
 		MeerTocht updateMeerTocht = new MeerTocht(dezeBoot, 10D, thisPeriode);
-		MeerTochtJpaDAO dao = MeerTochtJpaDAO.getDAO();
+		MeerTochtJpaDAO dao = MeerTochtJpaDAO.getInstance();
 		dao.add(updateMeerTocht);
 		Assert.assertTrue("MeerTocht is opgeslagen", updateMeerTocht.isPersistant());
 		updateMeerTocht.setPrijs(16D);
