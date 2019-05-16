@@ -12,54 +12,57 @@ import se.skillytaire.course.tools.jlc.This;
 @RunWith(JLCRunner.class)
 @JLC(value = Reservering.class, asJUnit = true)
 public class ReserveringTest {
-	int reserveringsNummer = 555555555;
 	@This
-	private Klant thisKlant;
+	private Account thisAccount;
 	@That
-	private Klant thatKlant;
+	private Account thatAccount;
 	@This
-	private MeerTocht eenTocht;
+	private MeerTocht thisRivierTocht;
+	@That
+	private RivierTocht thatRivierTocht;
 
 	@Test
 	public void fullConstructorTest() {
-		Reservering volledigeReservering = new Reservering(this.reserveringsNummer, thisKlant);
-		int actual = volledigeReservering.getReserveringsNummer();
-		Klant actualKlant = volledigeReservering.getKlant();
-		Assert.assertEquals(this.reserveringsNummer, actual);
-		Assert.assertEquals(this.thisKlant, actualKlant);
+		Reservering volledigeReservering = new Reservering(thisAccount, thisRivierTocht);
+//		int actual = volledigeReservering.getReserveringsNummer();
+		Account actualAccount = volledigeReservering.getAccount();
+//		Assert.assertEquals(volledigeReservering.getOid(), actual);
+		Assert.assertEquals(this.thisAccount, actualAccount);
 	}
 
 	@Test
 	public void equalsGelijkTest() {
-		Reservering reservering1 = new Reservering(this.reserveringsNummer, thisKlant);
-		int hetzelfde = 555555555;
-		Reservering reservering2 = new Reservering(hetzelfde, thisKlant);
+		Reservering reservering1 = new Reservering(thisAccount, thisRivierTocht);
+		Reservering reservering2 = new Reservering(thisAccount, thisRivierTocht);
+		reservering1.setReserveringsDatum(ReserveringTestFactory.TIJD);
+		reservering2.setReserveringsDatum(ReserveringTestFactory.TIJD);
 		Assert.assertTrue(reservering1.equals(reservering2));
 	}
 
 	@Test
 	public void equalsGelijkeRefTest() {
-		Reservering reservering1 = new Reservering(this.reserveringsNummer, thisKlant);
+		Reservering reservering1 = new Reservering(thisAccount, thisRivierTocht);
 		Assert.assertTrue(reservering1.equals(reservering1));
 	}
 
 	@Test
 	public void equalsNullTest() {
-		Reservering reservering1 = new Reservering(this.reserveringsNummer, thisKlant);
+		Reservering reservering1 = new Reservering(thisAccount, thisRivierTocht);
 		Assert.assertFalse(reservering1.equals(null));
 	}
 
 	@Test
 	public void equalsOngelijkTest() {
-		Reservering reservering1 = new Reservering(this.reserveringsNummer, thisKlant);
-		int anders = 666666666;
-		Reservering reservering2 = new Reservering(anders, thatKlant);
+		Reservering reservering1 = new Reservering(thisAccount, thisRivierTocht);
+		Reservering reservering2 = new Reservering(thatAccount, thisRivierTocht);
+		Reservering reservering3 = new Reservering(thatAccount, thatRivierTocht);
 		Assert.assertFalse(reservering1.equals(reservering2));
+		Assert.assertFalse(reservering1.equals(reservering3));
 	}
 
 	@Test
 	public void testHash() {
-		Reservering reservering1 = new Reservering(this.reserveringsNummer, thisKlant);
+		Reservering reservering1 = new Reservering(thisAccount, thisRivierTocht);
 		int notExpected = 604107971;
 		int actual = reservering1.hashCode();
 		Assert.assertNotEquals(notExpected, actual);
@@ -67,37 +70,14 @@ public class ReserveringTest {
 
 	@Test
 	public void testAddTocht() {
-		Reservering reservering1 = new Reservering(this.reserveringsNummer, thisKlant);
-		Assert.assertTrue(reservering1.add(eenTocht));
+		Reservering reservering1 = new Reservering(thisAccount, thisRivierTocht);
+		Assert.assertTrue(reservering1.add(thatRivierTocht));
 	}
 
 	@Test
 	public void testRemoveTocht() {
-		Reservering reservering1 = new Reservering(this.reserveringsNummer, thisKlant);
-		reservering1.add(eenTocht);
-		Assert.assertTrue(reservering1.remove(eenTocht));
+		Reservering reservering1 = new Reservering(thisAccount, thisRivierTocht);
+		reservering1.add(thatRivierTocht);
+		Assert.assertTrue(reservering1.remove(thatRivierTocht));
 	}
-
-	// @Test
-	// public void testGetVerloopDatum() {
-	// Reservering reservering1 = new Reservering(this.reserveringsNummer);
-	// reservering1.setVerloopDatum(LocalDateTime.now());
-	// Assert.assertEquals(reservering1.getVerloopDatum(), LocalDateTime.now());
-	// }
-
-	// @Test
-	// public void testGetReserveringDatum() {
-	// Reservering reservering1 = new Reservering(this.reserveringsNummer);
-	// reservering1.setReserveringsDatum(LocalDateTime.now());
-	// Assert.assertEquals(reservering1.getReserveringsDatum(),
-	// LocalDateTime.now());
-	// }
-
-	// @Test
-	// public void testGetReserveringNummer() {
-	// Reservering reservering1 = new Reservering(this.reserveringsNummer);
-	// int actual = reservering1.getReserveringsNummer();
-	// Assert.assertEquals(this.reserveringsNummer, actual);
-	// }
-
 }

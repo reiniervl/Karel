@@ -110,16 +110,6 @@ public class ReserveringJpaDAOTest {
    }
 
    @Test
-   public void testFindByRESNUMMER() {
-      Assert.assertFalse(this.thisReservering.isPersistant());
-      this.addWithTX(this.thisReservering);
-      Integer eenReserveringsNummer = this.thisReservering.getReserveringsNummer();
-      Optional<Reservering> result = this.beanUnderTest.find(eenReserveringsNummer);
-      Assert.assertTrue(result.isPresent());
-      Assert.assertEquals(this.thisReservering, result.get());
-   }
-
-   @Test
    public void testDeleteByOid() {
       this.addWithTX(this.thisReservering);
       EntityTransaction unmanagedTx = this.entityManager.getTransaction();

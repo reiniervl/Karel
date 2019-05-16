@@ -3,52 +3,51 @@ package se.skillytaire.belastingdienst.ee.entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.rvlstudio.annotation.Builder;
 import com.rvlstudio.annotation.BuilderField;
 
 @Builder
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueReservering", columnNames = { "ReserveringsNummer",
-		"reserveringsDatum", "verloopDatum" }) })
-@NamedQueries({
-		@NamedQuery(name = Reservering.FIND_BY_RESNUMMER, query = "select a from Reservering a where a.reserveringsNummer=:reserveringsNummer"),
-		@NamedQuery(name = Reservering.DELETE_BY_OID, query = "delete from Reservering a where a.oid=:oid") })
+@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueReservering", columnNames = { "accountOID",
+		"reserveringsDatum"}) })
+@NamedQuery(name = Reservering.DELETE_BY_OID, query = "delete from Reservering a where a.oid=:oid")
 public class Reservering extends AbstractEntity<Reservering> {
 	private static final long serialVersionUID = 1L;
-	public static final String FIND_BY_RESNUMMER = "Reservering_FindByResnummer";
 	public static final String DELETE_BY_OID = "Reservering_DeleteByOid";
 	@NotNull
 	@BuilderField
-	@Basic
-	@Column(unique = true)
-	private Integer reserveringsNummer;
-	@NotNull
-	@BuilderField
-	@Basic
+	@Basic 
+	@Column (name = "reserveringsDatum")
 	private LocalDateTime reserveringsDatum;
 	@NotNull
 	@BuilderField
 	@Basic
-	private LocalDateTime verloopDatum;
+	private Periode verloopDatum = new Periode();
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@NotNull
+	@Size(min = 1)
 	private List<Tocht<?>> mijnTochten = new ArrayList<Tocht<?>>();
 	@NotNull
 	@BuilderField
+	@JoinColumn (name = "accountOID")
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	private Klant klant;
+	private Account account;
 
 	/**
 	 * Developers should not use the default constructor. Please use the same
@@ -57,50 +56,71 @@ public class Reservering extends AbstractEntity<Reservering> {
 	public Reservering() {
 	}
 
-	public Reservering(final Integer reserveringsNummer, final Klant klant) {
-		if (reserveringsNummer == null) {
-			throw new IllegalArgumentException("Het reserveringsNummer is Null");
+	public Reservering(final Account account, final MeerTocht meerTocht) {
+		if (account == null) {
+			throw new IllegalArgumentException("Account is Null");
 		}
-		if (klant == null) {
-			throw new IllegalArgumentException("Klant is Null");
+		if (meerTocht == null) {
+			throw new IllegalArgumentException("meerTocht is Null");
 		}
-		this.reserveringsNummer = reserveringsNummer;
-		this.klant = klant;
+		this.add(meerTocht);
+		this.reserveringsDatum = LocalDateTime.now();
+		this.verloopDatum.start();
+		this.account = account;
+	}
+	
+	public Reservering(final Account account, final RivierTocht rivierTocht) {
+		if (account == null) {
+			throw new IllegalArgumentException("Account is Null");
+		}
+		if (rivierTocht == null) {
+			throw new IllegalArgumentException("rivierTocht is Null");
+		}
+		this.add(rivierTocht);
+		this.reserveringsDatum = LocalDateTime.now();
+		this.verloopDatum.start();
+		this.account = account;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Reservering(final Reservering reservering) {
 		super(reservering);
-		this.reserveringsNummer = reservering.getReserveringsNummer();
+		this.mijnTochten = (ArrayList<Tocht<?>>) ((ArrayList<Tocht<?>>)reservering.mijnTochten).clone();
 		this.reserveringsDatum = reservering.getReserveringsDatum();
 		this.verloopDatum = reservering.getVerloopDatum();
-		this.klant = reservering.getKlant();
+		this.account = reservering.getAccount();
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Klant [Mijn Klant= ").append(this.klant).append("Reservering Reserveringsnummer= ")
-				.append(this.reserveringsNummer).append("Reserverings datum= ").append(this.reserveringsDatum)
+		builder.append("Account = ").append(this.account).append("Reservering Reserveringsnummer= ")
+				.append(this.getOid()).append("Reserverings datum= ").append(this.reserveringsDatum)
 				.append("Verloop datum= ").append(this.verloopDatum).append("]");
 		return builder.toString();
 	}
 
 	@Override
 	public int compareTo(final Reservering that) {
-		return this.getReserveringsNummer().compareTo(that.getReserveringsNummer());
+		int compareTo = this.getAccount().compareTo(that.getAccount());
+		if (compareTo == 0) {
+			compareTo = this.getReserveringsDatum().compareTo(that.getReserveringsDatum());
+		}
+		return compareTo;
 	}
 
 	@Override
 	public int hashCode() {
-		return this.reserveringsNummer.hashCode();
+		return this.account.hashCode();
 	}
 
-	public Klant getKlant() {
-		return this.klant;
+	public Account getAccount() {
+		return this.account;
 	}
 
-	public Integer getReserveringsNummer() {
-		return this.reserveringsNummer;
+	@Transient
+	public Optional<Integer> getReserveringsNummer() {
+		return Optional.ofNullable(this.getOid());
 	}
 
 	public LocalDateTime getReserveringsDatum() {
@@ -111,12 +131,8 @@ public class Reservering extends AbstractEntity<Reservering> {
 		this.reserveringsDatum = reserveringsDatum;
 	}
 
-	public LocalDateTime getVerloopDatum() {
+	public Periode getVerloopDatum() {
 		return this.verloopDatum;
-	}
-
-	public void setVerloopDatum(final LocalDateTime verloopDatum) {
-		this.verloopDatum = verloopDatum;
 	}
 
 	public boolean add(final Tocht<?> e) {

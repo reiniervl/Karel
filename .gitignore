@@ -38,3 +38,5 @@ mvnOutput.txt
 #
 installs/install.sh
 .factorypath
+/pom.xml
+/.gitignore
