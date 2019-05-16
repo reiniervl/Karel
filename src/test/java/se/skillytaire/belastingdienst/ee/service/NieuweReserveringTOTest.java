@@ -27,7 +27,7 @@ public class NieuweReserveringTOTest {
 	@Test
 	public void testEmptyReserveringTO() {
 		NieuweReserveringResultTO result = new NieuweReserveringResultTO();
-		assertEquals(NieuweKlantResultTO.Nieuwe_Klant_Exists, result.getCode());
+		assertEquals(NieuweKlantResultTO.NIEUWE_KLANT_EXISTS, result.getCode());
 	}
 	@Test
 	public void testNieuweReserveringTO() {
