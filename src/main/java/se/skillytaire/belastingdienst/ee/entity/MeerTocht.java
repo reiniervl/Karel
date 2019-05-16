@@ -22,5 +22,16 @@ public class MeerTocht extends Tocht<MeerTocht> {
 	public MeerTocht(MeerTocht tocht) {
 		super(tocht);
 	}
-
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("MeerTocht []");
+		builder.append(", reserveringsPeriode=");
+		builder.append(super.getReserveringsPeriode());
+		builder.append(", actuelePeriode=");
+		builder.append(super.getActuelePeriode());
+		builder.append(", prijs=");
+		builder.append(super.getPrijs());
+		return builder.toString();
+	}
 }

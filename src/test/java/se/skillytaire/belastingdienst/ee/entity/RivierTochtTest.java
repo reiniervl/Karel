@@ -17,6 +17,7 @@ public class RivierTochtTest {
    private double prijs1 = 16D;
    @That
    private Periode periode2;
+   private double prijs2 = 17D;
 
 	 @This
 	 Boot thisBoot;
@@ -54,7 +55,7 @@ public class RivierTochtTest {
    @Test
    public void equalsOngelijkTest() {
 		RivierTocht rivierTocht1 = new RivierTocht(thisBoot, prijs1, periode1);
-		RivierTocht rivierTocht2 = new RivierTocht(thatBoot, prijs1, periode1);
+		RivierTocht rivierTocht2 = new RivierTocht(thatBoot, prijs2, periode2);
       Assert.assertFalse(rivierTocht1.equals(rivierTocht2));
    }
 
