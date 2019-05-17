@@ -4,7 +4,7 @@ import javax.ejb.Remote;
 
 import se.skillytaire.belastingdienst.ee.common.QRCode;
 
-@Remote
+// @Remote
 public interface StartMeertochtRemote {
 	StartMeerTochtResultTO start(QRCode code);
 }

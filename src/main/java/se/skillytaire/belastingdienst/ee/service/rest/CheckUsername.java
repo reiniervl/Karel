@@ -19,14 +19,14 @@ import se.skillytaire.belastingdienst.ee.service.UsernameCheck;
 @Path("checkusername")
 public class CheckUsername {
 
-	@Inject
-	UsernameCheck usernameCheck;
+	// @Inject
+	// UsernameCheck usernameCheck;
 
 	@GET
 	@Path("{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public StreamingOutput checkUsername(@PathParam("username") String username) {
-		boolean exists = usernameCheck.isBeschikbaar(username);
+		boolean exists = false; // usernameCheck.isBeschikbaar(username);
 		StringBuilder sb = new StringBuilder();
 		sb.append("{\n")
 			.append("\t\"success\"")

@@ -34,7 +34,8 @@ import com.rvlstudio.annotation.Builder;
 @Table(uniqueConstraints = { @UniqueConstraint(name = "uniqueKlant",
       columnNames = { "username", "email" }) })
 @NamedQueries({
-      @NamedQuery(name = Klant.FIND_BY_USERNAME, query = "SELECT k FROM Klant k WHERE k.username=:username") })
+	@NamedQuery(name = Klant.FIND_BY_USERNAME, query = "SELECT k FROM Klant k WHERE k.username=:username")
+})
 public class Klant extends AbstractEntity<Klant> {
    private static final long serialVersionUID = 1l;
    public static final String FIND_BY_USERNAME = "Klant_findByUsername";

@@ -42,7 +42,7 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	 */
 	public Tocht() {
 	}
-
+// TODO: boot weg
 	public Tocht(final Boot boot, final double prijs, final Periode reserveringsPeriode) {
 		if (boot == null) {
 			throw new IllegalArgumentException("De boot is null");
