@@ -42,6 +42,7 @@ public class Boot extends AbstractEntity<Boot> {
 	@BuilderField
 	private int nummer;
 
+	// TODO: Correct cascadetype
 	// UNDONE: CascadeType.PERSIST, CascadeType.MERGE
 	@OneToMany(cascade = { CascadeType.ALL})
 	private List<Tocht<?>> tochten = new ArrayList<>();
