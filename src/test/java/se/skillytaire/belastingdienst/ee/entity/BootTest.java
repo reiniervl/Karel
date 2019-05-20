@@ -1,5 +1,8 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -97,4 +100,30 @@ public class BootTest {
 		boot.removeTocht(this.thisMeerTocht);
 		boot.removeTocht(this.thisRivierTocht);
 	}
+	
+	@Test
+	public void StartTocht() {
+		Boot boot = new Boot(this.thisVerhuurder, this.thisNummer);
+		assertTrue(boot.isBeschikbaar());
+		boot.start(thisMeerTocht);
+		assertFalse(boot.isBeschikbaar());
+	}
+	
+	@Test
+	public void hasLaatsteTocht() {
+		Boot boot = new Boot(this.thisVerhuurder, this.thisNummer);
+		boot.start(thisMeerTocht);
+		assertTrue(boot.hasLaatsteTocht());
+	}
+	
+	@Test
+	public void isInspectieNodig() {
+		Boot boot = new Boot(this.thisVerhuurder, this.thisNummer);
+		assertTrue(boot.isBeschikbaar());
+		boot.start(thisMeerTocht);
+		assertFalse(boot.isInspectieNodig());
+	}
+	
+	
+		
 }

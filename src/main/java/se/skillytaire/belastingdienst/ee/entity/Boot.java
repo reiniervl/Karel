@@ -1,7 +1,9 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,37 +24,30 @@ import se.skillytaire.java.datatype.PositiveInteger;
 
 @Entity
 @Builder
-@NamedQueries({ 
-	@NamedQuery(name = Boot.DELETE_BY_OID, query = "delete from Boot a where a.oid=:oid"),
-	@NamedQuery(name = Boot.SELECT_BY_QRCODE, query = "select a from Boot a where a.nummer=:bootNummer AND a.eigenaar.userName=:verhuurder")
-})
-@Table(
-	uniqueConstraints = { 
-		@UniqueConstraint(
-			name = "Uniqueverhuurdericmnummer",
-			columnNames = { "verhuurder_oid", "nummer" }
-		)
-})
+@NamedQueries({ @NamedQuery(name = Boot.DELETE_BY_OID, query = "delete from Boot a where a.oid=:oid"),
+		@NamedQuery(name = Boot.SELECT_BY_QRCODE, query = "select a from Boot a where a.nummer=:bootNummer AND a.eigenaar.userName=:verhuurder") })
+@Table(uniqueConstraints = {
+		@UniqueConstraint(name = "Uniqueverhuurdericmnummer", columnNames = { "verhuurder_oid", "nummer" }) })
 public class Boot extends AbstractEntity<Boot> {
 	private static final long serialVersionUID = 1L;
 	public static final String DELETE_BY_OID = "Boot_DeleteByOid";
 	public static final String SELECT_BY_QRCODE = "Boot_SelectByQrcode";
 	@NotNull
-	@Column (name = "nummer")
+	@Column(name = "nummer")
 	@BuilderField
 	private int nummer;
 
 	// TODO: Correct cascadetype
 	// UNDONE: CascadeType.PERSIST, CascadeType.MERGE
-	@OneToMany(cascade = { CascadeType.ALL})
-	private List<Tocht<?>> tochten = new ArrayList<>();
+	@OneToMany(cascade = { CascadeType.ALL })
+	private List<Tocht<?>> tochtGeschiedenis = new ArrayList<>();
 	@NotNull
 	@BuilderField
-	@OneToOne(cascade = { CascadeType.ALL})
-	@JoinColumn (name = "verhuurder_oid")
+	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "verhuurder_oid")
 	private Verhuurder eigenaar;
-//   private ArrayList<Tocht<?>> tochtGeschiedenis;
-//   private static final Duration INSPECTIEDUUR = Duration.ofSeconds(10);
+	private Tocht<?> deLaatsteTocht;
+   private static final Duration INSPECTIEDUUR = Duration.ofSeconds(10);
 
 	public Boot() {
 	}
@@ -107,11 +102,11 @@ public class Boot extends AbstractEntity<Boot> {
 	}
 
 	public void addTocht(Tocht<?> tocht) {
-		this.tochten.add(tocht);
+		this.tochtGeschiedenis.add(tocht);
 	}
 
 	public void removeTocht(Tocht<?> tocht) {
-		this.tochten.remove(tocht);
+		this.tochtGeschiedenis.remove(tocht);
 	}
 
 	public int getNummer() {
@@ -126,37 +121,33 @@ public class Boot extends AbstractEntity<Boot> {
 		return this.eigenaar;
 	}
 
-// public void start(final Tocht<?> eenTocht) {
-//    this.deLaatsteTocht = eenTocht;
-////    this.tochtGeschiedenis.add(this.deLaatsteTocht);
-//    eenTocht.start();
-// }
-// public boolean isBeschikbaar() {
-//    return ((this.isVrij()) && (!this.isInspectieNodig()));
-// }
-//
-// public boolean isInspectieNodig() {
-//    Duration total = Duration.ZERO;
-//    for (Tocht<?> t : this.tochtGeschiedenis) {
-//       Periode actuelePeriode = t.getActuelePeriode();
-//       Optional<Duration> optionalDuration = actuelePeriode.getDuur();
-//       if (optionalDuration.isPresent()) {
-//          total = total.plus(optionalDuration.get());
-//       }
-//    }
-//    return total.getSeconds() > Boot.INSPECTIEDUUR.getSeconds();
-// }
-//
-// private boolean isVrij() {
-//    return (!this.hasLaatsteTocht()) || (this.deLaatsteTocht.isBeeindigd());
-// }
-//
-// public boolean hasLaatsteTocht() {
-//    return this.deLaatsteTocht != null;
-// }
-//
-// public void uitvoerenInspectie() {
-//    this.tochtGeschiedenis.clear();
-// }
+ public void start(final Tocht<?> eenTocht) {
+    this.deLaatsteTocht = eenTocht;
+    this.tochtGeschiedenis.add(this.deLaatsteTocht);
+    eenTocht.start();
+ }
 
+	public boolean isBeschikbaar() {
+		return ((this.isVrij()) && (!this.isInspectieNodig()));
+	}
+
+ public boolean isInspectieNodig() {
+    Duration total = Duration.ZERO;
+    for (Tocht<?> t : this.tochtGeschiedenis) {
+       Periode actuelePeriode = t.getActuelePeriode();
+       Optional<Duration> optionalDuration = actuelePeriode.getDuur();
+       if (optionalDuration.isPresent()) {
+          total = total.plus(optionalDuration.get());
+       }
+    }
+    return total.getSeconds() > Boot.INSPECTIEDUUR.getSeconds();
+ }
+
+ private boolean isVrij() {
+    return (!this.hasLaatsteTocht()) || (this.deLaatsteTocht.isBeeindigd());
+ }
+
+ public boolean hasLaatsteTocht() {
+    return this.deLaatsteTocht != null;
+ }
 }
