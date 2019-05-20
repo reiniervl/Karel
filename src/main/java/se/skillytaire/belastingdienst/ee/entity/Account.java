@@ -5,10 +5,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import com.rvlstudio.annotation.Builder;
@@ -18,6 +21,8 @@ import java.util.ArrayList;
 
 @Builder
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueAccount", columnNames = { "Klant_OID",
+"verhuurder"}) })
 @NamedQueries({
 	@NamedQuery(name = "FIND_BY_USERNAME", query = "SELECT a FROM Account a WHERE a.klant.username=:username")
 })
@@ -34,6 +39,10 @@ public class Account extends AbstractEntity<Account> {
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
 	private List<Reservering> reserveringen = new ArrayList<Reservering>();
 	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn (name = "verhuurder")
+	private Verhuurder verhuurder;
+
 	/**
 	 * Constructor alleen te gebruiken door JPA
 	 */

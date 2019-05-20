@@ -37,17 +37,16 @@ public class Boot extends AbstractEntity<Boot> {
 	@BuilderField
 	private int nummer;
 
-	// TODO: Correct cascadetype
-	// UNDONE: CascadeType.PERSIST, CascadeType.MERGE
-	@OneToMany(cascade = { CascadeType.ALL })
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Tocht<?>> tochtGeschiedenis = new ArrayList<>();
 	@NotNull
 	@BuilderField
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "verhuurder_oid")
 	private Verhuurder eigenaar;
+	@OneToOne
 	private Tocht<?> deLaatsteTocht;
-   private static final Duration INSPECTIEDUUR = Duration.ofSeconds(10);
+	private static final Duration INSPECTIEDUUR = Duration.ofSeconds(15);
 
 	public Boot() {
 	}
@@ -61,18 +60,14 @@ public class Boot extends AbstractEntity<Boot> {
 		}
 		this.eigenaar = eenEigenaar;
 		this.nummer = nummer.intValue();
-//      this.tochtGeschiedenis = new ArrayList<Tocht<?>>();
 	}
 
+	@SuppressWarnings("unchecked")
 	public Boot(final Boot boot) {
 		super(boot);
 		this.nummer = boot.getNummer();
 		this.eigenaar = boot.getEigenaar();
-//      this.tochtGeschiedenis =
-//            (ArrayList<Tocht<?>>) that.tochtGeschiedenis.clone();
-//      if (that.hasLaatsteTocht()) {
-//         // FIX-ME: Clone()
-//         this.deLaatsteTocht = that.deLaatsteTocht;
+		this.tochtGeschiedenis = (List<Tocht<?>>) ((ArrayList<Tocht<?>>) this.tochtGeschiedenis).clone();
 	}
 
 	@Override
@@ -121,33 +116,41 @@ public class Boot extends AbstractEntity<Boot> {
 		return this.eigenaar;
 	}
 
- public void start(final Tocht<?> eenTocht) {
-    this.deLaatsteTocht = eenTocht;
-    this.tochtGeschiedenis.add(this.deLaatsteTocht);
-    eenTocht.start();
- }
+	public void start(final Tocht<?> eenTocht) {
+		this.deLaatsteTocht = eenTocht;
+		this.tochtGeschiedenis.add(this.deLaatsteTocht);
+		eenTocht.start();
+	}
+	
+	public void beeindigLaatsteTocht() {
+		this.deLaatsteTocht.beeindig();
+	}
 
 	public boolean isBeschikbaar() {
 		return ((this.isVrij()) && (!this.isInspectieNodig()));
 	}
 
- public boolean isInspectieNodig() {
-    Duration total = Duration.ZERO;
-    for (Tocht<?> t : this.tochtGeschiedenis) {
-       Periode actuelePeriode = t.getActuelePeriode();
-       Optional<Duration> optionalDuration = actuelePeriode.getDuur();
-       if (optionalDuration.isPresent()) {
-          total = total.plus(optionalDuration.get());
-       }
-    }
-    return total.getSeconds() > Boot.INSPECTIEDUUR.getSeconds();
- }
+	public boolean isInspectieNodig() {
+		Duration total = Duration.ZERO;
+		for (Tocht<?> t : this.tochtGeschiedenis) {
+			Periode actuelePeriode = t.getActuelePeriode();
+			Optional<Duration> optionalDuration = actuelePeriode.getDuur();
+			if (optionalDuration.isPresent()) {
+				total = total.plus(optionalDuration.get());
+			}
+		}
+		return total.getSeconds() > Boot.INSPECTIEDUUR.getSeconds();
+	}
 
- private boolean isVrij() {
-    return (!this.hasLaatsteTocht()) || (this.deLaatsteTocht.isBeeindigd());
- }
+	private boolean isVrij() {
+		return (!this.hasLaatsteTocht()) || (this.deLaatsteTocht.isBeeindigd());
+	}
 
- public boolean hasLaatsteTocht() {
-    return this.deLaatsteTocht != null;
- }
+	public boolean hasLaatsteTocht() {
+		return this.deLaatsteTocht != null;
+	}
+	
+	public void uitvoerenInspectie() {
+		this.tochtGeschiedenis.clear();		
+	}
 }

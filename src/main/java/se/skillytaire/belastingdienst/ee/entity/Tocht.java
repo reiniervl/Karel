@@ -103,4 +103,8 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	public void start() {
 		this.actuelePeriode.start();
 	}
+	
+	public void beeindig() {
+		this.actuelePeriode.beeindig();
+	}
 }
