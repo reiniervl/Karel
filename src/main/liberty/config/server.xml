@@ -4,6 +4,7 @@
 		<feature>servlet-3.1</feature>
 		<!-- JSP disabled: clash with jaxrs -->
 		<!-- <feature>jsp-2.3</feature> -->
+		<feature>jsonp-1.0</feature>
 		<feature>beanValidation-1.1</feature>
 		<feature>el-3.0</feature>
 		<feature>ejbLite-3.2</feature>
