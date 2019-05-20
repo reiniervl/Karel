@@ -8,13 +8,13 @@ import javax.inject.Singleton;
 import se.skillytaire.belastingdienst.ee.entity.Reservering;
 import se.skillytaire.belastingdienst.ee.entity.ReserveringBuilder;
 import se.skillytaire.belastingdienst.ee.persistance.ReserveringDAO;
-import se.skillytaire.belastingdienst.ee.service.MaakNieuweReservering;
+import se.skillytaire.belastingdienst.ee.service.NieuweReservering;
 import se.skillytaire.belastingdienst.ee.service.NieuweReserveringResultTO;
 import se.skillytaire.belastingdienst.ee.service.NieuweReserveringTO;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class MaakNieuweReserveringEJB implements MaakNieuweReservering {
+public class MaakNieuweReserveringEJB implements NieuweReservering {
 	@Singleton
 	ReserveringDAO dao;
 	

@@ -3,12 +3,15 @@ package se.skillytaire.belastingdienst.ee.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@NamedQuery(name = Boeking.DELETE_BY_OID, query = "delete from Boeking a where a.oid=:oid")
 public class Boeking extends AbstractEntity<Boeking> {
 	private static final long serialVersionUID = 1L;
+	public static final String DELETE_BY_OID = "Boeking_DeleteByOid";
 	@NotNull
 	@JoinColumn(unique = true)
 	@OneToOne(cascade = CascadeType.ALL)
