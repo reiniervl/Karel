@@ -21,19 +21,19 @@ public class StartRiviertocht implements StartRivierTochtRemote {
 	RivierTochtDAO rivierTochtDAO;
 
 	public StartRiviertocht() {}
+	/*
+	 * public StartRivierTochtResultTO start(QRCode code) { StartRivierTochtResultTO
+	 * result = new StartRivierTochtResultTO(); Optional<Boot> bootRes =
+	 * bootDAO.find(code); if(bootRes.isPresent()) { Optional<RivierTocht> tochtRes
+	 * = rivierTochtDAO.findByBoot(bootRes.get()); if(tochtRes.isPresent()) {
+	 * RivierTocht tocht = tochtRes.get(); tocht.start(); tocht =
+	 * rivierTochtDAO.update(tocht); result = new
+	 * StartRivierTochtResultTO(tocht.getOid()); } } return result; }
+	 */
 
+	@Override
 	public StartRivierTochtResultTO start(QRCode code) {
-		StartRivierTochtResultTO result = new StartRivierTochtResultTO();
-		Optional<Boot> bootRes = bootDAO.find(code);
-		if(bootRes.isPresent()) {
-			Optional<RivierTocht> tochtRes = rivierTochtDAO.findByBoot(bootRes.get());
-			if(tochtRes.isPresent()) {
-				RivierTocht tocht = tochtRes.get();
-				tocht.start();
-				tocht = rivierTochtDAO.update(tocht);
-				result = new StartRivierTochtResultTO(tocht.getOid());
-			}
-		}
-		return result;
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

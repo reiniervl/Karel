@@ -2,13 +2,11 @@ package se.skillytaire.belastingdienst.ee.entity;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -31,11 +29,6 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	@NotNull
 	private double prijs;
 
-	// UNDONE: CascadeType.PERSIST
-	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@NotNull
-	private Boot boot;
-
 	/**
 	 * Developers should not use the default constructor. Please use the same
 	 * visibility modifier "protected" for overriding classes.
@@ -43,18 +36,13 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	public Tocht() {
 	}
 // TODO: boot weg
-	public Tocht(final Boot boot, final double prijs, final Periode reserveringsPeriode) {
-		if (boot == null) {
-			throw new IllegalArgumentException("De boot is null");
-		}
-
-		if (reserveringsPeriode == null) {
+	public Tocht(final double prijs, final Periode reserveringsPeriode) {
+				if (reserveringsPeriode == null) {
 			throw new IllegalArgumentException("De reserveringsPeriode is null");
 		}
 		if (!reserveringsPeriode.isBeeindigd()) {
 			throw new IllegalArgumentException("De reserveringsPeriode is niet valide");
 		}
-		this.boot = boot;
 		this.prijs = prijs;
 		this.reserveringsPeriode = reserveringsPeriode.clone();
 		this.actuelePeriode = new Periode();
@@ -62,7 +50,6 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 
 	public Tocht(final T tocht) {
 		super(tocht);
-		this.boot = tocht.getBoot();
 		this.reserveringsPeriode = tocht.getReserveringsPeriode();
 		this.actuelePeriode = tocht.getActuelePeriode();
 		this.prijs = tocht.getPrijs();
@@ -71,10 +58,7 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	@Override
 	public int compareTo(final T that) {
 		Tocht<T> deTocht = that;
-		int compareTo = this.boot.compareTo(that.getBoot());
-		if (compareTo == 0) {
-			compareTo = this.reserveringsPeriode.compareTo(deTocht.reserveringsPeriode);
-		}
+		int compareTo = this.reserveringsPeriode.compareTo(deTocht.reserveringsPeriode);
 		return compareTo;
 	}
 
@@ -91,9 +75,7 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 			.append(this.actuelePeriode)
 			.append(this.reserveringsPeriode)
 			.append(", prijs=")
-			.append(this.prijs)
-			.append(", boot=")
-			.append(this.boot);
+			.append(this.prijs);
 		return builder.toString();
 	}
 
@@ -120,9 +102,5 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 
 	public void start() {
 		this.actuelePeriode.start();
-	}
-
-	public Boot getBoot() {
-		return this.boot;
 	}
 }

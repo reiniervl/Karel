@@ -21,19 +21,18 @@ public class StartMeertocht implements StartMeertochtRemote {
 	MeerTochtDAO meerTochtDAO;
 
 	public StartMeertocht() {}
+	/*
+	 * public StartMeerTochtResultTO start(QRCode code) { StartMeerTochtResultTO
+	 * result = new StartMeerTochtResultTO(); Optional<Boot> bootRes =
+	 * bootDAO.find(code); if(bootRes.isPresent()) { Optional<MeerTocht> tochtRes =
+	 * meerTochtDAO.findByBoot(bootRes.get()); if(tochtRes.isPresent()) { MeerTocht
+	 * tocht = tochtRes.get(); tocht.start(); tocht = meerTochtDAO.update(tocht);
+	 * result = new StartMeerTochtResultTO(tocht.getOid()); } } return result; }
+	 */
 
+	@Override
 	public StartMeerTochtResultTO start(QRCode code) {
-		StartMeerTochtResultTO result = new StartMeerTochtResultTO();
-		Optional<Boot> bootRes = bootDAO.find(code);
-		if(bootRes.isPresent()) {
-			Optional<MeerTocht> tochtRes = meerTochtDAO.findByBoot(bootRes.get());
-			if(tochtRes.isPresent()) {
-				MeerTocht tocht = tochtRes.get();
-				tocht.start();
-				tocht = meerTochtDAO.update(tocht);
-				result = new StartMeerTochtResultTO(tocht.getOid());
-			}
-		}
-		return result;
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

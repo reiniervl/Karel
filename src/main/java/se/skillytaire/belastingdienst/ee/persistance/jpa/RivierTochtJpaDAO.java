@@ -4,9 +4,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
-import se.skillytaire.belastingdienst.ee.entity.Boot;
 import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
 import se.skillytaire.belastingdienst.ee.persistance.RivierTochtDAO;
 
@@ -35,17 +33,6 @@ public class RivierTochtJpaDAO implements RivierTochtDAO {
       RivierTocht gevondenRivierTocht = this.em.find(RivierTocht.class, OID);
       return Optional.ofNullable(gevondenRivierTocht);
    }
-
-	 public Optional<RivierTocht> findByBoot(Boot boot) {
-		 Optional<RivierTocht> result = Optional.ofNullable(null);
-		 if(boot.isPersistant()) {
-			 TypedQuery<RivierTocht> query = em.createNamedQuery(RivierTocht.FIND_BY_BOOT_OID, RivierTocht.class);
-			 query.setParameter("boot_oid", boot.getOid());
-			 result = query.getResultList().stream().findFirst();
-		 }
-		 return result;
- 
-	 }
 
    @Override
    public RivierTocht update(final RivierTocht rivierTocht) {

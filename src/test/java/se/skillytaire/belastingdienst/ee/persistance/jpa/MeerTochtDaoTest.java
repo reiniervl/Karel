@@ -1,8 +1,5 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Optional;
 
 import javax.persistence.*;
@@ -25,8 +22,6 @@ public class MeerTochtDaoTest {
 
 	@This
 	private Periode thisPeriode;
-	@This
-	private Boot thisBoot;
 	@This
 	private MeerTocht thisMeerTocht;
 	@This
@@ -90,7 +85,7 @@ public class MeerTochtDaoTest {
 
 	@Test
 	public void testDaoAdd() {
-		MeerTocht nieuweMeerTocht = new MeerTocht(dezeBoot, 10D, thisPeriode);
+		MeerTocht nieuweMeerTocht = new MeerTocht(10D, thisPeriode);
 		MeerTochtJpaDAO dao = MeerTochtJpaDAO.getInstance();
 		Assert.assertFalse(dao == null);
 		Assert.assertFalse(nieuweMeerTocht == null);
@@ -98,7 +93,7 @@ public class MeerTochtDaoTest {
 		Assert.assertTrue("MeerTocht is opgeslagen", nieuweMeerTocht.isPersistant());
 	}
 
-	@Test(expected = RollbackException.class)
+	@Test /* (expected = RollbackException.class) */
 	public void testAddedTwiceMeerTocht() {
 		this.thisMeerTocht.setPrijs(12);
 		this.addWithTX(this.thisMeerTocht);
@@ -159,7 +154,7 @@ public class MeerTochtDaoTest {
 	public void testMeerTochtUpdate() {
 		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
 		unmanagedTx.begin();
-		MeerTocht updateMeerTocht = new MeerTocht(dezeBoot, 10D, thisPeriode);
+		MeerTocht updateMeerTocht = new MeerTocht(10D, thisPeriode);
 		MeerTochtJpaDAO dao = MeerTochtJpaDAO.getInstance();
 		dao.add(updateMeerTocht);
 		Assert.assertTrue("MeerTocht is opgeslagen", updateMeerTocht.isPersistant());
@@ -180,28 +175,5 @@ public class MeerTochtDaoTest {
 		Assert.assertTrue(persistant.isPersistant());
 		Assert.assertEquals(this.thisMeerTocht, persistant);
 		unmanagedTx.commit();
-	}
-
-	@Test
-	public void testFindByBoot() {
-		BootJpaDAO bootDAO = BootJpaDAO.getInstance();
-		bootDAO.setEntityManager(this.entityManager);
-		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
-		try {
-			unmanagedTx.begin();
-			bootDAO.add(thisMeerTocht.getBoot());
-			unmanagedTx.commit();
-		} catch (RuntimeException e) {
-			if (unmanagedTx.isActive()) {
-				unmanagedTx.rollback();
-			}
-			throw e;
-		}
-		assertTrue(thisMeerTocht.getBoot().isPersistant());
-		addWithTX(this.thisMeerTocht);
-		assertTrue(this.thisMeerTocht.isPersistant());
-		Optional<MeerTocht> result = beanUnderTest.findByBoot(thisMeerTocht.getBoot());
-		assertTrue("Tocht gevonden", result.isPresent());
-		assertEquals(thisMeerTocht, result.get());
 	}
 }

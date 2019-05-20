@@ -11,23 +11,12 @@ import se.skillytaire.course.tools.jlc.This;
 public class MeerTochtTestFactory
       extends AbstractComparableTestObjectFactory<MeerTocht> {
 
-				@This
-				Boot thisBoot;
-				@That
-				Boot thatBoot;
-
-				@GreaterThen
-				Boot grooteBoot;
-
-				@LessThen
-				Boot subBoot;
-
    @GreaterThen
    private Periode greaterThenPeriode;
 
    @Override
    public MeerTocht createGreaterThen() {
-      return new MeerTocht(grooteBoot, 1D, greaterThenPeriode);
+      return new MeerTocht(1D, greaterThenPeriode);
    }
 
    @LessThen
@@ -35,7 +24,7 @@ public class MeerTochtTestFactory
 
    @Override
    public MeerTocht createLessThen() {
-      return new MeerTocht(subBoot, 1D, lessThenPeriode);
+      return new MeerTocht(1D, lessThenPeriode);
    }
 
    @That
@@ -43,7 +32,7 @@ public class MeerTochtTestFactory
 
    @Override
    public MeerTocht createThat() {
-      return new MeerTocht(thatBoot, 10D, thatPeriode);
+      return new MeerTocht(10D, thatPeriode);
    }
 
    @This
@@ -51,7 +40,7 @@ public class MeerTochtTestFactory
 
    @Override
    public MeerTocht createThis() {
-      return new MeerTocht(thisBoot, 100D, thisPeriode);
+      return new MeerTocht(100D, thisPeriode);
    }
 
 }
