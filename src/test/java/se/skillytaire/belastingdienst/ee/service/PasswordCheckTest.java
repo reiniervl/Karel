@@ -13,11 +13,11 @@ import org.junit.Assert;
 import se.skillytaire.belastingdienst.ee.entity.Klant;
 import se.skillytaire.belastingdienst.ee.entity.KlantBuilder;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.KlantJpaDAO;
-import se.skillytaire.belastingdienst.ee.service.ejb.UsernameCheckEJB;
+import se.skillytaire.belastingdienst.ee.service.ejb.PasswordCheckEJB;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 
-public class UserNameCheckTest {
-	private UsernameCheckEJB beanUnderTest;
+public class PasswordCheckTest {
+	private PasswordCheckEJB beanUnderTest;
 	private EntityManagerFactory factory;
 	private EntityManager entityManager;
 
@@ -31,7 +31,7 @@ public class UserNameCheckTest {
 		this.factory = Persistence.createEntityManagerFactory("stuga");
 		this.entityManager = this.factory.createEntityManager();
 		KlantJpaDAO.getInstance().setEntityManager(this.entityManager);
-		beanUnderTest = new UsernameCheckEJB(KlantJpaDAO.getInstance());
+		beanUnderTest = new PasswordCheckEJB(KlantJpaDAO.getInstance());
 	}
 
 	@After
@@ -66,22 +66,26 @@ public class UserNameCheckTest {
 	}
 
 	@Test
-	public void isBeschikbaarTest() {
-		Assert.assertTrue(beanUnderTest.isBeschikbaar("Karel"));
-	}
-
-	@Test
-	public void isNietBeschikbaarTest() {
+	public void isNietValideTest() {
 		Klant klant = KlantBuilder.builder().withPassword("123").withUsername("Karel").withEmail("sexyboy@gmail.com")
 				.build();
 		KlantJpaDAO.getInstance().add(klant);
 		this.addWithTX(klant);
-		Assert.assertFalse(beanUnderTest.isBeschikbaar("Karel"));
+		Assert.assertFalse(beanUnderTest.isValide("Karel", "SexyBoy"));
 	}
 	
 	@Test
-	public void usernameCheck() {
-		UsernameCheckEJB checker = new UsernameCheckEJB();
+	public void isValideTest() {
+		Klant klant = KlantBuilder.builder().withPassword("123").withUsername("Karel").withEmail("sexyboy@gmail.com")
+				.build();
+		KlantJpaDAO.getInstance().add(klant);
+		this.addWithTX(klant);
+		Assert.assertTrue(beanUnderTest.isValide("Karel", "123"));
+	}
+	
+	@Test
+	public void passwordCheck() {
+		PasswordCheckEJB checker = new PasswordCheckEJB();
 		checker.getClass();
 	}
 }
