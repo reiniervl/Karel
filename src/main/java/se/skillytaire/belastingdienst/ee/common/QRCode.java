@@ -3,38 +3,32 @@ package se.skillytaire.belastingdienst.ee.common;
 public class QRCode extends AbstractComparableObject<QRCode> {
 	private static final long serialVersionUID = 1L;
 
-	private final String username;
-	private final int bootNummer;
-
-	public QRCode(String username, int nummer) {
-		if(username == null) {
-			throw new IllegalArgumentException("username mag niet null zijn");
+	private final Integer boekingsNummer;
+	
+	public QRCode(final Integer boekingsNummer) {
+		if (boekingsNummer == null) {
+			throw new IllegalArgumentException("boekingsnummer is null");
 		}
-		this.username = username;
-		this.bootNummer = nummer;
+		this.boekingsNummer = boekingsNummer;
 	}
 	
-
+	public Integer getBoekingsNummer() { 
+		return this.boekingsNummer;
+	}
+	
 	@Override
-	public int compareTo(QRCode code) {
-		return this.username.compareTo(code.getUsername());
+	public int compareTo(QRCode that) {
+		return this.boekingsNummer.compareTo(that.boekingsNummer);
 	}
 
 	@Override
 	public int hashCode() {
-		return this.username.hashCode();
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public int getBootNummer() {
-		return bootNummer;
+		return this.boekingsNummer.hashCode();
 	}
 
 	@Override
 	public String toString() {
-		return "QRCode [bootNummer=" + bootNummer + ", username=" + username + "]";
+		return "QRCode [boekingsNummer=" + boekingsNummer + "]";
 	}
+	
 }

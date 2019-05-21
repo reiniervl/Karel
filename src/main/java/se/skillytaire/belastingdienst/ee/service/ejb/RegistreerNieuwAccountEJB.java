@@ -12,9 +12,9 @@ import se.skillytaire.belastingdienst.ee.entity.AccountBuilder;
 import se.skillytaire.belastingdienst.ee.entity.Klant;
 import se.skillytaire.belastingdienst.ee.persistance.AccountDAO;
 import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;
-import se.skillytaire.belastingdienst.ee.service.NieuwAccountResultTO;
-import se.skillytaire.belastingdienst.ee.service.RegistreerNieuwAccount;
 import se.skillytaire.belastingdienst.ee.service.ResultTO;
+import se.skillytaire.belastingdienst.ee.service.account.NieuwAccountResultTO;
+import se.skillytaire.belastingdienst.ee.service.account.RegistreerNieuwAccount;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)

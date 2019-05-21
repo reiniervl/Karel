@@ -118,11 +118,11 @@ public class AccountJpaDAOTest {
    }
 
    @Test
-   public void testFindByUsername() {
+   public void testFindByKlantAndVerhuurder() {
       Assert.assertFalse(this.thisAccount.isPersistant());
       this.addWithTX(this.thisAccount);
       Optional<Account> result = this.beanUnderTest
-            .find(this.thisAccount.getKlant().getUsername());
+            .find(this.thisAccount.getKlant().getUsername(), this.thisAccount.getVerhuurder().getUserName());
       Assert.assertTrue(result.isPresent());
       Assert.assertEquals(this.thisAccount, result.get());
    }

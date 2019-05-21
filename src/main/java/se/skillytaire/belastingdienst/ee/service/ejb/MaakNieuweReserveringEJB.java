@@ -8,9 +8,9 @@ import javax.inject.Singleton;
 import se.skillytaire.belastingdienst.ee.entity.Reservering;
 import se.skillytaire.belastingdienst.ee.entity.ReserveringBuilder;
 import se.skillytaire.belastingdienst.ee.persistance.ReserveringDAO;
-import se.skillytaire.belastingdienst.ee.service.NieuweReservering;
-import se.skillytaire.belastingdienst.ee.service.NieuweReserveringResultTO;
-import se.skillytaire.belastingdienst.ee.service.NieuweReserveringTO;
+import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReservering;
+import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReserveringResultTO;
+import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReserveringTO;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)

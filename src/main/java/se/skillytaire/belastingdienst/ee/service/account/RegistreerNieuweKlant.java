@@ -1,4 +1,4 @@
-package se.skillytaire.belastingdienst.ee.service;
+package se.skillytaire.belastingdienst.ee.service.account;
 
 
 public interface RegistreerNieuweKlant {

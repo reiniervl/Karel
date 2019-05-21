@@ -5,6 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantResultTO;
+import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantTO;
+
 public class NieuweKlantTOTest {
 	@Test
 	public void testEmptyKlantTO() {

@@ -13,25 +13,29 @@ public class AccountTestFactory extends AbstractComparableTestObjectFactory<Acco
 	@That private Klant thatKlant;
 	@GreaterThen private Klant uberKlant;
 	@LessThen private Klant lesserKlant;
+	@This private Verhuurder thisVerhuurder;
+	@That private Verhuurder thatVerhuurder;
+	@GreaterThen private Verhuurder uberVerhuurder;
+	@LessThen private Verhuurder lesserVerhuurder;
 
 	@Override
 	public Account createGreaterThen() {
-		return new Account(uberKlant);
+		return new Account(uberKlant, uberVerhuurder);
 	}
 
 	@Override
 	public Account createLessThen() {
-		return new Account(lesserKlant);
+		return new Account(lesserKlant, lesserVerhuurder);
 	}
 
 	@Override
 	public Account createThat() {
-		return new Account(thatKlant);
+		return new Account(thatKlant, thatVerhuurder);
 	}
 
 	@Override
 	public Account createThis() {
-		return new Account(thisKlant);
+		return new Account(thisKlant, thisVerhuurder);
 	}
 
 }

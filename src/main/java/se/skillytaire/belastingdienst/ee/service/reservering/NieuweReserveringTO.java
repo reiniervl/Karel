@@ -1,4 +1,4 @@
-package se.skillytaire.belastingdienst.ee.service;
+package se.skillytaire.belastingdienst.ee.service.reservering;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

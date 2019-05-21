@@ -17,7 +17,7 @@ import se.skillytaire.belastingdienst.ee.entity.Klant;
 import se.skillytaire.belastingdienst.ee.entity.KlantBuilder;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.AccountJpaDAO;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.KlantJpaDAO;
-import se.skillytaire.belastingdienst.ee.service.NieuwAccountResultTO;
+import se.skillytaire.belastingdienst.ee.service.account.NieuwAccountResultTO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
 
