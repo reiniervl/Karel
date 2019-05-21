@@ -30,10 +30,10 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
    @Column(unique=true)
 	 private String userName;
 	 @BuilderField
-   @Null
+   @NotNull
 	 private String name;
 	 @BuilderField
-	 @Null
+	 @NotNull
 	 @OneToOne(cascade = CascadeType.ALL)
    private Adres adres;
    @Null
@@ -67,10 +67,16 @@ public class Verhuurder extends AbstractEntity<Verhuurder> {
       this.vloot = (ArrayList<Boot>) ((ArrayList<Boot>)that.vloot).clone();
    }
 
-   public Verhuurder(final String userName) {
+   public Verhuurder(final String userName, final String name, final Adres adres) {
       if (userName == null) {
          throw new IllegalArgumentException("userName is void");
       }
+      if (name == null) {
+          throw new IllegalArgumentException("name is void");
+       }
+      if (adres == null) {
+          throw new IllegalArgumentException("adres is void");
+       }
       this.userName = userName;
    }
 
