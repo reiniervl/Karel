@@ -14,55 +14,53 @@ public class AccountJpaDAO implements AccountDAO {
 
 	private AccountJpaDAO() {
 	}
-	
+
 	public void setEntityManager(EntityManager entityManager) {
 		this.em = entityManager;
 	}
 
 	public static AccountJpaDAO getInstance() {
-		 return AccountJpaDAO.dao;
+		return AccountJpaDAO.dao;
 	}
 
 	@Override
 	public void add(final Account Account) {
-		 em.persist(Account);
+		em.persist(Account);
 	}
 
 	@Override
 	public Optional<Account> findByOID(final Integer OID) {
-		 return Optional.ofNullable(this.em.find(Account.class, OID));
+		return Optional.ofNullable(this.em.find(Account.class, OID));
 	}
-	
-
 
 	@Override
 	public Account update(final Account Account) {
-		 return this.em.merge(Account);
+		return this.em.merge(Account);
 	}
 
 	@Override
 	public boolean delete(final Account Account) {
-		 em.remove(Account);
-		 return true;
+		em.remove(Account);
+		return true;
 	}
 
 	@Override
 	public boolean deleteByOID(final Integer OID) {
 		boolean deleted = false;
-		 Optional<Account> gevondenAccount = this.findByOID(OID);
-		 if (gevondenAccount.isPresent()) {
-				em.remove(gevondenAccount.get());
-				deleted = true;
-		 }
-		 return deleted;
+		Optional<Account> gevondenAccount = this.findByOID(OID);
+		if (gevondenAccount.isPresent()) {
+			em.remove(gevondenAccount.get());
+			deleted = true;
+		}
+		return deleted;
 	}
 
- @Override
- public Optional<Account> find(String username) {
-	 TypedQuery<Account> namedQuery = this.em.createNamedQuery(Account.FIND_BY_USERNAME,
-	 Account.class);
-	 namedQuery.setParameter("username", username);
-	 Optional<Account> result = namedQuery.getResultList().stream().findFirst();
-	 return result;
- }
+	@Override
+	public Optional<Account> find(String usernameklant, String usernameverhuurder) {
+		TypedQuery<Account> namedQuery = this.em.createNamedQuery(Account.FIND_BY_UC, Account.class);
+		namedQuery.setParameter("usernameklant", usernameklant);
+		namedQuery.setParameter("usernameverhuurder", usernameverhuurder);
+		Optional<Account> result = namedQuery.getResultList().stream().findFirst();
+		return result;
+	}
 }
