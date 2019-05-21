@@ -8,21 +8,21 @@ public class QRCodeTestFactory extends AbstractComparableTestObjectFactory<QRCod
 
 	@Override
 	public QRCode createGreaterThen() {
-		return new QRCode("zzz", 999);
+		return new QRCode(999);
 	}
 
 	@Override
 	public QRCode createLessThen() {
-		return new QRCode("aaa", 0);
+		return new QRCode(0);
 	}
 
 	@Override
 	public QRCode createThat() {
-		return new QRCode("karel", 1);
+		return new QRCode(1);
 	}
 
 	@Override
 	public QRCode createThis() {
-		return new QRCode("dana", 2);
+		return new QRCode(2);
 	}
 }

@@ -1,7 +1,5 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -15,7 +13,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import se.skillytaire.belastingdienst.ee.common.QRCode;
 import se.skillytaire.belastingdienst.ee.entity.Boot;
 import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
 import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
@@ -90,14 +87,6 @@ public class BootJpaDaoTest {
 	public void testNewBoot() {
 		this.beanUnderTest.add(this.thisBoot);
 		Assert.assertTrue(this.thisBoot.isPersistant());
-	}
-
-	@Test
-	public void testFindBootWithQRCode() {
-		this.addWithTX(this.thisBoot);
-		QRCode qrCode = new QRCode(this.thisBoot.getEigenaar().getUserName(), this.thisBoot.getNummer());
-		Optional<Boot> result = this.beanUnderTest.find(qrCode);
-		assertTrue("Boot gevonden met QRCode", result.isPresent());
 	}
 
 	private void addWithTX(final Boot boot) {

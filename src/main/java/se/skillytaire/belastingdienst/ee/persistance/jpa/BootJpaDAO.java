@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import se.skillytaire.belastingdienst.ee.common.QRCode;
 import se.skillytaire.belastingdienst.ee.entity.Boot;
 import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.BootDAO;
@@ -55,13 +54,6 @@ public class BootJpaDAO implements BootDAO {
 		namedQuery.setParameter("oid", OID);
 		int result = namedQuery.executeUpdate();
 		return result != 0;
-	}
-
-	@Override
-	public Optional<Boot> find(QRCode qrcode) {
-		TypedQuery<Boot> query = this.em.createNamedQuery(Boot.SELECT_BY_QRCODE, Boot.class);
-		query.setParameter("bootNummer", qrcode.getBoekingsNummer());
-		return query.getResultList().stream().findFirst();
 	}
 
 	@Override

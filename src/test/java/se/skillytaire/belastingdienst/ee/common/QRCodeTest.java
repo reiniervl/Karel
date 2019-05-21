@@ -13,15 +13,11 @@ import se.skillytaire.course.tools.jlc.JLCRunner;
 @JLC(value = QRCode.class, asJUnit = true)
 @ImmutableObject
 public class QRCodeTest {
-	@Test
-	public void testUsername() {
-		QRCode code = new QRCode("bert", 1);
-		assertEquals("bert", code.getUsername());
-	}
+private Integer testBoekingsNummer = 1;
 
 	@Test
 	public void testBootNummer() {
-		QRCode code = new QRCode("bert", 1);
-		assertEquals(1, code.getBootNummer());
+		QRCode code = new QRCode(1);
+		assertEquals(testBoekingsNummer, code.getBoekingsNummer());
 	}
 }

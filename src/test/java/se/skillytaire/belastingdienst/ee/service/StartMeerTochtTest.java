@@ -1,25 +1,5 @@
 package se.skillytaire.belastingdienst.ee.service;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import se.skillytaire.belastingdienst.ee.common.QRCode;
-import se.skillytaire.belastingdienst.ee.entity.Account;
-import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
-import se.skillytaire.belastingdienst.ee.persistance.jpa.BootJpaDAO;
-import se.skillytaire.belastingdienst.ee.persistance.jpa.MeerTochtJpaDAO;
-import se.skillytaire.course.tools.jlc.JLCRunner;
-import se.skillytaire.course.tools.jlc.This;
-
 public class StartMeerTochtTest {
 	/*
 	 * @This private Account account;
