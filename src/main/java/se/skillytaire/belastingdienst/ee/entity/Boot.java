@@ -25,13 +25,15 @@ import se.skillytaire.java.datatype.PositiveInteger;
 @Entity
 @Builder
 @NamedQueries({ @NamedQuery(name = Boot.DELETE_BY_OID, query = "delete from Boot a where a.oid=:oid"),
-		@NamedQuery(name = Boot.SELECT_BY_QRCODE, query = "select a from Boot a where a.nummer=:bootNummer AND a.eigenaar.userName=:verhuurder") })
+		@NamedQuery(name = Boot.SELECT_BY_QRCODE, query = "select a from Boot a where a.nummer=:bootNummer AND a.eigenaar.userName=:verhuurder"),
+		@NamedQuery(name = Boot.SELECT_BY_ISBESCHIKBAAR, query = "select a from Boot a where a.eigenaar.userName=:verhuurder")})
 @Table(uniqueConstraints = {
 		@UniqueConstraint(name = "Uniqueverhuurdericmnummer", columnNames = { "verhuurder_oid", "nummer" }) })
 public class Boot extends AbstractEntity<Boot> {
 	private static final long serialVersionUID = 1L;
 	public static final String DELETE_BY_OID = "Boot_DeleteByOid";
 	public static final String SELECT_BY_QRCODE = "Boot_SelectByQrcode";
+	public static final String SELECT_BY_ISBESCHIKBAAR = "Boot_SelectByISBESCHIKBAAR";
 	@NotNull
 	@Column(name = "nummer")
 	@BuilderField
@@ -45,6 +47,7 @@ public class Boot extends AbstractEntity<Boot> {
 	@JoinColumn(name = "verhuurder_oid")
 	private Verhuurder eigenaar;
 	@OneToOne
+	@JoinColumn(name = "deLaatsteTocht", unique = true)
 	private Tocht<?> deLaatsteTocht;
 	private static final Duration INSPECTIEDUUR = Duration.ofSeconds(15);
 
