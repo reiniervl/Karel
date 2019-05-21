@@ -47,6 +47,7 @@ public class Boot extends AbstractEntity<Boot> {
 	@JoinColumn(name = "verhuurder_oid")
 	private Verhuurder eigenaar;
 	@OneToOne
+	@JoinColumn(name = "deLaatsteTocht", unique = true)
 	private Tocht<?> deLaatsteTocht;
 	private static final Duration INSPECTIEDUUR = Duration.ofSeconds(15);
 
