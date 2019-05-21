@@ -17,8 +17,14 @@ import org.junit.Test;
 
 import se.skillytaire.belastingdienst.ee.common.QRCode;
 import se.skillytaire.belastingdienst.ee.entity.Boot;
+import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
+import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
+import se.skillytaire.course.tools.jlc.GreaterThen;
 import se.skillytaire.course.tools.jlc.JLCRunner;
+import se.skillytaire.course.tools.jlc.LessThen;
+import se.skillytaire.course.tools.jlc.That;
 import se.skillytaire.course.tools.jlc.This;
+import se.skillytaire.java.datatype.PositiveInteger;
 
 public class BootJpaDaoTest {
 
@@ -29,6 +35,24 @@ public class BootJpaDaoTest {
 	private Boot thisBoot;
 	@This
 	private Boot thisBoot2;
+	@That
+	private Verhuurder verhuurder;
+	@This
+	private PositiveInteger thisNummer;
+	@That
+	private PositiveInteger thatNummer;
+	@LessThen
+	private PositiveInteger lessThenNummer;
+	@GreaterThen
+	private PositiveInteger greaterThenNummer;
+	@This
+	private RivierTocht eenTocht1;
+	@That
+	private RivierTocht eenTocht2;
+	@LessThen
+	private RivierTocht eenTocht3;
+	@GreaterThen
+	private RivierTocht eenTocht4;
 
 	private BootJpaDAO beanUnderTest;
 
@@ -47,19 +71,19 @@ public class BootJpaDaoTest {
 
 	@After
 	public void destroyJPA() {
-		 if (this.entityManager != null) {
-				this.entityManager.close();
-		 }
-		 if (this.factory != null) {
-				this.factory.close();
-				while (this.factory.isOpen() && !Thread.interrupted()) {
-					 try {
-							Thread.sleep(100);
-					 } catch (InterruptedException e) {
-							Thread.currentThread().interrupt();
-					 }
+		if (this.entityManager != null) {
+			this.entityManager.close();
+		}
+		if (this.factory != null) {
+			this.factory.close();
+			while (this.factory.isOpen() && !Thread.interrupted()) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
 				}
-		 }
+			}
+		}
 	}
 
 	@Test
@@ -114,6 +138,26 @@ public class BootJpaDaoTest {
 	}
 
 	@Test
+	public void testFindBeschikbareBoot() {
+		Boot boot1 = new Boot(this.verhuurder, this.thisNummer);
+		Boot boot2 = new Boot(this.verhuurder, this.thatNummer);
+		Boot boot3 = new Boot(this.verhuurder, this.lessThenNummer);
+		Boot boot4 = new Boot(this.verhuurder, this.greaterThenNummer);
+		this.addWithTX(boot1);
+		this.addWithTX(boot2);
+		this.addWithTX(boot3);
+		this.addWithTX(boot4);
+		boot1.start(eenTocht1);
+		boot2.start(eenTocht2);
+		boot3.start(eenTocht3);
+		boot4.start(eenTocht4);
+		boot2.beeindigLaatsteTocht();
+		Optional<Boot> result = this.beanUnderTest.findBeschikbareBoot(this.verhuurder);
+		Assert.assertTrue(result.isPresent());
+		Assert.assertEquals(boot2, result.get());
+	}
+
+	@Test
 	public void testDeleteByOid() {
 		this.addWithTX(this.thisBoot);
 		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
@@ -149,7 +193,7 @@ public class BootJpaDaoTest {
 
 	@Test
 	public void testUpdate() {
-		this.addWithTX(this.thisBoot); 
+		this.addWithTX(this.thisBoot);
 		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
 		unmanagedTx.begin();
 		Boot clone = this.thisBoot.clone();
