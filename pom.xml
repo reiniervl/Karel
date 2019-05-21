@@ -27,7 +27,12 @@
 		<version-slf4j>1.7.26</version-slf4j>
 		<version-junit>4.12</version-junit>
 		<version.hamcrest>1.3</version.hamcrest>
+		<version-eclipselink>2.5.0</version-eclipselink>
 		<version-postgresql>42.2.5</version-postgresql>
+		<version-derby>10.15.1.3</version-derby>
+		<version-hsqldb>2.4.1</version-hsqldb>	
+		<version-gwtbv>2.1</version-gwtbv>
+
 		<version.arquillian-junit-container>1.4.1.Final</version.arquillian-junit-container>
 		<version.arquillian-transaction-bom>1.0.5</version.arquillian-transaction-bom>
 	
@@ -47,6 +52,18 @@
 		<package.root>se.skillytaire.belastingdienst.ee</package.root>
 		<package.entity>${package.root}.entity</package.entity>
 		<package.service>${package.root}.service</package.service>
+		
+		<server.config.name>${project.artifactId}Server</server.config.name>
+		
+		<server.config.dir>${project.build.directory}/liberty/wlp/usr/servers/${server.config.name}</server.config.dir>
+		<server.config.dir.log>${server.config.dir}/jars/log</server.config.dir.log>
+		<server.config.dir.driver>${server.config.dir}/jars/jdbc</server.config.dir.driver>
+		<server.config.dir.jpa>${server.config.dir}/jars/jpa</server.config.dir.jpa>
+
+
+
+
+
 	</properties>
     <scm>
         <connection>scm:git:git@github.com:reiniervl/Karel</connection>
@@ -169,6 +186,7 @@
 			<version>${version-postgresql}</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- <dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
 			<version>42.1.3</version> <scope>runtime</scope> </dependency> -->
 		<!-- <dependency> <groupId>net.wasdev.maven.tools.targets</groupId> <artifactId>liberty-target</artifactId> 
@@ -234,15 +252,22 @@
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
-			<version>2.5.0</version>
+			<version>${version-eclipselink}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.4.1</version>
+			<version>${version-hsqldb}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.derby</groupId>
+		    <artifactId>derbyclient</artifactId>
+		    <version>${version-derby}</version>
+		    <scope>test</scope>
+		</dependency>
+		
 		<!-- JSR 349: Bean Validation 1.1 Let op, lage versies werken niet goed 
 			bij hashcodes... deze zijn org.apache.bval hibernate validator alleen de 
 			google variant werkt -->
@@ -250,7 +275,8 @@
 		<dependency>
 			<groupId>com.googlecode.gwt-validation</groupId>
 			<artifactId>gwt-validation</artifactId>
-			<version>2.1</version>
+			
+			<version>${version-gwtbv}</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -521,7 +547,7 @@
 						<version>${version.liberty}</version>
 						<type>zip</type>
 					</assemblyArtifact>
-					<serverName>${project.artifactId}Server</serverName>
+					<serverName>${server.config.name}</serverName>
 					<stripVersion>true</stripVersion>
 					<configFile>src/main/liberty/config/server.xml</configFile>
 					<looseApplication>true</looseApplication>
@@ -636,30 +662,57 @@
 						</goals>
 						<configuration>
 							<artifactItems>
+								<!-- The logging dependencies -->
 								<artifactItem>
 									<groupId>org.slf4j</groupId>
 									<artifactId>jcl-over-slf4j</artifactId>
 									<version>${version-slf4j}</version>
-									<outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
 								</artifactItem>
 								<artifactItem>
 									<groupId>org.slf4j</groupId>
 									<artifactId>slf4j-api</artifactId>
 									<version>${version-slf4j}</version>
-									<outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
 								</artifactItem>
 								<artifactItem>
 									<groupId>org.slf4j</groupId>
 									<artifactId>slf4j-log4j12</artifactId>
 									<version>${version-slf4j}</version>
-									<outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
 								</artifactItem>
+								
+								<!-- JDBC drivers -->
 								<artifactItem>
 									<groupId>org.postgresql</groupId>
 									<artifactId>postgresql</artifactId>
 									<version>${version-postgresql}</version>
-									<outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>	
-								</artifactItem>						
+									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
+								</artifactItem>	
+								<artifactItem>
+									<groupId>org.hsqldb</groupId>
+									<artifactId>hsqldb</artifactId>
+									<version>${version-hsqldb}</version>
+									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
+								</artifactItem>	
+								<artifactItem>
+								    <groupId>org.apache.derby</groupId>
+								    <artifactId>derbyclient</artifactId>
+								    <version>${version-derby}</version>
+									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
+								</artifactItem>																	
+
+								
+								<artifactItem>
+									<groupId>org.eclipse.persistence</groupId>
+									<artifactId>eclipselink</artifactId>
+									<version>${version-eclipselink}</version>
+									<outputDirectory>${server.config.dir.jpa}</outputDirectory>	
+								</artifactItem>									
+										
+								
+								
+											
 							</artifactItems>
 						</configuration>
 					</execution>
@@ -697,7 +750,7 @@
 						<!-- in order to use JUNIT for the Belasting Way, we need to have the 
 							properties from maven in JUnit -->
 						<id>help</id>
-						<phase>pre-clean</phase>
+						<phase>validate</phase>
 						<configuration>
 							<target>
 								<echo>
@@ -706,7 +759,9 @@ mvn liberty:run-server  runs the liberty server.
 mvn liberty:stop-server stops the liberty server
 
 mvn processor:process runs the generators
-mvn generate-test-resources set de service provider interface for JLC klaar.
+mvn process-test-classes set de service provider interface for JLC klaar tbv Eclipse.
+mvn generate-test-resources  set de test.properties file klaar
+                        
 
 Util URL
 Root         http://127.0.0.1:${testServerHttpPort}/${warContext}
@@ -721,11 +776,19 @@ app.url.http      =http://127.0.0.1:${testServerHttpPort}/${warContext}
 app.url.https     =http://127.0.0.1:${testServerHttpsPort}/${warContext}
 default.http.port =${testServerHttpPort}
 default.https.port=${testServerHttpsPort}
+server.config.name=${server.config.name}
+server.config.dir =${server.config.dir}
+
+server.config.dir.log    =${server.config.dir.log}
+server.config.dir.drivers=${server.config.dir.drivers}
+server.config.dir.jpa    =${server.config.dir.jpa}
+
 
 finalName         =${project.build.finalName}
 packaging type    =${project.packaging}
 package.file      =${package.file}
 packaging.type    =${packaging.type}
+
 
 ]]>
 								</echo>
@@ -757,8 +820,12 @@ app.url.http=http://127.0.0.1:${testServerHttpPort}/${warContext}
 app.url.https=http://127.0.0.1:${testServerHttpsPort}/${warContext}
 default.http.port=${testServerHttpPort}
 default.https.port=${testServerHttpsPort}
+
+server.config.name=${server.config.name}
+server.config.dir=${server.config.dir}
 ]]>
 								</echo>
+								<echo>test.properties are written in directory ${project.build.testOutputDirectory}</echo>
 							</target>
 							<!-- liberty:run-server runs the Liberty server stop-server -->
 						</configuration>

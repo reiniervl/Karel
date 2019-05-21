@@ -5,8 +5,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence 
 	http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="stuga"
-		transaction-type="RESOURCE_LOCAL">
-		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		transaction-type="JTA">
 		<class>se.skillytaire.belastingdienst.ee.entity.Adres</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.Klant</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.Reservering</class>
@@ -15,6 +14,8 @@
 		<class>se.skillytaire.belastingdienst.ee.entity.Tocht</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.Boot</class>
 		<class>se.skillytaire.belastingdienst.ee.entity.Verhuurder</class>
+		<class>se.skillytaire.belastingdienst.ee.entity.Account</class>
+		<class>se.skillytaire.belastingdienst.ee.entity.Boeking</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<validation-mode>AUTO</validation-mode>
 		<properties>
