@@ -45,9 +45,7 @@ public class Fill {
             .withStreet("Algsjokullvagen")
             .build();
       // maak een verhuurder aan
-      Verhuurder verhuurder = new Verhuurder("Karel");
-      verhuurder.setAdres(adres);
-      verhuurder.setName("Karel");
+      Verhuurder verhuurder = new Verhuurder("Karel","Karel", adres);
       for (int i = 1; i <= 10; i++) {
          PositiveInteger bootNummer = new PositiveInteger(i);
          Boot boot = new Boot(verhuurder, bootNummer);
