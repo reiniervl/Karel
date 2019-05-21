@@ -1,5 +1,6 @@
 package se.skillytaire.belastingdienst.ee.service.rest;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -23,7 +24,7 @@ public class FillScriptIT extends EndpointHelper {
          .append('/')
          .append(Fill.FILL_GET_PATH)
          .toString();
-
+   @Ignore
    @Test
    public void testConnection() {
       testEndpoint(BINDING, "true");
