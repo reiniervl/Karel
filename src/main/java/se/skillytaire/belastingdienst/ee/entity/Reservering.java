@@ -103,10 +103,17 @@ public class Reservering extends AbstractEntity<Reservering> {
 	@Override
 	public int compareTo(final Reservering that) {
 		int compareTo = this.getAccount().compareTo(that.getAccount());
-		if (compareTo == 0) {
-			compareTo = this.getReserveringsDatum().compareTo(that.getReserveringsDatum());
-		}
+		// if (compareTo == 0) {
+		// 	compareTo = this.getReserveringsDatum().compareTo(that.getReserveringsDatum());
+		// }
 		return compareTo;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof Reservering && 
+			this.getAccount().equals(((Reservering)obj).getAccount()) &&
+			this.mijnTochten.equals(((Reservering)obj).mijnTochten);
 	}
 
 	@Override

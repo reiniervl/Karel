@@ -1,24 +1,18 @@
-package se.skillytaire.belastingdienst.ee.service;
+package se.skillytaire.belastingdienst.ee.service.reservering;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import se.skillytaire.belastingdienst.ee.entity.Account;
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
-import se.skillytaire.belastingdienst.ee.entity.Reservering;
 import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
 import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantResultTO;
-import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReserveringResultTO;
-import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReserveringTO;
-import se.skillytaire.course.tools.jlc.JLC;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
 
-@RunWith(JLCRunner.class)
-@JLC(value = Reservering.class, asJUnit = true)
 public class NieuweReserveringTOTest {
 	@This
 	private RivierTocht thisRivierTocht;
@@ -26,6 +20,11 @@ public class NieuweReserveringTOTest {
 	private MeerTocht thisMeerTocht;
 	@This
 	private Account thisAccount;
+
+	@Before
+	public void initJLC(){
+		JLCRunner.init(this);
+	}
 	
 	@Test
 	public void testEmptyReserveringTO() {

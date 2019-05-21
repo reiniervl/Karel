@@ -11,12 +11,6 @@ import se.skillytaire.course.tools.jlc.This;
 public class VerhuurderTestFactory implements ComparableTestObjectFactory<Verhuurder> {
 	@This
 	private Adres thisAdres;
-	@That
-	private Adres thatAdres;
-	@LessThen
-	private Adres lessThenAdres;
-	@GreaterThen
-	private Adres greaterThenAdres;
 
 	@Override
 	public Verhuurder createThat() {
@@ -25,7 +19,7 @@ public class VerhuurderTestFactory implements ComparableTestObjectFactory<Verhuu
 
 	@Override
 	public Verhuurder createThis() {
-		return new Verhuurder("Kim", "TheOneAndOnly*Kim*", thatAdres);
+		return new Verhuurder("Kim", "TheOneAndOnly*Kim*", thisAdres);
 	}
 
 	@Override
@@ -35,11 +29,11 @@ public class VerhuurderTestFactory implements ComparableTestObjectFactory<Verhuu
 
 	@Override
 	public Verhuurder createGreaterThen() {
-		return new Verhuurder("ZZZ", "TheOneAndOnly*ZZZ*", greaterThenAdres);
+		return new Verhuurder("ZZZ", "TheOneAndOnly*ZZZ*", thisAdres);
 	}
 
 	@Override
 	public Verhuurder createLessThen() {
-		return new Verhuurder("AAA", "TheOneAndOnly*AAA*", lessThenAdres);
+		return new Verhuurder("AAA", "TheOneAndOnly*AAA*", thisAdres);
 	}
 }

@@ -9,21 +9,17 @@ import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import se.skillytaire.belastingdienst.ee.entity.Account;
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
-import se.skillytaire.belastingdienst.ee.entity.Reservering;
 import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.ReserveringJpaDAO;
 import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReserveringResultTO;
 import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReserveringTO;
-import se.skillytaire.course.tools.jlc.JLC;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
 
-@RunWith(JLCRunner.class)
-@JLC(value = Reservering.class, asJUnit = true)
+
 public class MaakNieuweReserveringTest {
 
 	@This

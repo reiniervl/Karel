@@ -1,6 +1,7 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 
 import se.skillytaire.course.tools.jlc.AbstractComparableTestObjectFactory;
 import se.skillytaire.course.tools.jlc.GreaterThen;
@@ -22,13 +23,13 @@ public class ReserveringTestFactory extends AbstractComparableTestObjectFactory<
 	private Account lessThenaccount;
 	@This
 	private RivierTocht thisRivierTocht;
-	@That
-	private RivierTocht thatRivierTocht;
-	@GreaterThen
-	private RivierTocht greaterRivierTocht;
-	@LessThen
-	private RivierTocht lessRivierTocht;
-	static final LocalDateTime TIJD = LocalDateTime.now();
+	// @That
+	// private RivierTocht thatRivierTocht;
+	// @GreaterThen
+	// private RivierTocht greaterRivierTocht;
+	// @LessThen
+	// private RivierTocht lessRivierTocht;
+	final LocalDateTime TIJD = LocalDateTime.of(2019, Month.MAY, 1, 12, 10);
 
 	@Override
 	public Reservering createThat() {
@@ -39,14 +40,14 @@ public class ReserveringTestFactory extends AbstractComparableTestObjectFactory<
 
 	@Override
 	public Reservering createThis() {
-		Reservering reservering = new Reservering(thisaccount, thatRivierTocht);
+		Reservering reservering = new Reservering(thisaccount, thisRivierTocht);
 		reservering.setReserveringsDatum(TIJD);
 		return reservering;
 	}
 
 	@Override
 	public Reservering createGreaterThen() {
-		Reservering reservering = new Reservering(greaterThenaccount, greaterRivierTocht);
+		Reservering reservering = new Reservering(greaterThenaccount, thisRivierTocht);
 		reservering.setReserveringsDatum(TIJD);
 		return reservering;
 
@@ -54,7 +55,7 @@ public class ReserveringTestFactory extends AbstractComparableTestObjectFactory<
 
 	@Override
 	public Reservering createLessThen() {
-		Reservering reservering = new Reservering(lessThenaccount, lessRivierTocht);
+		Reservering reservering = new Reservering(lessThenaccount, thisRivierTocht);
 		reservering.setReserveringsDatum(TIJD);
 		return reservering;
 	}

@@ -1,26 +1,18 @@
 package se.skillytaire.belastingdienst.ee.entity;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import se.skillytaire.belastingdienst.ee.persistance.ReserveringDAO;
-import se.skillytaire.belastingdienst.ee.persistance.jpa.ReserveringJpaDAO;
 import se.skillytaire.course.tools.jlc.JLC;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.That;
 import se.skillytaire.course.tools.jlc.This;
 
 @RunWith(JLCRunner.class)
-@JLC(value = Reservering.class, asJUnit = true)
+@JLC(value = Reservering.class, asJUnit = false)
 public class ReserveringTest {
 	@This
 	private Account thisAccount;
@@ -31,6 +23,7 @@ public class ReserveringTest {
 	@That
 	private RivierTocht thatRivierTocht;
 
+	private static final LocalDateTime TIJD = LocalDateTime.now();
 	
 	@Test
 	public void fullConstructorTest() {
@@ -43,8 +36,8 @@ public class ReserveringTest {
 	public void equalsGelijkTest() {
 		Reservering reservering1 = new Reservering(thisAccount, thisMeerTocht);
 		Reservering reservering2 = new Reservering(thisAccount, thisMeerTocht);
-		reservering1.setReserveringsDatum(ReserveringTestFactory.TIJD);
-		reservering2.setReserveringsDatum(ReserveringTestFactory.TIJD);
+		reservering1.setReserveringsDatum(TIJD);
+		reservering2.setReserveringsDatum(TIJD);
 		Assert.assertTrue(reservering1.equals(reservering2));
 	}
 
