@@ -1,5 +1,6 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.common.QRCode;
 import se.skillytaire.belastingdienst.ee.entity.Boot;
+import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.BootDAO;
 
 public class BootJpaDAO implements BootDAO {
@@ -58,9 +60,23 @@ public class BootJpaDAO implements BootDAO {
 	@Override
 	public Optional<Boot> find(QRCode qrcode) {
 		TypedQuery<Boot> query = this.em.createNamedQuery(Boot.SELECT_BY_QRCODE, Boot.class);
-		query.setParameter("bootNummer", qrcode.getBootNummer());
-		query.setParameter("verhuurder", qrcode.getUsername());
+		query.setParameter("bootNummer", qrcode.getBoekingsNummer());
 		return query.getResultList().stream().findFirst();
+	}
+
+	@Override
+	public Optional<Boot> findBeschikbareBoot(Verhuurder verhuurder) {
+		Boot beschikbareBoot = null;
+		TypedQuery<Boot> query = this.em.createNamedQuery(Boot.SELECT_BY_ISBESCHIKBAAR, Boot.class);
+		query.setParameter("verhuurder", verhuurder.getUserName());
+		List<Boot> lijstMetBoten = query.getResultList();
+		for (Boot boot : lijstMetBoten) {
+			if (boot.isBeschikbaar()) {
+				beschikbareBoot = boot;
+				break;
+			}
+		}
+		return Optional.ofNullable(beschikbareBoot);
 	}
 
 }
