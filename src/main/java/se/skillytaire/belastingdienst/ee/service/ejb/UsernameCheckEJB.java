@@ -1,21 +1,22 @@
-package se.skillytaire.belastingdienst.ee.service;
+package se.skillytaire.belastingdienst.ee.service.ejb;
 
 import javax.ejb.Stateless;
 import javax.inject.Singleton;
 
 import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;
+import se.skillytaire.belastingdienst.ee.service.account.UsernameCheck;
 
 @Stateless
-public class UsernameCheck implements UsernameCheckRemote {
+public class UsernameCheckEJB implements UsernameCheck {
 	@Singleton
 	private KlantDAO dao;
 	
-	public UsernameCheck(KlantDAO dao) {
+	public UsernameCheckEJB(KlantDAO dao) {
 		super();
 		this.dao = dao;
 	}
 	
-	public UsernameCheck() {
+	public UsernameCheckEJB() {
 		super();
 	}
 

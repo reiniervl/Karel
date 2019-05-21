@@ -1,4 +1,4 @@
-package se.skillytaire.belastingdienst.ee.service;
+package se.skillytaire.belastingdienst.ee.service.ejb;
 
 import java.util.Optional;
 
@@ -10,9 +10,11 @@ import se.skillytaire.belastingdienst.ee.entity.Boot;
 import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
 import se.skillytaire.belastingdienst.ee.persistance.BootDAO;
 import se.skillytaire.belastingdienst.ee.persistance.RivierTochtDAO;
+import se.skillytaire.belastingdienst.ee.service.activiteit.StartRivierTocht;
+import se.skillytaire.belastingdienst.ee.service.activiteit.StartRivierTochtResultTO;
 
 @Stateless
-public class StartRiviertocht implements StartRivierTochtRemote {
+public class StartRivierTochtEJB implements StartRivierTocht {
 
 	@Singleton
 	BootDAO bootDAO;
@@ -20,7 +22,7 @@ public class StartRiviertocht implements StartRivierTochtRemote {
 	@Singleton
 	RivierTochtDAO rivierTochtDAO;
 
-	public StartRiviertocht() {}
+	public StartRivierTochtEJB() {}
 	/*
 	 * public StartRivierTochtResultTO start(QRCode code) { StartRivierTochtResultTO
 	 * result = new StartRivierTochtResultTO(); Optional<Boot> bootRes =

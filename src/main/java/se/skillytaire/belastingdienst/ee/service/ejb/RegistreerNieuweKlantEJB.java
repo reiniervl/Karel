@@ -8,9 +8,9 @@ import javax.inject.Singleton;
 import se.skillytaire.belastingdienst.ee.entity.Klant;
 import se.skillytaire.belastingdienst.ee.entity.KlantBuilder;
 import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;
-import se.skillytaire.belastingdienst.ee.service.NieuweKlantResultTO;
-import se.skillytaire.belastingdienst.ee.service.NieuweKlantTO;
-import se.skillytaire.belastingdienst.ee.service.RegistreerNieuweKlant;
+import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantResultTO;
+import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantTO;
+import se.skillytaire.belastingdienst.ee.service.account.RegistreerNieuweKlant;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)

@@ -13,10 +13,11 @@ import org.junit.Assert;
 import se.skillytaire.belastingdienst.ee.entity.Klant;
 import se.skillytaire.belastingdienst.ee.entity.KlantBuilder;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.KlantJpaDAO;
+import se.skillytaire.belastingdienst.ee.service.ejb.UsernameCheckEJB;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 
 public class UserNameCheckTest {
-	private UsernameCheck beanUnderTest;
+	private UsernameCheckEJB beanUnderTest;
 	private EntityManagerFactory factory;
 	private EntityManager entityManager;
 
@@ -30,7 +31,7 @@ public class UserNameCheckTest {
 		this.factory = Persistence.createEntityManagerFactory("stuga");
 		this.entityManager = this.factory.createEntityManager();
 		KlantJpaDAO.getInstance().setEntityManager(this.entityManager);
-		beanUnderTest = new UsernameCheck(KlantJpaDAO.getInstance());
+		beanUnderTest = new UsernameCheckEJB(KlantJpaDAO.getInstance());
 	}
 
 	@After

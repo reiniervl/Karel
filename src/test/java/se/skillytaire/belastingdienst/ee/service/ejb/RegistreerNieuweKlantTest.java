@@ -12,8 +12,8 @@ import org.junit.Test;
 
 import se.skillytaire.belastingdienst.ee.entity.Klant;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.KlantJpaDAO;
-import se.skillytaire.belastingdienst.ee.service.NieuweKlantResultTO;
-import se.skillytaire.belastingdienst.ee.service.NieuweKlantTO;
+import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantResultTO;
+import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantTO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
 

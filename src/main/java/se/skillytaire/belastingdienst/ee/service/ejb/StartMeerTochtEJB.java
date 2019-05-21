@@ -1,4 +1,4 @@
-package se.skillytaire.belastingdienst.ee.service;
+package se.skillytaire.belastingdienst.ee.service.ejb;
 
 import java.util.Optional;
 
@@ -10,9 +10,11 @@ import se.skillytaire.belastingdienst.ee.entity.Boot;
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
 import se.skillytaire.belastingdienst.ee.persistance.BootDAO;
 import se.skillytaire.belastingdienst.ee.persistance.MeerTochtDAO;
+import se.skillytaire.belastingdienst.ee.service.activiteit.StartMeerTocht;
+import se.skillytaire.belastingdienst.ee.service.activiteit.StartMeerTochtResultTO;
 
 @Stateless
-public class StartMeertocht implements StartMeertochtRemote {
+public class StartMeerTochtEJB implements StartMeerTocht {
 
 	@Singleton
 	BootDAO bootDAO;
@@ -20,7 +22,7 @@ public class StartMeertocht implements StartMeertochtRemote {
 	@Singleton
 	MeerTochtDAO meerTochtDAO;
 
-	public StartMeertocht() {}
+	public StartMeerTochtEJB() {}
 	/*
 	 * public StartMeerTochtResultTO start(QRCode code) { StartMeerTochtResultTO
 	 * result = new StartMeerTochtResultTO(); Optional<Boot> bootRes =
