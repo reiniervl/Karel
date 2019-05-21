@@ -31,48 +31,6 @@ public class ReserveringTest {
 	@That
 	private RivierTocht thatRivierTocht;
 
-	private EntityManagerFactory factory;
-	private EntityManager entityManager;
-	private ReserveringDAO beanUnderTest;
-
-	@Before
-	   public void before() {
-	      JLCRunner.init(this);
-	   }
-
-	   @Before
-	   public void initJPA() {
-	      this.factory = Persistence.createEntityManagerFactory("stuga");
-	      this.entityManager = this.factory.createEntityManager();
-	      ReserveringJpaDAO.getInstance().setEntityManager(this.entityManager);
-	      this.beanUnderTest = ReserveringJpaDAO.getInstance();
-	   }
-
-
-	   @After
-	   public void destroyJPA() {
-	      if (this.entityManager != null) {
-	         this.entityManager.close();
-	      }
-	      if (this.factory != null) {
-	         this.factory.close();
-	         while (this.factory.isOpen() && !Thread.interrupted()) {
-	            try {
-	               Thread.sleep(100);
-	            } catch (InterruptedException e) {
-	               Thread.currentThread().interrupt();
-	            }
-	         }
-	      }
-	   }
-
-		@Test
-		public void testGetReserveringsNummer() {
-			Reservering reservering1 = new Reservering(thisAccount, thisMeerTocht);
-			this.beanUnderTest.add(reservering1);
-			Optional<Integer> result = reservering1.getReserveringsNummer();
-			Assert.assertFalse(result.equals(null));
-		}
 	
 	@Test
 	public void fullConstructorTest() {

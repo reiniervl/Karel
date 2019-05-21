@@ -14,9 +14,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import se.skillytaire.belastingdienst.ee.entity.Account;
+import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
 import se.skillytaire.belastingdienst.ee.entity.Reservering;
 import se.skillytaire.belastingdienst.ee.persistance.ReserveringDAO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
+import se.skillytaire.course.tools.jlc.That;
 import se.skillytaire.course.tools.jlc.This;
 
 public class ReserveringJpaDAOTest {
@@ -170,5 +173,17 @@ public class ReserveringJpaDAOTest {
       Assert.assertTrue(persistant.isPersistant());
       Assert.assertEquals(this.thisReservering, persistant);
       unmanagedTx.commit();
+   }
+   @This
+   private Account thisAccount;
+
+   @This
+   private MeerTocht thisMeerTocht;
+   @Test
+   public void testGetReserveringsNummer() {
+      Reservering reservering1 = new Reservering(thisAccount, thisMeerTocht);
+      this.beanUnderTest.add(reservering1);
+      Optional<Integer> result = reservering1.getReserveringsNummer();
+      Assert.assertFalse(result.equals(null));
    }
 }
