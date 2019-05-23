@@ -16,7 +16,8 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	private static final long serialVersionUID = 1L;
 	@NotNull
 	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "reserveringstart")),
+	@AttributeOverrides({
+			@AttributeOverride(name = Periode.PROPERTY_START, column = @Column(name = "reserveringstart")),
 			@AttributeOverride(name = Periode.PROPERTY_EIND, column = @Column(name = "reserveringeind")),
 			@AttributeOverride(name = Periode.PROPERTY_DUUR, column = @Column(name = "reserveringduur")) })
 	private Periode reserveringsPeriode;
@@ -35,9 +36,10 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	 */
 	public Tocht() {
 	}
+
 // TODO: boot weg
 	public Tocht(final double prijs, final Periode reserveringsPeriode) {
-				if (reserveringsPeriode == null) {
+		if (reserveringsPeriode == null) {
 			throw new IllegalArgumentException("De reserveringsPeriode is null");
 		}
 		if (!reserveringsPeriode.isBeeindigd()) {
@@ -70,12 +72,8 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(", reserveringsPeriode=")
-			.append(", actuelePeriode=")
-			.append(this.actuelePeriode)
-			.append(this.reserveringsPeriode)
-			.append(", prijs=")
-			.append(this.prijs);
+		builder.append(", reserveringsPeriode=").append(", actuelePeriode=").append(this.actuelePeriode)
+				.append(this.reserveringsPeriode).append(", prijs=").append(this.prijs);
 		return builder.toString();
 	}
 
@@ -100,10 +98,14 @@ public abstract class Tocht<T extends Tocht<T>> extends AbstractEntity<T> {
 		return this.actuelePeriode.isBeeindigd();
 	}
 
+	public boolean isGestart() {
+		return this.actuelePeriode.isGestart();
+	}
+
 	public void start() {
 		this.actuelePeriode.start();
 	}
-	
+
 	public void beeindig() {
 		this.actuelePeriode.beeindig();
 	}

@@ -1,5 +1,6 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -7,6 +8,7 @@ import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
 import se.skillytaire.belastingdienst.ee.persistance.MeerTochtDAO;
@@ -49,11 +51,18 @@ public class MeerTochtJpaDAO implements MeerTochtDAO {
 	 */
 	@Deprecated
 	public static MeerTochtJpaDAO getInstance() {
-      return dao;
-   }
+		return dao;
+	}
 
-   public void setEntityManager(EntityManager entityManager) {
-      this.em = entityManager;
-   }
+	public void setEntityManager(EntityManager entityManager) {
+		this.em = entityManager;
+	}
+
+	@Override
+	public Optional<List<MeerTocht>> findBeschikbareTochten() {
+		TypedQuery<MeerTocht> query = this.em.createNamedQuery(MeerTocht.BESCHIKBARE_TOCHTEN, MeerTocht.class);
+		List<MeerTocht> result = query.getResultList();
+		return Optional.ofNullable(result);
+	}
 
 }
