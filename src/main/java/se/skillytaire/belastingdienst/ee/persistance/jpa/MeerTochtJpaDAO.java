@@ -2,17 +2,22 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
 import se.skillytaire.belastingdienst.ee.persistance.MeerTochtDAO;
-
+@Default
+@ApplicationScoped
 public class MeerTochtJpaDAO implements MeerTochtDAO {
 	private final static MeerTochtJpaDAO dao = new MeerTochtJpaDAO();
+	@PersistenceContext
 	private EntityManager em;
 
-	private MeerTochtJpaDAO() {
+	public MeerTochtJpaDAO() {
 	}
 
 	@Override
@@ -38,13 +43,24 @@ public class MeerTochtJpaDAO implements MeerTochtDAO {
 		int result = namedQuery.executeUpdate();
 		return result != 0;
 	}
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
 	public static MeerTochtJpaDAO getInstance() {
-      return dao;
-   }
+		return dao;
+	}
 
-   public void setEntityManager(EntityManager entityManager) {
-      this.em = entityManager;
-   }
+	public void setEntityManager(EntityManager entityManager) {
+		this.em = entityManager;
+	}
+
+	@Override
+	public Optional<List<MeerTocht>> findBeschikbareTochten() {
+		TypedQuery<MeerTocht> query = this.em.createNamedQuery(MeerTocht.BESCHIKBARE_TOCHTEN, MeerTocht.class);
+		List<MeerTocht> result = query.getResultList();
+		return Optional.ofNullable(result);
+	}
 
 }
