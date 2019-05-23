@@ -3,16 +3,21 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 import java.util.List;
 import java.util.Optional;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.Boot;
 import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.BootDAO;
-
+@Default
+@ApplicationScoped
 public class BootJpaDAO implements BootDAO {
 	private static final BootJpaDAO instance = new BootJpaDAO();
+	@PersistenceContext
 	private EntityManager em;
 
 	private BootJpaDAO() {

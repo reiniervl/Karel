@@ -2,14 +2,19 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
 import se.skillytaire.belastingdienst.ee.persistance.MeerTochtDAO;
-
+@Default
+@ApplicationScoped
 public class MeerTochtJpaDAO implements MeerTochtDAO {
 	private final static MeerTochtJpaDAO dao = new MeerTochtJpaDAO();
+	@PersistenceContext
 	private EntityManager em;
 
 	private MeerTochtJpaDAO() {

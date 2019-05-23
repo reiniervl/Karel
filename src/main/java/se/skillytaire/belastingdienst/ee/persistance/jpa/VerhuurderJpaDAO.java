@@ -3,15 +3,18 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.VerhuurderDAO;
-
+@Default
 @ApplicationScoped
 public class VerhuurderJpaDAO implements VerhuurderDAO {
 	private static final VerhuurderJpaDAO instance = new VerhuurderJpaDAO();
+	@PersistenceContext
 	private EntityManager em;
 	//nu singleton via container door annotatie @ApplicationScoped
 	public VerhuurderJpaDAO() {

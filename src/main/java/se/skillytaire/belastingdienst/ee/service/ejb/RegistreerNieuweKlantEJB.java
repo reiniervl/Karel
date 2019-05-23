@@ -3,6 +3,7 @@ package se.skillytaire.belastingdienst.ee.service.ejb;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.enterprise.inject.Default;
 import javax.inject.Singleton;
 
 import se.skillytaire.belastingdienst.ee.entity.Klant;
@@ -11,6 +12,7 @@ import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;
 import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantResultTO;
 import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantTO;
 import se.skillytaire.belastingdienst.ee.service.account.RegistreerNieuweKlant;
+
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)

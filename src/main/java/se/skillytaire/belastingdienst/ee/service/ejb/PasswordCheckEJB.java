@@ -3,6 +3,7 @@ package se.skillytaire.belastingdienst.ee.service.ejb;
 import java.util.Optional;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Singleton;
 
 import se.skillytaire.belastingdienst.ee.entity.Klant;

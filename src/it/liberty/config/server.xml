@@ -36,19 +36,54 @@
 	    <file name="${server.config.dir}/jars/log/slf4j-api-1.7.26.jar"/>
 	    <file name="${server.config.dir}/jars/log/slf4j-log4j12-1.7.26.jar"/>
 	</library>
+	<!-- 
 	<library id="jdbc-drivers">
 	    <file name="${server.config.dir}/jars/jdbc/hsqldb-2.4.1.jar"/>
 	    <file name="${server.config.dir}/jars/jdbc/postgresql-42.2.5.jar"/>
 	    <file name="${server.config.dir}/jars/jdbc/derbyclient-10.15.1.3.jar"/>
 	    
 	</library>	
+	 -->
 	
+
+    
     <jpa defaultPersistenceProvider="org.eclipse.persistence.jpa.PersistenceProvider"/>	
 	<application location="${appLocation}">
 	   <classloader commonLibraryRef="eclipselink"/>
 	</application>
 	
-	<!-- 
+	
+	
+	<library id="jdbc-drivers">
+        <fileset  dir="${server.config.dir}/jars/jdbc" includes="*.jar"/>
+    </library>
+    
+    <jdbcDriver id="postgresql-driver"
+                javax.sql.XADataSource="org.postgresql.xa.PGXADataSource"
+                javax.sql.ConnectionPoolDataSource="org.postgresql.ds.PGConnectionPoolDataSource"
+                libraryRef="jdbc-drivers"/>
+
+    <dataSource id="DefaultDataSource"
+                jndiName="jdbc/stuga"
+                jdbcDriverRef="postgresql-driver"
+                type="javax.sql.ConnectionPoolDataSource"
+                transactional="true">
+        <properties serverName="127.0.0.1"
+                    portNumber="5432"
+                    databaseName="jeekbc"
+                    user="postgres"
+                    password="admin"/>
+    </dataSource>
+<!-- 
+todo na activatie in de properties zetten
+	datasource.server.name
+	datasource.server.port
+    datasource.server.user
+    datasource.server.password
+    
+    ${dev.db.postgress.password.admin}
+	
+	
     <jdbcDriver id="DerbyEmbedded" libraryRef="DerbyLib" />
     <library id="DerbyLib" filesetRef="DerbyFileset" />
     <fileset id="DerbyFileset"
