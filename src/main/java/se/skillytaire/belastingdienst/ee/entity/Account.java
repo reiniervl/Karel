@@ -30,7 +30,7 @@ public class Account extends AbstractEntity<Account> {
 	private static final long serialVersionUID = 1L;
 	public static final String FIND_BY_UC = "FIND_BY_UC";
 
-	@BuilderField
+	@BuilderField(required = true)
 	@NotNull
 	@JoinColumn(name = "Klant_OID", unique = true)
 	@OneToOne(cascade = CascadeType.ALL)
@@ -39,6 +39,8 @@ public class Account extends AbstractEntity<Account> {
 	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
 	private List<Reservering> reserveringen = new ArrayList<Reservering>();
 	
+
+	@BuilderField(required = true)
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn (name = "verhuurder")
 	private Verhuurder verhuurder;

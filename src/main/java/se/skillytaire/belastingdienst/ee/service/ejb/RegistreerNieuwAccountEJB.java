@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 import se.skillytaire.belastingdienst.ee.entity.Account;
 import se.skillytaire.belastingdienst.ee.entity.AccountBuilder;
 import se.skillytaire.belastingdienst.ee.entity.Klant;
+import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.AccountDAO;
 import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;
 import se.skillytaire.belastingdienst.ee.service.ResultTO;
@@ -32,7 +33,10 @@ public class RegistreerNieuwAccountEJB implements RegistreerNieuwAccount {
 
 		Optional<Klant> klant = klantDAO.findByOID(klantOid);
 		if(klant.isPresent()) {
-			Account account = AccountBuilder.builder().withKlant(klant.get()).build();
+			Account account = AccountBuilder.builder()
+				.withVerhuurder(new Verhuurder())
+				.withKlant(klant.get())
+				.build();
 			// Account account = new Account(klant.get());
 			try {
 				accountDAO.add(account);
