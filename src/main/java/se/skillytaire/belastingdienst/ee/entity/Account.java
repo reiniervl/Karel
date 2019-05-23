@@ -81,7 +81,11 @@ public class Account extends AbstractEntity<Account> {
 
 	@Override
 	public int compareTo(Account account) {
-		return this.getKlant().compareTo(account.getKlant());
+		int compare;
+		if((compare = this.getKlant().compareTo(account.getKlant())) == 0) {
+			compare = this.getVerhuurder().compareTo(account.getVerhuurder());
+		}
+		return compare;
 	}
 
 	@Override
@@ -89,9 +93,13 @@ public class Account extends AbstractEntity<Account> {
 		return this.getKlant().hashCode();
 	}
 
-	/**
-	 * @return the klant
-	 */
+	@Override
+	public boolean equals(Object o) {
+		return o instanceof Account
+			&& this.getKlant().equals(((Account)o).getKlant())
+			&& this.getVerhuurder().equals(((Account)o).getVerhuurder());
+	}
+	
 	public Klant getKlant() {
 		return klant;
 	}
