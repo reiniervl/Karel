@@ -13,10 +13,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
+import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
 import se.skillytaire.belastingdienst.ee.entity.Tocht;
 import se.skillytaire.belastingdienst.ee.service.activiteit.BeschikbareMeerTochten;
 import se.skillytaire.belastingdienst.ee.service.activiteit.BeschikbareMeerTochtenResultTO;
 import se.skillytaire.belastingdienst.ee.service.activiteit.BeschikbareMeerTochtenTO;
+import se.skillytaire.belastingdienst.ee.service.activiteit.BeschikbareRivierTochten;
+import se.skillytaire.belastingdienst.ee.service.activiteit.BeschikbareRivierTochtenResultTO;
+import se.skillytaire.belastingdienst.ee.service.activiteit.BeschikbareRivierTochtenTO;
 
 @Path("activiteiten")
 public class BeschikbareTochten {
@@ -24,8 +28,11 @@ public class BeschikbareTochten {
 	@Inject
 	BeschikbareMeerTochten beschikbareMeerTochten;
 
-	@Path("meertocht/{verhuurder}")
+	@Inject
+	BeschikbareRivierTochten beschikbareRivierTochten;
+
 	@GET
+	@Path("meertocht/{verhuurder}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response beschikbareMeerTochten (@PathParam("verhuurder") String verhuurder) {
 		Response response;
@@ -47,10 +54,27 @@ public class BeschikbareTochten {
 		return response;
 	}
 	
-	@Path("riviertocht/{verhuurder}")
 	@GET
+	@Path("riviertocht/{verhuurder}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response beschikbareRivierTochten (@PathParam("verhuurder") String verhuurder) {
-		return Response.ok().build();
+		Response response;
+		BeschikbareRivierTochtenTO requestTO = new BeschikbareRivierTochtenTO(verhuurder);
+		BeschikbareRivierTochtenResultTO resultTO = beschikbareRivierTochten.geefTochten(requestTO);
+		JsonObjectBuilder job = Json.createObjectBuilder();
+
+		if(resultTO.isSuccessful() && resultTO.getResult().isPresent()) {
+			List<RivierTocht> tochten = resultTO.getResult().get();
+			job.add("success", true)
+				.add("tochten", parseMeerTochten(tochten));
+
+			response = Response.ok(job.build()).build();
+		} else {
+			job.add("success", false);
+			response = Response.ok(job.build()).build();
+		}
+
+		return response;
 	}
 
 	private JsonObjectBuilder parseMeerTochten(List<? extends Tocht<?>> tochten) {

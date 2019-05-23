@@ -50,11 +50,11 @@ public class MaakNieuweReserveringEJB implements NieuweReservering {
 		
 		if (klantAccount.isSuccessful() && klantAccount.getResult().isPresent()) {
 			Optional<Tocht<?>> activiteit = this.findTocht(activiteitOID);
-//			Reservering reservering = ReserveringBuilder.builder()
-//														.withAccount(klantAccount.getResult().get())
-//														.withVerloopDatum(MaakNieuweReserveringEJB.getVerloopDatum())
-//														.build();
-//			reservering.add(activiteit.get());
+			// Reservering reservering = ReserveringBuilder.builder()
+			// 											.withAccount(klantAccount.getResult().get())
+			// 											.withVerloopDatum(MaakNieuweReserveringEJB.getVerloopDatum())
+			// 											.build();
+			// reservering.add(activiteit.get());
 			Reservering reservering = null;
 			try {
 				reserveringDAO.add(reservering);

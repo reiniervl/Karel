@@ -2,14 +2,19 @@ package se.skillytaire.belastingdienst.ee.entity;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
 @DiscriminatorValue("r")
-@NamedQuery(name = RivierTocht.DELETE_BY_OID, query = "delete from RivierTocht a where a.oid=:oid")
+@NamedQueries({
+@NamedQuery(name = RivierTocht.DELETE_BY_OID, query = "delete from RivierTocht a where a.oid=:oid"),
+@NamedQuery(name = RivierTocht.BESCHIKBARE_TOCHTEN, query = "select b from RivierTocht b where b.actuelePeriode.start=null")
+})
 public class RivierTocht extends Tocht<RivierTocht> {
 	private static final long serialVersionUID = 1L;
 	public static final String DELETE_BY_OID = "RIVIERTOCHT_DELETEBYOID";
+	public static final String BESCHIKBARE_TOCHTEN = "RIVIERTOCHT_BESCHIKBARE_BOTEN";
 
 	public RivierTocht() {
 	}

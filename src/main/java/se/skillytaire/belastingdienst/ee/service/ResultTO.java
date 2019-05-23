@@ -11,7 +11,9 @@ public abstract class ResultTO<R> implements Serializable {
 	public static final int ACCOUNT_NIET_GEVONDEN = 204;
 	public static final int TOCHT_NIET_GESTART = 300;
 	public static final int RESERVERING_NIET_AANGEMAAKT = 400;
-	public static final int BESCHIKBARE_MEERTOCHTEN_NIET_GEVONDEN = 500;
+	public static final int BESCHIKBARE_TOCHTEN_NIET_GEVONDEN = 500;
+	public static final int BESCHIKBARE_MEERTOCHTEN_NIET_GEVONDEN = 501;
+	public static final int BESCHIKBARE_RIVIERTOCHTEN_NIET_GEVONDEN = 502;
 	
 	private final int code;
 	private final R result;
