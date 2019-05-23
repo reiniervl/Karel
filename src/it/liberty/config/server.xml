@@ -20,9 +20,9 @@
 	    <feature>bells-1.0</feature>	
 	</featureManager>
 	<bell libraryRef="eclipselink"/>
-	<!--  
+
 	<applicationManager autoExpand="true" />
-	-->
+	
 	<quickStartSecurity userName="admin" userPassword="admin" />
 	<keyStore id="defaultKeyStore" password="mpKeystore" />
 	<logging traceSpecification="com.ibm.ws.microprofile.health.*=all" />
