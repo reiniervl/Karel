@@ -1,5 +1,6 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -7,6 +8,7 @@ import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
 import se.skillytaire.belastingdienst.ee.persistance.MeerTochtDAO;

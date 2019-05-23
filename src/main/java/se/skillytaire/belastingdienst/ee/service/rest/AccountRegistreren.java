@@ -35,6 +35,7 @@ public class AccountRegistreren {
 		if (usernameCheck.isBeschikbaar(username)) {
 			NieuweKlantTO nieuweKlantTo = new NieuweKlantTO(username, password, email);
 			NieuweKlantResultTO result = nieuweKlant.doIt(nieuweKlantTo);
+			//mail(mdb) uitsturen alvorens account is geregistreerd.
 			if (result.getResult().isPresent()) {
 				nieuwAccount.registreer(result.getResult().get());
 			}
