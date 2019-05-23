@@ -17,13 +17,17 @@ public class BoekingJpaDAO implements BoekingDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	private BoekingJpaDAO() {
+	public BoekingJpaDAO() {
 	}
 
 	public void setEntityManager(final EntityManager entityManager) {
 		this.em = entityManager;
 	}
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
 	public static BoekingJpaDAO getInstance() {
 		return BoekingJpaDAO.instance;
 	}

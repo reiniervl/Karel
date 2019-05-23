@@ -17,13 +17,17 @@ public class ReserveringJpaDAO implements ReserveringDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	private ReserveringJpaDAO() {
+	public ReserveringJpaDAO() {
 	}
 
 	public void setEntityManager(final EntityManager entityManager) {
 		this.em = entityManager;
 	}
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
 	public static ReserveringJpaDAO getInstance() {
 		return ReserveringJpaDAO.instance;
 	}

@@ -23,7 +23,11 @@ public class VerhuurderJpaDAO implements VerhuurderDAO {
 	public void setEntityManager(final EntityManager entityManager) {
 		this.em = entityManager;
 	}
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
 	public static VerhuurderJpaDAO getInstance() {
 		return VerhuurderJpaDAO.instance;
 	}

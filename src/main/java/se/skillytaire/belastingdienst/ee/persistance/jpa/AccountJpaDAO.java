@@ -13,13 +13,17 @@ public class AccountJpaDAO implements AccountDAO {
 	private final static AccountJpaDAO dao = new AccountJpaDAO();
 	private EntityManager em;
 
-	private AccountJpaDAO() {
+	public AccountJpaDAO() {
 	}
 
 	public void setEntityManager(EntityManager entityManager) {
 		this.em = entityManager;
 	}
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
 	public static AccountJpaDAO getInstance() {
 		return AccountJpaDAO.dao;
 	}

@@ -20,13 +20,17 @@ public class AdresJpaDao implements AdresDao {
 	@PersistenceContext
    private EntityManager em;
 
-   private AdresJpaDao() {
+   public AdresJpaDao() {
    }
 
    public void setEntityManager(final EntityManager entityManager) {
       this.em = entityManager;
    }
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
    public static AdresJpaDao getInstance() {
       return AdresJpaDao.instance;
    }

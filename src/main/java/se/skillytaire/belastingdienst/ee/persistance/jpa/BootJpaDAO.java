@@ -20,13 +20,17 @@ public class BootJpaDAO implements BootDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	private BootJpaDAO() {
+	public BootJpaDAO() {
 	}
 
 	public void setEntityManager(final EntityManager entityManager) {
 		this.em = entityManager;
 	}
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
 	public static BootJpaDAO getInstance() {
 		return BootJpaDAO.instance;
 	}

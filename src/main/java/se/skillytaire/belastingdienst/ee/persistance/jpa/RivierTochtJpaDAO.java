@@ -17,13 +17,17 @@ public class RivierTochtJpaDAO implements RivierTochtDAO {
 	@PersistenceContext
    private EntityManager em;
 
-   private RivierTochtJpaDAO() {
+   public RivierTochtJpaDAO() {
    }
 
    public void setEntityManager(final EntityManager entityManager) {
       this.em = entityManager;
    }
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
    public static RivierTochtJpaDAO getInstance() {
       return RivierTochtJpaDAO.instance;
    }

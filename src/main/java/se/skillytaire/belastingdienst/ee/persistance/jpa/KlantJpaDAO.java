@@ -17,13 +17,17 @@ public class KlantJpaDAO implements KlantDAO {
 		@PersistenceContext
 	 private EntityManager em;
 
-   private KlantJpaDAO() {
+   public KlantJpaDAO() {
 	 }
 	 
 	 public void setEntityManager(EntityManager entityManager) {
 		 this.em = entityManager;
 	 }
-
+		/**
+		 * Wordt CDI
+		 * @return
+		 */
+		@Deprecated
    public static KlantJpaDAO getInstance() {
       return KlantJpaDAO.dao;
    }

@@ -17,7 +17,7 @@ public class MeerTochtJpaDAO implements MeerTochtDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	private MeerTochtJpaDAO() {
+	public MeerTochtJpaDAO() {
 	}
 
 	@Override
@@ -43,7 +43,11 @@ public class MeerTochtJpaDAO implements MeerTochtDAO {
 		int result = namedQuery.executeUpdate();
 		return result != 0;
 	}
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
 	public static MeerTochtJpaDAO getInstance() {
       return dao;
    }
