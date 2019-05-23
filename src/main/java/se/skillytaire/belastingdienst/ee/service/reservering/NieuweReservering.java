@@ -1,8 +1,8 @@
 package se.skillytaire.belastingdienst.ee.service.reservering;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
-@Remote
+@Local
 public interface NieuweReservering {
 	NieuweReserveringResultTO reserveren(NieuweReserveringTO reserveringTO);
 }
