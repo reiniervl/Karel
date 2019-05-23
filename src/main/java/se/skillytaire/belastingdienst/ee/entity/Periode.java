@@ -128,11 +128,14 @@ public class Periode extends AbstractComparableObject<Periode>
       return builder.toString();
    }
 
-   private LocalDateTime getStart() {
+	 // HACK: getter public gemaakt voor BeschikbareTochtenService
+   public LocalDateTime getStart() {
       return this.start;
-   }
-
-   private LocalDateTime getEind() {
+	 }
+	 
+	 
+	 // HACK: getter public gemaakt voor BeschikbareTochtenService
+   public LocalDateTime getEind() {
       return this.eind;
    }
 
