@@ -39,7 +39,7 @@ public class EndpointHelper {
       default:msg = "Oeps!";
          break;
       }
-      assertTrue(String.format("Not OK, response code %d %s", responseCode, msg),
+      assertTrue(String.format("Not OK, response code %d %s  from %s", responseCode, msg,httpEndPoint),
             responseCode == 200);
 
       String responseString = response.readEntity(String.class);

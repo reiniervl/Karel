@@ -565,75 +565,7 @@
             </executions>
              -->
         </plugin>			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
 
-				<executions>
-					<execution>
-						<id>endors</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<!-- The logging dependencies -->
-								<artifactItem>
-									<groupId>org.slf4j</groupId>
-									<artifactId>jcl-over-slf4j</artifactId>
-									<version>${version-slf4j}</version>
-									<outputDirectory>${server.config.dir.log}</outputDirectory>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.slf4j</groupId>
-									<artifactId>slf4j-api</artifactId>
-									<version>${version-slf4j}</version>
-									<outputDirectory>${server.config.dir.log}</outputDirectory>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.slf4j</groupId>
-									<artifactId>slf4j-log4j12</artifactId>
-									<version>${version-slf4j}</version>
-									<outputDirectory>${server.config.dir.log}</outputDirectory>
-								</artifactItem>
-								
-								<!-- JDBC drivers -->
-								<artifactItem>
-									<groupId>org.postgresql</groupId>
-									<artifactId>postgresql</artifactId>
-									<version>${version-postgresql}</version>
-									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
-								</artifactItem>	
-								<artifactItem>
-									<groupId>org.hsqldb</groupId>
-									<artifactId>hsqldb</artifactId>
-									<version>${version-hsqldb}</version>
-									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
-								</artifactItem>	
-								<artifactItem>
-								    <groupId>org.apache.derby</groupId>
-								    <artifactId>derbyclient</artifactId>
-								    <version>${version-derby}</version>
-									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
-								</artifactItem>																	
-
-								
-								<artifactItem>
-									<groupId>org.eclipse.persistence</groupId>
-									<artifactId>eclipselink</artifactId>
-									<version>${version-eclipselink}</version>
-									<outputDirectory>${server.config.dir.jpa}</outputDirectory>	
-								</artifactItem>									
-										
-								
-								
-											
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -1182,6 +1114,75 @@ files are moved
 			</executions>
 		</plugin>		
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>endors</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<!-- The logging dependencies -->
+								<artifactItem>
+									<groupId>org.slf4j</groupId>
+									<artifactId>jcl-over-slf4j</artifactId>
+									<version>${version-slf4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.slf4j</groupId>
+									<artifactId>slf4j-api</artifactId>
+									<version>${version-slf4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.slf4j</groupId>
+									<artifactId>slf4j-log4j12</artifactId>
+									<version>${version-slf4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>
+								
+								<!-- JDBC drivers -->
+								<artifactItem>
+									<groupId>org.postgresql</groupId>
+									<artifactId>postgresql</artifactId>
+									<version>${version-postgresql}</version>
+									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
+								</artifactItem>	
+								<artifactItem>
+									<groupId>org.hsqldb</groupId>
+									<artifactId>hsqldb</artifactId>
+									<version>${version-hsqldb}</version>
+									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
+								</artifactItem>	
+								<artifactItem>
+								    <groupId>org.apache.derby</groupId>
+								    <artifactId>derbyclient</artifactId>
+								    <version>${version-derby}</version>
+									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
+								</artifactItem>																	
+
+								
+								<artifactItem>
+									<groupId>org.eclipse.persistence</groupId>
+									<artifactId>eclipselink</artifactId>
+									<version>${version-eclipselink}</version>
+									<outputDirectory>${server.config.dir.jpa}</outputDirectory>	
+								</artifactItem>									
+										
+								
+								
+											
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>			
+		
+			<plugin>
 				<!-- installs the Liberty server in the target directory -->
 				<groupId>net.wasdev.wlp.maven.plugins</groupId>
 				<artifactId>liberty-maven-plugin</artifactId>
@@ -1266,6 +1267,10 @@ files are moved
 					</execution>
 				</executions>
 			</plugin>
+			
+			
+			
+			
 		</plugins>
 	
 	

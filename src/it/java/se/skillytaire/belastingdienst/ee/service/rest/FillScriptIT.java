@@ -9,7 +9,7 @@ import se.skillytaire.course.tools.jlc.TestPropertyFile;
 
 
 @RunWith(JLCRunner.class)
-@JLC(asJUnit = false) // UNDONE: asJUnit = true
+@JLC(asJUnit = false)
 @TestPropertyFile
 public class FillScriptIT extends EndpointHelper {
 
