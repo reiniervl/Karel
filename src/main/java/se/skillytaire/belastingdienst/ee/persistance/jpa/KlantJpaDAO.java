@@ -2,23 +2,32 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.Klant;
 import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;
-
+@Default
+@ApplicationScoped
 public class KlantJpaDAO implements KlantDAO {
 	 private final static KlantJpaDAO dao = new KlantJpaDAO();
+		@PersistenceContext
 	 private EntityManager em;
 
-   private KlantJpaDAO() {
+   public KlantJpaDAO() {
 	 }
 	 
 	 public void setEntityManager(EntityManager entityManager) {
 		 this.em = entityManager;
 	 }
-
+		/**
+		 * Wordt CDI
+		 * @return
+		 */
+		@Deprecated
    public static KlantJpaDAO getInstance() {
       return KlantJpaDAO.dao;
    }

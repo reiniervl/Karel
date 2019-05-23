@@ -2,23 +2,32 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import se.skillytaire.belastingdienst.ee.entity.Boeking;
 import se.skillytaire.belastingdienst.ee.persistance.BoekingDAO;
-
+@Default
+@ApplicationScoped
 public class BoekingJpaDAO implements BoekingDAO {
 	private static final BoekingJpaDAO instance = new BoekingJpaDAO();
+	@PersistenceContext
 	private EntityManager em;
 
-	private BoekingJpaDAO() {
+	public BoekingJpaDAO() {
 	}
 
 	public void setEntityManager(final EntityManager entityManager) {
 		this.em = entityManager;
 	}
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
 	public static BoekingJpaDAO getInstance() {
 		return BoekingJpaDAO.instance;
 	}

@@ -2,7 +2,10 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -10,18 +13,24 @@ import se.skillytaire.belastingdienst.ee.common.GPSCoordinaat;
 import se.skillytaire.belastingdienst.ee.entity.Adres;
 import se.skillytaire.belastingdienst.ee.entity.EmbeddableGPSCoordinaat;
 import se.skillytaire.belastingdienst.ee.persistance.AdresDao;
-
+@Default
+@ApplicationScoped
 public class AdresJpaDao implements AdresDao {
    private static final AdresJpaDao instance = new AdresJpaDao();
+	@PersistenceContext
    private EntityManager em;
 
-   private AdresJpaDao() {
+   public AdresJpaDao() {
    }
 
    public void setEntityManager(final EntityManager entityManager) {
       this.em = entityManager;
    }
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
    public static AdresJpaDao getInstance() {
       return AdresJpaDao.instance;
    }

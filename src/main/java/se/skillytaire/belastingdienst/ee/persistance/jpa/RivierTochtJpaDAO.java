@@ -2,23 +2,32 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
 import se.skillytaire.belastingdienst.ee.persistance.RivierTochtDAO;
-
+@Default
+@ApplicationScoped
 public class RivierTochtJpaDAO implements RivierTochtDAO {
    private static final RivierTochtJpaDAO instance = new RivierTochtJpaDAO();
+	@PersistenceContext
    private EntityManager em;
 
-   private RivierTochtJpaDAO() {
+   public RivierTochtJpaDAO() {
    }
 
    public void setEntityManager(final EntityManager entityManager) {
       this.em = entityManager;
    }
-
+	/**
+	 * Wordt CDI
+	 * @return
+	 */
+	@Deprecated
    public static RivierTochtJpaDAO getInstance() {
       return RivierTochtJpaDAO.instance;
    }

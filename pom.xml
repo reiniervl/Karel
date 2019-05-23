@@ -1111,6 +1111,26 @@ files are moved
 							<goal>run</goal>
 						</goals>					
 				</execution>
+				<execution>
+					<id>it-jpa</id>
+					<phase>prepare-package</phase>
+					<configuration>
+						<target>
+							<echo>Placing persistance.xml for the integration tests to the output</echo>
+								<!-- 
+								<delete failonerror="false">
+
+								  <fileset dir="${basedir}/target/classes/META-INF" includes="**/*.xml"/>
+								</delete>
+								 -->
+								<copy file="${basedir}/src/it/liberty/config/persistence-it.xml" toFile="${basedir}/target/classes/META-INF/persistence.xml"/>
+								
+						</target>
+					</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>					
+				</execution>				
 			</executions>
 		</plugin>		
 			<plugin>
@@ -1196,7 +1216,7 @@ files are moved
 					</assemblyArtifact>
 					<serverName>${server.config.name}</serverName>
 					<stripVersion>true</stripVersion>
-					<configFile>src/main/liberty/config/server.xml</configFile>
+					<configFile>src/it/liberty/config/server.xml</configFile>
 					<looseApplication>true</looseApplication>
 					<!-- <installAppPackages>project</installAppPackages> -->
 					<packageFile>${package.file}</packageFile>

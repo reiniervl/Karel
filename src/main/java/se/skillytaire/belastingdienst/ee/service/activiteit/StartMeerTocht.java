@@ -1,10 +1,10 @@
 package se.skillytaire.belastingdienst.ee.service.activiteit;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 import se.skillytaire.belastingdienst.ee.common.QRCode;
 
-// @Remote
+@Local
 public interface StartMeerTocht {
 	StartMeerTochtResultTO start(QRCode code);
 }

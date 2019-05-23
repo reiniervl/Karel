@@ -1,8 +1,8 @@
 package se.skillytaire.belastingdienst.ee.service.account;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
-@Remote
+@Local
 public interface UsernameCheck {
 	boolean isBeschikbaar(String username);
 }
