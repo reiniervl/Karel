@@ -16,7 +16,7 @@ import se.skillytaire.belastingdienst.ee.service.account.AccountExistsService;
 @Stateless
 public class AccountExistsEJB implements AccountExistsService {
 	@Singleton
-	private AccountDAO dao;
+	public AccountDAO dao;
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
