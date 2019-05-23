@@ -8,14 +8,23 @@ public abstract class ResultTO<R> implements Serializable {
 	public static final int NO_ERROR = 0;
 	public static final int NIEUWE_KLANT_EXISTS = 100;
 	public static final int ACCOUNT_NIET_AANGEMAAKT = 200;
+	public static final int ACCOUNT_NIET_GEVONDEN = 204;
 	public static final int TOCHT_NIET_GESTART = 300;
-
-
+	public static final int RESERVERING_NIET_AANGEMAAKT = 400;
+	
 	private final int code;
 	private final R result;
 	
 	protected ResultTO(int code) {
 		this(code, null);
+	}
+	
+	protected ResultTO(ResultTO<?> resultTO) {
+		if (resultTO.isSuccessful()) {
+			throw new IllegalArgumentException("Mag niet!");
+		} 
+		this.code = resultTO.getCode();
+		this.result = null;
 	}
 
 	protected ResultTO(R result) {

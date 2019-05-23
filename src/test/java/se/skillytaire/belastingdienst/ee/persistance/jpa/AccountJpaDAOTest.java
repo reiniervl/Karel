@@ -18,6 +18,7 @@ import org.junit.Test;
 import se.skillytaire.belastingdienst.ee.entity.Account;
 import se.skillytaire.belastingdienst.ee.entity.Klant;
 import se.skillytaire.belastingdienst.ee.persistance.AccountDAO;
+import se.skillytaire.belastingdienst.ee.service.account.AccountAKTO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
 
@@ -119,10 +120,11 @@ public class AccountJpaDAOTest {
 
    @Test
    public void testFindByKlantAndVerhuurder() {
+	  AccountAKTO accountAKTO = new AccountAKTO(this.thisAccount.getKlant().getUsername(), this.thisAccount.getVerhuurder().getUserName());
       Assert.assertFalse(this.thisAccount.isPersistant());
       this.addWithTX(this.thisAccount);
       Optional<Account> result = this.beanUnderTest
-            .find(this.thisAccount.getKlant().getUsername(), this.thisAccount.getVerhuurder().getUserName());
+            .find(accountAKTO);
       Assert.assertTrue(result.isPresent());
       Assert.assertEquals(this.thisAccount, result.get());
    }

@@ -144,4 +144,9 @@ public class Periode extends AbstractComparableObject<Periode>
    public int hashCode() {
       return AbstractComparableObject.HASH_PRIME;
    }
+   
+   public static final Periode oneDay () {
+	   LocalDateTime nu = LocalDateTime.now();
+	   return new Periode(nu, nu.plusDays(1));
+   }
 }

@@ -12,4 +12,5 @@ public class NieuwAccountResultTO extends ResultTO<Integer> {
 	public NieuwAccountResultTO() {
 		super(ResultTO.ACCOUNT_NIET_AANGEMAAKT);
 	}
+
 }

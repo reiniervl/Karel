@@ -31,7 +31,6 @@ public class Reservering extends AbstractEntity<Reservering> {
 	private static final long serialVersionUID = 1L;
 	public static final String DELETE_BY_OID = "Reservering_DeleteByOid";
 	@NotNull
-	@BuilderField
 	@Basic 
 	@Column (name = "reserveringsDatum")
 	private LocalDateTime reserveringsDatum;

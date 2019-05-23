@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.Account;
 import se.skillytaire.belastingdienst.ee.persistance.AccountDAO;
+import se.skillytaire.belastingdienst.ee.service.account.AccountAKTO;
 
 public class AccountJpaDAO implements AccountDAO {
 	private final static AccountJpaDAO dao = new AccountJpaDAO();
@@ -56,10 +57,10 @@ public class AccountJpaDAO implements AccountDAO {
 	}
 
 	@Override
-	public Optional<Account> find(String usernameklant, String usernameverhuurder) {
+	public Optional<Account> find(AccountAKTO accountAKTO) {
 		TypedQuery<Account> namedQuery = this.em.createNamedQuery(Account.FIND_BY_UC, Account.class);
-		namedQuery.setParameter("usernameklant", usernameklant);
-		namedQuery.setParameter("usernameverhuurder", usernameverhuurder);
+		namedQuery.setParameter("usernameklant", accountAKTO.getUsernameKlant());
+		namedQuery.setParameter("usernameverhuurder", accountAKTO.getUsernameVerhuurder());
 		Optional<Account> result = namedQuery.getResultList().stream().findFirst();
 		return result;
 	}

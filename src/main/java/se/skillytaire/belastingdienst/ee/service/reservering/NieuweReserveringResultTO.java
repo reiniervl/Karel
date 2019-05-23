@@ -9,8 +9,10 @@ public class NieuweReserveringResultTO extends ResultTO<Integer> {
 		super(oid);
 	
 	}
-
+	public NieuweReserveringResultTO(ResultTO<?> resultTO) {
+		super(resultTO);
+	}
 	public NieuweReserveringResultTO() {
-		super(ResultTO.NIEUWE_KLANT_EXISTS);
+		super(ResultTO.RESERVERING_NIET_AANGEMAAKT);
 	}
 }
