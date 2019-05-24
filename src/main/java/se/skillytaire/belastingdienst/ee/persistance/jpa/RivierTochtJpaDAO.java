@@ -70,7 +70,7 @@ public class RivierTochtJpaDAO implements RivierTochtDAO {
 
 	@Override
 	public Optional<List<RivierTocht>> findBeschikbareTochten() {
-		TypedQuery<RivierTocht> query = this.em.createQuery(RivierTocht.BESCHIKBARE_TOCHTEN, RivierTocht.class);
+		TypedQuery<RivierTocht> query = this.em.createNamedQuery(RivierTocht.BESCHIKBARE_TOCHTEN, RivierTocht.class);
 		List<RivierTocht> result = query.getResultList();
 		return Optional.ofNullable(result);
 	}
