@@ -18,6 +18,7 @@
 		<feature>mpHealth-1.0</feature>
 	    <feature>jpaContainer-2.1</feature>
 	    <feature>bells-1.0</feature>	
+	    <feature>wasJmsServer-1.0</feature>
 	</featureManager>
 	<bell libraryRef="eclipselink"/>
 
@@ -65,6 +66,25 @@
                     password="admin"/>
                     
     </dataSource>
+    
+    <!-- JMS -->
+    
+    <messagingEngine>
+        <queue id="sendmailqueue" />
+    </messagingEngine>
+    <jmsQueueConnectionFactory jndiName="jms/JmsFactory">
+        <properties.wasJms remoteServerAddress="localhost:7276:BootStrapBasicMessaging" />
+    </jmsQueueConnectionFactory>
+    <jmsQueue id="simpleJmsQueue" jndiName="jms/sendmail">
+        <properties.wasJms queueName="sendmailqueue" />
+    </jmsQueue>
+    
+     <jmsActivationSpec id="embedded-messaging-engine-open-liberty/JmsMessageReader">
+        <properties.wasJms
+                destinationRef="simpleJmsQueue"
+                destinationType="javax.jms.Queue"
+                remoteServerAddress="localhost:7276:BootstrapBasicMessaging"/>
+ </jmsActivationSpec>
 <!-- 
 todo na activatie in de properties zetten
 	datasource.server.name

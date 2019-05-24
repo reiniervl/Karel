@@ -12,57 +12,9 @@ import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.VerhuurderDAO;
 @Default
 @ApplicationScoped
-public class VerhuurderJpaDAO implements VerhuurderDAO {
-	private static final VerhuurderJpaDAO instance = new VerhuurderJpaDAO();
-	@PersistenceContext
-	private EntityManager em;
-	//nu singleton via container door annotatie @ApplicationScoped
+public class VerhuurderJpaDAO extends AbstractJPADAO<Verhuurder> implements VerhuurderDAO {
 	public VerhuurderJpaDAO() {
-	}
-
-	public void setEntityManager(final EntityManager entityManager) {
-		this.em = entityManager;
-	}
-	/**
-	 * Wordt CDI
-	 * @return
-	 */
-	@Deprecated
-	public static VerhuurderJpaDAO getInstance() {
-		return VerhuurderJpaDAO.instance;
-	}
-
-	@Override
-	public void add(final Verhuurder verhuurder) {
-		this.em.persist(verhuurder);
-	}
-
-	@Override
-	public Optional<Verhuurder> findByOID(final Integer OID) {
-		Verhuurder gevondenVerhuurder = this.em.find(Verhuurder.class, OID);
-		return Optional.ofNullable(gevondenVerhuurder);
-	}
-
-	@Override
-	public Verhuurder update(final Verhuurder verhuurder) {
-		return this.em.merge(verhuurder);
-	}
-
-	@Override
-	public boolean delete(final Verhuurder verhuurder) {
-		this.em.remove(verhuurder);
-		return true;
-	}
-
-	@Override
-	public boolean deleteByOID(final Integer OID) {
-		boolean deleted = false;
-		 Optional<Verhuurder> gevondenVerhuurder = this.findByOID(OID);
-		 if (gevondenVerhuurder.isPresent()) {
-				em.remove(gevondenVerhuurder.get());
-				deleted = true;
-		 }
-		 return deleted;
+		super(Verhuurder.class);
 	}
 
 	@Override

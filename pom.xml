@@ -588,7 +588,7 @@
 						<!-- in order to use JUNIT for the Belasting Way, we need to have the 
 							properties from maven in JUnit -->
 						<id>help</id>
-						<phase>clean</phase>
+						<phase>validate</phase>
 						<configuration>
 							<target>
 								<echo>

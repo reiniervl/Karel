@@ -28,7 +28,7 @@ public class VerhuurderJpaDAOTest {
    @This
 	 private Verhuurder thisVerhuurder2;
 
-   private VerhuurderDAO beanUnderTest;
+   private VerhuurderJpaDAO beanUnderTest;
 
    @Before
    public void before() {
@@ -40,8 +40,8 @@ public class VerhuurderJpaDAOTest {
    public void initJPA() {
       this.factory = Persistence.createEntityManagerFactory("stuga");
       this.entityManager = this.factory.createEntityManager();
-      VerhuurderJpaDAO.getInstance().setEntityManager(this.entityManager);
-      this.beanUnderTest = VerhuurderJpaDAO.getInstance();
+      this.beanUnderTest = new VerhuurderJpaDAO();
+      this.beanUnderTest.setEntityManager(this.entityManager);
    }
 
    @After
