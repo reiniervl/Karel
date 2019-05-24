@@ -9,7 +9,7 @@ import javax.persistence.NamedQuery;
 @DiscriminatorValue("r")
 @NamedQueries({
 @NamedQuery(name = RivierTocht.DELETE_BY_OID, query = "delete from RivierTocht a where a.oid=:oid"),
-@NamedQuery(name = RivierTocht.BESCHIKBARE_TOCHTEN, query = "select b from RivierTocht b where b.actuelePeriode.start=null")
+@NamedQuery(name = RivierTocht.BESCHIKBARE_TOCHTEN, query = "SELECT rt FROM RivierTocht rt, Reservering r WHERE rt.oid != (SELECT mt.oid FROM r.mijnTochten mt)")
 })
 public class RivierTocht extends Tocht<RivierTocht> {
 	private static final long serialVersionUID = 1L;

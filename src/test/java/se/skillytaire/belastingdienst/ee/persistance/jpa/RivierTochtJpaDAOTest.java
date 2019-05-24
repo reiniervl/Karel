@@ -1,5 +1,8 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -162,5 +165,13 @@ public class RivierTochtJpaDAOTest {
 		Assert.assertFalse(this.thisRivierTocht2.isPersistant());
 		Assert.assertTrue(persistant.isPersistant());
 		Assert.assertEquals(this.thisRivierTocht2, persistant);
+	}
+
+	@Test
+	public void testBeschikbareTochten() {
+		addWithTX(this.thisRivierTocht);
+		assertTrue(thisRivierTocht.isPersistant());
+		Optional<List<RivierTocht>> result = beanUnderTest.findBeschikbareTochten();
+		assertTrue(result.isPresent());
 	}
 }
