@@ -1,8 +1,8 @@
 package se.skillytaire.belastingdienst.ee.service.activiteit;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
-@Remote
+@Local
 public interface BeschikbareRivierTochten {
 	BeschikbareRivierTochtenResultTO geefTochten (BeschikbareRivierTochtenTO beschikbareRivierTochtenTO);
 }
