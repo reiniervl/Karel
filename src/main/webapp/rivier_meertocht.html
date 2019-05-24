@@ -1,15 +1,13 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
 <head>
-<title>KAREL Bootverhuur</title>
-<meta name="description" content="website description" />
-<meta name="keywords" content="website keywords, website keywords" />
-<meta http-equiv="content-type"
-	content="text/html; charset=windows-1252" />
-<link rel="stylesheet" type="text/css" href="style/style.css" />
+	<title>KAREL Bootverhuur</title>
+	<meta name="description" content="website description" />
+	<meta name="keywords" content="website keywords, website keywords" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style/style.css" />
 </head>
-
 <body>
 	<div id="main">
 		<div id="header">
@@ -32,40 +30,37 @@
 				<img src="style/logo.jpg" width="300" height="200">
 			</div>
 
+			<div id="content">
+				<h1>Kies je Tocht</h1>
+				<form action="RivierTocht.html" method="post">
+					<div class="keuze_tocht">
+						<p></p>
 
-		<div id="content">
-			<h1>Kies je Tocht</h1>
-			<form action="RivierTocht.html" method="post">
-				<div class="keuze_tocht">
-				<p></p>
-				
-					<p>
-						<span>&nbsp;</span><input class="submit" type="submit"
-							name="contact_submitted" value="RivierTocht"/>
-					</p>
-				</div>
-			</form>
-						<form action="MeerTocht.html" method="post">
-				<div class="keuze_tocht">
-				<p></p>
-					<p>
-						<span>&nbsp;</span><input class="submit" type="submit"
-							name="contact_submitted" value="MeerTocht"/>
-					</p>
-				</div>
-			</form>
+						<p>
+							<span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="RivierTocht" />
+						</p>
+					</div>
+				</form>
+				<form action="MeerTocht.html" method="post">
+					<div class="keuze_tocht">
+						<p></p>
+						<p>
+							<span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="MeerTocht" />
+						</p>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="footer">
+			<p>
+				<a href="index.html">Home</a> | <a href="login.html">Login</a> | <a href="registreer.html">Registreer</a>
+			</p>
+			<p>
+				Copyright &copy; Karel & Dana | <a href="https://www.ishetalvrijdag.nl/">Benieuwd of het al vrijdag
+					is?</a>
 		</div>
 	</div>
-	<div id="footer">
-		<p>
-			<a href="index.html">Home</a> | <a href="login.html">Login</a> | <a
-				href="registreer.html">Registreer</a>
-		</p>
-		<p>
-			Copyright &copy; Karel & Dana | <a
-				href="https://www.ishetalvrijdag.nl/">Benieuwd of het al vrijdag
-				is?</a>
-	</div>
-	</div>
+	<!-- JavaScript -->
+	<script src="js/tochten.js"></script>
 </body>
 </html>

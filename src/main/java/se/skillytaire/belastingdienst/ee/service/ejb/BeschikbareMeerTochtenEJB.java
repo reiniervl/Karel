@@ -13,7 +13,7 @@ import se.skillytaire.belastingdienst.ee.service.activiteit.BeschikbareMeerTocht
 import se.skillytaire.belastingdienst.ee.service.activiteit.BeschikbareMeerTochtenTO;
 
 @Stateless
-public class BeschikbareTochtenEJB implements BeschikbareMeerTochten {
+public class BeschikbareMeerTochtenEJB implements BeschikbareMeerTochten {
 
 	@Singleton
 	MeerTochtDAO meerTochtDAO;
@@ -22,7 +22,8 @@ public class BeschikbareTochtenEJB implements BeschikbareMeerTochten {
 	public BeschikbareMeerTochtenResultTO geefTochten(BeschikbareMeerTochtenTO beschikbareMeerTO) {
 		BeschikbareMeerTochtenResultTO result;
 		Optional<List<MeerTocht>> tochten = meerTochtDAO.findBeschikbareTochten();
-		if (tochten.isPresent()) {
+		
+		if(tochten.isPresent()) {
 			result = new BeschikbareMeerTochtenResultTO(tochten.get());
 		} else {
 			result = new BeschikbareMeerTochtenResultTO();
