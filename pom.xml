@@ -568,34 +568,6 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-						<configuration>
-					      
-					       <skipTests>${skipTests}</skipTests>
-					       <skipITs>${skipIT}</skipITs>
-					     					
-							<includes>
-								<include>**/*IT</include>
-							</includes>
-							<systemPropertyVariables>
-								<liberty.test.port>
-									${testServerHttpPort}
-								</liberty.test.port>
-								<war.name>${warContext}</war.name>
-							</systemPropertyVariables>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<includes>
@@ -667,41 +639,21 @@ packaging.type    =${packaging.type}
 							<goal>run</goal>
 						</goals>
 					</execution>
-					<execution>
-						<!-- in order to use JUNIT for the Belasting Way, we need to have the 
-							properties from maven in JUnit -->
-						<phase>generate-test-resources</phase>
-						<id>default</id>
-						<configuration>
-							<target>
-								<delete failOnError="false">
-									<fileset dir="${project.build.testOutputDirectory}" includes="test.properties" />
-								</delete>
-								<mkdir dir="${project.build.testOutputDirectory}" />
-								<echo file="${project.build.testOutputDirectory}/test.properties">
-									<![CDATA[#In order to override place a file ${user.name}.test.properties in
-#directory '${basedir}/src/test/resources'					
-app.name=${app.name}
-app.context.root=${warContext}
-app.location=${app.location}
-app.root.package=${package.root}
-app.url.http=http://127.0.0.1:${testServerHttpPort}/${warContext}
-app.url.https=http://127.0.0.1:${testServerHttpsPort}/${warContext}
-default.http.port=${testServerHttpPort}
-default.https.port=${testServerHttpsPort}
+				<execution>
+					<id>reset-persistance</id>
+					<phase>initialize</phase>
+					<configuration>
+						<target>
+							<echo>Removing any persistance.xml in the output off classes</echo>
 
-server.config.name=${server.config.name}
-server.config.dir=${server.config.dir}
-]]>
-								</echo>
-								<echo>test.properties are written in directory ${project.build.testOutputDirectory}</echo>
-							</target>
-							<!-- liberty:run-server runs the Liberty server stop-server -->
-						</configuration>
+								<delete failonerror="false" file="${basedir}/target/classes/META-INF/persistence.xml"/>
+								
+						</target>
+					</configuration>
 						<goals>
 							<goal>run</goal>
-						</goals>
-					</execution>
+						</goals>					
+				</execution>
 					
 					<execution>
 						<id>eclipse-fix</id>
@@ -1104,16 +1056,52 @@ files are moved
 					<phase>validate</phase>
 					<configuration>
 						<target>
-							<echo>Integration Test is enabled</echo>
+							<echo>Integration Test is enabled, context root is ${warContext}</echo>
 						</target>
 					</configuration>
 						<goals>
 							<goal>run</goal>
 						</goals>					
 				</execution>
+					<execution>
+						<!-- in order to use JUNIT for the Belasting Way, we need to have the 
+							properties from maven in JUnit -->
+						<phase>generate-test-resources</phase>
+						<id>default</id>
+						<configuration>
+							<target>
+								<delete failOnError="false">
+									<fileset dir="${project.build.testOutputDirectory}" includes="test.properties" />
+								</delete>
+								<mkdir dir="${project.build.testOutputDirectory}" />
+								<echo file="${project.build.testOutputDirectory}/test.properties">
+									<![CDATA[#In order to override place a file ${user.name}.test.properties in
+#directory '${basedir}/src/test/resources'					
+app.name=${app.name}
+app.context.root=${warContext}
+app.location=${app.location}
+app.root.package=${package.root}
+app.url.http=http://127.0.0.1:${testServerHttpPort}/${warContext}
+app.url.https=http://127.0.0.1:${testServerHttpsPort}/${warContext}
+default.http.port=${testServerHttpPort}
+default.https.port=${testServerHttpsPort}
+
+server.config.name=${server.config.name}
+server.config.dir=${server.config.dir}
+]]>
+								</echo>
+								<echo>test.properties are written in directory ${project.build.testOutputDirectory}</echo>
+							</target>
+							<!-- liberty:run-server runs the Liberty server stop-server -->
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>	
+								
 				<execution>
-					<id>it-jpa</id>
-					<phase>prepare-package</phase>
+					<id>it-pre-jpa</id>
+					<phase>pre-integration-test</phase>
 					<configuration>
 						<target>
 							<echo>Placing persistance.xml for the integration tests to the output</echo>
@@ -1130,77 +1118,23 @@ files are moved
 						<goals>
 							<goal>run</goal>
 						</goals>					
-				</execution>				
+				</execution>	
+				<execution>
+					<id>it-post-jpa</id>
+					<phase>post-integration-test</phase>
+					<configuration>
+						<target>
+							<echo>Removing the persistance.xml for the integration tests in the output</echo>
+							<delete file="${basedir}/target/classes/META-INF/persistence.xml"/>
+						</target>
+					</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>					
+				</execution>							
 			</executions>
 		</plugin>		
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>endors</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<!-- The logging dependencies -->
-								<artifactItem>
-									<groupId>org.slf4j</groupId>
-									<artifactId>jcl-over-slf4j</artifactId>
-									<version>${version-slf4j}</version>
-									<outputDirectory>${server.config.dir.log}</outputDirectory>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.slf4j</groupId>
-									<artifactId>slf4j-api</artifactId>
-									<version>${version-slf4j}</version>
-									<outputDirectory>${server.config.dir.log}</outputDirectory>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.slf4j</groupId>
-									<artifactId>slf4j-log4j12</artifactId>
-									<version>${version-slf4j}</version>
-									<outputDirectory>${server.config.dir.log}</outputDirectory>
-								</artifactItem>
-								
-								<!-- JDBC drivers -->
-								<artifactItem>
-									<groupId>org.postgresql</groupId>
-									<artifactId>postgresql</artifactId>
-									<version>${version-postgresql}</version>
-									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
-								</artifactItem>	
-								<artifactItem>
-									<groupId>org.hsqldb</groupId>
-									<artifactId>hsqldb</artifactId>
-									<version>${version-hsqldb}</version>
-									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
-								</artifactItem>	
-								<artifactItem>
-								    <groupId>org.apache.derby</groupId>
-								    <artifactId>derbyclient</artifactId>
-								    <version>${version-derby}</version>
-									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
-								</artifactItem>																	
-
-								
-								<artifactItem>
-									<groupId>org.eclipse.persistence</groupId>
-									<artifactId>eclipselink</artifactId>
-									<version>${version-eclipselink}</version>
-									<outputDirectory>${server.config.dir.jpa}</outputDirectory>	
-								</artifactItem>									
-										
-								
-								
-											
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>			
+			
 		
 			<plugin>
 				<!-- installs the Liberty server in the target directory -->
@@ -1287,7 +1221,97 @@ files are moved
 					</execution>
 				</executions>
 			</plugin>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>endors</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<!-- The logging dependencies -->
+								<artifactItem>
+									<groupId>org.slf4j</groupId>
+									<artifactId>jcl-over-slf4j</artifactId>
+									<version>${version-slf4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.slf4j</groupId>
+									<artifactId>slf4j-api</artifactId>
+									<version>${version-slf4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.slf4j</groupId>
+									<artifactId>slf4j-log4j12</artifactId>
+									<version>${version-slf4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>
+								
+								<!-- JDBC drivers -->
+								<artifactItem>
+									<groupId>org.postgresql</groupId>
+									<artifactId>postgresql</artifactId>
+									<version>${version-postgresql}</version>
+									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
+								</artifactItem>	
+								<artifactItem>
+									<groupId>org.hsqldb</groupId>
+									<artifactId>hsqldb</artifactId>
+									<version>${version-hsqldb}</version>
+									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
+								</artifactItem>	
+								<artifactItem>
+								    <groupId>org.apache.derby</groupId>
+								    <artifactId>derbyclient</artifactId>
+								    <version>${version-derby}</version>
+									<outputDirectory>${server.config.dir.driver}</outputDirectory>	
+								</artifactItem>	
+								<!-- EclipseLink as provider -->																	
+								<artifactItem>
+									<groupId>org.eclipse.persistence</groupId>
+									<artifactId>eclipselink</artifactId>
+									<version>${version-eclipselink}</version>
+									<outputDirectory>${server.config.dir.jpa}</outputDirectory>	
+								</artifactItem>									
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+						<configuration>
+					      
+					       <skipTests>${skipTests}</skipTests>
+					       <skipITs>${skipITs}</skipITs>
+					     					
+							<includes>
+								<include>**/*IT</include>
+							</includes>
+							<systemPropertyVariables>
+								<liberty.test.port>
+									${testServerHttpPort}
+								</liberty.test.port>
+								<war.name>${warContext}</war.name>
+							</systemPropertyVariables>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			
 			
 			

@@ -28,7 +28,9 @@
 	<logging traceSpecification="com.ibm.ws.microprofile.health.*=all" />
 	<httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint" host="*" />
 	<variable name="io_openliberty_guides_system_inMaintenance" value="false" />
-	<webApplication location="${appLocation}" contextRoot="${app.context.root}" />
+	<webApplication location="${appLocation}" contextRoot="${app.context.root}" >
+	    <classloader commonLibraryRef="eclipselink,logging,jdbc-drivers"/>
+	</webApplication>
 	<!-- let op de versies zijn ff vast en niet via properties/ant generatie -->
 	<library id="eclipselink">
 	    <file name="${server.config.dir}/jars/jpa/eclipselink-2.5.0.jar"/>
@@ -50,15 +52,6 @@
     
     <jpa defaultPersistenceProvider="org.eclipse.persistence.jpa.PersistenceProvider"/>	
     
-    
-	<application location="${appLocation}">
-	   <classloader commonLibraryRef="eclipselink"/>
-	</application>
-	
-	
-
-    
-
 
     <dataSource id="DefaultDataSource" jndiName="jdbc/stuga">
 	    <jdbcDriver id="postgresql-driver"
