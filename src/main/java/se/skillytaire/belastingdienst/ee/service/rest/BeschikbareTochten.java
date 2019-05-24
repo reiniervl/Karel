@@ -77,6 +77,7 @@ public class BeschikbareTochten {
 		return response;
 	}
 
+	// FIXME: return JSONArray
 	private JsonObjectBuilder parseMeerTochten(List<? extends Tocht<?>> tochten) {
 		JsonObjectBuilder tochtenObj = Json.createObjectBuilder();
 		for (Tocht<?> t : tochten) {
