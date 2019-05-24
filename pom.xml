@@ -1019,7 +1019,7 @@ files are moved
 							<consoleOutput>false</consoleOutput>
 							<failsOnError>true</failsOnError>
 							<linkXRef>true</linkXRef>
-						</configuration>
+						</configuration> 
 						<goals>
 							<goal>check</goal>
 						</goals>
