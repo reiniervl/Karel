@@ -1167,7 +1167,7 @@ server.config.dir=${server.config.dir}
 				<executions>
 					<execution>
 						<id>stop-server-before-clean</id>
-						<phase>pre-clean</phase>
+						<phase>clean</phase>
 						<goals>
 							<goal>stop-server</goal>
 						</goals>
