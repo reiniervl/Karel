@@ -125,12 +125,14 @@
 			<version>0.9.8</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>se.skillytaire.didactic</groupId>
 			<artifactId>annotation.fluent</artifactId>
 			<version>${version.didactic.generator}</version>
 			<scope>provided</scope>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>se.skillytaire.didactic</groupId>
 			<artifactId>generator</artifactId>
@@ -503,6 +505,9 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+		
+		
+		
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -835,39 +840,7 @@
 								<source>${basedir}/target/generated/clart</source>		
 							</sources>
 						</configuration>
-					</execution>
-			
-			         <execution>
-			         	<!-- op de werkvloer is dit een extern project. -->
-			            <id>add-test-source</id>
-			            <phase>generate-test-sources</phase>
-			            <goals>
-			              <goal>add-test-source</goal>
-			            </goals>
-			            <configuration>
-			              <sources>
-			                <source>${basedir}/src/it/java</source>
-			              </sources>
-			            </configuration>
-			          </execution>					
-          <execution>
-            <id>add-test-resource</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>add-test-resource</goal>
-            </goals>
-            <configuration>
-              <resources>
-                <resource>
-                  <directory>${basedir}/src/it/resources</directory>
-                  <!--  
-                  <targetPath>my-resources</targetPath>
--->
-                </resource>
-              </resources>
-            </configuration>
-          </execution>					
-					
+					</execution>					
 				</executions>
 			</plugin>
 			<plugin>
@@ -951,8 +924,8 @@
 					</execution>
 					<execution>
 						<id>dev-repair</id>
-						<!-- verify the eclipse project -->
-						<phase>verify</phase>
+						<!-- after compilation -->
+						<phase>compile</phase>
 						<goals>
 							<goal>eclipse</goal>
 						</goals>
@@ -1001,8 +974,22 @@
         <name>!skipIT</name>
       </property>
     </activation>
-  
+    <!--  
+    <properties>
+      <database.name></database.name>
+    </properties>  
+    -->
 	<build>
+		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+		<testResources>
+			<testResource>
+			    <directory>${basedir}/src/it/resources/</directory>
+			    <filtering>true</filtering>	
+		    </testResource>	
+		</testResources>
+
+
+
 	<plugins>
 		<plugin>
 			<artifactId>maven-antrun-plugin</artifactId>
@@ -1043,13 +1030,12 @@
 					<id>it-pre-jpa</id>
 					<phase>pre-integration-test</phase>
 					<configuration>
-						<target>
+
 							<tasks>
 								<ant antfile="${basedir}/src/main/ant/build.xml">
 									<target name="integration-persistance" />
 								</ant>
-							</tasks>
-						</target>
+						</tasks>
 					</configuration>
 						<goals>
 							<goal>run</goal>
@@ -1071,7 +1057,44 @@
 				</execution>							
 			</executions>
 		</plugin>		
-			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+
+				<executions>
+			         <execution>
+			         	<!-- op de werkvloer is dit een extern project. -->
+			            <id>add-test-source</id>
+			            <phase>generate-test-sources</phase>
+			            <goals>
+			              <goal>add-test-source</goal>
+			            </goals>
+			            <configuration>
+			              <sources>
+			                <source>${basedir}/src/it/java</source>
+			              </sources>
+			            </configuration>
+			          </execution>					
+          <execution>
+            <id>add-test-resource</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>add-test-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/it/resources</directory>
+                  <!--  
+                  <targetPath>my-resources</targetPath>
+-->
+                </resource>
+              </resources>
+            </configuration>
+          </execution>					
+					
+				</executions>
+			</plugin>			
 		
 			<plugin>
 				<!-- installs the Liberty server in the target directory -->

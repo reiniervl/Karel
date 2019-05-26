@@ -18,7 +18,8 @@
 mvn liberty:run-server  runs the liberty server.
 mvn liberty:stop-server stops the liberty server
 
-mvn processor:process runs the generators
+mvn compile minimaal en zorgt ervoor dat eclipse het weer snapt.
+			
 mvn process-test-classes set de service provider interface for JLC klaar tbv Eclipse.
 mvn generate-test-resources  set de test.properties file klaar
 
@@ -100,10 +101,10 @@ server.config.dir=${server.config.dir}
 		</echo>
 		<echo>test.properties are written in directory ${project.build.testOutputDirectory}</echo>
 	</target>	
-	
+	             
 	<target name="integration-persistance">
 		<echo>Placing persistance.xml for the integration tests to the output</echo>
-		<copy file="${basedir}/src/it/liberty/config/persistence-it.xml" toFile="${basedir}/target/classes/META-INF/persistence.xml"/>
+		<copy file="${basedir}/src/it/liberty/config/persistence-it.xml" toFile="${basedir}/target/classes/META-INF/persistence.xml"></copy>
 			
 	</target>	
 </project>
