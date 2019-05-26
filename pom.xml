@@ -24,7 +24,14 @@
 		<fail.pmd>true</fail.pmd>
 		<fail.javadoc>false</fail.javadoc>
 		<fail.checkstyle>false</fail.checkstyle>
-		<version-slf4j>1.7.26</version-slf4j>
+		<!-- versie op de zaak -->
+		<version-slf4j>1.7.24</version-slf4j>
+		<!-- versie op de zaak -->
+		<version-log4j>2.8.2</version-log4j>
+		
+
+
+		
 		<version-junit>4.12</version-junit>
 		<version.hamcrest>1.3</version.hamcrest>
 		<version-eclipselink>2.5.0</version-eclipselink>
@@ -209,12 +216,26 @@
 			<version>${version-slf4j}</version>
 			<scope>provided</scope>
 		</dependency>
+		<!--  
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${version-slf4j}</version>
 			<scope>provided</scope>
 		</dependency>
+		-->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>log4j-over-slf4j</artifactId>
+		    <version>${version-slf4j}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>${version-log4j}</version>
+		    <scope>provided</scope>
+		</dependency>		
 		<!-- test dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -1233,11 +1254,20 @@
 								</artifactItem>
 								<artifactItem>
 									<groupId>org.slf4j</groupId>
+									<!-- 
 									<artifactId>slf4j-log4j12</artifactId>
+									 -->
+									<artifactId>log4j-over-slf4j</artifactId>
 									<version>${version-slf4j}</version>
 									<outputDirectory>${server.config.dir.log}</outputDirectory>
 								</artifactItem>
-								
+								<artifactItem>
+									<groupId>org.apache.logging.log4j</groupId>
+								    <artifactId>log4j-core</artifactId>
+								    <version>${version-log4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>
+							
 								<!-- JDBC drivers -->
 								<artifactItem>
 									<groupId>org.postgresql</groupId>

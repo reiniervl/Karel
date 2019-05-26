@@ -38,9 +38,11 @@
 	    <file name="${server.config.dir}/jars/jpa/eclipselink-2.5.0.jar"/>
 	</library>
 	<library id="logging">
-	    <file name="${server.config.dir}/jars/log/jcl-over-slf4j-1.7.26.jar"/>
-	    <file name="${server.config.dir}/jars/log/slf4j-api-1.7.26.jar"/>
-	    <file name="${server.config.dir}/jars/log/slf4j-log4j12-1.7.26.jar"/>
+		<!-- conform versies van de zaak -->
+		<file name="${server.config.dir}/jars/log/log4j-core-2.8.2.jar"/>
+	    <file name="${server.config.dir}/jars/log/jcl-over-slf4j-1.7.24.jar"/>
+	    <file name="${server.config.dir}/jars/log/slf4j-api-1.7.24.jar"/>
+	    <file name="${server.config.dir}/jars/log/log4j-over-slf4j-1.7.24.jar"/>
 	</library>
 
 	<library id="jdbc-drivers">
