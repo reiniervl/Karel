@@ -10,6 +10,9 @@ import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import se.skillytaire.belastingdienst.ee.service.jms.MailSender;
 import se.skillytaire.java.datatype.PositiveInteger;
 import se.skillytaire.service.weather.api.WeatherForecast;
@@ -17,6 +20,7 @@ import se.skillytaire.service.weather.klart.KlartWeatherService;
 
 @Singleton
 public class KlartService {
+	private static Logger log = LoggerFactory.getLogger(KlartService.class);
     @Inject
     private MailSender sender;
 	private KlartWeatherService weerservice;
@@ -30,11 +34,12 @@ public class KlartService {
 	}
 	@PostConstruct
     public void init() {
-        System.out.println("Initialize KlartService");
+		log.info("Initialize KlartService");
         weerservice = new KlartWeatherService();
     }
     @Schedule(second = "*/10", minute = "*", hour = "*", persistent = false)
     public void pollKlart() {
+    	log.info("Updating the weather information.");
     	weerservice.update();
     }
 }

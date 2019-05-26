@@ -35,6 +35,8 @@ public class EndpointHelper {
       switch (responseCode) {
       case 404: msg = "Page Not Found, or Server Not Found";
          break;
+      case 500: msg = "Internal Server Error";
+         break;         
 
       default:msg = "Oeps!";
          break;
