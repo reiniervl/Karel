@@ -75,13 +75,13 @@
     <jmsQueueConnectionFactory jndiName="jms/JmsFactory">
         <properties.wasJms remoteServerAddress="localhost:7276:BootStrapBasicMessaging" />
     </jmsQueueConnectionFactory>
-    <jmsQueue id="simpleJmsQueue" jndiName="jms/sendmail">
+    <jmsQueue id="sendmailQueueID" jndiName="jms/sendmail">
         <properties.wasJms queueName="sendmailqueue" />
     </jmsQueue>
     
      <jmsActivationSpec id="embedded-messaging-engine-open-liberty/JmsMessageReader">
         <properties.wasJms
-                destinationRef="simpleJmsQueue"
+                destinationRef="sendmailQueueID"
                 destinationType="javax.jms.Queue"
                 remoteServerAddress="localhost:7276:BootstrapBasicMessaging"/>
  </jmsActivationSpec>

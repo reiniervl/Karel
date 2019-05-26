@@ -24,8 +24,8 @@ import se.skillytaire.java.datatype.PositiveInteger;
 public class Fill {
    public static final String ROOT_PATH ="init";
    public static final String FILL_GET_PATH = "fill";
-//   @Inject
-//   VerhuurderJpaDAO dao;
+   @Inject
+   VerhuurderJpaDAO dao;
    
    // Preparing the fill script
    @GET
@@ -52,7 +52,7 @@ public class Fill {
          verhuurder.add(boot);
       }
       
-    //  dao.add(verhuurder);
+      dao.add(verhuurder);
       return true;
    }
    

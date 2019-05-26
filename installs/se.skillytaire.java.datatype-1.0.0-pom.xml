@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>se.skillytaire.course.tools.junit</groupId>
 			<artifactId>jlc</artifactId>
-			<version>1.4.5</version>
+			<version>1.4.7</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- einde Java 8 -->

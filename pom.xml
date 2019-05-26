@@ -590,50 +590,11 @@
 						<id>help</id>
 						<phase>validate</phase>
 						<configuration>
-							<target>
-								<echo>
-									<![CDATA[Maven Goals
-mvn liberty:run-server  runs the liberty server.
-mvn liberty:stop-server stops the liberty server
-
-mvn processor:process runs the generators
-mvn process-test-classes set de service provider interface for JLC klaar tbv Eclipse.
-mvn generate-test-resources  set de test.properties file klaar
-
-Om unit tests uit te zetten gebruikt        -DskipJU=true
-Om integratie tests uit te zetten gebruikt  -DskipIT=true
-                        
-
-Util URL
-Root         http://127.0.0.1:${testServerHttpPort}/${warContext}
-Health Check http://127.0.0.1:${testServerHttpPort}/health
-
-Properties:
-
-app.name=${app.name}
-app.context.root  =${warContext}
-app.location      =${app.location}
-app.url.http      =http://127.0.0.1:${testServerHttpPort}/${warContext}
-app.url.https     =http://127.0.0.1:${testServerHttpsPort}/${warContext}
-default.http.port =${testServerHttpPort}
-default.https.port=${testServerHttpsPort}
-server.config.name=${server.config.name}
-server.config.dir =${server.config.dir}
-
-server.config.dir.log    =${server.config.dir.log}
-server.config.dir.drivers=${server.config.dir.drivers}
-server.config.dir.jpa    =${server.config.dir.jpa}
-
-
-finalName         =${project.build.finalName}
-packaging type    =${project.packaging}
-package.file      =${package.file}
-packaging.type    =${packaging.type}
-
-
-]]>
-								</echo>
-							</target>
+							<tasks>
+								<ant antfile="${basedir}/src/main/ant/build.xml">
+									<target name="showProperties" />
+								</ant>
+							</tasks>
 						</configuration>
 						<goals>
 							<goal>run</goal>
@@ -642,14 +603,13 @@ packaging.type    =${packaging.type}
 				<execution>
 					<id>reset-persistance</id>
 					<phase>initialize</phase>
-					<configuration>
-						<target>
-							<echo>Removing any persistance.xml in the output off classes</echo>
-
-								<delete failonerror="false" file="${basedir}/target/classes/META-INF/persistence.xml"/>
-								
-						</target>
-					</configuration>
+						<configuration>
+							<tasks>
+								<ant antfile="${basedir}/src/main/ant/build.xml">
+									<target name="no-persistance" />
+								</ant>
+							</tasks>
+						</configuration>
 						<goals>
 							<goal>run</goal>
 						</goals>					
@@ -660,17 +620,11 @@ packaging.type    =${packaging.type}
 						<!-- Helaas Maven versus Eclipse problemen, deze file moet verplaatst worden tbv Eclipse -->
 						<phase>process-test-classes</phase>
 						<configuration>
-							<target>
-								<copy todir="${basedir}/src/test/resources">
-								   <fileset dir="${basedir}/target/generated-test-sources/test-annotations">
-								   	 <include name="**/*"/>
-								   </fileset>
-								</copy>
-								<delete dir="${basedir}/target/generated-test-sources/test-annotations/META-INF"/>
-								<echo file="${basedir}/target/generated-test-sources/test-annotations/done.txt">
-files are moved
-								</echo>
-							</target>
+							<tasks>
+								<ant antfile="${basedir}/src/main/ant/build.xml">
+									<target name="eclipse-fix-generated-spi" />
+								</ant>
+							</tasks>
 						</configuration>
 						<goals>
 							<goal>run</goal>
@@ -1041,11 +995,13 @@ files are moved
 <profiles>
   <profile>
   	<id>IntegrationTest</id>
+  	<!--    -->
     <activation>
       <property>
         <name>!skipIT</name>
       </property>
     </activation>
+  
 	<build>
 	<plugins>
 		<plugin>
@@ -1054,11 +1010,14 @@ files are moved
 				<execution>
 					<id>it-info</id>
 					<phase>validate</phase>
-					<configuration>
-						<target>
-							<echo>Integration Test is enabled, context root is ${warContext}</echo>
-						</target>
-					</configuration>
+						<configuration>
+							<tasks>
+								<ant antfile="${basedir}/src/main/ant/build.xml">
+									<target name="integration-showInfo" />
+								</ant>
+							</tasks>
+						</configuration>					
+
 						<goals>
 							<goal>run</goal>
 						</goals>					
@@ -1069,30 +1028,11 @@ files are moved
 						<phase>generate-test-resources</phase>
 						<id>default</id>
 						<configuration>
-							<target>
-								<delete failOnError="false">
-									<fileset dir="${project.build.testOutputDirectory}" includes="test.properties" />
-								</delete>
-								<mkdir dir="${project.build.testOutputDirectory}" />
-								<echo file="${project.build.testOutputDirectory}/test.properties">
-									<![CDATA[#In order to override place a file ${user.name}.test.properties in
-#directory '${basedir}/src/test/resources'					
-app.name=${app.name}
-app.context.root=${warContext}
-app.location=${app.location}
-app.root.package=${package.root}
-app.url.http=http://127.0.0.1:${testServerHttpPort}/${warContext}
-app.url.https=http://127.0.0.1:${testServerHttpsPort}/${warContext}
-default.http.port=${testServerHttpPort}
-default.https.port=${testServerHttpsPort}
-
-server.config.name=${server.config.name}
-server.config.dir=${server.config.dir}
-]]>
-								</echo>
-								<echo>test.properties are written in directory ${project.build.testOutputDirectory}</echo>
-							</target>
-							<!-- liberty:run-server runs the Liberty server stop-server -->
+							<tasks>
+								<ant antfile="${basedir}/src/main/ant/build.xml">
+									<target name="integration-write-test.properties" />
+								</ant>
+							</tasks>
 						</configuration>
 						<goals>
 							<goal>run</goal>
@@ -1104,15 +1044,11 @@ server.config.dir=${server.config.dir}
 					<phase>pre-integration-test</phase>
 					<configuration>
 						<target>
-							<echo>Placing persistance.xml for the integration tests to the output</echo>
-								<!-- 
-								<delete failonerror="false">
-
-								  <fileset dir="${basedir}/target/classes/META-INF" includes="**/*.xml"/>
-								</delete>
-								 -->
-								<copy file="${basedir}/src/it/liberty/config/persistence-it.xml" toFile="${basedir}/target/classes/META-INF/persistence.xml"/>
-								
+							<tasks>
+								<ant antfile="${basedir}/src/main/ant/build.xml">
+									<target name="integration-persistance" />
+								</ant>
+							</tasks>
 						</target>
 					</configuration>
 						<goals>
@@ -1123,10 +1059,11 @@ server.config.dir=${server.config.dir}
 					<id>it-post-jpa</id>
 					<phase>post-integration-test</phase>
 					<configuration>
-						<target>
-							<echo>Removing the persistance.xml for the integration tests in the output</echo>
-							<delete file="${basedir}/target/classes/META-INF/persistence.xml"/>
-						</target>
+							<tasks>
+								<ant antfile="${basedir}/src/main/ant/build.xml">
+									<target name="no-persistance" />
+								</ant>
+							</tasks>
 					</configuration>
 						<goals>
 							<goal>run</goal>

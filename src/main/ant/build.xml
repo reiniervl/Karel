@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     26 mei 2019 15:19:14                                                        
+
+     project    
+     description
+                   
+                                                           
+     ====================================================================== -->
+<project name="project">
+    <description>
+         Maven support file
+    </description>
+
+	<target name="showProperties">
+		<echo>
+			<![CDATA[Maven Goals
+mvn liberty:run-server  runs the liberty server.
+mvn liberty:stop-server stops the liberty server
+
+mvn processor:process runs the generators
+mvn process-test-classes set de service provider interface for JLC klaar tbv Eclipse.
+mvn generate-test-resources  set de test.properties file klaar
+
+Om unit tests uit te zetten gebruikt        -DskipJU=true
+Om integratie tests uit te zetten gebruikt  -DskipIT=true
+
+
+Util URL
+Root         http://127.0.0.1:${testServerHttpPort}/${warContext}
+Health Check http://127.0.0.1:${testServerHttpPort}/health
+
+Properties:
+
+app.name=${app.name}
+app.context.root  =${warContext}
+app.location      =${app.location}
+app.url.http      =http://127.0.0.1:${testServerHttpPort}/${warContext}
+app.url.https     =http://127.0.0.1:${testServerHttpsPort}/${warContext}
+default.http.port =${testServerHttpPort}
+default.https.port=${testServerHttpsPort}
+server.config.name=${server.config.name}
+server.config.dir =${server.config.dir}
+
+server.config.dir.log    =${server.config.dir.log}
+server.config.dir.drivers=${server.config.dir.drivers}
+server.config.dir.jpa    =${server.config.dir.jpa}
+
+
+finalName         =${project.build.finalName}
+packaging type    =${project.packaging}
+package.file      =${package.file}
+packaging.type    =${packaging.type}
+
+
+]]>
+		</echo>
+	</target>
+
+	<target name="no-persistance" description="removes the persistance.xml form the classpath">
+		<echo>Removing any persistance.xml in the output off classes</echo>
+			<delete failonerror="false" file="${basedir}/target/classes/META-INF/persistence.xml"/>
+	</target>
+
+	<target name="eclipse-fix-generated-spi">
+		<copy todir="${basedir}/src/test/resources">
+		   <fileset dir="${basedir}/target/generated-test-sources/test-annotations">
+		   	 <include name="**/*"/>
+		   </fileset>
+		</copy>
+		<delete dir="${basedir}/target/generated-test-sources/test-annotations/META-INF"/>
+		<echo file="${basedir}/target/generated-test-sources/test-annotations/done.txt">
+files are moved
+		</echo>
+	</target>
+
+	<target name="integration-showInfo">
+		<echo>Integration Test is enabled, context root is ${warContext}</echo>
+	</target>
+	<target name="integration-write-test.properties">
+		<delete failOnError="false">
+			<fileset dir="${project.build.testOutputDirectory}" includes="test.properties" />
+		</delete>
+		<mkdir dir="${project.build.testOutputDirectory}" />
+		<echo file="${project.build.testOutputDirectory}/test.properties">
+			<![CDATA[#In order to override place a file ${user.name}.test.properties in
+#directory '${basedir}/src/test/resources'					
+app.name=${app.name}
+app.context.root=${warContext}
+app.location=${app.location}
+app.root.package=${package.root}
+app.url.http=http://127.0.0.1:${testServerHttpPort}/${warContext}
+app.url.https=http://127.0.0.1:${testServerHttpsPort}/${warContext}
+default.http.port=${testServerHttpPort}
+default.https.port=${testServerHttpsPort}
+
+server.config.name=${server.config.name}
+server.config.dir=${server.config.dir}
+]]>
+		</echo>
+		<echo>test.properties are written in directory ${project.build.testOutputDirectory}</echo>
+	</target>	
+	
+	<target name="integration-persistance">
+		<echo>Placing persistance.xml for the integration tests to the output</echo>
+		<copy file="${basedir}/src/it/liberty/config/persistence-it.xml" toFile="${basedir}/target/classes/META-INF/persistence.xml"/>
+			
+	</target>	
+</project>
