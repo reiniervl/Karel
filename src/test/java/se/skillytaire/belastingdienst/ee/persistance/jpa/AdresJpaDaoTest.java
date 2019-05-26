@@ -11,6 +11,7 @@ import javax.persistence.RollbackException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import se.skillytaire.belastingdienst.ee.common.GPSCoordinaat;
@@ -21,47 +22,48 @@ import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
 
 public class AdresJpaDaoTest {
-
-   private EntityManagerFactory factory;
-   private EntityManager entityManager;
+    @Rule
+    public EntityManagerTestRule jpa = EntityManagerTestRule.persistenceUnit("stuga");
 
    @This
    private Adres thisAdres;
    @This
    private Adres thisAdres2;
 
-   private AdresDao beanUnderTest;
+   private AdresJpaDao beanUnderTest;
 
    @Before
    public void before() {
       JLCRunner.init(this);
+      beanUnderTest = new AdresJpaDao();
+      beanUnderTest.setEntityManager(jpa.em());
    }
 
-   // every time thedb will be truncated
-   @Before
-   public void initJPA() {
-      this.factory = Persistence.createEntityManagerFactory("stuga");
-      this.entityManager = this.factory.createEntityManager();
-      AdresJpaDao.getInstance().setEntityManager(this.entityManager);
-      this.beanUnderTest = AdresJpaDao.getInstance();
-   }
+//   // every time thedb will be truncated
+//   @Before
+//   public void initJPA() {
+//      this.factory = Persistence.createEntityManagerFactory("stuga");
+//      this.entityManager = this.factory.createEntityManager();
+//      AdresJpaDao.getInstance().setEntityManager(this.entityManager);
+//      this.beanUnderTest = AdresJpaDao.getInstance();
+//   }
 
-   @After
-   public void destroyJPA() {
-      if (this.entityManager != null) {
-         this.entityManager.close();
-      }
-      if (this.factory != null) {
-         this.factory.close();
-         while (this.factory.isOpen() && !Thread.interrupted()) {
-            try {
-               Thread.sleep(100);
-            } catch (InterruptedException e) {
-               Thread.currentThread().interrupt();
-            }
-         }
-      }
-   }
+//   @After
+//   public void destroyJPA() {
+//      if (this.entityManager != null) {
+//         this.entityManager.close();
+//      }
+//      if (this.factory != null) {
+//         this.factory.close();
+//         while (this.factory.isOpen() && !Thread.interrupted()) {
+//            try {
+//               Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//               Thread.currentThread().interrupt();
+//            }
+//         }
+//      }
+//   }
 
    @Test
    public void testNewAdres() {
@@ -70,7 +72,7 @@ public class AdresJpaDaoTest {
    }
 
    private void addWithTX(final Adres adres) {
-      EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+      EntityTransaction unmanagedTx = jpa.getNewTransaction();
       try {
          unmanagedTx.begin();
          this.beanUnderTest.add(adres);
@@ -124,7 +126,7 @@ public class AdresJpaDaoTest {
    @Test
    public void testDeleteByOid() {
       this.addWithTX(this.thisAdres);
-      EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+      EntityTransaction unmanagedTx = this.jpa.getNewTransaction();
       unmanagedTx.begin();
       boolean actual = this.beanUnderTest.deleteByOID(this.thisAdres.getOid());
       Assert.assertTrue(actual);
@@ -135,7 +137,7 @@ public class AdresJpaDaoTest {
 
    @Test
    public void testDeleteByNonExisitingOid() {
-      EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+      EntityTransaction unmanagedTx = this.jpa.getNewTransaction();
       unmanagedTx.begin();
       boolean actual = this.beanUnderTest.deleteByOID(9999999);
       Assert.assertFalse(actual);
@@ -145,7 +147,7 @@ public class AdresJpaDaoTest {
    @Test
    public void testDeleteExisting() {
       this.addWithTX(this.thisAdres);
-      EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+      EntityTransaction unmanagedTx =  this.jpa.getNewTransaction();
       unmanagedTx.begin();
       boolean succes = this.beanUnderTest.delete(this.thisAdres);
       Assert.assertTrue(succes);
@@ -159,7 +161,7 @@ public class AdresJpaDaoTest {
    @Test
    public void testUpdate() {
       this.addWithTX(this.thisAdres);
-      EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+      EntityTransaction unmanagedTx =  this.jpa.getNewTransaction();
       unmanagedTx.begin();
       Adres clone = this.thisAdres.clone();
       clone.setCity("Zwolle");
@@ -173,7 +175,7 @@ public class AdresJpaDaoTest {
 
    @Test
    public void testUpdateNonExsisting() {
-      EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+      EntityTransaction unmanagedTx = this.jpa.getNewTransaction();
       unmanagedTx.begin();
       Adres persistant = this.beanUnderTest.update(this.thisAdres);
       Assert.assertFalse(this.thisAdres.isPersistant());

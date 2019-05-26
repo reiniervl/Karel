@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorinterval="30">
+	<Properties>
+		<Property name="filename">target/logs/karels-bootjes-case.log</Property>
+	</Properties>
+	<Appenders>
+		<Console name="ConsoleAppender">
+			<PatternLayout>
+				<pattern>%-5p [%C.%M()] %m%n</pattern>
+			</PatternLayout>
+		</Console>
+		
+		<RollingFile name="RollingFileAppender" fileName="${filename}" filePattern="${filename}.%d{yyyy-MM-dd}">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%C.%M()] %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+			</Policies>
+			<DefaultRolloverStrategy >
+				<Delete basePath="target/logs/" maxDepth="1">
+					<IfFileName glob="karels-bootjes-case.log.*"/>
+					<IfLastModified age="30d"/>
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="se.skillytaire.belastingdienst" level="debug" additivity="false">
+			<AppenderRef ref="RollingFileAppender" />
+			<AppenderRef ref="ConsoleAppender" />
+		</Logger>
+		<Root level="error" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</Root>
+	</Loggers>
+</Configuration>

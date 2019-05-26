@@ -8,12 +8,13 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import se.skillytaire.course.tools.jlc.Property;
 
 public class EndpointHelper {
-   private static final Logger log = Logger.getLogger(EndpointHelper.class);
+   private static final Logger log = LoggerFactory.getLogger(EndpointHelper.class);
    @Property(key = "app.url.http")
    private static String URL;
    

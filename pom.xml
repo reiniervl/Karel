@@ -206,30 +206,45 @@
 		<!-- Logging dependencies -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${version-slf4j}</version>
+			<scope>provided</scope>
+		</dependency>		
+		<dependency>
+			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${version-slf4j}</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
+			<artifactId>jul-to-slf4j</artifactId>
 			<version>${version-slf4j}</version>
 			<scope>provided</scope>
 		</dependency>
-		<!--  
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
+			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${version-slf4j}</version>
 			<scope>provided</scope>
 		</dependency>
-		-->
+            
+            	
+	    <!-- Log4J -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${version-log4j}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- is transitief maar ivm endoresing extra opgenomen voor duidelijkheid /non optional -->
 		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>log4j-over-slf4j</artifactId>
-		    <version>${version-slf4j}</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${version-log4j}</version>
+			<scope>provided</scope>
 		</dependency>
-		
 		<dependency>
 		    <groupId>org.apache.logging.log4j</groupId>
 		    <artifactId>log4j-core</artifactId>
@@ -1254,19 +1269,43 @@
 								</artifactItem>
 								<artifactItem>
 									<groupId>org.slf4j</groupId>
-									<!-- 
-									<artifactId>slf4j-log4j12</artifactId>
-									 -->
 									<artifactId>log4j-over-slf4j</artifactId>
 									<version>${version-slf4j}</version>
 									<outputDirectory>${server.config.dir.log}</outputDirectory>
 								</artifactItem>
+								
+								<artifactItem>
+									<groupId>org.apache.logging.log4j</groupId>
+									<artifactId>log4j-api</artifactId>
+								    <version>${version-log4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>								
 								<artifactItem>
 									<groupId>org.apache.logging.log4j</groupId>
 								    <artifactId>log4j-core</artifactId>
 								    <version>${version-log4j}</version>
 									<outputDirectory>${server.config.dir.log}</outputDirectory>
 								</artifactItem>
+								<artifactItem>
+						            <groupId>org.apache.logging.log4j</groupId>
+						            <artifactId>log4j-slf4j-impl</artifactId>
+								    <version>${version-log4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>
+							
+								<artifactItem>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>${version-slf4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>							
+								<artifactItem>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${version-slf4j}</version>
+									<outputDirectory>${server.config.dir.log}</outputDirectory>
+								</artifactItem>	
+						
 							
 								<!-- JDBC drivers -->
 								<artifactItem>
