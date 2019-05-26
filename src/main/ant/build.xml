@@ -104,7 +104,7 @@ server.config.dir=${server.config.dir}
 	             
 	<target name="integration-persistance">
 		<echo>Placing persistance.xml for the integration tests to the output</echo>
-		<copy file="${basedir}/src/it/liberty/config/persistence-it.xml" toFile="${basedir}/target/${dir.exploded}/META-INF/persistence.xml"></copy>
+		<copy file="${basedir}/src/it/liberty/config/persistence-it.xml" toFile="${basedir}/target/${dir.exploded}/WEB-INF/classes/META-INF/persistence.xml"></copy>
 			
 	</target>	
 </project>

@@ -12,7 +12,7 @@ import se.skillytaire.belastingdienst.ee.persistance.DAO;
 //FIXME lijkt me beter :-)
 //FIXME JPADao? als naam?
 public class AbstractJPADAO <T extends AbstractEntity<T>> implements DAO<T>{
-	@PersistenceContext(name="stuga")
+	@PersistenceContext(unitName="stuga")
 	protected EntityManager em;
 	private Class<T> entityType;
 	
