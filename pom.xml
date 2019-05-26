@@ -60,6 +60,7 @@
 		<server.config.dir.driver>${server.config.dir}/jars/jdbc</server.config.dir.driver>
 		<server.config.dir.jpa>${server.config.dir}/jars/jpa</server.config.dir.jpa>
 
+		<dir.exploded>${project.build.finalName}</dir.exploded>
 
 <!-- 
 		<skipJU>false</skipJU>
@@ -313,7 +314,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>${project.groupId}.${project.artifactId}</finalName>
+		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
 
 		<pluginManagement>
 			<plugins>
@@ -967,6 +968,28 @@
 
 <profiles>
   <profile>
+  	<id>Development</id>
+    <activation>
+    <!-- werkt niet, zucht...
+      <activeByDefault>true</activeByDefault>
+      -->
+  
+      <property>
+        <name>!prod</name>
+      </property>
+    
+    </activation>  	
+	<build>
+		
+		<testResources>
+			<testResource>
+			    <directory>${basedir}/src/test/resources/</directory>
+			    <filtering>true</filtering>	
+		    </testResource>	
+		</testResources>
+	</build>  	
+  	</profile>
+  <profile>
   	<id>IntegrationTest</id>
   	<!--    -->
     <activation>
@@ -980,7 +1003,7 @@
     </properties>  
     -->
 	<build>
-		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+		
 		<testResources>
 			<testResource>
 			    <directory>${basedir}/src/it/resources/</directory>
@@ -1028,7 +1051,7 @@
 								
 				<execution>
 					<id>it-pre-jpa</id>
-					<phase>pre-integration-test</phase>
+					<phase>prepare-package</phase>
 					<configuration>
 
 							<tasks>
@@ -1041,6 +1064,7 @@
 							<goal>run</goal>
 						</goals>					
 				</execution>	
+				<!-- 
 				<execution>
 					<id>it-post-jpa</id>
 					<phase>post-integration-test</phase>
@@ -1054,7 +1078,8 @@
 						<goals>
 							<goal>run</goal>
 						</goals>					
-				</execution>							
+				</execution>	
+				 -->						
 			</executions>
 		</plugin>		
 			<plugin>
