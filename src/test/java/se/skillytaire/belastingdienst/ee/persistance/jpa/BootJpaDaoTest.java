@@ -2,15 +2,11 @@ package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.RollbackException;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import se.skillytaire.belastingdienst.ee.entity.Boot;
@@ -24,9 +20,8 @@ import se.skillytaire.course.tools.jlc.This;
 import se.skillytaire.java.datatype.PositiveInteger;
 
 public class BootJpaDaoTest {
-
-	private EntityManagerFactory factory;
-	private EntityManager entityManager;
+	@Rule
+	public EntityManagerTestRule jpa = EntityManagerTestRule.persistenceUnit("stuga");
 
 	@This
 	private Boot thisBoot;
@@ -56,31 +51,8 @@ public class BootJpaDaoTest {
 	@Before
 	public void before() {
 		JLCRunner.init(this);
-	}
-
-	@Before
-	public void initJPA() {
-		this.factory = Persistence.createEntityManagerFactory("stuga");
-		this.entityManager = this.factory.createEntityManager();
-		BootJpaDAO.getInstance().setEntityManager(this.entityManager);
-		this.beanUnderTest = BootJpaDAO.getInstance();
-	}
-
-	@After
-	public void destroyJPA() {
-		if (this.entityManager != null) {
-			this.entityManager.close();
-		}
-		if (this.factory != null) {
-			this.factory.close();
-			while (this.factory.isOpen() && !Thread.interrupted()) {
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					Thread.currentThread().interrupt();
-				}
-			}
-		}
+		beanUnderTest = new BootJpaDAO();
+		beanUnderTest.setEntityManager(jpa.em());
 	}
 
 	@Test
@@ -90,7 +62,7 @@ public class BootJpaDaoTest {
 	}
 
 	private void addWithTX(final Boot boot) {
-		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+		EntityTransaction unmanagedTx = jpa.getNewTransaction();
 		try {
 			unmanagedTx.begin();
 			this.beanUnderTest.add(boot);
@@ -149,7 +121,7 @@ public class BootJpaDaoTest {
 	@Test
 	public void testDeleteByOid() {
 		this.addWithTX(this.thisBoot);
-		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+		EntityTransaction unmanagedTx = jpa.getNewTransaction();
 		unmanagedTx.begin();
 		boolean actual = this.beanUnderTest.deleteByOID(this.thisBoot.getOid());
 		Assert.assertTrue(actual);
@@ -160,7 +132,7 @@ public class BootJpaDaoTest {
 
 	@Test
 	public void testDeleteByNonExisitingOid() {
-		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+		EntityTransaction unmanagedTx = jpa.getNewTransaction();
 		unmanagedTx.begin();
 		boolean actual = this.beanUnderTest.deleteByOID(9999999);
 		Assert.assertFalse(actual);
@@ -170,7 +142,7 @@ public class BootJpaDaoTest {
 	@Test
 	public void testDeleteExisting() {
 		this.addWithTX(this.thisBoot);
-		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+		EntityTransaction unmanagedTx = jpa.getNewTransaction();
 		unmanagedTx.begin();
 		boolean succes = this.beanUnderTest.delete(this.thisBoot);
 		Assert.assertTrue(succes);
@@ -194,7 +166,7 @@ public class BootJpaDaoTest {
 
 	@Test
 	public void testUpdateNonExsisting() {
-		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+		EntityTransaction unmanagedTx = jpa.getNewTransaction();
 		unmanagedTx.begin();
 		this.beanUnderTest.update(this.thisBoot);
 		Boot persistant = this.beanUnderTest.update(this.thisBoot);

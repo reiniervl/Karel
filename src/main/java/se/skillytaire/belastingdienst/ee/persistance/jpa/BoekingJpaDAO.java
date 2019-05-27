@@ -9,16 +9,18 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import se.skillytaire.belastingdienst.ee.entity.Boeking;
+import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.BoekingDAO;
 @Default
 @ApplicationScoped
-public class BoekingJpaDAO implements BoekingDAO {
-	private static final BoekingJpaDAO instance = new BoekingJpaDAO();
+public class BoekingJpaDAO extends AbstractJPADAO<Boeking> implements BoekingDAO {
+	protected BoekingJpaDAO(Class<Boeking> boeking) {
+		super(Boeking.class);
+	}
+
+	private static final BoekingJpaDAO instance = new BoekingJpaDAO(Boeking.class);
 	@PersistenceContext
 	private EntityManager em;
-
-	public BoekingJpaDAO() {
-	}
 
 	public void setEntityManager(final EntityManager entityManager) {
 		this.em = entityManager;

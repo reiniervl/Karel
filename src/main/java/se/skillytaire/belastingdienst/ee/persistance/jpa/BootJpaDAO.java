@@ -5,9 +5,6 @@ import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.Boot;
@@ -16,55 +13,8 @@ import se.skillytaire.belastingdienst.ee.persistance.BootDAO;
 @Default
 @ApplicationScoped
 public class BootJpaDAO extends AbstractJPADAO<Boot> implements BootDAO {
-	protected BootJpaDAO(Class<Boot> boot) {
+	public BootJpaDAO() {
 		super(Boot.class);
-	}
-
-	private static final BootJpaDAO instance = new BootJpaDAO(Boot.class);
-	@PersistenceContext
-	private EntityManager em;
-
-
-	public void setEntityManager(final EntityManager entityManager) {
-		this.em = entityManager;
-	}
-	/**
-	 * Wordt CDI
-	 * @return
-	 */
-	@Deprecated
-	public static BootJpaDAO getInstance() {
-		return BootJpaDAO.instance;
-	}
-
-	@Override
-	public void add(final Boot boot) {
-		this.em.persist(boot);
-	}
-
-	@Override
-	public Optional<Boot> findByOID(final Integer OID) {
-		Boot gevondenBoot = this.em.find(Boot.class, OID);
-		return Optional.ofNullable(gevondenBoot);
-	}
-
-	@Override
-	public Boot update(final Boot boot) {
-		return this.em.merge(boot);
-	}
-
-	@Override
-	public boolean delete(final Boot boot) {
-		this.em.remove(boot);
-		return true;
-	}
-
-	@Override
-	public boolean deleteByOID(final Integer OID) {
-		Query namedQuery = this.em.createNamedQuery(Boot.DELETE_BY_OID);
-		namedQuery.setParameter("oid", OID);
-		int result = namedQuery.executeUpdate();
-		return result != 0;
 	}
 
 	@Override
