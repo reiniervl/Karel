@@ -17,19 +17,19 @@ import se.skillytaire.belastingdienst.ee.service.account.UsernameCheck;
 @Path("account")
 public class LoginAccount {
 	
-//	@Inject
-//	private UsernameCheck usernameCheck;
-//	@Inject
-//	private PasswordCheck passwordCheck;
+	@Inject
+	private UsernameCheck usernameCheck;
+	@Inject
+	private PasswordCheck passwordCheck;
 
 	@POST
 	@Path("inloggen")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response inloggen(@FormParam("username") String username, @FormParam("password") String password) {
 		boolean valide = false;
-//		if (!usernameCheck.isBeschikbaar(username)) {
-//			valide = passwordCheck.isValide(username, password);
-//		} 		
+		if (!usernameCheck.isBeschikbaar(username)) {
+			valide = passwordCheck.isValide(username, password);
+		} 		
 		
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 		JsonObject obj = factory.createObjectBuilder()

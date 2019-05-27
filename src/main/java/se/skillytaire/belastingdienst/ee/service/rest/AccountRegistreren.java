@@ -38,6 +38,7 @@ public class AccountRegistreren {
 			//mail(mdb) uitsturen alvorens account is geregistreerd.
 			if (result.getResult().isPresent()) {
 				nieuwAccount.registreer(result.getResult().get());
+				isAangemaakt = true;
 			}
 		}
 
