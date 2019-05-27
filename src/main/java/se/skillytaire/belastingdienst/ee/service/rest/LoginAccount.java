@@ -4,10 +4,13 @@ import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -25,11 +28,12 @@ public class LoginAccount {
 	@POST
 	@Path("inloggen")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response inloggen(@FormParam("username") String username, @FormParam("password") String password) {
+	public Response inloggen(@FormParam("username") String username, @FormParam("password") String password, @Context HttpServletRequest request) {
 		boolean valide = false;
 		if (!usernameCheck.isBeschikbaar(username)) {
 			valide = passwordCheck.isValide(username, password);
-		} 		
+		}
+		request.getSession().setAttribute("username", username);
 		
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 		JsonObject obj = factory.createObjectBuilder()
