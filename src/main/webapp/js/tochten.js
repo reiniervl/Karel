@@ -23,7 +23,7 @@ function Tochtenbak(tochttype, verhuurder) {
 	this.bt = new BeschikbareTochten(tochttype, verhuurder);
 	this.tochten = [];
 	this.vul = function() {
-		this.bt.getlist(this.vul);
+		this.bt.getlist(this.update);
 	}
 	this.update = function(res) {
 		var ts = document.getElementById("tochtSelect")
