@@ -1,6 +1,7 @@
 package se.skillytaire.belastingdienst.ee.persistance.jpa;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.persistence.EntityTransaction;
 
@@ -9,6 +10,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import se.skillytaire.belastingdienst.ee.entity.Adres;
 import se.skillytaire.belastingdienst.ee.entity.Boot;
 import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
 import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
@@ -17,6 +19,7 @@ import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.LessThen;
 import se.skillytaire.course.tools.jlc.That;
 import se.skillytaire.course.tools.jlc.This;
+import se.skillytaire.belastingdienst.ee.entity.VerhuurderBuilder;
 import se.skillytaire.java.datatype.PositiveInteger;
 
 public class BootJpaDaoTest {
@@ -27,6 +30,8 @@ public class BootJpaDaoTest {
 	private Boot thisBoot;
 	@This
 	private Boot thisBoot2;
+	@This
+	private Adres adres;
 	@That
 	private Verhuurder verhuurder;
 	@This
@@ -100,10 +105,11 @@ public class BootJpaDaoTest {
 
 	@Test
 	public void testFindBeschikbareBoot() {
-		Boot boot1 = new Boot(this.verhuurder, this.thisNummer);
-		Boot boot2 = new Boot(this.verhuurder, this.thatNummer);
-		Boot boot3 = new Boot(this.verhuurder, this.lessThenNummer);
-		Boot boot4 = new Boot(this.verhuurder, this.greaterThenNummer);
+		Verhuurder verhuurder = generateRandomHuurder();
+		Boot boot1 = new Boot(verhuurder, this.thisNummer);
+		Boot boot2 = new Boot(verhuurder, this.thatNummer);
+		Boot boot3 = new Boot(verhuurder, this.lessThenNummer);
+		Boot boot4 = new Boot(verhuurder, this.greaterThenNummer);
 		this.addWithTX(boot1);
 		this.addWithTX(boot2);
 		this.addWithTX(boot3);
@@ -113,7 +119,7 @@ public class BootJpaDaoTest {
 		boot3.start(eenTocht3);
 		boot4.start(eenTocht4);
 		boot2.beeindigLaatsteTocht();
-		Optional<Boot> result = this.beanUnderTest.findBeschikbareBoot(this.verhuurder);
+		Optional<Boot> result = this.beanUnderTest.findBeschikbareBoot(verhuurder);
 		Assert.assertTrue(result.isPresent());
 		Assert.assertEquals(boot2, result.get());
 	}
@@ -174,5 +180,10 @@ public class BootJpaDaoTest {
 		Assert.assertFalse(this.thisBoot.isPersistant());
 		Assert.assertTrue(persistant.isPersistant());
 		Assert.assertEquals(this.thisBoot, persistant);
+	}
+	
+	private Verhuurder generateRandomHuurder() {
+		return VerhuurderBuilder.builder().withAdres(adres).withName(UUID.randomUUID().toString())
+				.withUserName(UUID.randomUUID().toString()).build();
 	}
 }

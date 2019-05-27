@@ -7,6 +7,7 @@ public abstract class ResultTO<R> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final int NO_ERROR = 0;
 	public static final int NIEUWE_KLANT_EXISTS = 100;
+	public static final int KLANT_NIET_GEVONDEN = 104;
 	public static final int ACCOUNT_NIET_AANGEMAAKT = 200;
 	public static final int ACCOUNT_NIET_GEVONDEN = 204;
 	public static final int TOCHT_NIET_GESTART = 300;
@@ -15,6 +16,7 @@ public abstract class ResultTO<R> implements Serializable {
 	public static final int BESCHIKBARE_TOCHTEN_NIET_GEVONDEN = 500;
 	public static final int BESCHIKBARE_MEERTOCHTEN_NIET_GEVONDEN = 501;
 	public static final int BESCHIKBARE_RIVIERTOCHTEN_NIET_GEVONDEN = 502;
+	public static final int VERHUURDER_NIET_GEVONDEN = 604;
 	
 	
 	private final int code;

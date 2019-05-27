@@ -5,19 +5,17 @@ import java.util.Optional;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import se.skillytaire.belastingdienst.ee.entity.Reservering;
 import se.skillytaire.belastingdienst.ee.persistance.ReserveringDAO;
 @Default
 @ApplicationScoped
-public class ReserveringJpaDAO implements ReserveringDAO {
+public class ReserveringJpaDAO extends AbstractJPADAO<Reservering> implements ReserveringDAO {
 	private static final ReserveringJpaDAO instance = new ReserveringJpaDAO();
-	@PersistenceContext
-	private EntityManager em;
 
 	public ReserveringJpaDAO() {
+		super(Reservering.class);
 	}
 
 	public void setEntityManager(final EntityManager entityManager) {
@@ -30,28 +28,6 @@ public class ReserveringJpaDAO implements ReserveringDAO {
 	@Deprecated
 	public static ReserveringJpaDAO getInstance() {
 		return ReserveringJpaDAO.instance;
-	}
-
-	@Override
-	public void add(final Reservering reservering) {
-		this.em.persist(reservering);
-	}
-
-	@Override
-	public Optional<Reservering> findByOID(final Integer OID) {
-		Reservering gevondenReservering = this.em.find(Reservering.class, OID);
-		return Optional.ofNullable(gevondenReservering);
-	}
-
-	@Override
-	public Reservering update(final Reservering reservering) {
-		return this.em.merge(reservering);
-	}
-
-	@Override
-	public boolean delete(final Reservering reservering) {
-		this.em.remove(reservering);
-		return true;
 	}
 
 	@Override

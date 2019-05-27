@@ -17,7 +17,6 @@ public class UsernameCheckEJB implements UsernameCheck {
 	private KlantJpaDAO dao;
 	
 	public UsernameCheckEJB(KlantJpaDAO dao) {
-		super();
 		this.dao = dao;
 	}
 	

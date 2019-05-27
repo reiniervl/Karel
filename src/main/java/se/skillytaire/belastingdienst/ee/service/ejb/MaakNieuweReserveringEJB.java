@@ -27,13 +27,13 @@ import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReserveringTO
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class MaakNieuweReserveringEJB implements NieuweReservering {
-	@Singleton
+	@Inject
 	ReserveringDAO reserveringDAO;
 	@Inject
 	AccountExistsService accountExistsService;
-	@Singleton
+	@Inject
 	MeerTochtDAO meerTochtDAO;
-	@Singleton
+	@Inject
 	RivierTochtDAO rivierTochtDAO;
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)

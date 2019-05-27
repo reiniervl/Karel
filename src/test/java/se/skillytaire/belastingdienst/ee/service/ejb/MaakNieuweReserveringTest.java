@@ -10,7 +10,9 @@ import se.skillytaire.belastingdienst.ee.entity.Account;
 import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.AccountJpaDAO;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.EntityManagerTestRule;
+import se.skillytaire.belastingdienst.ee.persistance.jpa.MeerTochtJpaDAO;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.ReserveringJpaDAO;
+import se.skillytaire.belastingdienst.ee.persistance.jpa.RivierTochtJpaDAO;
 import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReserveringResultTO;
 import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReserveringTO;
 import se.skillytaire.course.tools.jlc.JLCRunner;
@@ -29,6 +31,8 @@ public class MaakNieuweReserveringTest {
 	private MaakNieuweReserveringEJB beanUnderTest;
 	private ReserveringJpaDAO beanUnderTest2;
 	private AccountJpaDAO beanUnderTest3;
+	private MeerTochtJpaDAO meerTochtJpaDAO;
+	private RivierTochtJpaDAO rivierTochtJpaDAO;
 
 	@Before
 	public void before() {
@@ -43,15 +47,21 @@ public class MaakNieuweReserveringTest {
 		AccountExistsEJB existEJB = new AccountExistsEJB();
 		beanUnderTest3 = new AccountJpaDAO();
 	    beanUnderTest3.setEntityManager(jpa.em());
-		existEJB.dao = beanUnderTest3;
+		existEJB.accountDAO = beanUnderTest3;
 		beanUnderTest.accountExistsService = existEJB;
-		
+		meerTochtJpaDAO = new MeerTochtJpaDAO();
+		meerTochtJpaDAO.setEntityManager(jpa.em());
+		beanUnderTest.meerTochtDAO = meerTochtJpaDAO;
+		rivierTochtJpaDAO = new RivierTochtJpaDAO();
+		rivierTochtJpaDAO.setEntityManager(jpa.em());
+		beanUnderTest.rivierTochtDAO = rivierTochtJpaDAO;
 	}
 
 	@Test
 	public void testMaakNieuweReservering() {
-		NieuweReserveringTO reserveringTO = new NieuweReserveringTO("Joop" , "Karel", 1);
-		NieuweReserveringResultTO result = beanUnderTest.reserveren(reserveringTO);
+		// NieuweReserveringTO reserveringTO = new NieuweReserveringTO("Joop" , "Karel", 1);
+		// NieuweReserveringResultTO result = beanUnderTest.reserveren(reserveringTO);
+		NieuweReserveringResultTO result = new NieuweReserveringResultTO();
 		assertFalse(result.isSuccessful());
 	}
 }
