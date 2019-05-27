@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.RivierTocht;
