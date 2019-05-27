@@ -2,15 +2,12 @@ package se.skillytaire.belastingdienst.ee.service.ejb;
 
 import static org.junit.Assert.assertTrue;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import se.skillytaire.belastingdienst.ee.entity.Klant;
+import se.skillytaire.belastingdienst.ee.persistance.jpa.EntityManagerTestRule;
 import se.skillytaire.belastingdienst.ee.persistance.jpa.KlantJpaDAO;
 import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantResultTO;
 import se.skillytaire.belastingdienst.ee.service.account.NieuweKlantTO;
@@ -18,12 +15,12 @@ import se.skillytaire.course.tools.jlc.JLCRunner;
 import se.skillytaire.course.tools.jlc.This;
 
 public class RegistreerNieuweKlantTest {
+	@Rule
+	public EntityManagerTestRule jpa = EntityManagerTestRule.persistenceUnit("stuga");
 	@This Klant klant;
 
-	EntityManagerFactory factory;
-	EntityManager em;
-
 	RegistreerNieuweKlantEJB beanUnderTest;
+	private KlantJpaDAO beanUnderTest2;
 
 
 	@Before
@@ -33,28 +30,10 @@ public class RegistreerNieuweKlantTest {
 
 	@Before
 	public void initJPA() {
-		factory = Persistence.createEntityManagerFactory("stuga");
-		em = factory.createEntityManager();
-		KlantJpaDAO.getInstance().setEntityManager(em);
+		beanUnderTest2 = new KlantJpaDAO();
+	    beanUnderTest2.setEntityManager(jpa.em());
 		beanUnderTest = new RegistreerNieuweKlantEJB();
-		beanUnderTest.dao = KlantJpaDAO.getInstance();
-	}
-
-	@After
-	public void destroyJPA() {
-		if (this.em != null) {
-			this.em.close();
-		}
-		if (this.factory != null) {
-			this.factory.close();
-			while (this.factory.isOpen() && !Thread.interrupted()) {
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					Thread.currentThread().interrupt();
-				}
-			}
-		}
+		beanUnderTest.dao = beanUnderTest2;
 	}
 
 	@Test

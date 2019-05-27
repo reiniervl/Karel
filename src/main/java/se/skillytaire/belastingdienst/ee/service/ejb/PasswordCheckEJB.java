@@ -3,18 +3,18 @@ package se.skillytaire.belastingdienst.ee.service.ejb;
 import java.util.Optional;
 
 import javax.ejb.Stateless;
-import javax.inject.Singleton;
+import javax.inject.Inject;
 
 import se.skillytaire.belastingdienst.ee.entity.Klant;
-import se.skillytaire.belastingdienst.ee.persistance.KlantDAO;
+import se.skillytaire.belastingdienst.ee.persistance.jpa.KlantJpaDAO;
 import se.skillytaire.belastingdienst.ee.service.account.PasswordCheck;
 
 @Stateless
 public class PasswordCheckEJB implements PasswordCheck {
-	@Singleton
-	private KlantDAO dao;
+	@Inject
+	private KlantJpaDAO dao;
 	
-	public PasswordCheckEJB(KlantDAO dao) {
+	public PasswordCheckEJB(KlantJpaDAO dao) {
 		super();
 		this.dao = dao;
 	}
