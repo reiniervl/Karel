@@ -5,7 +5,7 @@ function BeschikbareTochten(tochttype, verhuurder) {
 		request.onload = function(e) {
 			if(this.readyState === 4 && this.status === 200) {
 				var data = JSON.parse(this.responseText);
-				if(data.success === "true") {
+				if(data.success == "true") {
 					return data.tochten;
 				} else {
 					return data.success;

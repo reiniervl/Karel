@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -78,15 +79,16 @@ public class BeschikbareTochten {
 	}
 
 	// FIXME: return JSONArray
-	private JsonObjectBuilder parseMeerTochten(List<? extends Tocht<?>> tochten) {
-		JsonObjectBuilder tochtenObj = Json.createObjectBuilder();
+	private JsonArrayBuilder parseMeerTochten(List<? extends Tocht<?>> tochten) {
+		JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
 		for (Tocht<?> t : tochten) {
-				tochtenObj.add("id", t.getOid())
-					.add("prijs", t.getPrijs())
-					.add("start", t.getReserveringsPeriode().getStart().toString())
-					.add("eind", t.getReserveringsPeriode().getEind().toString());
+			arrayBuilder.add(Json.createObjectBuilder()
+				.add("id", t.getOid())
+				.add("prijs", t.getPrijs())
+				.add("start", t.getReserveringsPeriode().getStart().toString())
+				.add("eind", t.getReserveringsPeriode().getEind().toString()));
 			}
-		return tochtenObj;
+		return arrayBuilder;
 	}
 	
 }
