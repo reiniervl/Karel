@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
+import javax.validation.ConstraintViolationException;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -34,13 +35,18 @@ public class AccountRegistreren {
 		boolean isAangemaakt = false;
 		if (usernameCheck.isBeschikbaar(username)) {
 			NieuweKlantTO nieuweKlantTo = new NieuweKlantTO(username, password, email);
-			NieuweKlantResultTO result = nieuweKlant.doIt(nieuweKlantTo);
-			//mail(mdb) uitsturen alvorens account is geregistreerd.
-			if (result.getResult().isPresent()) {
-				nieuwAccount.registreer(result.getResult().get());
-				isAangemaakt = true;
+			try{
+				NieuweKlantResultTO result = nieuweKlant.doIt(nieuweKlantTo);
+				//mail(mdb) uitsturen alvorens account is geregistreerd.
+				if (result.getResult().isPresent()) {
+					nieuwAccount.registreer(result.getResult().get());
+					isAangemaakt = true;
+				}
+			} catch(ConstraintViolationException e) {
+				e.getConstraintViolations();
 			}
 		}
+			
 
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 		JsonObject obj = factory.createObjectBuilder().add("success", isAangemaakt).add("username", username)
