@@ -37,6 +37,12 @@ public class BeschikbareTochten {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response beschikbareMeerTochten (@PathParam("verhuurder") String verhuurder) {
 		Response response;
+		if(beschikbareMeerTochten == null) {
+			JsonObjectBuilder job = Json.createObjectBuilder();
+			job.add("success", false)
+			.add("reason", "BeschikbareMeerTochten is null");
+			return Response.ok(job.build()).build();
+		}
 		BeschikbareMeerTochtenTO requestTO = new BeschikbareMeerTochtenTO(verhuurder);
 		BeschikbareMeerTochtenResultTO resultTO = beschikbareMeerTochten.geefTochten(requestTO);
 		JsonObjectBuilder job = Json.createObjectBuilder();

@@ -20,8 +20,10 @@ public class BoekingTestFactory extends AbstractComparableTestObjectFactory<Boek
 	// private Reservering greaterThenReservering;
 
 	@This Adres adres;
-	static final Periode period = new Periode(LocalDateTime.now(), LocalDateTime.now().plusHours(1));
-	final LocalDateTime TIJD = LocalDateTime.of(2019, Month.MAY, 1, 12, 10);
+	static final LocalDateTime TIJD = LocalDateTime.of(2019, Month.MAY, 1, 12, 10);
+
+	static final LocalDateTime TIJD2 = LocalDateTime.of(2019, Month.MAY, 1, 12, 10).plusHours(1);
+	static final Periode period = new Periode(TIJD, TIJD2);
 	
 	@Override
 	public Boeking createThat() {

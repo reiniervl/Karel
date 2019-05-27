@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -14,37 +13,35 @@ import se.skillytaire.belastingdienst.ee.entity.MeerTocht;
 import se.skillytaire.belastingdienst.ee.persistance.MeerTochtDAO;
 @Default
 @ApplicationScoped
-public class MeerTochtJpaDAO implements MeerTochtDAO {
+public class MeerTochtJpaDAO extends AbstractJPADAO<MeerTocht> implements MeerTochtDAO {
 	private final static MeerTochtJpaDAO dao = new MeerTochtJpaDAO();
-	@PersistenceContext
-	private EntityManager em;
-
 	public MeerTochtJpaDAO() {
+		super(MeerTocht.class);
 	}
 
-	@Override
-	public void add(MeerTocht t) {
-		this.em.persist(t);
-	}
+	// @Override
+	// public void add(MeerTocht t) {
+	// 	this.em.persist(t);
+	// }
 
-	@Override
-	public Optional<MeerTocht> findByOID(Integer OID) {
-		MeerTocht tochtinsysteem = em.find(MeerTocht.class, OID);
-		return Optional.ofNullable(tochtinsysteem);
-	}
+	// @Override
+	// public Optional<MeerTocht> findByOID(Integer OID) {
+	// 	MeerTocht tochtinsysteem = em.find(MeerTocht.class, OID);
+	// 	return Optional.ofNullable(tochtinsysteem);
+	// }
 
-	@Override
-	public MeerTocht update(MeerTocht eenMeerTocht) {
-		return this.em.merge(eenMeerTocht);
-	}
+	// @Override
+	// public MeerTocht update(MeerTocht eenMeerTocht) {
+	// 	return this.em.merge(eenMeerTocht);
+	// }
 
-	@Override
-	public boolean deleteByOID(Integer OID) {
-		Query namedQuery = this.em.createNamedQuery(MeerTocht.DELETE_BY_OID);
-		namedQuery.setParameter("oid", OID);
-		int result = namedQuery.executeUpdate();
-		return result != 0;
-	}
+	// @Override
+	// public boolean deleteByOID(Integer OID) {
+	// 	Query namedQuery = this.em.createNamedQuery(MeerTocht.DELETE_BY_OID);
+	// 	namedQuery.setParameter("oid", OID);
+	// 	int result = namedQuery.executeUpdate();
+	// 	return result != 0;
+	// }
 	/**
 	 * Wordt CDI
 	 * @return

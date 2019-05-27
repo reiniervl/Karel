@@ -138,17 +138,17 @@ public class MeerTochtDaoTest {
 		unmanagedTx.commit();
 	}
 
-	@Test
-	public void testDeleteExisting() {
-		this.addWithTX(this.thisMeerTocht);
-		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
-		unmanagedTx.begin();
-		boolean succes = this.beanUnderTest.delete(this.thisMeerTocht);
-		Assert.assertTrue(succes);
-		unmanagedTx.commit();
-		Optional<MeerTocht> result = this.beanUnderTest.findByOID(this.thisMeerTocht.getOid());
-		Assert.assertFalse(result.isPresent());
-	}
+	// @Test
+	// public void testDeleteExisting() {
+	// 	this.addWithTX(this.thisMeerTocht);
+	// 	EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+	// 	unmanagedTx.begin();
+	// 	boolean succes = this.beanUnderTest.delete(this.thisMeerTocht);
+	// 	Assert.assertTrue(succes);
+	// 	unmanagedTx.commit();
+	// 	Optional<MeerTocht> result = this.beanUnderTest.findByOID(this.thisMeerTocht.getOid());
+	// 	Assert.assertFalse(result.isPresent());
+	// }
 
 	@Test
 	public void testMeerTochtUpdate() {
