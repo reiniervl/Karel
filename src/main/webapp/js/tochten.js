@@ -1,15 +1,15 @@
 function BeschikbareTochten(tochttype, verhuurder) {
 	this.url = "login/activiteiten/" + tochttype + "/" + verhuurder;
-	this.getlist = function() {
+	this.getlist = function(callback) {
 		var request = new XMLHttpRequest();
-		request.onload = function(e) {
+		request.onreadystatechange = function() {
 			if(this.readyState === 4 && this.status === 200) {
 				var data = JSON.parse(this.responseText);
-				if(data.success == "true") {
-					return data.tochten;
-				} else {
-					return data.success;
-				}
+				callback(data);
+			} else if (this.status === 500) {
+				callback({success: false, reason: "Internal server error"})
+			} else if (this.status === 404) {
+				callback({success: false, reason: "file not found"})
 			}
 		};
 
@@ -17,25 +17,17 @@ function BeschikbareTochten(tochttype, verhuurder) {
 		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		request.send();
 	};
-
-	this.getTestList = function() {
-		return "{ \"success\": true,"
-			+ "\"tochten\": ["
-			+ "{ \"id\": 1, \"prijs\": 12.95, \"start\": \"2014-01-01T23:28:56.782Z\", \"eind\": \"2014-01-01T23:28:56.782Z\"},"
-			+ "{ \"id\": 2, \"prijs\": 11.95, \"start\": \"2014-01-01T23:28:56.782Z\", \"eind\": \"2014-01-01T23:28:56.782Z\"},"
-			+ "{ \"id\": 3, \"prijs\": 14.95, \"start\": \"2014-01-01T23:28:56.782Z\", \"eind\": \"2014-01-01T23:28:56.782Z\"},"
-			+ "{ \"id\": 4, \"prijs\": 13.95, \"start\": \"2014-01-01T23:28:56.782Z\", \"eind\": \"2014-01-01T23:28:56.782Z\"}"
-			+ "]}";
-	};
 }
 
 function Tochtenbak(tochttype, verhuurder) {
 	this.bt = new BeschikbareTochten(tochttype, verhuurder);
 	this.tochten = [];
 	this.vul = function() {
-		var res = JSON.parse(this.bt.getTestList());
+		this.bt.getlist(this.vul);
+	}
+	this.update = function(res) {
 		var ts = document.getElementById("tochtSelect")
-		if(res.success === true) {
+		if(res.success === true && res.tochten.length > 0) {
 			ts.remove(null);
 			this.tochten = res.tochten;
 			for(i = 0; i < res.tochten.length; i++) {
