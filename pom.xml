@@ -1188,9 +1188,10 @@
 				<executions>
 					<execution>
 						<id>stop-server-before-clean</id>
-						<phase>clean</phase>
+						<phase>pre-clean</phase>
 						<goals>
 							<goal>stop-server</goal>
+							<goal>test-stop-server</goal>
 						</goals>
 					</execution>
 					<execution>
