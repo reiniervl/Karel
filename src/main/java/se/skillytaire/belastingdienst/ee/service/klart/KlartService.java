@@ -37,7 +37,7 @@ public class KlartService {
 		log.info("Initialize KlartService");
         weerservice = new KlartWeatherService();
     }
-    @Schedule(second = "*/10", minute = "*", hour = "*", persistent = false)
+    @Schedule(minute = "*/30", hour = "9,17", persistent = false)
     public void pollKlart() {
     	log.info("Updating the weather information.");
     	weerservice.update();
