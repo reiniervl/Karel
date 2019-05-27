@@ -6,15 +6,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import se.skillytaire.belastingdienst.ee.entity.Account;
+import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.AccountDAO;
 import se.skillytaire.belastingdienst.ee.service.account.AccountAKTO;
 
-public class AccountJpaDAO implements AccountDAO {
-	private final static AccountJpaDAO dao = new AccountJpaDAO();
+public class AccountJpaDAO extends AbstractJPADAO<Account> implements AccountDAO {
+	protected AccountJpaDAO(Class<Account> Account) {
+		super(Account.class);
+	}
+
+	private final static AccountJpaDAO dao = new AccountJpaDAO(Account.class);
 	private EntityManager em;
 
-	public AccountJpaDAO() {
-	}
 
 	public void setEntityManager(EntityManager entityManager) {
 		this.em = entityManager;
@@ -27,37 +30,10 @@ public class AccountJpaDAO implements AccountDAO {
 	public static AccountJpaDAO getInstance() {
 		return AccountJpaDAO.dao;
 	}
-
-	@Override
-	public void add(final Account Account) {
-		em.persist(Account);
-	}
-
+	
 	@Override
 	public Optional<Account> findByOID(final Integer OID) {
 		return Optional.ofNullable(this.em.find(Account.class, OID));
-	}
-
-	@Override
-	public Account update(final Account Account) {
-		return this.em.merge(Account);
-	}
-
-	@Override
-	public boolean delete(final Account Account) {
-		em.remove(Account);
-		return true;
-	}
-
-	@Override
-	public boolean deleteByOID(final Integer OID) {
-		boolean deleted = false;
-		Optional<Account> gevondenAccount = this.findByOID(OID);
-		if (gevondenAccount.isPresent()) {
-			em.remove(gevondenAccount.get());
-			deleted = true;
-		}
-		return deleted;
 	}
 
 	@Override

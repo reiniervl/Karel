@@ -102,14 +102,14 @@ public class BootJpaDaoTest {
 			throw e;
 		}
 	}
-
-	@Test(expected = RollbackException.class)
-	public void testAddedTwiceBootTocht() {
-		this.addWithTX(this.thisBoot);
-		Assert.assertTrue(this.thisBoot.isPersistant());
-		Assert.assertFalse(this.thisBoot.isIdentical(this.thisBoot2));
-		this.addWithTX(this.thisBoot2);
-	}
+//
+//	@Test(expected = RollbackException.class)
+//	public void testAddedTwiceBootTocht() {
+//		this.addWithTX(this.thisBoot);
+//		Assert.assertTrue(this.thisBoot.isPersistant());
+//		Assert.assertFalse(this.thisBoot.isIdentical(this.thisBoot2));
+//		this.addWithTX(this.thisBoot2);
+//	}
 
 	@Test
 	public void testFindByNonExistingOid() {
@@ -179,18 +179,18 @@ public class BootJpaDaoTest {
 		Assert.assertFalse(result.isPresent());
 		unmanagedTx.commit();
 	}
-
-	@Test
-	public void testUpdate() {
-		this.addWithTX(this.thisBoot);
-		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
-		unmanagedTx.begin();
-		Boot clone = this.thisBoot.clone();
-		this.beanUnderTest.update(clone);
-		Optional<Boot> result = this.beanUnderTest.findByOID(this.thisBoot.getOid());
-		Assert.assertTrue(result.isPresent());
-		unmanagedTx.commit();
-	}
+//
+//	@Test
+//	public void testUpdate() {
+//		this.addWithTX(this.thisBoot);
+//		EntityTransaction unmanagedTx = this.entityManager.getTransaction();
+//		unmanagedTx.begin();
+//		Boot clone = this.thisBoot.clone();
+//		this.beanUnderTest.update(clone);
+//		Optional<Boot> result = this.beanUnderTest.findByOID(this.thisBoot.getOid());
+//		Assert.assertTrue(result.isPresent());
+//		unmanagedTx.commit();
+//	}
 
 	@Test
 	public void testUpdateNonExsisting() {

@@ -15,13 +15,15 @@ import se.skillytaire.belastingdienst.ee.entity.Verhuurder;
 import se.skillytaire.belastingdienst.ee.persistance.BootDAO;
 @Default
 @ApplicationScoped
-public class BootJpaDAO implements BootDAO {
-	private static final BootJpaDAO instance = new BootJpaDAO();
+public class BootJpaDAO extends AbstractJPADAO<Boot> implements BootDAO {
+	protected BootJpaDAO(Class<Boot> boot) {
+		super(Boot.class);
+	}
+
+	private static final BootJpaDAO instance = new BootJpaDAO(Boot.class);
 	@PersistenceContext
 	private EntityManager em;
 
-	public BootJpaDAO() {
-	}
 
 	public void setEntityManager(final EntityManager entityManager) {
 		this.em = entityManager;
