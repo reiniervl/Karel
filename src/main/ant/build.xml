@@ -131,7 +131,8 @@ server.config.dir=${server.config.dir}
         <property name="context-root" value="${app.name}"/>
         <property name="java-output-path" value="/target/classes"/>
     </wb-module>
-</project-modules>]]></echo>
+</project-modules>
+]]></echo>
 		
 		<echo file="${basedir}/.settings/org.eclipse.wst.common.project.facet.core.xml"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
@@ -141,7 +142,8 @@ server.config.dir=${server.config.dir}
   <installed facet="java" version="1.3"/>
   <installed facet="jst.web" version="2.3"/>
   <installed facet="wst.jsdt.web" version="1.0"/>
-</faceted-project>]]></echo>
+</faceted-project>
+]]></echo>
 
 		<echo file="${basedir}/.settings/org.eclipse.wst.jsdt.ui.superType.container"><![CDATA[org.eclipse.wst.jsdt.launching.baseBrowserLibrary]]></echo>
 		

@@ -97,11 +97,7 @@ public class FillScriptEJB {
 			LocalDateTime to = from.plusDays(30);
 			
 			Periode verloopPeriode = new Periode(from, to);
-			Reservering reservering = ReserveringBuilder.builder()
-					.withAccount(account)
-					.withVerloopDatum(verloopPeriode )
-					
-					.build();
+			Reservering reservering = null;
 	
 			boolean addToReservering = false;
 			LocalDateTimeIterator it = new LocalDateTimeIterator(from, to, t -> t.plusHours(1));
@@ -116,13 +112,14 @@ public class FillScriptEJB {
 				this.rivierTochtDao.add(rivierTocht);
 				
 				if(!addToReservering) {
-					reservering.add(meertocht);
+					reservering = new Reservering(account, meertocht);
 					reservering.add(rivierTocht);
+					
 					addToReservering = true;
 				}
 			}
 		//	account.add(reservering);
-			accountDao.update(account);
+		//	accountDao.update(account);
 			
 			Boeking boeking = new Boeking(reservering);
 			boekingDao.add(boeking);
