@@ -33,14 +33,17 @@
 		<div id="content">
 			<%
 			Object usr = session.getAttribute("username");
+			String username;
 			if(usr != null) {
-				String username = (String) usr;
+				username = "Ingelogd met gebruikersnaam: " +(String) usr;
 			%>
-			<p>Hallo, <%=username%></p>
+			<%-- <p>Hallo, <%=username%></p> --%>
 			<%
 			} else {
-			%>
-			<h1>Log in</h1>
+				username = "Inloggen is niet gelukt!";
+			}%>
+			
+			<h1><%=username %></h1>
 			<form action="login/account/inloggen" method="post">
 				<div class="form_settings">
 					<p>
@@ -59,9 +62,6 @@
 					</p>
 				</div>
 			</form>
-			<%
-			}
-			%>
 		</div>
 	</div>
 	<div id="footer">

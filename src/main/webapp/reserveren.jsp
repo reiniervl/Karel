@@ -15,6 +15,7 @@
 			if(usr == null) {
 				response.sendRedirect(request.getContextPath() + "/inloggen.jsp");
 			}
+			String username = (String) usr;
 	%>
 	<div id="main">
 		<div id="header">
@@ -33,7 +34,7 @@
 		</div>
 		<div id="site_content">
 			<div id="content">
-				<h1>Selecteer een datum</h1>
+				<h1>Hallo <%=username%>! Selecteer een datum</h1>
 				<p></p>
 			<div id="content">
 				<div id="agenda" style="background: #fff; max-width: 628px;">
