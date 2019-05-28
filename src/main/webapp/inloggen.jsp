@@ -35,7 +35,7 @@
 			Object usr = session.getAttribute("username");
 			String username;
 			if(usr != null) {
-				username = "Ingelogd met gebruikersnaam: " +(String) usr;
+				username = "Log in";
 			%>
 			<%-- <p>Hallo, <%=username%></p> --%>
 			<%

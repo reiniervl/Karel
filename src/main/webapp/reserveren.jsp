@@ -34,7 +34,7 @@
 		</div>
 		<div id="site_content">
 			<div id="content">
-				<h1>Hallo <%=username%>! Selecteer een datum</h1>
+				<h1>Hallo <%=username%> Selecteer een datum</h1>
 				<p></p>
 			<div id="content">
 				<div id="agenda" style="background: #fff; max-width: 628px;">
