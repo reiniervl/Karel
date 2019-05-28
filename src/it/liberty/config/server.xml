@@ -1,9 +1,8 @@
 <server description="KBCServer">
 	<featureManager>
+		<!--
 		<feature>jdbc-4.1</feature>
 		<feature>servlet-3.1</feature>
-		<!-- JSP disabled: clash with jaxrs -->
-		<!-- <feature>jsp-2.3</feature> -->
 		<feature>jsonp-1.0</feature>
 		<feature>beanValidation-1.1</feature>
 		<feature>el-3.0</feature>
@@ -13,6 +12,10 @@
 		<feature>jndi-1.0</feature>
 		<feature>jaxrs-2.0</feature>
 		<feature>jpa-2.1</feature>
+		-->
+		<feature>webProfile-7.0</feature>
+		<feature>ejbPersistentTimer-3.2</feature>
+		<feature>ejbRemote-3.2</feature>
 		<feature>mpMetrics-1.1</feature>
 		<feature>mpConfig-1.3</feature>
 		<feature>mpHealth-1.0</feature>
