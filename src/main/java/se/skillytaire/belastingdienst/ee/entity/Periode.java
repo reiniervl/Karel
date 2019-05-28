@@ -25,7 +25,9 @@ public class Periode extends AbstractComparableObject<Periode>
    static final String PROPERTY_EIND = "eind";
    static final String PROPERTY_DUUR = "duur";
    private Duration duur;
+   
    private LocalDateTime start;
+   
    private LocalDateTime eind;
 
    public Periode(final LocalDateTime start, final LocalDateTime eind) {

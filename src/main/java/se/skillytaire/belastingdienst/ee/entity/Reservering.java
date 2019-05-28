@@ -31,17 +31,17 @@ import com.rvlstudio.annotation.BuilderField;
 public class Reservering extends AbstractEntity<Reservering> {
 	private static final long serialVersionUID = 1L;
 	public static final String DELETE_BY_OID = "Reservering_DeleteByOid";
-	@NotNull
+	@NotNull(message="reserveringsDatum is niet aanwezig")
 	@Basic 
 	@Column (name = "reserveringsDatum")
 	private LocalDateTime reserveringsDatum;
-	@NotNull
+	@NotNull(message="verloopdatum is niet aanwezig")
 	@BuilderField
 	@Embedded
 	private Periode verloopDatum = new Periode();
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@NotNull
-	@Size(min = 1)
+	@Size(min = 1,message="minimaal voor 1 tocht")
 	private List<Tocht<?>> mijnTochten = new ArrayList<Tocht<?>>();
 	@NotNull
 	@BuilderField

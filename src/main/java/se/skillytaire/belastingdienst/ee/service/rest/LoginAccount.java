@@ -3,20 +3,14 @@ package se.skillytaire.belastingdienst.ee.service.rest;
 import java.io.IOException;
 
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonBuilderFactory;
-import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import se.skillytaire.belastingdienst.ee.service.account.PasswordCheck;
 import se.skillytaire.belastingdienst.ee.service.account.UsernameCheck;
@@ -31,7 +25,6 @@ public class LoginAccount {
 
 	@POST
 	@Path("inloggen")
-	@Produces(MediaType.APPLICATION_JSON)
 	public void inloggen(
 			@FormParam("username") String username, 
 			@FormParam("password") String password, 
@@ -46,10 +39,18 @@ public class LoginAccount {
 			response.sendRedirect(request.getContextPath() + "/reserveren.jsp");
 			// request.getSession().getServletContext().getRequestDispatcher("reserveer.jsp").forward(request, response);
 		} else {
-			response.sendRedirect(request.getContextPath() + "/login.html");
+			response.sendRedirect(request.getContextPath() + "/inloggen.jsp");
 			// request.getSession().getServletContext().getRequestDispatcher("login.html").forward(request, response);
 		}
 	}
 
-	
+	@GET
+	@Path("uitloggen")
+	public void uitloggen(
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response) throws IOException,ServletException {
+		String contextPath = request.getContextPath();
+		request.getSession().invalidate();
+		response.sendRedirect(contextPath + "/inloggen.jsp");
+	}
 }

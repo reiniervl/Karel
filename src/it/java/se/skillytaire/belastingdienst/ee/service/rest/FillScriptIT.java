@@ -23,7 +23,7 @@ public class FillScriptIT extends EndpointHelper {
          .append('/')
          .append(Fill.FILL_GET_PATH)
          .toString();
-   @Ignore
+
    @Test
    public void testConnection() {
       testEndpoint(BINDING, "true");

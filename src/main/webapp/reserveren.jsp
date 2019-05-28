@@ -28,7 +28,7 @@
 			<div id="menubar">
 				<ul id="menu">
 					<li><a href="index.html">Home</a></li>
-					<li class="selected"><a href="login.html">Reserveer</a></li>
+					<li class="selected"><a href="inloggen.jsp">Reserveer</a></li>
 				</ul>
 			</div>
 		</div>
@@ -75,7 +75,7 @@
 	</div>
 	<div id="footer">
 		<p>
-			<a href="index.html">Home</a> | <a href="login.html">Login</a> | <a
+			<a href="index.html">Home</a> | <a href="inloggen.jsp">Login</a> | <a
 				href="registreer.html">Registreer</a>
 		</p>
 		<p>

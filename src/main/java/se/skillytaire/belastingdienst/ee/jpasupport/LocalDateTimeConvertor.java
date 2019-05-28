@@ -8,7 +8,9 @@ import java.util.Date;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-
+/**
+ * JPA 2.1 heeft geen LocalDateTime support.
+ */
 @Converter(autoApply = true)
 public class LocalDateTimeConvertor implements AttributeConverter<LocalDateTime, Timestamp> {
 
