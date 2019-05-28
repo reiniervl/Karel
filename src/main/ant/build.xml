@@ -107,4 +107,50 @@ server.config.dir=${server.config.dir}
 		<copy file="${basedir}/src/it/liberty/config/persistence-it.xml" toFile="${basedir}/target/${dir.exploded}/WEB-INF/classes/META-INF/persistence.xml"></copy>
 			
 	</target>	
+	
+	
+	
+	<target name="eclipse-integration">
+	
+		<echo file="${basedir}/.settings/.jsdtscope"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="src/main/webapp"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.WebProject">
+		<attributes>
+			<attribute name="hide" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.baseBrowserLibrary"/>
+	<classpathentry kind="output" path=""/>
+</classpath>]]></echo>
+	
+		<echo file="${basedir}/.settings/org.eclipse.wst.common.component"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="${app.name}">
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <property name="context-root" value="${app.name}"/>
+        <property name="java-output-path" value="/target/classes"/>
+    </wb-module>
+</project-modules>]]></echo>
+		
+		<echo file="${basedir}/.settings/org.eclipse.wst.common.project.facet.core.xml"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<faceted-project>
+  <fixed facet="wst.jsdt.web"/>
+  <fixed facet="java"/>
+  <fixed facet="jst.web"/>
+  <installed facet="java" version="1.3"/>
+  <installed facet="jst.web" version="2.3"/>
+  <installed facet="wst.jsdt.web" version="1.0"/>
+</faceted-project>]]></echo>
+
+		<echo file="${basedir}/.settings/org.eclipse.wst.jsdt.ui.superType.container"><![CDATA[org.eclipse.wst.jsdt.launching.baseBrowserLibrary]]></echo>
+		
+		<echo file="${basedir}/.settings/org.eclipse.wst.jsdt.ui.superType.name"><![CDATA[Window]]></echo>
+
+		
+	</target>
+	
+	
+	
+
 </project>

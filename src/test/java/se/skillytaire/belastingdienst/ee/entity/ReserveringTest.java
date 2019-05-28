@@ -82,4 +82,7 @@ public class ReserveringTest {
 		reservering1.add(thatRivierTocht);
 		Assert.assertTrue(reservering1.remove(thatRivierTocht));
 	}
+	
+	
+
 }

@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,7 +37,7 @@ public class Reservering extends AbstractEntity<Reservering> {
 	private LocalDateTime reserveringsDatum;
 	@NotNull
 	@BuilderField
-	@Basic
+	@Embedded
 	private Periode verloopDatum = new Periode();
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@NotNull
@@ -54,32 +55,32 @@ public class Reservering extends AbstractEntity<Reservering> {
 	 */
 	public Reservering() {
 	}
+	public Reservering(final Account account, final MeerTocht tocht) {
+		if (account == null) {
+			throw new IllegalArgumentException("Account is Null");
+		}
+		if (tocht == null) {
+			throw new IllegalArgumentException("tocht is Null");
+		}
+		this.add(tocht);
+		this.reserveringsDatum = LocalDateTime.now();
+		this.verloopDatum.start();
+		this.account = account;
+	}
+	public Reservering(final Account account, final RivierTocht tocht) {
+		if (account == null) {
+			throw new IllegalArgumentException("Account is Null");
+		}
+		if (tocht == null) {
+			throw new IllegalArgumentException("tocht is Null");
+		}
+		this.add(tocht);
+		this.reserveringsDatum = LocalDateTime.now();
+		this.verloopDatum.start();
+		this.account = account;
+	}
 
-	public Reservering(final Account account, final MeerTocht meerTocht) {
-		if (account == null) {
-			throw new IllegalArgumentException("Account is Null");
-		}
-		if (meerTocht == null) {
-			throw new IllegalArgumentException("meerTocht is Null");
-		}
-		this.add(meerTocht);
-		this.reserveringsDatum = LocalDateTime.now();
-		this.verloopDatum.start();
-		this.account = account;
-	}
 	
-	public Reservering(final Account account, final RivierTocht rivierTocht) {
-		if (account == null) {
-			throw new IllegalArgumentException("Account is Null");
-		}
-		if (rivierTocht == null) {
-			throw new IllegalArgumentException("rivierTocht is Null");
-		}
-		this.add(rivierTocht);
-		this.reserveringsDatum = LocalDateTime.now();
-		this.verloopDatum.start();
-		this.account = account;
-	}
 
 	@SuppressWarnings("unchecked")
 	public Reservering(final Reservering reservering) {
