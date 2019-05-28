@@ -10,6 +10,12 @@
 <link rel="stylesheet" type="text/css" href="style/reserveer.css" />
 </head>
 <body>
+	<%
+			Object usr = session.getAttribute("username");
+			if(usr == null) {
+				response.sendRedirect(request.getContextPath() + "/inloggen.jsp");
+			}
+	%>
 	<div id="main">
 		<div id="header">
 			<div id="logo">
@@ -27,12 +33,7 @@
 		</div>
 		<div id="site_content">
 			<div id="content">
-			<%
-			Object usr = session.getAttribute("username");
-			if(usr != null) {
-				String username = (String) usr;
-			%>
-				<h1>Hallo, <%=username%>! Selecteer een datum</h1>
+				<h1>Selecteer een datum</h1>
 				<p></p>
 			<div id="content">
 				<div id="agenda" style="background: #fff; max-width: 628px;">
@@ -57,7 +58,7 @@
 							</select>
 						</div>
 						<input class="submit" type="submit"
-						name="contact_submitted" value="Terug" />
+						name="contact_submitted" value="Reserveer" />
 					</form>
 				</div>
 				<p></p>
@@ -69,12 +70,6 @@
 						name="contact_submitted" value="Terug" />
 				</div>
 			</form>
-				<%
-			} else {
-			%>
-			<%
-			}
-			%>
 		</div>
 	</div>
 	<div id="footer">
@@ -89,5 +84,14 @@
 	</div>
 	<!-- JavaScript -->
 	<script src="js/tochten.js"></script>
+	<script>
+		var ts = document.getElementById("soortSelect");
+		var tochtenbak = new Tochtenbak(ts.value, "karel");
+		tochtenbak.vul();
+		ts.addEventListener("onchange", function() {
+			tochtenbak = new Tochtenbak(ts.value, "karel");
+			tochtenbak.vul();
+		});
+	</script>
 </body>
 </html>

@@ -43,7 +43,7 @@ public class LoginAccount {
 		}
 		if(valide) {
 			request.getSession().setAttribute("username", username);
-			response.sendRedirect(request.getContextPath() + "/reserveer.jsp");
+			response.sendRedirect(request.getContextPath() + "/reserveren.jsp");
 			// request.getSession().getServletContext().getRequestDispatcher("reserveer.jsp").forward(request, response);
 		} else {
 			response.sendRedirect(request.getContextPath() + "/login.html");
