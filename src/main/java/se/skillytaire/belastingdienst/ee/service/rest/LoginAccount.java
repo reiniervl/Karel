@@ -43,9 +43,11 @@ public class LoginAccount {
 		}
 		if(valide) {
 			request.getSession().setAttribute("username", username);
-			request.getSession().getServletContext().getRequestDispatcher(request.getContextPath() + "/reserveer.html").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/reserveer.html");
+			// request.getSession().getServletContext().getRequestDispatcher("reserveer.html").forward(request, response);
 		} else {
-			request.getSession().getServletContext().getRequestDispatcher(request.getContextPath() + "/login.html").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/login.html");
+			// request.getSession().getServletContext().getRequestDispatcher("login.html").forward(request, response);
 		}
 	}
 
