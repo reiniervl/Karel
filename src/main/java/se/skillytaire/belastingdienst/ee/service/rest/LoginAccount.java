@@ -43,8 +43,8 @@ public class LoginAccount {
 		}
 		if(valide) {
 			request.getSession().setAttribute("username", username);
-			response.sendRedirect(request.getContextPath() + "/reserveer.html");
-			// request.getSession().getServletContext().getRequestDispatcher("reserveer.html").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/reserveer.jsp");
+			// request.getSession().getServletContext().getRequestDispatcher("reserveer.jsp").forward(request, response);
 		} else {
 			response.sendRedirect(request.getContextPath() + "/login.html");
 			// request.getSession().getServletContext().getRequestDispatcher("login.html").forward(request, response);
