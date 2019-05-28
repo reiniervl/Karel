@@ -27,16 +27,20 @@
 			<div id="menubar">
 				<ul id="menu">
 					<li><a href="index.html">Home</a></li>
+					<li><a href="login.html">Log uit</a></li>
 					<li class="selected"><a href="login.html">Reserveer</a></li>
 				</ul>
 			</div>
 		</div>
 		<div id="site_content">
+					<div class="sidebar">
+				<img src="style/logo.jpg" width="300" height="200">
+			</div>
 			<div id="content">
 				<h1>Selecteer een datum</h1>
 				<p></p>
 			<div id="content">
-				<div id="agenda" style="background: #fff; max-width: 628px;">
+				<div id="agenda">
 					<form id="reserveerForm" method="POST" action="login/reserveren">
 						<div>
 							<label for="verhuurderSelect">Verhuurder</label>
