@@ -1,10 +1,14 @@
 package se.skillytaire.belastingdienst.ee.service.rest;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -28,27 +32,21 @@ public class LoginAccount {
 	@POST
 	@Path("inloggen")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response inloggen(@FormParam("username") String username, @FormParam("password") String password, @Context HttpServletRequest request) {
+	public void inloggen(
+			@FormParam("username") String username, 
+			@FormParam("password") String password, 
+			@Context HttpServletRequest request, 
+			@Context HttpServletResponse response) throws IOException, ServletException {
 		boolean valide = false;
 		if (!usernameCheck.isBeschikbaar(username)) {
 			valide = passwordCheck.isValide(username, password);
 		}
-		request.getSession().setAttribute("username", username);
-		
-		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		JsonObject obj = factory.createObjectBuilder()
-			.add("success", valide)
-			.add("username", username)
-			.add("password", password)
-			.build();
-		
-		Response response = Response.ok()
-			.entity(obj.toString())
-			.type(MediaType.APPLICATION_JSON_TYPE)
-			.build();
-		
-
-		return response;
+		if(valide) {
+			request.getSession().setAttribute("username", username);
+			request.getSession().getServletContext().getRequestDispatcher(request.getContextPath() + "/reserveer.html").forward(request, response);
+		} else {
+			request.getSession().getServletContext().getRequestDispatcher(request.getContextPath() + "/login.html").forward(request, response);
+		}
 	}
 
 	
