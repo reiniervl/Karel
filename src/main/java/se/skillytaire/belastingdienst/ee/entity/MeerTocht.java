@@ -8,7 +8,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @DiscriminatorValue("m")
 @NamedQueries({ @NamedQuery(name = MeerTocht.DELETE_BY_OID, query = "delete from MeerTocht a where a.oid=:oid"),
-		@NamedQuery(name = MeerTocht.BESCHIKBARE_TOCHTEN, query = "select b from MeerTocht b where b.actuelePeriode.start=null") })
+		@NamedQuery(name = MeerTocht.BESCHIKBARE_TOCHTEN, query = "SELECT rt FROM MeerTocht rt") })
 public class MeerTocht extends Tocht<MeerTocht> {
 	public static final String DELETE_BY_OID = "MeerTocht_DeleteByOid";
 	public static final String BESCHIKBARE_TOCHTEN = "MeerTocht_BESCHIKBARE_TOCHTEN";

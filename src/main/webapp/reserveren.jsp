@@ -47,7 +47,7 @@
 						</div>
 						<div>
 							<label for="soortSelect">Soort Tocht</label>
-							<select id="soortSelect">
+							<select id="soortSelect" name="soort">
 								<option value="meertocht">Meer Tocht</option>
 								<option value="riviertocht">Rivier Tocht</option>
 							</select>
@@ -89,10 +89,10 @@
 		var ts = document.getElementById("soortSelect");
 		var tochtenbak = new Tochtenbak(ts.value, "karel");
 		tochtenbak.vul();
-		ts.addEventListener("onchange", function() {
+		ts.onchange = function() {
 			tochtenbak = new Tochtenbak(ts.value, "karel");
 			tochtenbak.vul();
-		});
+		};
 	</script>
 </body>
 </html>

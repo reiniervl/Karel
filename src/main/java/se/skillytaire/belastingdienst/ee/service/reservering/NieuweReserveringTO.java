@@ -16,7 +16,9 @@ public class NieuweReserveringTO implements Serializable{
 	@NotNull
 	private final Integer oidActiviteit;
 
-	public NieuweReserveringTO(String usernameAccount, String usernameVerhuurder, Integer oidActiviteit) {
+	private final String soort;
+
+	public NieuweReserveringTO(String usernameAccount, String usernameVerhuurder, Integer oidActiviteit, String soort) {
 		if (usernameAccount == null) {
 			 throw new IllegalArgumentException("usernameAccount mag niet null zijn");
 		}
@@ -26,9 +28,13 @@ public class NieuweReserveringTO implements Serializable{
 		if (oidActiviteit == null) {
 			 throw new IllegalArgumentException("oid mag niet null zijn");
 		}
+		if (soort == null) {
+			 throw new IllegalArgumentException("soort mag niet null zijn");
+		}
 		this.usernameAccount = usernameAccount;
 		this.usernameVerhuurder = usernameVerhuurder;
 		this.oidActiviteit = oidActiviteit;
+		this.soort = soort;
  }
 
 	public String getUsernameAccount() {
@@ -43,9 +49,13 @@ public class NieuweReserveringTO implements Serializable{
 		return oidActiviteit;
 	}
 
+	public String getSoort() {
+		return soort;
+	}
+
 	@Override
 	public String toString() {
 		return "NieuweReserveringTO [usernameAccount=" + usernameAccount + ", usernameVerhuuder=" + usernameVerhuurder
-				+ ", oidActiviteit=" + oidActiviteit + "]";
+				+ ", oidActiviteit=" + oidActiviteit + ", soort=" + soort + "]";
 	}
 }

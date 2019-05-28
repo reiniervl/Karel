@@ -30,10 +30,11 @@ public class MaakNieuweReservering {
 	public void Reserveren(
 			@FormParam("verhuurder") String verhuurderUsername,
 			@FormParam("tocht") Integer oid,
+			@FormParam("soort") String soort,
 			@Context HttpServletRequest request,
 			@Context HttpServletResponse response) throws IOException, ServletException {
 		String accountUsername = (String) request.getSession().getAttribute("username");
-		NieuweReserveringTO nieuweReserveringTo = new NieuweReserveringTO(accountUsername, verhuurderUsername, oid);
+		NieuweReserveringTO nieuweReserveringTo = new NieuweReserveringTO(accountUsername, verhuurderUsername, oid, soort);
 		nieuweReservering.reserveren(nieuweReserveringTo);
 
 	}

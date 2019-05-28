@@ -45,17 +45,24 @@ public class MaakNieuweReserveringEJB implements NieuweReservering {
 		Integer activiteitOID = reserveringTO.getOidActiviteit();
 		AccountAKTO accountAKTO = new AccountAKTO(usernameAccount, usernameVerhuurder);
 		AccountAKResultTO klantAccount = accountExistsService.exists(accountAKTO);
-		
+
 		NieuweReserveringResultTO result;
-		
+
 		if (klantAccount.isSuccessful() && klantAccount.getResult().isPresent()) {
 			Optional<Tocht<?>> activiteit = this.findTocht(activiteitOID);
-			 Reservering reservering = ReserveringBuilder.builder()
-			 											.withAccount(klantAccount.getResult().get())
-			 											.withVerloopDatum(MaakNieuweReserveringEJB.getVerloopDatum())
-			 											.build();
-			 reservering.add(activiteit.get());
-//			Reservering reservering = null;
+			// Reservering reservering = ReserveringBuilder.builder()
+			// .withAccount(klantAccount.getResult().get())
+			// .withVerloopDatum(MaakNieuweReserveringEJB.getVerloopDatum())
+			// .build();
+			// reservering.add(activiteit.get());
+			// Reservering reservering = null;
+			Reservering reservering;
+			if (reserveringTO.getSoort().equals("meertocht")) {
+				reservering = new Reservering(klantAccount.getResult().get(), (MeerTocht) activiteit.get());
+			} else {
+
+				reservering = new Reservering(klantAccount.getResult().get(), (RivierTocht) activiteit.get());
+			}
 			try {
 				reserveringDAO.add(reservering);
 				result = new NieuweReserveringResultTO(reservering.getOid());
@@ -69,20 +76,20 @@ public class MaakNieuweReserveringEJB implements NieuweReservering {
 		}
 		return result;
 	}
-	
-	private Optional <Tocht<?>> findTocht(Integer activiteitOID){
+
+	private Optional<Tocht<?>> findTocht(Integer activiteitOID) {
 		Tocht<?> activiteit;
 		Optional<MeerTocht> meerTocht = meerTochtDAO.findByOID(activiteitOID);
-		
+
 		if (meerTocht.isPresent()) {
 			activiteit = meerTocht.get();
 		} else {
-		Optional<RivierTocht> rivierTocht = rivierTochtDAO.findByOID(activiteitOID);
+			Optional<RivierTocht> rivierTocht = rivierTochtDAO.findByOID(activiteitOID);
 			activiteit = rivierTocht.get();
 		}
 		return Optional.ofNullable(activiteit);
 	}
-	
+
 	private static Periode getVerloopDatum() {
 		return Periode.oneDay();
 	}
