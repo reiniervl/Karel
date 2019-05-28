@@ -10,6 +10,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Context;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReservering;
 import se.skillytaire.belastingdienst.ee.service.reservering.NieuweReserveringTO;
@@ -22,17 +27,14 @@ public class MaakNieuweReservering {
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response Reserveren(@FormParam("your_username") String accountUsername,
-			@FormParam("verhuurder_username") String verhuurderUsername, @FormParam("activiteit") Integer oid) {
+	public void Reserveren(
+			@FormParam("verhuurder") String verhuurderUsername,
+			@FormParam("tocht") Integer oid,
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response) throws IOException, ServletException {
+		String accountUsername = (String) request.getSession().getAttribute("username");
 		NieuweReserveringTO nieuweReserveringTo = new NieuweReserveringTO(accountUsername, verhuurderUsername, oid);
 		nieuweReservering.reserveren(nieuweReserveringTo);
 
-		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		JsonObject obj = factory.createObjectBuilder().add("your_username", accountUsername)
-				.add("verhuurder_username", verhuurderUsername).add("activiteit", oid).build();
-
-		Response response = Response.ok().entity(obj.toString()).type(MediaType.APPLICATION_JSON_TYPE).build();
-
-		return response;
 	}
 }

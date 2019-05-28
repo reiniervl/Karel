@@ -42,7 +42,7 @@
 						<div>
 							<label for="verhuurderSelect">Verhuurder</label>
 							<select id="verhuurderSelect" name="verhuurder">
-								<option value="karel">Karel</option>
+								<option value="kareluser">Karel</option>
 							</select>
 						</div>
 						<div>
