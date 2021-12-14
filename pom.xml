@@ -27,7 +27,7 @@
 		<!-- versie op de zaak -->
 		<version-slf4j>1.7.24</version-slf4j>
 		<!-- versie op de zaak -->
-		<version-log4j>2.8.2</version-log4j>
+		<version-log4j>2.16.0</version-log4j>
 		
 
 
